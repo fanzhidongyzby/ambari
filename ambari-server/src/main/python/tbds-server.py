@@ -307,6 +307,9 @@ def init_parser_options(parser):
   parser.add_option('--hostname', default=None, dest="hostname",
                     help="Specifies the hostname")
 
+  parser.add_option('--use_default', default="yes", dest="use_default",
+                      help="use default value to setup yes, no")
+
   # -b, -i, -k and -x the remaining available short options
   # -h reserved for help
 
@@ -371,6 +374,9 @@ def init_parser_options(parser):
                     help="Specifies the path to YUM repo url")
   parser.add_option('--hostname', default=None, dest="hostname",
                     help="Specifies the hostname")
+
+  parser.add_option('--use_default', default="yes", dest="use_default",
+                      help="use default value to setup yes, no")
 
 
 @OsFamilyFuncImpl(OSConst.WINSRV_FAMILY)

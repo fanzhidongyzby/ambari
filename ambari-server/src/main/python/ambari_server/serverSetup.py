@@ -43,7 +43,7 @@ from ambari_server.serverConfiguration import configDefaults, JDKRelease, \
   get_is_persisted
 from ambari_server.serverUtils import is_server_runing
 from ambari_server.setupSecurity import adjust_directory_permissions
-from ambari_server.userInput import get_YN_input, get_validated_string_input
+from ambari_server.userInput import get_YN_input, get_validated_string_input,get_YN_input_optional,get_validated_string_input_optional
 from ambari_server.utils import locate_file
 
 
@@ -56,6 +56,9 @@ SE_STATUS_DISABLED = "disabled"
 SE_STATUS_ENABLED = "enabled"
 SE_MODE_ENFORCING = "enforcing"
 SE_MODE_PERMISSIVE = "permissive"
+
+#user var
+SETUP_USE_DEFAULT = True
 
 # Non-root user setup commands
 NR_USER_COMMENT = "TBDS user"
@@ -129,7 +132,7 @@ def check_selinux():
         run_os_command(SE_SETENFORCE_CMD)
       print_warning_msg(
         "SELinux is set to 'permissive' mode and temporarily disabled.")
-      ok = get_YN_input("OK to continue [y/n] (y)? ", True)
+      ok = get_YN_input_optional("OK to continue [y/n] (y)? ", True, SETUP_USE_DEFAULT)
       if not ok:
         raise FatalException(1, None)
       return 0
@@ -172,11 +175,11 @@ class AmbariUserChecks(object):
       create_user = False
       update_user_setting = False
       if user is not None:
-        create_user = get_YN_input(self.NR_USER_CHANGE_PROMPT.format(user), False)
+        create_user = get_YN_input_optional(self.NR_USER_CHANGE_PROMPT.format(user), False,SETUP_USE_DEFAULT)
         update_user_setting = create_user  # Only if we will create another user
       else:  # user is not configured yet
         update_user_setting = True  # Write configuration anyway
-        create_user = get_YN_input(self.NR_USER_CUSTOMIZE_PROMPT, False)
+        create_user = get_YN_input_optional(self.NR_USER_CUSTOMIZE_PROMPT, False,SETUP_USE_DEFAULT)
         if not create_user:
           user = self.NR_DEFAULT_USER
 
@@ -210,15 +213,16 @@ class AmbariUserChecksWindows(AmbariUserChecks):
     self.NR_DEFAULT_USER = "NT AUTHORITY\SYSTEM"
 
   def _create_custom_user(self):
-    user = get_validated_string_input(
+    user = get_validated_string_input_optional(
       "Enter user account for tbds-server service ({0}):".format(self.NR_DEFAULT_USER),
       self.NR_DEFAULT_USER, None,
       "Invalid username.",
-      False
+      False,
+      SETUP_USE_DEFAULT
     )
     if user == self.NR_DEFAULT_USER:
       return 0, user
-    password = get_validated_string_input("Enter password for user {0}:".format(user), "", None, "Password", True, False)
+    password = get_validated_string_input_optional("Enter password for user {0}:".format(user), "", None, "Password", True, False,SETUP_USE_DEFAULT)
 
     from ambari_commons.os_windows import UserHelper
 
@@ -262,12 +266,13 @@ class AmbariUserChecksLinux(AmbariUserChecks):
                           '--shell %s -d /var/lib/tbds-server/keys/ {0}' % locate_file('nologin', '/sbin')
 
   def _create_custom_user(self):
-    user = get_validated_string_input(
+    user = get_validated_string_input_optional(
       "Enter user account for tbds-server daemon (root):",
       "root",
       "^[a-z_][a-z0-9_-]{1,31}$",
       "Invalid username.",
-      False
+      False,
+      SETUP_USE_DEFAULT
     )
 
     print_info_msg("Trying to create user {0}".format(user))
@@ -302,7 +307,7 @@ def check_firewall():
     print_warning_msg("%s is running. Confirm the necessary TBDS ports are accessible. " %
                       firewall_obj.FIREWALL_SERVICE_NAME +
                       "Refer to the TBDS documentation for more details on ports.")
-    ok = get_YN_input("OK to continue [y/n] (y)? ", True)
+    ok = get_YN_input_optional("OK to continue [y/n] (y)? ", True,SETUP_USE_DEFAULT)
     if not ok:
       raise FatalException(1, None)
 
@@ -370,7 +375,7 @@ class JDKSetup(object):
           pass
 
     if java_home_var:
-      change_jdk = get_YN_input("Do you want to change Oracle JDK [y/n] (n)? ", False)
+      change_jdk = get_YN_input_optional("Do you want to change Oracle JDK [y/n] (n)? ", False,SETUP_USE_DEFAULT)
       if not change_jdk:
         self._ensure_java_home_env_var_is_set(java_home_var)
         self.jdk_index = self.custom_jdk_number
@@ -380,12 +385,13 @@ class JDKSetup(object):
     jdk_num = str(self.jdk_index + 1)
     (self.jdks, jdk_choice_prompt, jdk_valid_choices, self.custom_jdk_number) = self._populate_jdk_configs(properties, jdk_num)
 
-    jdk_num = get_validated_string_input(
+    jdk_num = get_validated_string_input_optional(
       jdk_choice_prompt,
       jdk_num,
       jdk_valid_choices,
       "Invalid number.",
-      False
+      False,
+      SETUP_USE_DEFAULT
     )
 
     self.jdk_index = int(jdk_num) - 1
@@ -393,7 +399,7 @@ class JDKSetup(object):
     if self.jdk_index == self.custom_jdk_number:
       print_warning_msg("JDK must be installed on all hosts and JAVA_HOME must be valid on all hosts.")
       print_warning_msg(jcePolicyWarn)
-      args.java_home = get_validated_string_input("Path to JAVA_HOME: ", None, None, None, False, False)
+      args.java_home = get_validated_string_input_optional("Path to JAVA_HOME: ", None, None, None, False, False,SETUP_USE_DEFAULT)
       if not os.path.exists(args.java_home) or not os.path.isfile(os.path.join(args.java_home, "bin", self.JAVA_BIN)):
         err = "Java home path or java binary file is unavailable. Please put correct path to java home."
         raise FatalException(1, err)
@@ -418,14 +424,14 @@ class JDKSetup(object):
     if os.path.exists(dest_file):
       print "JDK already exists, using " + dest_file
     else:
-      ok = get_YN_input("To download the Oracle JDK and the Java Cryptography Extension (JCE) "
+      ok = get_YN_input_optional("To download the Oracle JDK and the Java Cryptography Extension (JCE) "
                         "Policy Files you must accept the "
                         "license terms found at "
                         "http://www.oracle.com/technetwork/java/javase/"
                         "terms/license/index.html and not accepting will "
                         "cancel the TBDS Server setup and you must install the JDK and JCE "
                         "files manually.\nDo you accept the "
-                        "Oracle Binary Code License Agreement [y/n] (y)? ", True)
+                        "Oracle Binary Code License Agreement [y/n] (y)? ", True,SETUP_USE_DEFAULT)
       if not ok:
         print 'Exiting...'
         sys.exit(1)
@@ -441,8 +447,8 @@ class JDKSetup(object):
       print "Installation of JDK has failed: %s\n" % str(e)
       file_exists = os.path.isfile(dest_file)
       if file_exists:
-        ok = get_YN_input("JDK found at " + dest_file + ". "
-                          "Would you like to re-download the JDK [y/n] (y)? ", not get_silent())
+        ok = get_YN_input_optional("JDK found at " + dest_file + ". "
+                          "Would you like to re-download the JDK [y/n] (y)? ", not get_silent(),SETUP_USE_DEFAULT)
         if not ok:
           err = "Unable to install JDK. Please remove JDK file found at " + \
                 dest_file + " and re-run TBDS Server setup"
@@ -820,7 +826,7 @@ def _cache_jdbc_driver(args):
 def prompt_db_properties(options):
   ok = False
   if options.must_set_database_options:
-    ok = get_YN_input("Enter advanced database configuration [y/n] (n)? ", False)
+    ok = get_YN_input_optional("Enter advanced database configuration [y/n] (n)? ", False,SETUP_USE_DEFAULT)
 
   print 'Configuring database...'
 
@@ -1014,7 +1020,24 @@ def configureHostname(hostName):
 #
 # Setup the TBDS Server.
 #
+def modifyGlobalConstant(newvalue):
+  print("change global SETUP_USE_DEFAULT")
+  newdefault = True
+  if newvalue == "yes":
+    newdefault = True
+  elif newvalue == "no":
+     newdefault = False
+  else:
+     print "please set --use_default=yes or --use_default=no"
+     return
+
+  global SETUP_USE_DEFAULT
+  SETUP_USE_DEFAULT = newdefault
+  print(SETUP_USE_DEFAULT)
+  return
+
 def setup(options):
+  modifyGlobalConstant(options.use_default)
   retcode = verify_setup_allowed()
   if not retcode == 0:
     raise FatalException(1, None)
