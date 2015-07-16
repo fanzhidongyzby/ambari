@@ -1,0 +1,13 @@
+<configuration>
+  <property>
+    <name>content</name>
+    <value>
+logdir=/data/usp/program/ddc/log/mark
+server=N
+is_support_semicolon=Y
+is_support_iplist=Y
+    </value>
+    <description>Hive PLC客户端配置</description>
+  </property>
+
+</configuration>

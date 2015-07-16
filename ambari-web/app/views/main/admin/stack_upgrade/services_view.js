@@ -28,6 +28,7 @@ App.MainAdminStackServicesView = Em.View.extend({
   services: function() {
     var services = App.supports.installGanglia ? App.StackService.find() : App.StackService.find().without(App.StackService.find('GANGLIA'));
     return services.map(function(s) {
+	  var serviceName = s.get('serviceName');
 	  if (serviceName == 'LHOTSE' || serviceName == 'PGXZ' || serviceName == 'THIVE') {
 		s.set('isIencent', true);
 	  } else {

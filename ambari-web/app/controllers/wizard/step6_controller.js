@@ -294,7 +294,7 @@ App.WizardStep6Controller = Em.Controller.extend(App.BlueprintMixin, {
     var services;
     if (this.get('isInstallerWizard')) services = selectedServices;
     else if (this.get('isAddHostWizard')) services = installedServices;
-    else if (this.get('isAddServiceWizard')) services = selectedServices; //installedServices.concat(selectedServices);
+    else if (this.get('isAddServiceWizard')) services = installedServices.concat(selectedServices); //selectedServices;
 
     var headers = Em.A([]);
     services.forEach(function (stackService) {

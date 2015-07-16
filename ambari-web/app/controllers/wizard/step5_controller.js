@@ -681,8 +681,8 @@ App.WizardStep5Controller = Em.Controller.extend(App.BlueprintMixin, {
         (masterComponents.filterProperty('component_name', item.component_name).length > 1);
 		
 	  /*mod by hillliu*/
-	  var  flag = installedServices.contains(serviceComponent.get('stackService.serviceName'));
-	  if (!flag) return;
+	  //var  flag = installedServices.contains(serviceComponent.get('stackService.serviceName'));
+	  //if (!flag) return;
 	  /*end mod*/
 		
       var componentObj = Em.Object.create(item);

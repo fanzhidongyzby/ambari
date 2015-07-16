@@ -906,7 +906,7 @@ App.WizardStep9Controller = Em.Controller.extend({
 	
 	
 	/*add by hillliu*/
-	var hosts = this.get('content.hosts');
+	/*var hosts = this.get('content.hosts');
 	var new_hosts = {};
     for (var name in hosts) {
 	  if (hosts[name].progress == '33' && hosts[name].status != 'failed' && hosts[name].status != 'warning') {
@@ -914,7 +914,7 @@ App.WizardStep9Controller = Em.Controller.extend({
 	  }
 	  new_hosts[name] = hosts[name];
     }
-	this.set('hosts', new_hosts);
+	this.set('hosts', new_hosts);*/
 	/*end add*/
 
     this.get('hosts').forEach(function (_host) {

@@ -69,8 +69,8 @@
           </commandScript>
           <configFiles>
             <configFile>
-              <type>xml</type>
-              <fileName>pgxz.xml</fileName>
+              <type>env</type>
+              <fileName>pgxz-client.conf</fileName>
               <dictionaryName>pgxz-global</dictionaryName>
             </configFile>
           </configFiles>
