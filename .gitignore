@@ -2,6 +2,8 @@
 .project
 .settings
 .idea/
+.svn/
+lib/
 .iml/
 .DS_Store
 target
@@ -20,4 +22,4 @@ derby.log
 pass.txt
 ambari-agent/src/test/python/ambari_agent/dummy_files/current-stack
 velocity.log*
-.svn
+ambari-metrics/ambari-metrics-host-monitoring/src/main/python/psutil/build/

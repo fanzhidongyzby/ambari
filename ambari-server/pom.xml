@@ -397,6 +397,17 @@
               <groupname>root</groupname>
               <sources>
                 <source>
+                  <location>conf/unix/ambari-sudo.sh</location>
+                </source>
+              </sources>
+            </mapping>
+            <mapping>
+              <directory>/var/lib/tbds-server/</directory>
+              <filemode>700</filemode>
+              <username>root</username>
+              <groupname>root</groupname>
+              <sources>
+                <source>
                   <location>conf/unix/ambari-env.sh</location>
                 </source>
               </sources>
@@ -775,6 +786,17 @@
               </mapper>
             </data>
              <!-- /q001 -->
+            <data>
+              <src>conf/unix/ambari-sudo.sh</src>
+              <type>file</type>
+              <mapper>
+                <type>perm</type>
+                <prefix>/var/lib/tbds-server/</prefix>
+                <user>root</user>
+                <group>root</group>
+                <filemode>700</filemode>
+              </mapper>
+            </data>
             <data>
               <src>conf/unix/ambari-env.sh</src>
               <type>file</type>
