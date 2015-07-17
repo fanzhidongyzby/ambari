@@ -18,23 +18,46 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import commands
 import json
 import datetime
 import uuid
+import shlex
+import subprocess
+import time
+
 
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
 THIVE_USER = '{{thive-config-env/hive.plc.user}}'
 THIVE_PASSWORD = '{{thive-config-env/hive.plc.password}}'
+THIVE_PORT = '{{thive-config-env/thive.server.port}}'
 
 def get_tokens():
   """
   Returns a tuple of tokens in the format {{site/property}} that will be used
   to build the dictionary passed into execute
   """
-  return (THIVE_USER, THIVE_USER)
+  return (THIVE_USER, THIVE_PASSWORD, THIVE_PORT)
   
+
+def execute_command(cmdstring, timeout=None, shell=True):
+    if shell:
+      cmdstring_list = cmdstring
+    else:   
+      cmdstring_list = shlex.split(cmdstring)
+    if timeout:
+      end_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+    
+    sub = subprocess.Popen(cmdstring_list, stdout=subprocess.PIPE,stderr=subprocess.PIPE, stdin=subprocess.PIPE,shell=shell)
+    
+    while sub.poll() is None:
+      time.sleep(0.1)
+      if timeout:
+        if end_time <= datetime.datetime.now():
+          return 1,"Timeout:%s"%cmdstring
+        
+    stdout,stderr = sub.communicate()
+    return sub.returncode,stdout+stderr
 
 def execute(parameters=None, host_name=None):
   """
@@ -51,6 +74,7 @@ def execute(parameters=None, host_name=None):
   thive_user = "thive"
   thive_password = "thive"
   hdfs_user = "hdfs"
+  thive_port = "10002"
 
   if THIVE_USER in parameters:
     thive_user = parameters[THIVE_USER]
@@ -58,12 +82,15 @@ def execute(parameters=None, host_name=None):
   if THIVE_PASSWORD in parameters:
     thive_password = parameters[THIVE_PASSWORD]
     
+  if THIVE_PORT in parameters:
+    thive_port = parameters[THIVE_PORT]
+    
   unique = str(uuid.uuid1()).replace("-","")
   tmp_table = "tmp_table_"+unique;
   ddl_cmd = "create table {0}(id int); drop table {1};".format(tmp_table, tmp_table)
   #ddl_cmd = "show tables;"
-  cmd = 'su -c \"/usr/local/thive/dist/bin/hive -u {0} -p {1} -e \\\"{2}\\\"\" {3}'.format(thive_user, thive_password,  ddl_cmd, hdfs_user)
-  (ret, out) = commands.getstatusoutput(cmd)
+  cmd = 'export PLCLIENT_PATH=/usr/local/thive/dist/PLClient; su -c \"/usr/local/thive/dist/PLClient/PLC {0} {1} {2} {3} \\\"{4}\\\"\" {5}'.format(thive_user, thive_password, host_name, thive_port,  ddl_cmd, hdfs_user)
+  (ret, out) = execute_command(cmd,60)
   
   if ret == 0:
     label = 'thive service is running.'

@@ -18,10 +18,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import commands
 import json
 import datetime
 import uuid
+import shlex
+import subprocess
+import time
 
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
@@ -34,21 +36,40 @@ def get_tokens():
   """
   return (HDFS_USER)
   
+def execute_command(cmdstring, timeout=None, shell=True):
+    if shell:
+      cmdstring_list = cmdstring
+    else:   
+      cmdstring_list = shlex.split(cmdstring)
+    if timeout:
+      end_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+    
+    sub = subprocess.Popen(cmdstring_list, stdout=subprocess.PIPE,stderr=subprocess.PIPE, stdin=subprocess.PIPE,shell=shell)
+    
+    while sub.poll() is None:
+      time.sleep(0.1)
+      if timeout:
+        if end_time <= datetime.datetime.now():
+          return 1,"Timeout:%s"%cmdstring
+        
+    stdout,stderr = sub.communicate()
+    return sub.returncode,stdout+stderr
+  
 def _executeHadoop(hdfs_user, cmd, not_if=None, yes_if=None):
   hadoop_bin = "/usr/bin/hadoop"
   hadoop_conf_dir = "/etc/hadoop/conf"
   if not_if != None:
-    (not_if_ret, not_if_out) = commands.getstatusoutput('su -c "{0} --config {1} {2}" - {3}'.format(hadoop_bin,hadoop_conf_dir,not_if,hdfs_user))
+    (not_if_ret, not_if_out) = execute_command('su -c "{0} --config {1} {2}" - {3}'.format(hadoop_bin,hadoop_conf_dir,not_if,hdfs_user),60)
     if not_if_ret == 0:
       return (not_if_ret, "cmd[ {0} ] success;".format(cmd)+not_if_out)
       
   if yes_if != None:
-    (yes_if_ret, yes_if_out) = commands.getstatusoutput('su -c "{0} --config {1} {2}" - {3}'.format(hadoop_bin,hadoop_conf_dir,yes_if,hdfs_user))
+    (yes_if_ret, yes_if_out) = execute_command('su -c "{0} --config {1} {2}" - {3}'.format(hadoop_bin,hadoop_conf_dir,yes_if,hdfs_user),60)
     if yes_if_ret != 0:
       return (yes_if_ret, "cmd[ {0} ] success;\n".format(cmd)+yes_if_out)
           
   hdfs_cmd = 'su -c "{0} --config {1} {2}" - {3}'.format(hadoop_bin,hadoop_conf_dir,cmd,hdfs_user);
-  (ret, out) = commands.getstatusoutput(hdfs_cmd)
+  (ret, out) = execute_command(hdfs_cmd,60)
   if ret == 0:
     label = "cmd[ {0} ]success;\n".format(cmd)+out
     return (ret, label)

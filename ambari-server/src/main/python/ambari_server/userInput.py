@@ -34,9 +34,10 @@ from ambari_commons.os_utils import get_password
 def get_YN_input_optional(prompt, default, usedefault):
   if usedefault:
     print(prompt)
-    if default:
+    defaultstr = str(default)
+    if defaultstr=="True":
       print("y")
-    elif not default:
+    elif defaultstr == "False":
       print("n")
     else:
       print(default)
@@ -77,9 +78,10 @@ def get_validated_string_input_optional(prompt, default, pattern, description,
                                is_pass, allowEmpty=True, validatorFunction=None,usedefault=True):
   if usedefault:
     print(prompt)
-    if default:
+    defaultstr = str(default)
+    if defaultstr=="True":
       print("y")
-    elif not default:
+    elif defaultstr == "False":
       print("n")
     else:
       print(default)
