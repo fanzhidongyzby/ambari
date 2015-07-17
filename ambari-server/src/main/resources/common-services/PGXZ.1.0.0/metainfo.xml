@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<metainfo>
+  <schemaVersion>2.0</schemaVersion>
+  <services>
+    <service>
+      <name>PGXZ</name>
+      <displayName>PGXZ</displayName>
+      <comment>分布式PostgreSQL数据库系统：通过数据库事务分流、数据分布式存储以及并行计算，提高数据库的性能和稳定性</comment>
+      <version>1.0.0</version>
+      <components>
+        <component>
+          <name>PGXZ_GTM</name>
+          <displayName>PGXZ GTM</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+          <commandScript>
+            <script>scripts/gtm.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
+        <component>
+          <name>PGXZ_COORDINATOR</name>
+          <displayName>PGXZ Coordinator</displayName>
+          <category>SLAVE</category>
+          <cardinality>1+</cardinality>
+          <commandScript>
+            <script>scripts/coordinator.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
+        <component>
+          <name>PGXZ_DATANODE</name>
+          <displayName>PGXZ DataNode</displayName>
+          <category>SLAVE</category>
+          <cardinality>1+</cardinality>
+          <commandScript>
+            <script>scripts/datanode.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
+        <component>
+          <name>PGXZ_CLIENT</name>
+          <displayName>PGXZ Client</displayName>
+          <category>CLIENT</category>
+          <cardinality>1+</cardinality>
+          <commandScript>
+            <script>scripts/client.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+          <configFiles>
+            <configFile>
+              <type>env</type>
+              <fileName>pgxz-client.conf</fileName>
+              <dictionaryName>pgxz-global</dictionaryName>
+            </configFile>
+          </configFiles>
+        </component>
+      </components>
+
+      <osSpecifics>
+        <osSpecific>
+          <osFamily>redhat5,redhat6,suse11</osFamily>
+          <packages>
+            <package>
+              <name>pgxz</name>
+            </package>
+          </packages>
+        </osSpecific>
+      </osSpecifics>
+
+      <configuration-dependencies>
+        <config-type>pgxz-global</config-type>
+        <config-type>gtm-config-env</config-type>
+        <config-type>coordinator-config-env</config-type>
+        <config-type>datanode-config-env</config-type>
+      </configuration-dependencies>
+      <restartRequiredAfterChange>true</restartRequiredAfterChange>
+    </service>
+  </services>
+</metainfo>
