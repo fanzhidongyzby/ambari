@@ -222,7 +222,7 @@ class AmbariUserChecksWindows(AmbariUserChecks):
     )
     if user == self.NR_DEFAULT_USER:
       return 0, user
-    password = get_validated_string_input_optional("Enter password for user {0}:".format(user), "", None, "Password", True, False,SETUP_USE_DEFAULT)
+    password = get_validated_string_input_optional("Enter password for user {0}:".format(user), "", None, "Password", True,SETUP_USE_DEFAULT, False)
 
     from ambari_commons.os_windows import UserHelper
 
@@ -399,7 +399,7 @@ class JDKSetup(object):
     if self.jdk_index == self.custom_jdk_number:
       print_warning_msg("JDK must be installed on all hosts and JAVA_HOME must be valid on all hosts.")
       print_warning_msg(jcePolicyWarn)
-      args.java_home = get_validated_string_input_optional("Path to JAVA_HOME: ", None, None, None, False, False,SETUP_USE_DEFAULT)
+      args.java_home = get_validated_string_input_optional("Path to JAVA_HOME: ", None, None, None, False,SETUP_USE_DEFAULT, False)
       if not os.path.exists(args.java_home) or not os.path.isfile(os.path.join(args.java_home, "bin", self.JAVA_BIN)):
         err = "Java home path or java binary file is unavailable. Please put correct path to java home."
         raise FatalException(1, err)

@@ -75,7 +75,7 @@ def get_choice_string_input(prompt, default, firstChoice, secondChoice):
   return result
 
 def get_validated_string_input_optional(prompt, default, pattern, description,
-                               is_pass, allowEmpty=True, validatorFunction=None,usedefault=True):
+                               is_pass, usedefault,allowEmpty=True, validatorFunction=None):
   if usedefault:
     print(prompt)
     defaultstr = str(default)
