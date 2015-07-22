@@ -29,9 +29,9 @@ from ambari_commons import OSConst,OSCheck
 
 # PostgreSQL settings
 PG_STATUS_RUNNING_DEFAULT = "running"
-PG_HBA_ROOT_DEFAULT = "/var/lib/pgsql/data"
+PG_HBA_ROOT_DEFAULT = "/var/lib/pgsql/9.3/data"
 PG_HBA_INIT_FILES = {'ubuntu': '/etc/postgresql',
-                     'redhat': '/etc/rc.d/init.d/postgresql',
+                     'redhat': '/etc/rc.d/init.d/postgresql-9.3',
                      'suse': '/etc/init.d/postgresql'}
 
 #Environment
