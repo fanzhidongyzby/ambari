@@ -382,16 +382,6 @@
               </sources>
             </mapping>
             <mapping>
-              <directory>${sudoers.d.dir}</directory>
-              <username>root</username>
-              <groupname>root</groupname>
-              <sources>
-                <source>
-                  <location>etc/sudoers.d</location>
-                </source>
-              </sources>
-            </mapping>
-            <mapping>
               <directory>/var/lib/${project.artifactId}/data</directory>
               <filemode>755</filemode>
               <username>root</username>
@@ -492,16 +482,6 @@
                   <user>root</user>
                   <group>root</group>
                   <filemode>755</filemode>
-              </mapper>
-            </data>
-           <data>
-              <src>etc/sudoers.d/ambari-agent</src>
-              <type>file</type>
-              <mapper>
-                <type>perm</type>
-                <prefix>${sudoers.d.dir}</prefix>
-                  <user>root</user>
-                  <group>root</group>
               </mapper>
             </data>
             <data>

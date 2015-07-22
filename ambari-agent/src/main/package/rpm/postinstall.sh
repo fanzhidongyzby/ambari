@@ -19,7 +19,9 @@ case "$1" in
     if [ -f "/var/lib/ambari-agent/install-helper.sh" ]; then
         /var/lib/ambari-agent/install-helper.sh install
     fi
-  chkconfig --add ambari-agent
+    mkdir -p /etc/sudoers.d
+    echo "Defaults:root !requiretty" > /etc/sudoers.d/ambari-agent
+    chkconfig --add ambari-agent
   ;;
   2) # Action upgrade
     if [ -d "/etc/ambari-agent/conf.save" ]; then
