@@ -57,8 +57,8 @@ class AmbariCleaner(Script):
 
   def remove_dir(self):
 
-    if self.isServerHost() :
-       pass
+    if self.isServerHost():
+       return
 
     cmd = "sudo rm -rf /var/lib/ambari*"
     self.run_cmd(cmd)
