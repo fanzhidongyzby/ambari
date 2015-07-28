@@ -81,7 +81,7 @@ print "ftp server:" + ftp_server_host
 #####################################################################################################################################
 
 #hive info
-hive_server_host = default("/clusterHostInfo/hive_server_host", '127.0.0.1')
+hive_server_host = default("/clusterHostInfo/hive_server_host", ["127.0.0.1"])[0]
 hive_server_port = default("/configurations/hive-site/hive.server2.thrift.port", '10000')
 #config sql
 namenode_info = default("/configurations/core-site/fs.defaultFS", 'hdfs://127.0.0.1:8020')
