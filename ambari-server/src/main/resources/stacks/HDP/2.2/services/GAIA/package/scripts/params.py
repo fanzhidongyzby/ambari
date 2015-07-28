@@ -74,7 +74,7 @@ etcd_urls = default("/configurations/gaia-yarn-site/gaia.etcd-address", inner_et
 
 
 # utils
-gaia_script = "cd /gaia/hadoop; su gaia -c '{}'"
+gaia_script = "cd /gaia/hadoop && su gaia -c '{}'"
 
 yarn_config_path = "/gaia/hadoop/etc/hadoop"
 yarn_script = gaia_script.format("env JAVA_HOME={} /gaia/hadoop/sbin/yarn-daemon.sh {} {}".format(java_home, "{}", "{}"))
@@ -136,29 +136,6 @@ web_proxy_address_rm2 = default("/configurations/gaia-yarn-site/gaia.web-proxy.a
 api_server_address = default("/configurations/gaia-yarn-site/gaia.api-server-address", "http://${yarn.resourcemanager.cluster-id}.api.oa.com/api")
 log_server_url = default("/configurations/gaia-yarn-site/gaia.log.server.url", "http://${yarn.timeline-service.webapp.address}/applicationhistory/logs")
 
-
-nodemanager_address = default("/configurations/gaia-yarn-site/gaia.nodemanager.address", "0.0.0.0:8041")
-nodemanager_docker_hup_address = default("/configurations/gaia-yarn-site/gaia.nodemanager.docker-hup-address", "docker.oa.com")
-nodemanager_local_docker_address = default("/configurations/gaia-yarn-site/gaia.nodemanager.local-docker-address", "http://localhost:2375")
-nodemanager_localizer_address = default("/configurations/gaia-yarn-site/gaia.nodemanager.localizer.address", "0.0.0.0:18040")
-nodemanager_webapp_address = default("/configurations/gaia-yarn-site/gaia.nodemanager.webapp.address", "0.0.0.0:8080")
-resourcemanager_address_rm1 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.address.rm1", "${gaia.resourcemanager.hostname.rm1}:18032")
-resourcemanager_address_rm2 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.address.rm2", "${gaia.resourcemanager.hostname.rm2}:18032")
-resourcemanager_admin_address_rm1 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.admin.address.rm1", "${gaia.resourcemanager.hostname.rm1}:18033")
-resourcemanager_admin_address_rm2 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.admin.address.rm2", "${gaia.resourcemanager.hostname.rm2}:18033")
-resourcemanager_resource_tracker_address_rm1 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.resource-tracker.address.rm1", "${gaia.resourcemanager.hostname.rm1}:18031")
-resourcemanager_resource_tracker_address_rm2 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.resource-tracker.address.rm2", "${gaia.resourcemanager.hostname.rm2}:18031")
-resourcemanager_scheduler_address_rm1 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.scheduler.address.rm1", "${gaia.resourcemanager.hostname.rm1}:18030")
-resourcemanager_scheduler_address_rm2 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.scheduler.address.rm2", "${gaia.resourcemanager.hostname.rm2}:18030")
-resourcemanager_webapp_address_rm1 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.webapp.address.rm1", "${gaia.resourcemanager.hostname.rm1}:8080")
-resourcemanager_webapp_address_rm2 = default("/configurations/gaia-yarn-site/gaia.resourcemanager.webapp.address.rm2", "${gaia.resourcemanager.hostname.rm2}:8080")
-timeline_service_webapp_address = default("/configurations/gaia-yarn-site/gaia.timeline-service.webapp.address", "${gaia.timeline-service.hostname}:8081")
-web_proxy_address_rm1 = default("/configurations/gaia-yarn-site/gaia.web-proxy.address.rm1", "${gaia.resourcemanager.hostname.rm1}:8081")
-web_proxy_address_rm2 = default("/configurations/gaia-yarn-site/gaia.web-proxy.address.rm2", "${gaia.resourcemanager.hostname.rm2}:8081")
-api_server_address = default("/configurations/gaia-yarn-site/gaia.api-server-address", "http://${yarn.resourcemanager.cluster-id}.api.oa.com/api")
-log_server_url = default("/configurations/gaia-yarn-site/gaia.log.server.url", "http://${yarn.timeline-service.webapp.address}/applicationhistory/logs")
-
-
 # ResourceManager
 rm_name = "resourcemanager"
 rm_start = yarn_start.format(rm_name)
@@ -216,7 +193,7 @@ nm_status_key = "org.apache.hadoop.yarn.server.nodemanager.NodeManager"
 
 # NodeManager Haproxy
 nmhaproxy_install_path = "/usr/local/haproxy"
-nmhaproxy_script = "cd {}; ./update_proxy.sh".format(nmhaproxy_install_path)
+nmhaproxy_script = "cd {} && ./update_proxy.sh".format(nmhaproxy_install_path)
 nmhaproxy_start = "({}&) &> /dev/null".format(nmhaproxy_script)
 nmhaproxy_hosts = default("/clusterHostInfo/nmhaproxy_hosts", [])
 nmhaproxy_key = nmhaproxy_install_path
@@ -231,11 +208,11 @@ docker_status_key = "running"
 resourcemonitor_log_dir = default("/configurations/resourcemonitor/log.dir", "/gaia/resource_monitor/logs")
 resourcemonitor_from_cadvisor = default("/configurations/resourcemonitor/from.cadvisor", "false")
 resourcemonitor_listen_port = default("/configurations/resourcemonitor/listen.port", "36007")
-resourcemonitor_nm_address = 8041
+resourcemonitor_nm_address = nodemanager_address.split(":")[-1]
 resourcemonitor_save_interval = default("/configurations/resourcemonitor/save.interval", "60")
 
 resourcemonitor_install_path = "/gaia/resource_monitor"
-resourcemonitor_script = resourcemonitor_install_path + "/resource_monitor"
+resourcemonitor_script = "cd {} && ./resource_monitor".format(resourcemonitor_install_path)
 resourcemonitor_start = gaia_script.format("({} -log_dir={} -from_cadvisor={} -listen_port={} -nmAddress={} -saveInterval={} &) &> /dev/null".format(resourcemonitor_script, resourcemonitor_log_dir, resourcemonitor_from_cadvisor, resourcemonitor_listen_port, resourcemonitor_nm_address, resourcemonitor_save_interval))
 resourcemonitor_key = resourcemonitor_script
 
