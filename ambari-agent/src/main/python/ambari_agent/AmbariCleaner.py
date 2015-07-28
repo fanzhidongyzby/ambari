@@ -67,7 +67,7 @@ class AmbariCleaner(Script):
     self.run_cmd(cmd)
 
     cmd = "sudo rm -rf /var/log/ambari*"
-    self.run_cmd(    cmd)
+    self.run_cmd(cmd)
 
     cmd = "sudo rm -rf /var/run/ambari*"
     self.run_cmd(cmd)
