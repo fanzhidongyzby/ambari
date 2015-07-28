@@ -42,6 +42,7 @@ class AmbariCleaner(Script):
     self.run_cmd(cmd)
 
   def remove_dir(self):
+
     cmd = "sudo rm -rf /var/lib/ambari*"
     self.run_cmd(cmd)
 
@@ -81,6 +82,7 @@ class AmbariCleaner(Script):
     (ret, output) = commands.getstatusoutput(cmd)
     print output
     print ret
+    return ret
 
   def main(self):
     self.cleaner_services()

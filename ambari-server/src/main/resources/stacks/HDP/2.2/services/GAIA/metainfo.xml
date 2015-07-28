@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<metainfo>
+  <schemaVersion>2.0</schemaVersion>
+  <services>
+    <service>
+      <name>GAIA</name>
+      <displayName>Gaia</displayName>
+      <version>0.1.0</version>
+      <comment>gaia</comment>
+      <components>
+
+        <component>
+          <name>GAIA_RESOURCEMANAGER</name>
+          <displayName>Gaia ResourceManager</displayName>
+          <category>MASTER</category>
+          <cardinality>2</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/resourcemanager.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+          <customCommands>
+            <customCommand>
+              <name>DECOMMISSION</name>
+              <commandScript>
+                <script>scripts/resourcemanager.py</script>
+                <scriptType>PYTHON</scriptType>
+                <timeout>600</timeout>
+              </commandScript>
+            </customCommand>
+            <customCommand>
+              <name>REFRESHQUEUES</name>
+              <commandScript>
+                <script>scripts/resourcemanager.py</script>
+                <scriptType>PYTHON</scriptType>
+                <timeout>600</timeout>
+              </commandScript>
+            </customCommand>
+          </customCommands>
+          <configuration-dependencies>
+            <config-type>capacity-scheduler</config-type>
+          </configuration-dependencies>
+        </component>
+
+        <component>
+          <name>RMHAPROXY</name>
+          <displayName>RM Haproxy</displayName>
+          <category>MASTER</category>
+          <cardinality>2</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/rmhaproxy.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+
+        <component>
+          <name>APISERVER</name>
+          <displayName>API Server</displayName>
+          <category>MASTER</category>
+          <cardinality>2</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/apiserver.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+
+        <component>
+          <name>JOBHISTORY</name>
+          <displayName>JobHistoryServer</displayName>
+          <category>MASTER</category>
+          <cardinality>2</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/jobhistory.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+
+        <component>
+          <name>GAIA_NODEMANAGER</name>
+          <displayName>Gaia NodeManager</displayName>
+          <category>SLAVE</category>
+          <cardinality>1+</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/nodemanager.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+        <component>
+          <name>NMHAPROXY</name>
+          <displayName>NM Haproxy</displayName>
+          <category>SLAVE</category>
+          <cardinality>1+</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/nmhaproxy.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+        <component>
+          <name>DOCKER</name>
+          <displayName>Docker</displayName>
+          <category>SLAVE</category>
+          <cardinality>1+</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/docker.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+
+        <component>
+          <name>RESOURCEMONITOR</name>
+          <displayName>Resource Monitor</displayName>
+          <category>SLAVE</category>
+          <cardinality>1+</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/resourcemonitor.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+      </components>
+
+      <osSpecifics>
+        <osSpecific>
+          <osFamily>any</osFamily>
+          <packages>
+            <package>
+              <name>docker-ng</name>
+            </package>
+            <package>
+              <name>hadoop-ng</name>
+            </package>
+            <package>
+              <name>haproxy</name>
+            </package>
+            <package>
+              <name>portal_api_server</name>
+            </package>
+            <package>
+              <name>resource_monitor</name>
+            </package>
+          </packages>
+        </osSpecific>
+      </osSpecifics>
+
+
+      <requiredServices>
+        <service>ZOOKEEPER</service>
+        <service>ETCD</service>
+      </requiredServices>
+
+      <configuration-dependencies>
+        <config-type>yarn-site</config-type>
+        <config-type>yarn-env</config-type>
+        <config-type>core-site</config-type>
+        <config-type>mapred-site</config-type>
+        <config-type>yarn-log4j</config-type>
+      </configuration-dependencies>
+
+    </service>
+  </services>
+</metainfo>
