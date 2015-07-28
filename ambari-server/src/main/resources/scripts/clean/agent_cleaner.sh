@@ -9,7 +9,7 @@ server='127.0.0.1'
 cluster=`curl --user admin:admin http://$server:8080/api/v1/clusters 2> /dev/null | grep cluster_name | awk -F '"' '{print $4}'`
 
 # stop all the services
-request=`curl -H "ContentType:application/json" -H "X-rfequested-By: florianfan" -X PUT -d '{"ServiceInfo":{"state":"INSTALLED"}}' --user admin:admin http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
+request=`curl -H "ContentType:application/json" -H "X-requested-By: florianfan" -X PUT -d '{"ServiceInfo":{"state":"INSTALLED"}}' --user admin:admin http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
 
 # wait services stopped
 if [[ $request != "" ]]; then
@@ -17,7 +17,7 @@ if [[ $request != "" ]]; then
 	echo -n "Stopping all the services"
 	while true; do
 		status=`curl --user admin:admin $request 2> /dev/null | grep request_status | awk -F '"' '{print $4}'`
-		if [[ "$status" == "IN_PROGRESS" ]]; then
+		if [[ "$status" == "IN_PROGRESS" || "$status" == "PENDING" ]]; then
 			echo -n \>
 			sleep 5
 		elif [[ "$status" == "COMPLETED" ]]; then

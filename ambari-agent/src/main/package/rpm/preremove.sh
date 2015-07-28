@@ -30,6 +30,7 @@ if [ "$1" -eq 0 ]; then  # Action is uninstall
     fi
 
     chkconfig --list | grep tbds-server && chkconfig --del tbds-server
+    rm -f /etc/sudoers.d/ambari-agent
 fi
 
 exit 0
