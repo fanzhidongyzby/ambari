@@ -2,6 +2,7 @@
 import os
 import sys
 import commands
+import socket
 
 from resource_management import *
 from ambari_agent.HostInfo import HostInfo, HostInfoLinux
@@ -41,7 +42,23 @@ class AmbariCleaner(Script):
     cmd = "sudo yum erase -y ambari-metrics*"
     self.run_cmd(cmd)
 
+  def isServerHost(self):
+    print "get server host"
+    cmd = "cat  /etc/ambari-agent/conf/ambari-agent.ini|grep "hostname"|awk -F "=" '{print $2}'"
+    serverhost =  self.run_cmd(cmd)
+
+    print "get local host"
+    localhost = socket.gethostname()
+
+    if localhost == serverhost:
+       return True
+    else:
+       return False
+
   def remove_dir(self):
+
+    if self.isServerHost() :
+       pass
 
     cmd = "sudo rm -rf /var/lib/ambari*"
     self.run_cmd(cmd)
@@ -50,7 +67,7 @@ class AmbariCleaner(Script):
     self.run_cmd(cmd)
 
     cmd = "sudo rm -rf /var/log/ambari*"
-    self.run_cmd(cmd)
+    self.run_cmd(    cmd)
 
     cmd = "sudo rm -rf /var/run/ambari*"
     self.run_cmd(cmd)
@@ -82,7 +99,7 @@ class AmbariCleaner(Script):
     (ret, output) = commands.getstatusoutput(cmd)
     print output
     print ret
-    return ret
+    return output
 
   def main(self):
     self.cleaner_services()
