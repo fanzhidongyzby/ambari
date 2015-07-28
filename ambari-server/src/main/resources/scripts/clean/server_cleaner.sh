@@ -7,25 +7,25 @@ echo "step2: yum erase tbds-server"
 sudo yum erase -y tbds-server
 
 echo "step3: rm dir"
-sudo rm -R /var/lib/tbds*
-sudo rm -R /usr/lib/tbds*
-sudo rm -R /var/log/tbds*
-sudo rm -R /var/run/tbds*
-sudo rm -R /usr/bin/tbds*
-sudo rm -R /usr/sbin/tbds*
-sudo rm -R /usr/lib/python2.6/site-packages/tbds*
-sudo rm -R /usr/lib/python2.6/site-packages/resource_management
-sudo rm -R /etc/tbds*
+sudo rm -rf /var/lib/tbds*
+sudo rm -rf /usr/lib/tbds*
+sudo rm -rf /var/log/tbds*
+sudo rm -rf /var/run/tbds*
+sudo rm -rf /usr/bin/tbds*
+sudo rm -rf /usr/sbin/tbds*
+sudo rm -rf /usr/lib/python2.6/site-packages/tbds*
+sudo rm -rf /usr/lib/python2.6/site-packages/resource_management
+sudo rm -rf /etc/tbds*
 
-sudo rm -R /var/lib/ambari*
-sudo rm -R /usr/lib/ambari*
-sudo rm -R /var/log/ambari*
-sudo rm -R /var/run/ambari*
-sudo rm -R /usr/bin/ambari*
-sudo rm -R /usr/sbin/ambari*
-sudo rm -R /usr/lib/python2.6/site-packages/ambari*
-sudo rm -R /usr/lib/python2.6/site-packages/resource_management
-sudo rm -R /etc/ambari*
+sudo rm -rf /var/lib/ambari*
+sudo rm -rf /usr/lib/ambari*
+sudo rm -rf /var/log/ambari*
+sudo rm -rf /var/run/ambari*
+sudo rm -rf /usr/bin/ambari*
+sudo rm -rf /usr/sbin/ambari*
+sudo rm -rf /usr/lib/python2.6/site-packages/ambari*
+sudo rm -rf /usr/lib/python2.6/site-packages/resource_management
+sudo rm -rf /etc/ambari*
 
 echo "--------clean pg"
 echo "step 1: stop pg"
@@ -40,13 +40,12 @@ sudo rm -rf /var/lib/pgsql/
 sudo rm -rf /var/run/post*
 sudo rm -rf /var/lock/subsys/postgresql*
 
+echo "step4: remove ipcs"
 # remove all ipcs of postgresql when it's killed -9
 for x in `ipcs -m | grep postgres | awk '{print $2}'` ; do ipcrm -m $x ; done
 for x in `ipcs -s | grep postgres | awk '{print $2}'` ; do ipcrm -s $x ; done
 
-
 echo "step5: yum clean all"
 sudo yum clean all
 
-
-echo "Cluster clean success !!!"
+echo "Server clean success !!!"
