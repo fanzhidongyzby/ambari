@@ -1220,7 +1220,7 @@ Em.I18n.translations = {
   'services.service.summary.clientCount': '{0} 客户端主机',
   'services.service.summary.historyServer': '历史服务Web UI',
   'services.service.actions.downloadClientConfigs':'下载客户端配置',
-  'services.service.actions.downloadClientConfigs.fail.noConfigFile':'组建无对应的配置文件',
+  'services.service.actions.downloadClientConfigs.fail.noConfigFile':'组件无对应的配置文件',
   'services.service.actions.downloadClientConfigs.fail.popup.header':'{0} 配置',
   'services.service.actions.downloadClientConfigs.fail.popup.body.noErrorMessage':'{0}配置文件生成失败',
   'services.service.actions.downloadClientConfigs.fail.popup.body.errorMessage':'{0}配置文件生成失败，错误信息<br/><pre><span class="text-error">{2}</span></pre>',

@@ -653,7 +653,20 @@ limitations under the License.
 
   <property>
     <name>hive.txn.manager</name>
-    <value>org.apache.hadoop.hive.ql.lockmgr.DummyTxnManager</value>
+    <!-- <value>org.apache.hadoop.hive.ql.lockmgr.DummyTxnManager</value> -->
+    <value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
+    <description/>
+  </property>
+  
+  <property>
+    <name>hive.compactor.initiator.on</name>
+    <value>on</value>
+    <description/>
+  </property>
+  
+  <property>
+    <name>hive.compactor.worker.threads</name>
+    <value>1</value>
     <description/>
   </property>
 
@@ -670,7 +683,7 @@ limitations under the License.
 
   <property>
     <name>hive.support.concurrency</name>
-    <value>false</value>
+    <value>true</value>
     <description>
       Support concurrency and use locks, needed for Transactions. Requires Zookeeper.
     </description>
@@ -1116,6 +1129,8 @@ limitations under the License.
       over Tez without the pool of sessions.
     </description>
   </property>
+  
+  
 
 
 </configuration>

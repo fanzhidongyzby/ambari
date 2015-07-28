@@ -300,7 +300,7 @@ class PGConfig(LinuxDBMSConfig):
   PG_ERROR_BLOCKED = "is being accessed by other users"
   PG_STATUS_RUNNING = None
   SERVICE_CMD = "/usr/bin/env service"
-  PG_SERVICE_NAME = "postgresql-9.3"
+  PG_SERVICE_NAME = "postgresql"
   PG_HBA_DIR = None
 
   PG_ST_CMD = "%s %s status" % (SERVICE_CMD, PG_SERVICE_NAME)
