@@ -42,12 +42,12 @@
   <property>
     <name>gaia.etcd-address</name>
     <value></value>
-    <description>Etcd地址，默认为内部Etcd地址</description>
+    <description>Etcd地址，默认为内部Etcd地址。如192.168.0.1:2181, 192.168.0.2:2181, 192.168.0.3:2181</description>
   </property>
   <property>
     <name>gaia.resourcemanager.zk-address</name>
     <value></value>
-    <description>ZooKeeper地址，默认为内部ZooKeeper地址</description>
+    <description>ZooKeeper地址，默认为内部ZooKeeper地址。如http://192.168.0.1:4001, http://192.168.0.2:4001, http://192.168.0.3:4001</description>
   </property>
 
   <property>

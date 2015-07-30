@@ -41,6 +41,19 @@ if [[ "$my_hostname" != "$target_hostname" ]]; then :
   ac_exit "$LINENO" "1" "$own_ip: hostname should be $target_hostname"
 fi
 
+# crontab check
+crontab -l >/tmp/crontab.old
+ac_check_string_in_file "$LINENO" "/usr/sbin/ntpdate 10.224.132.241 10.169.136.81 10.192.144.168" "/tmp/crontab.old" "string_in_crontab"
+if [[ "x$string_in_crontab" = xyes ]]; then :
+else
+  cat >> /tmp/crontab.old <<EOF
+*/1 * * * * /usr/sbin/ntpdate 10.224.132.241 10.169.136.81 10.192.144.168 >/dev/null 2>&1
+*/24 * * * * /sbin/hwclock --systohc >/dev/null 2>&1
+EOF
+  crontab /tmp/crontab.old
+fi
+rm /tmp/crontab.old
+
 # resolv.conf
 unset string_in_resolv_conf
 
@@ -128,6 +141,35 @@ if [[ "x$node_type" = "xslave" ]]; then :
     ac_exit "$LINENO" "1" "$own_ip: docker service file is not existed"
   fi
 
+  ac_service_method "$LINENO" "docker" "stop" "stop_docker"
+  if [[ "x$stop_docker" = xyes ]]; then :
+  else
+    ac_exit "$LINENO" "1" "$own_ip: can not stop docker service"
+  fi
+
+  { $as_echo "$as_me:$LINENO: check docker relative disk mount state" >&5
+  $as_echo_n "check docker relative disk mount state... " >&6;}
+  disk_location=$(cat /proc/mounts|grep docker|awk '{print $2}')
+  if [[ -n "$disk_location" ]]; then :
+    { $as_echo "$as_me:$LINENO: result : no" >&5
+    $as_echo "no" >&6;}
+
+    { $as_echo "$as_me:$LINENO: umount disk" >&5
+    $as_echo_n "umount disk... " >&6;}
+    if cat /proc/mounts|grep docker|awk '{print $2}'|xargs umount; then :
+      { $as_echo "$as_me:$LINENO: result : yes" >&5
+      $as_echo "yes" >&6;}
+    else
+      { $as_echo "$as_me:$LINENO: result : no" >&5
+      $as_echo "no" >&6;}
+
+      ac_exit "$LINENO" "1" "$own_ip: can not umount disk"
+    fi
+  else
+    { $as_echo "$as_me:$LINENO: result : yes" >&5
+    $as_echo "yes" >&6;}
+  fi
+
   ac_check_string_in_file "$LINENO" "/gaia/docker/var/lib/docker/$prog" "/etc/init.d/docker" "docker_log_string"
   if [[ "x$docker_log_string" = xyes ]]; then :
   else
@@ -152,12 +194,6 @@ if [[ "x$node_type" = "xslave" ]]; then :
     else
       ac_exit "$LINENO" "1" "$own_ip: can not make directory /gaia/docker/var/lib/docker"
     fi
-  fi
-
-  ac_service_method "$LINENO" "docker" "stop" "stop_docker"
-  if [[ "x$stop_docker" = xyes ]]; then :
-  else
-    ac_exit "$LINENO" "1" "$own_ip: can not stop docker service"
   fi
 
   { $as_echo "$as_me:$LINENO: remove /var/lib/docker" >&5
@@ -185,6 +221,12 @@ if [[ "x$node_type" = "xslave" ]]; then :
   fi
 
   # cgconfig
+  ac_package_installed "$LINENO" "libcgroup-tools" "libcgroup_tools_installed"
+  if [[ "x$libcgroup_tools_installed" = xyes ]]; then :
+  else
+    ac_exit "$LINENO" "1" "$own_ip: libcgroup-tools is not installed"
+  fi
+
   ac_check_string_in_file "$LINENO" "memory.use_hierarchy=\"0\";" "/etc/cgconfig.conf" "cgconfig_conf_string_found"
   if [[ "x$cgconfig_conf_string_found" = xyes ]]; then :
   else

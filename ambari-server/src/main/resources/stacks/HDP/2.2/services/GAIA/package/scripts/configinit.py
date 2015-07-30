@@ -99,9 +99,9 @@ class configinit(Script):
         
     Logger.info("generate container-executor.cfg on ResourceManager")
     File(os.path.join(params.yarn_config_path,'container-executor.cfg'),
-      owner='root',
-      group='root',
-      mode=6050,
+      owner=params.user,
+      group=params.group,
+      mode=0644,
       content=Template("container-executor.cfg.j2")
     )
 

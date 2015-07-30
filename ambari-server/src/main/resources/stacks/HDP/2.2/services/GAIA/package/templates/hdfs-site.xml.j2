@@ -48,7 +48,7 @@ limitations under the License. See accompanying LICENSE file.
 
   <property>
     <name>dfs.namenode.edits.dir</name>
-    <value>/{{first_data_section}}/editlog</value>
+    <value>{{namenode_edits_dir}}</value>
     <description>the directory where store the edit log</description>
   </property>
 
@@ -102,7 +102,7 @@ limitations under the License. See accompanying LICENSE file.
 
   <property>
     <name>hadoop.home</name>
-    <value>/gaia/hadoop/</value>
+    <value>{{hadoop_home}}</value>
   </property>
 
   <property>
@@ -284,7 +284,7 @@ limitations under the License. See accompanying LICENSE file.
 
   <property>
     <name>dfs.journalnode.edits.dir</name>
-    <value>/gaia/hadoop/hdfsadmin/hdfsenv/runtime/dfsnamespace/journal</value>
+    <value>{{journalnode_edits_dir}}</value>
     <description>A directory on shared storage between the multiple namenodes in an HA cluster.
       It should be left empty in a non-HA cluster.
     </description>
@@ -375,4 +375,5 @@ limitations under the License. See accompanying LICENSE file.
     <description>How often, in seconds, the StandbyNode should check for new finalized log segments in the shared edits log.</description>
   </property>
 </configuration>
+
 

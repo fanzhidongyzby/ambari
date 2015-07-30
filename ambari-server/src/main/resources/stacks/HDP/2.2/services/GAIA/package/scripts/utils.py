@@ -133,5 +133,5 @@ class utils:
  
 
 if __name__ == "__main__":
-    pass
-
+    cmd="bash -x /var/lib/ambari-agent/data/tmp/env.sh slave"
+    utils().exe(cmd)

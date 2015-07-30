@@ -39,7 +39,7 @@ class ResourceManager(Script):
 
     def configure(self, env):
         print 'configured ResourceManager'
-        configinit().update_rm_config(env)
+        configinit().update_rm_configs(env)
 
     def start(self, env):
         import params

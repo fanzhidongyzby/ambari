@@ -32,9 +32,12 @@ java_home = default("/hostLevelParams/java_home", "/usr/jdk64/jdk1.8.0_51")
 
 # HDFS
 
-
-datanode_data_dirs = gaiautils().get_local_dirs("/hadoop")
-first_data_section = gaiautils().get_first_data()
+hadoop_home = default("/configurations/gaia-hdfs-site/hadoop.home", "/gaia/hadoop")
+hadoop_tmp_dir = default("/configurations/gaia-hdfs-site/hadoop.tmpdir", "/gaia/hadoop/hdfsadmin/hdfsenv/runtime")
+datanode_data_subdir = default("/configurations/gaia-hdfs-site/datanode.data.subdir", "/hadoop")
+datanode_data_dirs = gaiautils().get_local_dirs(datanode_data_subdir)
+namenode_edits_dir = default("/configurations/gaia-hdfs-site/namenode.edits.dir", "/data/editlog")
+journalnode_edits_dir = default("/configurations/gaia-hdfs-site/journalnode.edits.dir", "/gaia/hadoop/hdfsadmin/hdfsenv/runtime/dfsnamespace/journal")
 
 namenode_host = default("/configurations/gaia-hdfs-site/namenode.host", "127.0.0.1")
 namenode_rpc_port = default("/configurations/gaia-hdfs-site/namenode.rpc.port", "9000")
@@ -87,19 +90,19 @@ service_stop = service_script.format("{}", "stop")
 service_status = service_script.format("{}", "status")
 
 
-hadoop_tmp_dir = "/gaia/hadoop/hdfsadmin/hdfsenv/runtime"
+hadoop_tmp_dir = default("/configurations/gaia-yarn-site/hadoop.tmpdir", "/gaia/hadoop/hdfsadmin/hdfsenv/runtime")
 sfair_schedule_content = default("/configurations/sfair-scheduler-env/content", "")
 
 # yarn-site.xml
-yarn_cluster_id = default("/configurations/gaia-yarn-site/yarn.resourcemanager.cluster-id", "shpc-test")
-yarn_nm_local_dirs = default("/configurations/gaia-yarn-site/yarn.nodemanager.local-dirs", "/yarnenv/local")
+yarn_cluster_id = default("/configurations/gaia-yarn-site/gaia.resourcemanager.cluster-id", "gaia-test")
+yarn_nm_local_dirs = default("/configurations/gaia-yarn-site/gaia.nodemanager.local-dirs", "/yarnenv/local")
 yarn_nm_local_dirs_fullpath = gaiautils().get_local_dirs(yarn_nm_local_dirs)
 
-yarn_nm_reserve_cpu = default("/configurations/gaia-yarn-site/yarn.nodemanager.resource.reserved-cpu-vcores", "20")
+yarn_nm_reserve_cpu = default("/configurations/gaia-yarn-site/gaia.nodemanager.resource.reserved-cpu-vcores", "20")
 yarn_nm_cpu = gaiautils().get_local_cpunum() * 10 - int(yarn_nm_reserve_cpu)
 
 
-yarn_nm_reserve_mem  = default("/configurations/gaia-yarn-site/yarn.nodemanager.resource.reserved-memory-mb", "1024")
+yarn_nm_reserve_mem  = default("/configurations/gaia-yarn-site/gaia.nodemanager.resource.reserved-memory-mb", "1024")
 yarn_nm_mem = gaiautils().get_local_memorytotal() - int(yarn_nm_reserve_mem)
 
 yarn_etcd = etcd_urls
@@ -215,4 +218,5 @@ resourcemonitor_install_path = "/gaia/resource_monitor"
 resourcemonitor_script = "cd {} && ./resource_monitor".format(resourcemonitor_install_path)
 resourcemonitor_start = gaia_script.format("({} -log_dir={} -from_cadvisor={} -listen_port={} -nmAddress={} -saveInterval={} &) &> /dev/null".format(resourcemonitor_script, resourcemonitor_log_dir, resourcemonitor_from_cadvisor, resourcemonitor_listen_port, resourcemonitor_nm_address, resourcemonitor_save_interval))
 resourcemonitor_key = resourcemonitor_script
+
 

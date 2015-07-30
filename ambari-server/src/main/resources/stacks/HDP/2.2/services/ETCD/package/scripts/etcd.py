@@ -23,36 +23,36 @@ from resource_management import *
 from resource_management.core.logger import Logger
 from utils import utils
 
-class ResourceManager(Script):
-    isfirststart = False
+class etcd(Script):
 
     def install(self, env):
+        import params
+        env.set_params(params)
 
         self.install_packages(env)
-        isfirststart = True
+
+        Logger.info("first start etcd")
+        cmd = params.etcd_start_cmd
+        cmd = cmd + " -initial-cluster-state new >>/gaia/etcd/backup/etcd.log  2>&1 &"
+        cmd = "su gaia -c '{}'".format(cmd)
+        utils().exe(cmd)
 
     def configure(self, env):
-        print 'configured ResourceManager'
+        print 'configured etcd'
 
     def start(self, env):
         import params
         env.set_params(params)
 
         cmd = params.etcd_start_cmd
- 
-        if self.isfirststart:
-           cmd = cmd + " -initial-cluster-state new >>/gaia/etcd/backup/etcd.log  2>&1 &"
-           isfirststart = False
-        else:
-           cmd = cmd + " -initial-cluster-state existing >>/gaia/etcd/backup/etcd.log  2>&1 &"
-
+        cmd = cmd + " -initial-cluster-state existing >>/gaia/etcd/backup/etcd.log  2>&1 &"
         cmd = "su gaia -c '{}'".format(cmd)
-        Logger.info("start ResourceManager")
+        Logger.info("start etcd")
         utils().exe(cmd)
 
     def stop(self, env):
         import params
-        Logger.info("stop ResourceManager")
+        Logger.info("stop etcd")
         utils().kill_process(params.etcd_keyword)
 
     def status(self, env):
@@ -62,5 +62,5 @@ class ResourceManager(Script):
 
 
 if __name__ == "__main__":
-    ResourceManager().execute()
+    etcd().execute()
 

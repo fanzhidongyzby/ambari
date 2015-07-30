@@ -29,7 +29,7 @@
           <name>GAIA_RESOURCEMANAGER</name>
           <displayName>Gaia ResourceManager</displayName>
           <category>MASTER</category>
-          <cardinality>2</cardinality>
+          <cardinality>1+</cardinality>
           <versionAdvertised>true</versionAdvertised>
           <commandScript>
             <script>scripts/resourcemanager.py</script>
@@ -63,7 +63,7 @@
           <name>RMHAPROXY</name>
           <displayName>RM Haproxy</displayName>
           <category>MASTER</category>
-          <cardinality>2</cardinality>
+          <cardinality>1+</cardinality>
           <versionAdvertised>true</versionAdvertised>
           <commandScript>
             <script>scripts/rmhaproxy.py</script>
@@ -77,7 +77,7 @@
           <name>APISERVER</name>
           <displayName>API Server</displayName>
           <category>MASTER</category>
-          <cardinality>2</cardinality>
+          <cardinality>1+</cardinality>
           <versionAdvertised>true</versionAdvertised>
           <commandScript>
             <script>scripts/apiserver.py</script>
@@ -91,7 +91,7 @@
           <name>JOBHISTORY</name>
           <displayName>JobHistoryServer</displayName>
           <category>MASTER</category>
-          <cardinality>2</cardinality>
+          <cardinality>1+</cardinality>
           <versionAdvertised>true</versionAdvertised>
           <commandScript>
             <script>scripts/jobhistory.py</script>

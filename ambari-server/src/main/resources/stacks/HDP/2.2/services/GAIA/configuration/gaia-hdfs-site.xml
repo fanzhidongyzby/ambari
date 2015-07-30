@@ -19,50 +19,81 @@
  */
 -->
 <configuration supports_final="false">
+  <property>
+    <name>hadoop.home</name>
+    <value>/gaia/hadoop</value>
+  </property>
+
+  <property>
+    <name>hadoop.tmpdir</name>
+    <value>/gaia/hadoop/hdfsadmin/hdfsenv/runtime</value>
+  </property>
+
   <property require-input = "true">
     <name>namenode.host</name>
     <value></value>
-  <property>
+    <description>如: 192.168.0.1</description>
+  </property>
 
   <property>
     <name>namenode.rpc.port</name>
     <value>9000</value>
-  <property>
+  </property>
 
   <property>
     <name>namenode.http.port</name>
     <value>8080</value>
+  </property>
+
+
   <property>
+    <name>namenode.edits.dir</name>
+    <value>/data/editlog</value>
+  </property>
 
   <property require-input = "true">
     <name>snamenode.host</name>
     <value></value>
-  <property>
+    <description>如: 192.168.0.1</description>
+  </property>
 
   <property>
     <name>snamenode.rpc.port</name>
     <value>9000</value>
-  <property>
+  </property>
 
   <property>
     <name>snamenode.http.port</name>
     <value>8080</value>
-  <property>
+  </property>
 
   <property require-input = "true">
     <name>journalnode.hosts</name>
     <value></value>
-  <property>
+    <description>如: 192.168.0.1, 192.168.0.2, 192.168.0.3</description>
+  </property>
 
   <property>
     <name>journalnode.rpc.port</name>
     <value>8485</value>
-  <property>
+  </property>
 
   <property>
     <name>journalnode.http.port</name>
     <value>8087</value>
+  </property>
+
   <property>
+    <name>journalnode.edits.dir</name>
+    <value>/gaia/hadoop/hdfsadmin/hdfsenv/runtime/dfsnamespace/journal</value>
+  </property>
+
+  <property>
+    <name>datanode.data.subdir</name>
+    <value>/hadoop</value>
+    <description>如：填写/hadoop, 有data分区1、2，将得到路径/data1/hadoop, /data2/hadoop</description>
+  </property>
 </configuration>
+
 
 

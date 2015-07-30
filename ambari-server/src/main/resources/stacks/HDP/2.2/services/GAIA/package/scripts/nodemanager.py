@@ -38,7 +38,7 @@ class NodeManager(Script):
   
   def configure(self, env):
     print 'configure NodeManager'
-    configinit().update_nm_config(env)
+    configinit().update_nm_configs(env)
   
   def start(self, env):
     import params
