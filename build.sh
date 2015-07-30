@@ -8,3 +8,4 @@ pushd ambari-metrics
 mvn versions:set -DnewVersion=2.2.0.0
 popd
 mvn install package rpm:rpm -Dfindbugs.skip -DskipTests -Drat.skip -Dmaven.test.skip -DskipAssembly -DnewVersion=2.2.0.0 -Dpython.ver="python >= 2.6" -X
+# mvn install -pl ambari-agent package rpm:rpm -Dfindbugs.skip -DskipTests -Drat.skip -Dmaven.test.skip -DskipAssembly -DnewVersion=2.2.0.0 -Dpython.ver="python >= 2.6" -X

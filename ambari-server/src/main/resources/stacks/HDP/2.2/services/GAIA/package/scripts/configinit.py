@@ -136,7 +136,7 @@ class configinit(Script):
     )
 
     Logger.info("generate nodemanager local dirs")
-    for dir in params.yarn_nm_local_dirs:
+    for dir in params.yarn_nm_local_dirs_fullpath.split(","):
       Directory(dir,
         owner=params.user,
         group=params.group,
