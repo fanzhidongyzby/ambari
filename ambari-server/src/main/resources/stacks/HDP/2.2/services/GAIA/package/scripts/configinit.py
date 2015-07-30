@@ -48,6 +48,17 @@ class configinit(Script):
       content=Template("hdfs-site.xml.j2")
     )
 
+  def update_core_site(self, env):
+    import params
+    Logger.info('update core-site.xml')
+
+    File(os.path.join(params.yarn_config_path,'core-site.xml'),
+      owner=params.user,
+      group=params.group,
+      mode=0644,
+      content=Template("core-site.xml.j2")
+    )
+
   def update_rmhaproxy_configs(self, env):
     import params
     Logger.info('configure Haproxy on ResourceManager')
@@ -123,6 +134,15 @@ class configinit(Script):
       mode=0644,
       content=Template("nodes_to_decommission.j2")
     )
+
+    Logger.info("generate nodemanager local dirs")
+    for dir in params.yarn_nm_local_dirs:
+      Directory(dir,
+        owner=params.user,
+        group=params.group,
+        mode=0755,
+        recursive=True
+        )
 
 
 if __name__ == "__main__":

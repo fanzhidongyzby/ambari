@@ -70,7 +70,7 @@
   <property require-input = "true">
     <name>journalnode.hosts</name>
     <value></value>
-    <description>如: 192.168.0.1, 192.168.0.2, 192.168.0.3</description>
+    <description>如: 192.168.0.1,192.168.0.2,192.168.0.3</description>
   </property>
 
   <property>
@@ -91,7 +91,7 @@
   <property>
     <name>datanode.data.subdir</name>
     <value>/hadoop</value>
-    <description>如：填写/hadoop, 有data分区1、2，将得到路径/data1/hadoop, /data2/hadoop</description>
+    <description>如：填写/hadoop, 有data分区1、2，将得到路径/data1/hadoop,/data2/hadoop</description>
   </property>
 </configuration>
 

@@ -91,7 +91,7 @@
           <name>JOBHISTORY</name>
           <displayName>JobHistoryServer</displayName>
           <category>MASTER</category>
-          <cardinality>1+</cardinality>
+          <cardinality>1</cardinality>
           <versionAdvertised>true</versionAdvertised>
           <commandScript>
             <script>scripts/jobhistory.py</script>

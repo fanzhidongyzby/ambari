@@ -169,8 +169,10 @@ gaia_queue_default = default("/configurations/apiserver-properties/gaia.queue.de
 server_port = default("/configurations/application-proerties/server.port",8085)
 management_port = default("/configurations/application-proerties/management.port",8088)
 spring_datasource_url = default("/configurations/application-proerties/spring.datasource.url",'jdbc:postgresql://10.196.152.110:5432/gaia_portal')
-spring_datasource_username = default("/configurations/application-proerties/spring.datasource.username",'tdw_randomcheng')
-spring_datasource_password = default("/configurations/application-proerties/spring.datasource.password","000000")
+spring_datasource_username = default("/configurations/application-proerties/spring.datasource.username",'postgres')
+spring_datasource_password = default("/configurations/application-proerties/spring.datasource.password","postgres")
+spring_jpa_hibernate_ddl_auto = default("/configurations/application-proerties/spring.jpa.hibernate.ddl-auto","update")
+
 docker_default_port = default("/configurations/application-proerties/docker.default.port",2375)
 
 apiserver_start = gaia_script.format("(/gaia/apiserver/bin/run.sh &) &>/gaia/apiserver/log/start.log")
