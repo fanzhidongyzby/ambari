@@ -8,24 +8,6 @@ import fileinput
 repo_name_key = "repo_name"
 directory_key = "directory"
 class AmbariCleaner:
-
-  def hostcheck(self):
-    h = HostInfo()
-    struct = {}
-    h.register(struct,False,False)
-    print struct
-
-  def servicecheck(self):
-    cmd = "sudo python /var/lib/ambari-agent/cache/custom_actions/scripts/check_host.py ACTIONEXECUTE /usr/lib/python2.6/site-packages/ambari_agent/service_info.json /var/lib/ambari-agent/cache/common-services/HDFS/2.1.0.2.0/package /tmp/my.txt INFO /var/lib/ambari-agent/data/tmp"
-    self.run_cmd(cmd)
-
-  def cleaner_services(self):
-    self.hostcheck()
-    self.servicecheck()
-
-    cmd = "sudo python /usr/lib/python2.6/site-packages/ambari_agent/HostCleanupManually.py --skip \"users\" 1>/tmp/ambari_clean.log"
-    self.run_cmd(cmd)
-
   def eraseagent(self):
     print "ambari-agent stop"
     cmd = "sudo ambari-agent stop"

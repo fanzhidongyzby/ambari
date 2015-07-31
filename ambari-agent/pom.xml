@@ -414,9 +414,6 @@
                   <location>src/main/python/ambari_agent/AmbariCleaner.py</location>
                 </source>
                 <source>
-                  <location>src/main/python/ambari_agent/HostCleanupManually.py</location>
-                </source>
-                <source>
                   <location>src/main/python/ambari_agent/service_info.json</location>
                 </source>
               </sources>
