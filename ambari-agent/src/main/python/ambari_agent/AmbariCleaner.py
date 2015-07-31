@@ -44,7 +44,7 @@ class AmbariCleaner(Script):
 
   def isServerHost(self):
     print "get server host"
-    cmd = "cat  /etc/ambari-agent/conf/ambari-agent.ini|grep "hostname"|awk -F "=" '{print $2}'"
+    cmd = "cat  /etc/ambari-agent/conf/ambari-agent.ini|grep hostname|awk -F '=' '{print $2}'"
     serverhost =  self.run_cmd(cmd)
 
     print "get local host"
