@@ -143,13 +143,15 @@ case "$1" in
         echo -e "Restoring TBDS File System state"
         $PYTHON /usr/sbin/tbds-server.py $@
         ;;
-  clean-agent)
-        echo -e "Clean TBDS cluster includes Agent"
-        /var/lib/tbds-server/resources/scripts/clean/agent_cleaner.sh
-        ;;
-  clean-server)
-        echo "Clean TBDS server"F
-        /var/lib/tbds-server/resources/scripts/clean/server_cleaner.sh
+  clean)
+        echo "Clean the whole cluster, are you sure? (yes/no):"
+        read choose
+        if [[ "$choose" == "yes" ]]; then
+          echo -e "Clean services and agents"
+          /var/lib/tbds-server/resources/scripts/clean/agent_cleaner.sh
+          echo "Clean TBDS server"
+          /var/lib/tbds-server/resources/scripts/clean/server_cleaner.sh
+        fi
         ;;
   *)
         echo "Usage: /usr/sbin/tbds-server

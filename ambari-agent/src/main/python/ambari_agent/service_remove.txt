@@ -1,0 +1,17 @@
+[repo_name]
+TDP-2.2
+
+
+[directory]
+/var/lib/ambari*
+/usr/lib/ambari*
+/var/log/ambari*
+/var/run/ambari*
+/usr/bin/ambari*
+/usr/sbin/ambari*
+/usr/lib/python2.6/site-packages/ambari*
+/usr/lib/python2.6/site-packages/resource_management
+/etc/ambari*
+/gaia/*
+/usr/hdp
+/etc/yum.repo.d/*.repo
