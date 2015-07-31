@@ -34,8 +34,9 @@ java_home = default("/hostLevelParams/java_home", "/usr/jdk64/jdk1.8.0_51")
 
 hadoop_home = default("/configurations/gaia-hdfs-site/hadoop.home", "/gaia/hadoop")
 hadoop_tmp_dir = default("/configurations/gaia-hdfs-site/hadoop.tmpdir", "/gaia/hadoop/hdfsadmin/hdfsenv/runtime")
-datanode_data_subdir = default("/configurations/gaia-hdfs-site/datanode.data.subdir", "/hadoop")
-datanode_data_dirs = gaiautils().get_local_dirs(datanode_data_subdir)
+# datanode_data_subdir = default("/configurations/gaia-hdfs-site/datanode.data.subdir", "/hadoop")
+# datanode_data_dirs = gaiautils().get_local_dirs(datanode_data_subdir)
+datanode_data_dirs = default("/configurations/gaia-hdfs-site/datanode.data.dirs", "data/hadoop")
 namenode_edits_dir = default("/configurations/gaia-hdfs-site/namenode.edits.dir", "/data/editlog")
 journalnode_edits_dir = default("/configurations/gaia-hdfs-site/journalnode.edits.dir", "/gaia/hadoop/hdfsadmin/hdfsenv/runtime/dfsnamespace/journal")
 
