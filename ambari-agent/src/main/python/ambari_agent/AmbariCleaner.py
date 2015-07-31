@@ -3,13 +3,11 @@ import os
 import sys
 import commands
 import socket
+import fileinput
 
-from resource_management import *
-from ambari_agent.HostInfo import HostInfo, HostInfoLinux
-sys.path.append("/var/lib/ambari-agent/cache/custom_actions/scripts/")
-from check_host import CheckHost
-
-class AmbariCleaner(Script):
+repo_name_key = "repo_name"
+directory_key = "directory"
+class AmbariCleaner:
 
   def hostcheck(self):
     h = HostInfo()
@@ -56,36 +54,24 @@ class AmbariCleaner(Script):
        return False
 
   def remove_dir(self):
-
-    if self.isServerHost():
-       return
-
-    cmd = "sudo rm -rf /var/lib/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/lib/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /var/log/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /var/run/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/bin/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/sbin/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/lib/python2.6/site-packages/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/lib/python2.6/site-packages/resource_management"
-    self.run_cmd(cmd)
+    dirs = self.readServiceInfo(directory_key)
+    for dir in dirs:
+      cmd = "sudo rm -rf {}".format(dir)
+      self.run_cmd(cmd)
+    return
 
     cmd = "sudo rm -rf /etc/ambari*"
     self.run_cmd(cmd)
+
+  def remove_services_installed_rpm(self):
+
+    #get all installed rpm
+    repos = self.readServiceInfo(repo_name_key)
+    for repo in repos:
+      cmd = "yum list installed 2>/dev/null |grep " + repo + "| xargs yum remove -y"
+      self.run_cmd(cmd)
+
+    return
 
   def yum_clean(self):
     print "yum clean all"
@@ -101,16 +87,33 @@ class AmbariCleaner(Script):
     print ret
     return output
 
+  def readServiceInfo(self,key):
+    res = []
+    findkey = False
+
+    for line in fileinput.input("/usr/lib/python2.6/site-packages/ambari_agent/service_remove.txt"):
+      print(line)
+      line = line.strip()
+      if ( line=="" ):
+         continue
+
+      if (findkey):
+        if(line.find("[") < 0):
+           print("add list: " + line)
+           res.append(line)
+        else:
+          break
+
+      elif (line.find(key)>=0) :
+         findkey = True
+
+    fileinput.close()
+    return res
+
   def main(self):
-    self.cleaner_services()
-
-    self.erasemetrics()
-
-    self.eraseagent()
-
-    self.yum_clean()
-
+    self.remove_services_installed_rpm()
     self.remove_dir()
+    self.yum_clean()
 
 if __name__ == '__main__':
    obj = AmbariCleaner()
