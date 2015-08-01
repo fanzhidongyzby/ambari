@@ -14,7 +14,7 @@ for x in `ipcs -s | grep postgres | awk '{print $2}'` ; do ipcrm -s $x ; done
 echo "uninstall all the rpm packages of TDP-2.2 repo ..."
 yum list installed 2>/dev/null | grep "TDP-2.2" | xargs yum remove -y
 yum clean all
-rm /etc/yum.repos.d/*.repo
+ls -l /etc/yum.repos.d/*.repo | grep -v TDP.repo | xargs rm -f
 
 echo "remove postgresql data files ..."
 rm -rf /var/lib/pgsql/

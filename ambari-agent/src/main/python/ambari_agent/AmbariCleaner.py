@@ -83,7 +83,11 @@ class AmbariCleaner:
       cmd ="rm /etc/yum.repos.d/*.repo"
       self.run_cmd(cmd)
 
+  def release_resources(self):
+    self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
+
   def remove_dir(self):
+    self.release_resources()
     for dir in self.dirs:
       cmd = "sudo rm -rf {}".format(dir)
       self.run_cmd(cmd)
