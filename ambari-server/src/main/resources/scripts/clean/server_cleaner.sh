@@ -1,51 +1,35 @@
 #!/bin/bash
-echo "--------clean tbds server"
-echo "step 1: server stop"
-sudo tbds-server stop
+echo "----------   CLEAN TBDS SERVER  ----------"
+echo "stop tbds server ..."
+tbds-server stop
 
-echo "step2: yum erase tbds-server"
-sudo yum erase -y tbds-server
+echo "stop postgresql ..."
+service postgresql-9.3 stop
 
-echo "step3: rm dir"
-sudo rm -rf /var/lib/tbds*
-sudo rm -rf /usr/lib/tbds*
-sudo rm -rf /var/log/tbds*
-sudo rm -rf /var/run/tbds*
-sudo rm -rf /usr/bin/tbds*
-sudo rm -rf /usr/sbin/tbds*
-sudo rm -rf /usr/lib/python2.6/site-packages/tbds*
-sudo rm -rf /usr/lib/python2.6/site-packages/resource_management
-sudo rm -rf /etc/tbds*
-
-sudo rm -rf /var/lib/ambari*
-sudo rm -rf /usr/lib/ambari*
-sudo rm -rf /var/log/ambari*
-sudo rm -rf /var/run/ambari*
-sudo rm -rf /usr/bin/ambari*
-sudo rm -rf /usr/sbin/ambari*
-sudo rm -rf /usr/lib/python2.6/site-packages/ambari*
-sudo rm -rf /usr/lib/python2.6/site-packages/resource_management
-sudo rm -rf /etc/ambari*
-
-echo "--------clean pg"
-echo "step 1: stop pg"
-service postgresql stop
-
-echo "step 2: "
-yum remove -y post*
-
-echo "step3: clean pg"
-# remove all postgresql-files
-sudo rm -rf /var/lib/pgsql/
-sudo rm -rf /var/run/post*
-sudo rm -rf /var/lock/subsys/postgresql*
-
-echo "step4: remove ipcs"
-# remove all ipcs of postgresql when it's killed -9
+echo "delete processes and ipcs of postgres in case of someone has kill-9 postgresql"
+for x in `ps aux | grep "/usr/pgsql-9.3/bin/postmaster" | grep -v grep | awk '{print $2}'`; do kill -9 $x; done
 for x in `ipcs -m | grep postgres | awk '{print $2}'` ; do ipcrm -m $x ; done
 for x in `ipcs -s | grep postgres | awk '{print $2}'` ; do ipcrm -s $x ; done
 
-echo "step5: yum clean all"
-sudo yum clean all
+echo "uninstall all the rpm packages of TDP-2.2 repo ..."
+yum list installed 2>/dev/null | grep "TDP-2.2" | xargs yum remove -y
+yum clean all
+rm /etc/yum.repos.d/*.repo
 
-echo "Server clean success !!!"
+echo "remove postgresql data files ..."
+rm -rf /var/lib/pgsql/
+rm -rf /var/run/post*
+rm -rf /var/lock/subsys/postgresql*
+
+echo "remove residual files on server ..."
+rm -rf /var/lib/tbds*
+rm -rf /usr/lib/tbds*
+rm -rf /var/log/tbds*
+rm -rf /var/run/tbds*
+rm -rf /usr/bin/tbds*
+rm -rf /usr/sbin/tbds*
+rm -rf /usr/lib/python2.6/site-packages/tbds*
+rm -rf /usr/lib/python2.6/site-packages/resource_management
+rm -rf /etc/tbds*
+
+echo "server cleaned success !!!"

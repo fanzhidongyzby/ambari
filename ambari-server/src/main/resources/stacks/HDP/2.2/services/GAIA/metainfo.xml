@@ -167,7 +167,7 @@
               <name>hadoop-ng</name>
             </package>
             <package>
-              <name>haproxy</name>
+              <name>haproxy-ng</name>
             </package>
             <package>
               <name>portal_api_server</name>

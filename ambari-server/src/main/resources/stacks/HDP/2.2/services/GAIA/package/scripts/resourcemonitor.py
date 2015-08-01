@@ -27,7 +27,7 @@ class ResourceMonitor(Script):
 
   def install(self, env):
     Logger.info("install ResourceMonitor")
-    excludePackage = ['haproxy', 'hadoop-ng', 'portal_api_server', 'docker-ng']
+    excludePackage = ['haproxy-ng', 'hadoop-ng', 'portal_api_server', 'docker-ng']
     self.install_packages(env,excludePackage)
 
     Logger.info("grant node privilege")
@@ -51,7 +51,7 @@ class ResourceMonitor(Script):
     env.set_params(params)
 
     Logger.info("stop ResourceMonitor")
-    utils().kill_process(params.resourcemonitor_script)
+    utils().kill_process(params.resourcemonitor_key)
 
   def status(self, env):
     import params

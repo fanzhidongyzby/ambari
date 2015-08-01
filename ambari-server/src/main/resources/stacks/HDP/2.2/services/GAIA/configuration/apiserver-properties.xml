@@ -20,14 +20,8 @@
 -->
 <configuration supports_final="false">
     <property>
-        <name>etcd.url</name>
-        <value>http://10.149.27.112:4001, http://10.149.27.114:4001, http://10.149.27.116:4001</value>
-        <description>etcd url port info</description>
-    </property>
-
-    <property>
         <name>gaia.cluster.default</name>
-        <value>shpc-test</value>
+        <value>gaia-test</value>
         <description>cluster name</description>
     </property>
     

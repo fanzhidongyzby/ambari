@@ -29,7 +29,7 @@ class ApiServer(Script):
 
     def install(self, env):
         Logger.info("install apiserver")        
-        excludePackage = ['docker-ng','hadoop-ng','haproxy','resource_monitor']
+        excludePackage = ['docker-ng','hadoop-ng','haproxy-ng','resource_monitor']
         self.install_packages(env,excludePackage)
 
 

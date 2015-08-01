@@ -405,7 +405,7 @@
               </sources>
             </mapping>
             <mapping>
-              <directory>/usr/lib/python2.6/site-packages/ambari_agent</directory>
+              <directory>${agent.install.dir}</directory>
               <filemode>755</filemode>
               <username>root</username>
               <groupname>root</groupname>
@@ -414,7 +414,7 @@
                   <location>src/main/python/ambari_agent/AmbariCleaner.py</location>
                 </source>
                 <source>
-                  <location>src/main/python/ambari_agent/service_info.json</location>
+                  <location>src/main/python/ambari_agent/service_remove.txt</location>
                 </source>
               </sources>
             </mapping>

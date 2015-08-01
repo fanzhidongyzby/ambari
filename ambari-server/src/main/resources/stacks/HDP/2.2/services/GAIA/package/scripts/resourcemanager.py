@@ -33,7 +33,7 @@ class ResourceManager(Script):
         utils().check_local_environment(env,params.master)
 
         Logger.info("install hadoop")        
-        excludePackage = ['docker-ng','haproxy','resource_monitor','portal_api_server']
+        excludePackage = ['docker-ng','haproxy-ng','resource_monitor','portal_api_server']
         self.install_packages(env,excludePackage)
 
 

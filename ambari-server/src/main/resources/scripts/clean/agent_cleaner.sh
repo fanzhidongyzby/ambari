@@ -1,52 +1,52 @@
 #!/bin/bash
 
 
-echo "-------stop all services"
+echo "----------   STOP ALL THE SERVICES   ----------"
 # get server ip
 server='127.0.0.1'
 
 # get cluster name
 cluster=`curl --user admin:admin http://$server:8080/api/v1/clusters 2> /dev/null | grep cluster_name | awk -F '"' '{print $4}'`
+echo "get cluster name = "$cluster
 
 # stop all the services
+echo "send request to stop all the service"
 request=`curl -H "ContentType:application/json" -H "X-requested-By: florianfan" -X PUT -d '{"ServiceInfo":{"state":"INSTALLED"}}' --user admin:admin http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
 
 # wait services stopped
+echo "request sent ok, waiting services to be stopped ..."
 if [[ $request != "" ]]; then
 	# wait services stopped
-	echo -n "Stopping all the services"
 	while true; do
 		status=`curl --user admin:admin $request 2> /dev/null | grep request_status | awk -F '"' '{print $4}'`
 		if [[ "$status" == "IN_PROGRESS" || "$status" == "PENDING" ]]; then
 			echo -n \>
 			sleep 5
 		elif [[ "$status" == "COMPLETED" ]]; then
-			echo -e "\nStopp services success"
+			echo -e "\nservices stopped success !!!"
 			break
 		else
-			echo -e "\nStopping services failed, status = $status"
+			echo -e "\nservices stopped failed, status = $status"
 			exit 1
 			break
 		fi
 	done
 fi
 
-echo "-------get hosts info from tbds server"
+echo "----------   CLEAN AGENTS ON ALL THE HOSTS  ----------"
+
+echo "scanning all the hosts in the cluster ..."
 > /var/lib/tbds-server/resources/scripts/clean/hosts
-echo "get hosts"
 
 clustername=`curl --user admin:admin "http://0.0.0.0:8080/api/v1/clusters?minimal_response=true" 2> /dev/null | grep cluster_name | awk -F':' '{print $2}' | sed  "s/[ \"]//g"`
-echo $clustername
 
 for host in `curl --user admin:admin "http://0.0.0.0:8080/api/v1/clusters/$clustername/hosts?minimal_response=true" 2> /dev/null | grep host_name | awk -F':' '{print $2}' | sed "s/[ \"]//g"`
 do
   echo ${host} >> /var/lib/tbds-server/resources/scripts/clean/hosts
- 
 done
-  
 
-echo "----------clean agent"
-
+echo "agents on following hosts will be cleaned:"
+cat /var/lib/tbds-server/resources/scripts/clean/hosts
 
 BINDIR=`dirname "$0"`
 cd $BINDIR
@@ -55,12 +55,7 @@ currentPath=`pwd`
 loginUser="tencent"
 loginPass="tencent"
 
-if [ -d "/tmp/clean/" ]
-then
-   echo "/tmp/clean/ exist"
-else
-  sudo mkdir /tmp/clean
-fi
+sudo mkdir -p /tmp/clean
 
 count=10
 for host in `cat hosts`

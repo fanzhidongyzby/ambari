@@ -67,7 +67,7 @@ slave = "slave"
 zk_server_port = default("/configurations/zoo.cfg/client.port",2181)
 zk_hosts = default("/clusterHostInfo/zookeeper_hosts", ["127.0.0.1"])
 inner_zk_urls = gaiautils().bind_hosts_port(zk_hosts, zk_server_port, ",")
-zk_urls = default("/configurations/gaia-yarn-site/gaia.zk-address", inner_zk_urls)
+zk_urls = default("/configurations/gaia-yarn-site/gaia.resourcemanager.zk-address", inner_zk_urls)
 
 
 # ETCD
@@ -90,9 +90,8 @@ service_start = service_script.format("{}", "start")
 service_stop = service_script.format("{}", "stop")
 service_status = service_script.format("{}", "status")
 
-
-hadoop_tmp_dir = default("/configurations/gaia-yarn-site/hadoop.tmpdir", "/gaia/hadoop/hdfsadmin/hdfsenv/runtime")
-sfair_schedule_content = default("/configurations/sfair-scheduler-env/content", "")
+# strip blank line ahead in file, or cause RM start failed
+sfair_schedule_content = default("/configurations/sfair-scheduler-env/content", "").strip()
 
 # yarn-site.xml
 yarn_cluster_id = default("/configurations/gaia-yarn-site/gaia.resourcemanager.cluster-id", "gaia-test")
@@ -165,7 +164,7 @@ rmhaproxy_key = rmhaproxy_install_path
 
 # API Server
 etcd_url = etcd_urls
-gaia_cluster_default = default("/configurations/apiserver-properties/gaia.cluster.default",'shpc-test')
+gaia_cluster_default = default("/configurations/apiserver-properties/gaia.cluster.default",'gaia-test')
 gaia_queue_default = default("/configurations/apiserver-properties/gaia.queue.default",'root.gaia')
 server_port = default("/configurations/application-proerties/server.port",8085)
 management_port = default("/configurations/application-proerties/management.port",8088)
@@ -202,7 +201,7 @@ nmhaproxy_install_path = "/usr/local/haproxy"
 nmhaproxy_script = "cd {} && ./update_proxy.sh".format(nmhaproxy_install_path)
 nmhaproxy_start = "({}&) &> /dev/null".format(nmhaproxy_script)
 nmhaproxy_hosts = default("/clusterHostInfo/nmhaproxy_hosts", [])
-nmhaproxy_key = nmhaproxy_install_path
+nmhaproxy_key = "/usr/local/haproxy|./update_proxy.sh"
 
 # Docker
 docker_service = "docker"
@@ -220,6 +219,6 @@ resourcemonitor_save_interval = default("/configurations/resourcemonitor/save.in
 resourcemonitor_install_path = "/gaia/resource_monitor"
 resourcemonitor_script = "cd {} && ./resource_monitor".format(resourcemonitor_install_path)
 resourcemonitor_start = gaia_script.format("({} -log_dir={} -from_cadvisor={} -listen_port={} -nmAddress={} -saveInterval={} &) &> /dev/null".format(resourcemonitor_script, resourcemonitor_log_dir, resourcemonitor_from_cadvisor, resourcemonitor_listen_port, resourcemonitor_nm_address, resourcemonitor_save_interval))
-resourcemonitor_key = resourcemonitor_script
+resourcemonitor_key = "./resource_monitor"
 
 

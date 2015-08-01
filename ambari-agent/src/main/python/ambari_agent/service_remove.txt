@@ -14,4 +14,3 @@ TDP-2.2
 /etc/ambari*
 /gaia/*
 /usr/hdp
-/etc/yum.repo.d/*.repo

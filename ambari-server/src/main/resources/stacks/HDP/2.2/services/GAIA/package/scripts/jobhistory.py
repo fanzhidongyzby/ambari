@@ -28,7 +28,7 @@ class JobHistory(Script):
 
     def install(self, env):
         Logger.info("install hadoop")        
-        excludePackage = ['docker-ng','haproxy','resource_monitor','portal_api_server']
+        excludePackage = ['docker-ng','haproxy-ng','resource_monitor','portal_api_server']
         self.install_packages(env,excludePackage)
 
 
@@ -46,7 +46,7 @@ class JobHistory(Script):
 
     def stop(self, env):
         import params
-        Logger.info("stop ResourceManager")
+        Logger.info("stop JobHistory")
         utils().exe(params.jobhistory_stop)
 
     def status(self, env):

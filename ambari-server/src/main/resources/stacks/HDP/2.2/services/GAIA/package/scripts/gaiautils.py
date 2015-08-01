@@ -80,7 +80,7 @@ class gaiautils:
       for disk in local_disks:
         local_dirs += disk + subdir + ","
     
-      return local_dirs[:-2]
+      return local_dirs[:-1]
 
 
     def bind_hosts_port(self, hosts, port, sep, prefix = ""):
@@ -88,7 +88,7 @@ class gaiautils:
       for host in hosts:
         address += prefix + host.strip() + ":" + str(port) + sep
 
-      address = address[:-2] if len(address) > 0 else address
+      address = address[:-1] if len(address) > 0 else address
 
       return address
 

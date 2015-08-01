@@ -92,6 +92,10 @@ class configinit(Script):
   def update_rm_configs(self, env):
     import params
     Logger.info('configure ResourceManager')
+
+    self.update_yarn_site(env)
+    self.update_hdfs_site(env)
+    self.update_core_site(env)
         
     Logger.info("generate sfair-scheduler.xml on ResourceManager")
     File(os.path.join(params.yarn_config_path,'sfair-scheduler.xml'),
@@ -101,13 +105,16 @@ class configinit(Script):
       content=Template("sfair-scheduler.xml.j2")
     )
 
-    self.update_yarn_site(env)
-    self.update_hdfs_site(env)
+
 
   def update_nm_configs(self, env):
     import params
     Logger.info('configure NodeManager')
-        
+
+    self.update_yarn_site(env)
+    self.update_hdfs_site(env)
+    self.update_core_site(env)
+
     Logger.info("generate container-executor.cfg on ResourceManager")
     File(os.path.join(params.yarn_config_path,'container-executor.cfg'),
       owner=params.user,
@@ -115,9 +122,6 @@ class configinit(Script):
       mode=0644,
       content=Template("container-executor.cfg.j2")
     )
-
-    self.update_yarn_site(env)
-    self.update_hdfs_site(env)
 
     Logger.info("generate hadoop tmp directory")
     Directory(params.hadoop_tmp_dir,
@@ -142,7 +146,7 @@ class configinit(Script):
         group=params.group,
         mode=0755,
         recursive=True
-        )
+      )
 
 
 if __name__ == "__main__":

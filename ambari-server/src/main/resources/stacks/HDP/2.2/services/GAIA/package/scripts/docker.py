@@ -27,7 +27,7 @@ class Docker(Script):
 
   def install(self, env):
     Logger.info("install Docker")
-    excludePackage = ['haproxy', 'hadoop-ng', 'portal_api_server', 'resource_monitor']
+    excludePackage = ['haproxy-ng', 'hadoop-ng', 'portal_api_server', 'resource_monitor']
     self.install_packages(env,excludePackage)
 
 

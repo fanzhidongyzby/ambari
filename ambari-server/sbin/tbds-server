@@ -144,12 +144,15 @@ case "$1" in
         $PYTHON /usr/sbin/tbds-server.py $@
         ;;
   clean)
+        me=`whoami`
+        if [[ "$me" != "root" ]]; then
+          echo "You need to be root privilege"
+          exit 1
+        fi
         echo "Clean the whole cluster, are you sure? (yes/no):"
         read choose
         if [[ "$choose" == "yes" ]]; then
-          echo -e "Clean services and agents"
           /var/lib/tbds-server/resources/scripts/clean/agent_cleaner.sh
-          echo "Clean TBDS server"
           /var/lib/tbds-server/resources/scripts/clean/server_cleaner.sh
         fi
         ;;

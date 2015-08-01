@@ -40,7 +40,7 @@ class utils:
 
   def kill_process(self, keyword):
     Logger.info("kill process with: {}".format(keyword))
-    cmd = "ps aux | grep '" + keyword + "' | grep -v grep | awk '{print $2}'"
+    cmd = "ps aux | grep -E '" + keyword + "' | grep -v grep | awk '{print $2}'"
     result = self.exe(cmd)
     if result != None:
       pids = result.split()
@@ -52,7 +52,7 @@ class utils:
   # check process by key word
   def check_process(self, keyword):
     Logger.info("check process with: {}".format(keyword))
-    cmd = "ps aux | grep '" + keyword + "' | grep -v grep | cat"
+    cmd = "ps aux | grep -E '" + keyword + "' | grep -v grep | cat"
     result = self.exe(cmd)
     if (result == ""):
       Logger.error("process {} not exist".format(keyword))
@@ -60,7 +60,7 @@ class utils:
 
   # check process with "service xxx status" and key word
   def check_service_status(self, service, keyword):
-    cmd = "service {} status | grep '{}'".format(service, keyword)
+    cmd = "service {} status | grep -E '{}'".format(service, keyword)
     Logger.info("run service check on {} : ".format(service))
     (status, output) = commands.getstatusoutput(cmd)
     if (output == ""):
