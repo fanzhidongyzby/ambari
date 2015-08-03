@@ -21,7 +21,7 @@
 <configuration supports_final="false">
   <property require-input = "true">
     <name>gaia.resourcemanager.cluster-id</name>
-    <value>shpc-test</value>
+    <value>gaia-test</value>
     <description>集群名</description>
   </property>
   <property require-input = "true">
@@ -56,7 +56,7 @@
   </property>
   <property>
       <name>gaia.nodemanager.docker-hup-address</name>
-      <value>docker.oa.com</value>
+      <value>docker.oa.com:8080</value>
   </property>
   <property>
       <name>gaia.nodemanager.local-docker-address</name>

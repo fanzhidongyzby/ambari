@@ -21,14 +21,8 @@
 <configuration supports_final="false">
     <property>
         <name>log.dir</name>
-        <value>/gaia/resource_monitor/logs</value>
-        <description>Resource Monitor日志目录</description>
-    </property>
-
-    <property>
-        <name>from.cadvisor</name>
-        <value>false</value>
-        <description>是否使用cadvisor</description>
+        <value>logs</value>
+        <description>Resource Monitor日志相对于/gaia/resource_monitor的目录</description>
     </property>
 
     <property>

@@ -210,8 +210,8 @@ docker_stop = service_stop.format(docker_service)
 docker_status_key = "running"
 
 # Resource Monitor
-resourcemonitor_log_dir = default("/configurations/resourcemonitor/log.dir", "/gaia/resource_monitor/logs")
-resourcemonitor_from_cadvisor = default("/configurations/resourcemonitor/from.cadvisor", "false")
+resourcemonitor_log_dir = default("/configurations/resourcemonitor/log.dir", "logs")
+resourcemonitor_from_cadvisor = "false"
 resourcemonitor_listen_port = default("/configurations/resourcemonitor/listen.port", "36007")
 resourcemonitor_nm_address = nodemanager_address.split(":")[-1]
 resourcemonitor_save_interval = default("/configurations/resourcemonitor/save.interval", "60")

@@ -77,12 +77,6 @@ class AmbariCleaner:
     print output
     print ret
 
-
-  def remove_yum_repo(self):
-    if not self.onServer:
-      cmd ="rm /etc/yum.repos.d/*.repo"
-      self.run_cmd(cmd)
-
   def release_resources(self):
     self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
 
@@ -101,7 +95,6 @@ class AmbariCleaner:
     # remove yum rpms
     self.remove_services_installed_rpm()
     self.yum_clean()
-    self.remove_yum_repo()
 
     # remove user defined dirs
     self.remove_dir()
