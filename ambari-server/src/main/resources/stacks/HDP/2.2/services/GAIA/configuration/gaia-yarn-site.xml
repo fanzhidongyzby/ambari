@@ -42,7 +42,7 @@
   <property require-input = "false">
     <name>gaia.etcd-address</name>
     <value></value>
-    <description>Etcd地址，默认为内部Etcd地址。如http://192.168.0.1:4001,http://192.168.0.2:4001,http://192.168.0.3:4001</description>
+    <description>Etcd地址，默认为内部Etcd地址。192.168.0.1:4001,192.168.0.2:4001,192.168.0.3:4001</description>
   </property>
   <property require-input = "false">
     <name>gaia.resourcemanager.zk-address</name>
@@ -129,6 +129,14 @@
   <property>
     <name>gaia.log.server.url</name>
     <value>http://${yarn.timeline-service.webapp.address}/applicationhistory/logs</value>
+  </property>
+  <property>
+    <name>gaia.home.dir</name>
+    <value>/gaia/hadoop</value>
+  </property>
+  <property>
+    <name>gaia.nodemanager.recovery.dir</name>
+    <value>/gaia/recovery</value>
   </property>
 </configuration>
 

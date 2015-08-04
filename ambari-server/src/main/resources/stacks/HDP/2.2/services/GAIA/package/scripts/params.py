@@ -73,7 +73,7 @@ zk_urls = default("/configurations/gaia-yarn-site/gaia.resourcemanager.zk-addres
 # ETCD
 etcd_server_port = default("/configurations/etcd/etcd.server.port",4001)
 etcd_hosts = default("/clusterHostInfo/etcd_service_hosts", ["127.0.0.1"])
-inner_etcd_urls = gaiautils().bind_hosts_port(etcd_hosts, etcd_server_port, ",", "http://")
+inner_etcd_urls = gaiautils().bind_hosts_port(etcd_hosts, etcd_server_port, ",")
 etcd_urls = default("/configurations/gaia-yarn-site/gaia.etcd-address", inner_etcd_urls)
 
 
@@ -138,6 +138,8 @@ web_proxy_address_rm1 = default("/configurations/gaia-yarn-site/gaia.web-proxy.a
 web_proxy_address_rm2 = default("/configurations/gaia-yarn-site/gaia.web-proxy.address.rm2", "${gaia.resourcemanager.hostname.rm2}:8081")
 api_server_address = default("/configurations/gaia-yarn-site/gaia.api-server-address", "http://${yarn.resourcemanager.cluster-id}.api.oa.com/api")
 log_server_url = default("/configurations/gaia-yarn-site/gaia.log.server.url", "http://${yarn.timeline-service.webapp.address}/applicationhistory/logs")
+gaia_home_dir = default("/configurations/gaia-yarn-site/gaia.home.dir", "/gaia/hadoop")
+gaia_nodemanager_recovery_dir = default("/configurations/gaia-yarn-site/gaia.nodemanager.recovery.dir", "/gaia/recovery")
 
 # ResourceManager
 rm_name = "resourcemanager"
