@@ -22,69 +22,71 @@ import sys
 import commands
 from utils import utils
 
+
 class gaiautils:
+  def get_local_cpunum(self):
+    cmd = "cat /proc/cpuinfo | grep 'cpu cores' | awk '{print $4}'"
+    out = utils().exe(cmd)
+    cpuNum = 0
+    for i in out.split():
+      cpuNum += int(i)
 
-    def get_local_cpunum(self):
-      cmd = "cat /proc/cpuinfo | grep 'cpu cores' | awk '{print $4}'"
-      out = utils.exe(cmd)
-      cpuNum = 0
-      for i in out.split():
-        cpuNum += int(i)
+    return cpuNum
 
-      return cpuNum
-   
-    def get_local_memorytotal(self):
-      mem_info = {}
-      with open('/proc/meminfo', 'r') as f:
-        data = f.readlines()
-        for i in data:
-            k, v = [x.strip() for x in i.split(':')]
-            mem_info[k] = int(v.split()[0])
-      meminfo = self.sub_dict(mem_info, 'MemTotal,SwapTotal')
-      return int(meminfo.get("MemTotal",0)/1024)
+  def sub_dict(self, form_dict, sub_keys, default=None):
+    return dict([(k, form_dict.get(k.strip(), default)) for k in sub_keys.split(',')])
 
-    def get_first_data(self):
-      cmd = "df | awk '{print $6}' | grep /data" 
-      (code, output) = commands.getstatusoutput(cmd) 
-      if code == 0:
-        local_disks = output.split()
-        if len(local_disks) > 0:
-          return local_disks[0]
+  def get_local_memorytotal(self):
+    mem_info = {}
+    with open('/proc/meminfo', 'r') as f:
+      data = f.readlines()
+      for i in data:
+        k, v = [x.strip() for x in i.split(':')]
+        mem_info[k] = int(v.split()[0])
+    meminfo = self.sub_dict(mem_info, 'MemTotal,SwapTotal')
+    return int(meminfo.get("MemTotal", 0) / 1024)
 
-      return "/data"
+  def get_first_data(self):
+    cmd = "df | awk '{print $6}' | grep /data"
+    (code, output) = commands.getstatusoutput(cmd)
+    if code == 0:
+      local_disks = output.split()
+      if len(local_disks) > 0:
+        return local_disks[0]
 
-    def get_local_dirs(self, subdir):
-      DEFAULT_LOCAL_DIRS = ["/data"]
-      local_disks = DEFAULT_LOCAL_DIRS
-    
-      cmd = "df | awk '{print $6}' | grep /data" 
-      (code, output) = commands.getstatusoutput(cmd) 
-      if code == 0:
-        local_disks = output.split()
-    
-      local_dirs = ""
-      for disk in local_disks:
-        local_dirs += disk + subdir + ","
-    
-      return local_dirs[:-1]
+    return "/data"
 
+  def get_local_dirs(self, subdir):
+    DEFAULT_LOCAL_DIRS = ["/data"]
+    local_disks = DEFAULT_LOCAL_DIRS
 
-    def bind_hosts_port(self, hosts, port, sep, prefix = ""):
-      address = ""
-      for host in hosts:
-        address += prefix + host.strip() + ":" + str(port) + sep
+    cmd = "df | awk '{print $6}' | grep /data"
+    (code, output) = commands.getstatusoutput(cmd)
+    if code == 0:
+      local_disks = output.split()
 
-      address = address[:-1] if len(address) > 0 else address
+    local_dirs = ""
+    for disk in local_disks:
+      local_dirs += disk + subdir + ","
 
-      return address
+    return local_dirs[:-1]
+
+  def bind_hosts_port(self, hosts, port, sep, prefix=""):
+    address = ""
+    for host in hosts:
+      address += prefix + host.strip() + ":" + str(port) + sep
+
+    address = address[:-1] if len(address) > 0 else address
+
+    return address
 
 
-if  __name__ == "__main__":
-    a = gaiautils().get_local_cpunum()
-    print(a)
-    b = gaiautils().get_local_memorytotal()
-    print(b)
-    print gaiautils().get_local_dirs("/yarnenv/local")
-    print gaiautils().get_first_data()
-    print gaiautils().bind_hosts_port(["123", "345"], 9090, ";")
-    print gaiautils().bind_hosts_port(["123", "345"], 9090, ";", "http://")
+if __name__ == "__main__":
+  a = gaiautils().get_local_cpunum()
+  print(a)
+  b = gaiautils().get_local_memorytotal()
+  print(b)
+  print gaiautils().get_local_dirs("/yarnenv/local")
+  print gaiautils().get_first_data()
+  print gaiautils().bind_hosts_port(["123", "345"], 9090, ";")
+  print gaiautils().bind_hosts_port(["123", "345"], 9090, ";", "http://")
