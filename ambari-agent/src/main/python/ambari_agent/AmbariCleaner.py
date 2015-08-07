@@ -41,7 +41,7 @@ class AmbariCleaner:
 
       if (findkey):
         if(line.find("[") < 0):
-          print("add list: " + line)
+          print("add list: " + line)\
           res.append(line)
         else:
           break
@@ -67,6 +67,8 @@ class AmbariCleaner:
   def remove_services_installed_rpm(self):
     if not self.onServer:
       for repo in self.repos:
+        if self.onServer and ("tbds-server" in repo) :
+          continue
         cmd = "yum list installed 2>/dev/null |grep " + repo + " | xargs yum remove -y"
         self.run_cmd(cmd)
 
@@ -82,9 +84,10 @@ class AmbariCleaner:
 
   def remove_dir(self):
     self.release_resources()
-    for dir in self.dirs:
-      cmd = "sudo rm -rf {}".format(dir)
-      self.run_cmd(cmd)
+    if not self.onServer:
+      for dir in self.dirs:
+        cmd = "sudo rm -rf {}".format(dir)
+        self.run_cmd(cmd)
 
 
 

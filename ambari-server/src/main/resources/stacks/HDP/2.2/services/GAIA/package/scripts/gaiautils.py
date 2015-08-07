@@ -20,32 +20,18 @@ limitations under the License.
 
 import sys
 import commands
+from utils import utils
 
 class gaiautils:
 
-    def sub_dict(self,form_dict, sub_keys, default=None):
-       return dict([(k, form_dict.get(k.strip(), default)) for k in sub_keys.split(',')])
-
-    def read_cpuinfo(self):
-      cpu_stat = []
-      with open('/proc/cpuinfo', 'r') as f:
-        data = f.read()
-        for line in data.split('\n\n'):
-            cpu_stat.append(line)
-      return cpu_stat[-2]
-
     def get_local_cpunum(self):
-      data = self.read_cpuinfo()
-      cpu_info = {}
-      for i in data.splitlines():
-        k, v = [x.strip() for x in i.split(':')]
-        cpu_info[k] = v
-       
-      cpu_info['physical id'] = str(int(cpu_info.get('physical id')) + 1)
+      cmd = "cat /proc/cpuinfo | grep 'cpu cores' | awk '{print $4}'"
+      out = utils.exe(cmd)
+      cpuNum = 0
+      for i in out.split():
+        cpuNum += int(i)
 
-      cpuinfo = self.sub_dict(cpu_info, 'model name,physical id,cpu cores')
-      return int(cpuinfo.get("cpu cores",None))
-    
+      return cpuNum
    
     def get_local_memorytotal(self):
       mem_info = {}

@@ -131,6 +131,14 @@ class configinit(Script):
               recursive=True
               )
 
+    Logger.info("generate gaia recovery directory")
+    Directory(params.gaia_nodemanager_recovery_dir,
+              owner=params.user,
+              group=params.group,
+              mode=0755,
+              recursive=True
+              )
+
     Logger.info("generate nodemanager local dirs")
     for dir in params.yarn_nm_local_dirs_fullpath.split(","):
       Directory(dir,

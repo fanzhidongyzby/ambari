@@ -37,7 +37,7 @@
         "enabled": true,
         "source": {
           "type": "SCRIPT",
-          "path": "HDP/2.2/services/ZOOKEEEPR/package/alerts/check_zk_server.py"
+          "path": "ZOOKEEPER/3.4.5.2.0/package/alerts/check_zk_server.py"
         }
       }
     ]
