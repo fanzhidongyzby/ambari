@@ -1,0 +1,31 @@
+<root>
+
+  req_mq_conf = ../etc/sys/mq/mq_ccd_2_mcd0.conf
+  rsp_mq_conf = ../etc/sys/mq/mq_mcd0_2_ccd.conf
+
+  service_config = ../etc/sys/service.conf
+
+  event_notify = 1
+  # grid_num = 1000
+  # grid_distant = 100
+  req_water_mark = 5000000
+  max_conn = 40000
+
+
+  # max recv buffer, default 16M
+  recv_buff_max = 0
+  # max send buffer, deault 16M
+  send_buff_max = 0
+
+  # recv buffer initial, default 16384
+  # recv_buff_size = 1000
+  # send buffer initial, default 1024
+  # send_buff_size = 32768
+
+  watchdog_conf_file=../etc/sys/center_watchdog.conf
+
+  <log_client>
+      shm_key = {{center_ccd_shm_key}}
+  </log_client>
+
+</root>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?> 
+<configuration>
+  <property>
+    <name>center.port</name>
+    <value>55001</value>
+  </property>
+
+  <property>
+    <name>shm_key</name>
+    <value>7111</value>
+  </property>
+
+  <property>
+    <name>center_is_master</name>
+    <value>1</value>
+  </property>
+
+  <property>
+    <name>heart_beat_cycle</name>
+    <value>5</value>
+  </property>
+
+  <property>
+    <name>heart_beat_retry</name>
+    <value>3</value>
+  </property>
+
+  <property>
+    <name>handle_time_out</name>
+    <value>500</value>
+  </property>
+
+</configuration>
+

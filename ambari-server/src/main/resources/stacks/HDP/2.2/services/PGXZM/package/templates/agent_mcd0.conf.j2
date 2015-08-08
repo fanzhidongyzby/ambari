@@ -1,0 +1,23 @@
+<root>
+  app_conf_file = ../etc/sys/agent_mcd0.conf
+  user_conf_file = ../etc/user.conf
+  create_app_func = create_app
+  app_so_file = ./agent_mcd.so
+
+	<mq>
+		mq_mcd_2_dcc = ../etc/sys/mq/mq_mcd0_2_dcc.conf
+		mq_dcc_2_mcd = ../etc/sys/mq/mq_dcc_2_mcd0.conf
+	</mq>
+
+  mcppp_reportor_conf_file = ../etc/sys/mcp_reporter.conf
+  watchdog_conf_file=../etc/sys/agent_watchdog.conf
+
+  <log_client>
+      shm_key = {{agent_mcd0_shm_key}}
+  </log_client>
+
+  <http>
+    {{center_mcd0_center_host}}:{{center_mcd0_center_port}}
+  </http>
+	
+</root>

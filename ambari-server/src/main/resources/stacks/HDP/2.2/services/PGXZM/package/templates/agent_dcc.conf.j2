@@ -1,0 +1,32 @@
+<root>
+  req_mq_conf = ../etc/sys/mq/mq_mcd0_2_dcc.conf
+  rsp_mq_conf = ../etc/sys/mq/mq_dcc_2_mcd0.conf
+
+  service_config = ../etc/sys/service.conf
+  event_notify = 1
+  # grid_num = 1000
+  # grid_distant = 100
+  # req_water_mark = 5000000
+  max_conn = 40000
+
+  dcc_request_msg_timeout_thresh = 0
+
+
+  # max recv buffer, default 16M
+  recv_buff_max = 0
+  # max send buffer, deault 16M
+  send_buff_max = 0
+
+  # recv buffer initial, default 16384
+  # recv_buff_size = 2000
+  # send buffer initial, default 1024
+  # send_buff_size = 2000000
+
+  # watchdog_conf_file=../etc/http_watchdog.conf
+  watchdog_conf_file=../etc/sys/agent_watchdog.conf
+
+  <log_client>
+      shm_key = {{agent_dcc_shm_key}}
+  </log_client>
+
+</root>

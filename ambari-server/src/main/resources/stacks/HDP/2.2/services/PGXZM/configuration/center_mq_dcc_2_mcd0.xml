@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?> 
+<configuration>
+  <property>
+    <name>shm_key</name>
+    <value>3</value>
+  </property>
+
+  <property>
+    <name>sem_name</name>
+    <value>/center_3_qguo</value>
+  </property>
+
+  <property>
+    <name>fifo_path</name>
+    <value>./tmp/center_3_dcc_2_mcd0.fifo</value>
+  </property>
+
+</configuration>
+
