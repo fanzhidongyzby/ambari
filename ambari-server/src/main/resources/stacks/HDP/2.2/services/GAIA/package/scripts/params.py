@@ -68,6 +68,7 @@ zk_server_port = default("/configurations/zoo.cfg/client.port",2181)
 zk_hosts = default("/clusterHostInfo/zookeeper_hosts", ["127.0.0.1"])
 inner_zk_urls = gaiautils().bind_hosts_port(zk_hosts, zk_server_port, ",")
 zk_urls = default("/configurations/gaia-yarn-site/gaia.resourcemanager.zk-address", inner_zk_urls)
+zk_urls = "".join(zk_urls.split())
 
 
 # ETCD
@@ -75,6 +76,7 @@ etcd_server_port = default("/configurations/etcd/etcd.server.port",4001)
 etcd_hosts = default("/clusterHostInfo/etcd_service_hosts", ["127.0.0.1"])
 inner_etcd_urls = gaiautils().bind_hosts_port(etcd_hosts, etcd_server_port, ",")
 etcd_urls = default("/configurations/gaia-yarn-site/gaia.etcd-address", inner_etcd_urls)
+etcd_urls = "".join(etcd_urls.split())
 
 
 # utils
