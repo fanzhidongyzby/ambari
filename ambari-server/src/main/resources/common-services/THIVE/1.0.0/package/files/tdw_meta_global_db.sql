@@ -99,7 +99,7 @@ CREATE TABLE seg_split (
 
 ALTER TABLE public.seg_split OWNER TO tdwmeta;
 
--- insert into seg_split values('jdbc:postgresql://127.0.0.1:5432/seg_1','[0,10000)');
+insert into seg_split values('jdbc:postgresql://127.0.0.1:5432/seg_1','[0,10000)');
 
 --
 -- Name: tblpriv; Type: TABLE; Schema: public; Owner: tdwmeta; Tablespace: 

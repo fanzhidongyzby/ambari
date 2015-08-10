@@ -123,7 +123,7 @@ class utils:
         elif (ret != 0 and out.rfind(name) != -1):
           # update coordinator self
           # update pgxc_node set node_host = 'local', node_port = 5000 WHERE node_name = 'datanode_10_151_0_123';
-          self_sql = "update pgxc_node set node_host = '{0}', node_port = {1} WHERE node_name = '{2}';".format(host, datanode_port, name)
+          self_sql = "update pgxc_node set node_host = '{0}', node_port = {1} WHERE node_name = '{2}';".format(host, port, name)
           self_cmd = sql_str.format(coor, coord_port, self_sql)
           Logger.info(self_cmd)
           (ret, out) = commands.getstatusoutput(self_cmd)

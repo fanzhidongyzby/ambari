@@ -17,6 +17,7 @@ limitations under the License.
 
 """
 import os.path
+import time
 
 from resource_management import *
 from resource_management.core.logger import Logger
@@ -99,10 +100,18 @@ def namenode(action=None, do_format=True, rolling_restart=False, env=None):
       code, out = shell.call(namenode_safe_mode_off)
       if code != 0:
         leave_safe_mode_cmd = format("hdfs --config {hadoop_conf_dir} dfsadmin -safemode leave")
-        Execute(leave_safe_mode_cmd,
-                user=params.hdfs_user,
-                path=[params.hadoop_bin_dir],
-        )
+        try:
+            Execute(leave_safe_mode_cmd,
+                    user=params.hdfs_user,
+                    path=[params.hadoop_bin_dir],
+            )
+        except:
+            # Sleep and retry
+            time.sleep(60)
+            Execute(leave_safe_mode_cmd,
+                    user=params.hdfs_user,
+                    path=[params.hadoop_bin_dir],
+                    )
 
     # Verify if Namenode should be in safemode OFF
     Execute(namenode_safe_mode_off,
