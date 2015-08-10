@@ -186,11 +186,12 @@
       </requiredServices>
 
       <configuration-dependencies>
-        <config-type>yarn-site</config-type>
-        <config-type>yarn-env</config-type>
-        <config-type>core-site</config-type>
-        <config-type>mapred-site</config-type>
-        <config-type>yarn-log4j</config-type>
+        <config-type>apiserver-properties</config-type>
+        <config-type>application-proerties</config-type>
+        <config-type>gaia-hdfs-site</config-type>
+        <config-type>gaia-yarn-site</config-type>
+        <config-type>resourcemonitor</config-type>
+        <config-type>sfair-scheduler-env</config-type>
       </configuration-dependencies>
 
     </service>

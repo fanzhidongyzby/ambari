@@ -103,13 +103,15 @@ yarn_nm_local_dirs_fullpath = gaiautils().get_local_dirs(yarn_nm_local_dirs)
 yarn_nm_reserve_cpu = default("/configurations/gaia-yarn-site/gaia.nodemanager.resource.reserved-cpu-vcores", "20")
 yarn_nm_cpu = gaiautils().get_local_cpunum() * 10
 yarn_nm_reserve_cpu = int(yarn_nm_reserve_cpu)
-yarn_nm_cpu = (yarn_nm_cpu - yarn_nm_reserve_cpu) if (yarn_nm_cpu > yarn_nm_reserve_cpu) else yarn_nm_cpu
+yarn_nm_reserve_cpu = 20 if yarn_nm_reserve_cpu < 0 or yarn_nm_reserve_cpu > yarn_nm_cpu else yarn_nm_reserve_cpu
+yarn_nm_cpu = yarn_nm_cpu - yarn_nm_reserve_cpu
 
 
 yarn_nm_reserve_mem  = default("/configurations/gaia-yarn-site/gaia.nodemanager.resource.reserved-memory-mb", "1024")
 yarn_nm_mem = gaiautils().get_local_memorytotal()
 yarn_nm_reserve_mem = int(yarn_nm_reserve_mem)
-yarn_nm_mem = (yarn_nm_mem - yarn_nm_reserve_mem) if (yarn_nm_mem > yarn_nm_reserve_mem) else yarn_nm_mem
+yarn_nm_reserve_mem = 1024 if yarn_nm_reserve_mem < 0 or yarn_nm_reserve_mem > yarn_nm_mem else yarn_nm_reserve_mem
+yarn_nm_mem = yarn_nm_mem - yarn_nm_reserve_mem
 
 yarn_etcd = etcd_urls
 etcd_hosts = default("/clusterHostInfo/etcd_service_hosts", [])
