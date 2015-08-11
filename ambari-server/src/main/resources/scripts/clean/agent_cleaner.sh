@@ -32,6 +32,7 @@ if [[ $request != "" ]]; then
 		fi
 	done
 fi
+echo "services stopped OK !"
 
 echo "----------   CLEAN AGENTS ON ALL THE HOSTS  ----------"
 
@@ -57,22 +58,22 @@ loginPass="tencent"
 
 sudo mkdir -p /tmp/clean
 
-echo "begin clean agent:"
+echo "begin to clean agents ..."
 count=10
 for host in `cat hosts`
 do
   ./service_cleaner.exp ${host} ${loginUser} ${loginPass} 1>>/tmp/clean/${host}.log 2>&1 &
-  p_num=`ps -wef|grep service_cleaner | grep -v grep -c`
+  p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
   echo "${host} is cleaning..."
 
   while [ $p_num -ge $count ]
   do
       echo "$count"
-      p_num=`ps -wef|grep service_cleaner | grep -v grep -c`
+      p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
       sleep 5
-      echo "$p_num:: sleep 2s..."
+      echo "waiting $p_num agents clean over ..."
   done
 done
-echo "clean finished----"
+echo "agents clean OK !"
 
 wait
