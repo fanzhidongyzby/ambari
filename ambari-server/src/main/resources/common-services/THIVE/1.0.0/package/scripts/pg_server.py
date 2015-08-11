@@ -30,7 +30,6 @@ class PgMaster(Script):
     env.set_params(env)
 
     excludePackage = ['plclient*','thive']
-
     self.install_packages(env,excludePackage)
   
 

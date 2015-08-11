@@ -57,13 +57,13 @@ loginPass="tencent"
 
 sudo mkdir -p /tmp/clean
 
+echo "begin clean agent:"
 count=10
 for host in `cat hosts`
 do
   ./service_cleaner.exp ${host} ${loginUser} ${loginPass} 1>>/tmp/clean/${host}.log 2>&1 &
-  sleep 5
   p_num=`ps -wef|grep service_cleaner | grep -v grep -c`
-  echo "$p_num:: ${host}"
+  echo "${host} is cleaning..."
 
   while [ $p_num -ge $count ]
   do
@@ -73,4 +73,6 @@ do
       echo "$p_num:: sleep 2s..."
   done
 done
+echo "clean finished----"
+
 wait
