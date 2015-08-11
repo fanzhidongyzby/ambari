@@ -31,16 +31,16 @@ rm -rf /usr/lib/python2.6/site-packages/tbds*
 rm -rf /usr/lib/python2.6/site-packages/resource_management
 rm -rf /etc/tbds*
 
-/var/lib/ambari*
-/usr/lib/ambari*
-/var/log/ambari*
-/var/run/ambari*
-/usr/bin/ambari*
-/usr/sbin/ambari*
-/usr/lib/python2.6/site-packages/ambari*
-/usr/lib/python2.6/site-packages/resource_management
-/etc/ambari*
-/gaia/*
-/usr/hdp
+rm -rf /var/lib/ambari*
+rm -rf /usr/lib/ambari*
+rm -rf /var/log/ambari*
+rm -rf /var/run/ambari*
+rm -rf /usr/bin/ambari*
+rm -rf /usr/sbin/ambari*
+rm -rf /usr/lib/python2.6/site-packages/ambari*
+rm -rf /usr/lib/python2.6/site-packages/resource_management
+rm -rf /etc/ambari*
+rm -rf /gaia/*
+rm -rf /usr/hdp
 
 echo "server cleaned success !!!"
