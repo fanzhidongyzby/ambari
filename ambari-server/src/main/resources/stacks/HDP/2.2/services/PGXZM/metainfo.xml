@@ -37,6 +37,18 @@
           </commandScript>
         </component>
 
+        <component>
+          <name>PGXZM_DATABASE</name>
+          <displayName>Database</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+
+          <commandScript>
+            <script>scripts/pg.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
 
         <component>
           <name>PGXZM_AGENT</name>

@@ -107,5 +107,20 @@ class config(Script):
          content=Template("agent_mq_dcc_2_mcd0.conf.j2")
          )
 
+  def update_pg(self, env):
+    import params
+
+    Logger.info('create postgresql.conf')
+    File(os.path.join(params.pgxm_pg_conf,'postgresql.conf'),
+         mode=0644,
+         content=Template("postgresql.conf.j2")
+         )
+
+    Logger.info('create pg_hba.conf')
+    File(os.path.join(params.pgxm_pg_conf,'pg_hba.conf'),
+         mode=0644,
+         content=Template("pg_hba.conf.j2")
+         )
+
 if __name__ == "__main__":
   pass

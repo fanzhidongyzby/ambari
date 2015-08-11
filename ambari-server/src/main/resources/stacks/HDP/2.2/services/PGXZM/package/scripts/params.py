@@ -33,6 +33,8 @@ pgxzm_agent_etc_sys_mq = "/usr/local/pgxzm/agent/etc/sys/mq"
 
 pgxzm_cmd = "({0}&) &> /dev/null"
 
+pgxm_pg_conf = "/var/lib/pgsql/9.3/data"
+
 # Center
 center_start = "{0}/center/tools/op/start.sh".format(pgxzm_install_path)
 center_start = pgxzm_cmd.format(center_start)
@@ -103,7 +105,9 @@ pg_start = pg_bin.format("start")
 
 pg_stop = pg_bin.format("stop")
 
-pg_status= pg_bin.format("status")
+pg_status = pg_bin.format("status")
+
+pg_port = default("/configurations/pgxzm_database/pgxzm.database.port", 5432)
 
 
 
