@@ -424,7 +424,7 @@ Em.I18n.translations = {
   'installer.step2.header':'安装选项',
   'installer.step2.body':'请输入要加入集群的主机列表',
   'installer.step2.targetHosts':'目标主机列表',
-  'installer.step2.targetHosts.info':'请使用机器ip，每行一个，具体格式为ip 帐号 密码（注：用空格分隔，帐号具备sudo权限）',
+  'installer.step2.targetHosts.info':'请使用机器ip（或者域名），每行一个，具体格式为ip 帐号 密码，用空格分隔，帐号具备sudo权限（注：若使用域名，用户需自行在所有机器的/etc/hosts中配置好所有域名和ip的映射关系）',
   'installer.step2.hostPattern.tooltip.title':'模式表达式',
   'installer.step2.hostPattern.tooltip.content':'可以利用模式表达式来指定多个目标主机. 例如, 为了指定从 host01.com 到 host10.com这些主机, 可在目标主机文本框里输入 host[01-10].com',
   'installer.step2.hostName.error.required':'格式为: IP 帐号 密码',
