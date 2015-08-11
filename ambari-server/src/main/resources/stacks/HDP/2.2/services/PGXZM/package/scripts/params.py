@@ -94,7 +94,16 @@ agent_mq_mcd0_2_dcc_fifo_path = default("/configurations/agent_mq_mcd0_2_dcc/fif
 
 agent_watchdog_key = default("/configurations/agent_watchdog/watchdog_key", 911)
 
+# Pg
+pg_bin = "/etc/init.d/postgresql-9.3 {0}"
 
+pg_init = pg_bin.format("initdb")
+
+pg_start = pg_bin.format("start")
+
+pg_stop = pg_bin.format("stop")
+
+pg_status= pg_bin.format("status")
 
 
 

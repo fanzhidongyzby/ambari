@@ -19,22 +19,22 @@ limitations under the License.
 
 import commands
 from resource_management import *
-from resource_management.core.logger import Logger  
+from resource_management.core.logger import Logger
 
 class utils:
-  
+
   def exe(self, cmd):
     Logger.info("exec command: {0}".format(cmd))
-    
+
     (status, output) = commands.getstatusoutput(cmd)
     if (status != 0):
       Logger.error("command exec error, return code = {0}".format(status))
       Logger.error(output)
       raise Fail()
-    
+
     Logger.info(output)
     return output
-  
+
 
   def kill_process(self, keyword):
     Logger.info("kill process by: {0}".format(keyword))
@@ -53,6 +53,15 @@ class utils:
     result = self.exe(cmd)
     if (result == ""):
       Logger.error("process not exist".format(keyword))
+      raise ComponentIsNotRunning()
+
+  # check process with "xxx status" and key word
+  def check_service_running(self, statusCmd):
+    Logger.info("check service by: {0}".format(statusCmd))
+    cmd = "{0} | grep -E 'running'".format(statusCmd)
+    result = self.exe(cmd)
+    if (result == ""):
+      Logger.error("service not exist")
       raise ComponentIsNotRunning()
 
 if __name__ == "__main__":
