@@ -41,7 +41,7 @@ class AmbariCleaner:
 
       if (findkey):
         if(line.find("[") < 0):
-          print("add list: " + line)\
+          print("add list: " + line)
           res.append(line)
         else:
           break
