@@ -1,0 +1,16 @@
+{
+  "DSE_SERVER": {
+    "Component": [
+      {
+        "type": "ganglia",
+        "metrics": {
+          "metrics/dse/hello/counter": {
+            "metric": "dse.hello.counter",
+            "pointInTime": true,
+            "temporal": true
+          }
+        }
+      }
+    ]
+  }
+}

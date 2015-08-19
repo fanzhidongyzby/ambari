@@ -137,5 +137,10 @@
     "GOLDENEYE_METADATA_DATABASE":[
       "3306"
     ]
+  },
+  "KAFKA": {
+    "KAFKA_MANAGER": [
+      "kafka-manager/http.port"
+    ]
   }
 }

@@ -1,0 +1,19 @@
+{
+  "JSTORM": {
+    "service": [],
+    "JSTORM_UI_SERVER": [
+      {
+	        "name": "nimbus_service_check",
+	        "label": "nimbus Service Check",
+	        "description": "nimbus service check",
+	        "interval": 10,
+	        "scope": "ANY",
+	        "enabled": true,
+	        "source": {
+	          "type": "SCRIPT",
+	          "path": "HDP/2.2/services/JSTORM/package/alerts/jstorm_service_check.py"
+	        }
+	  }
+    ]
+  }
+}

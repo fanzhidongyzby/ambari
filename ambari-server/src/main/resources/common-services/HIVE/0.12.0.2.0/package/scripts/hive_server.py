@@ -18,6 +18,10 @@ limitations under the License.
 
 """
 import hive_server_upgrade
+import datetime
+import shlex
+import subprocess
+import time
 
 from resource_management import *
 from hive import hive
@@ -28,6 +32,27 @@ from resource_management.libraries.functions.security_commons import build_expec
   FILE_TYPE_XML
 from install_jars import install_tez_jars
 from setup_ranger_hive import setup_ranger_hive
+
+def _execute_command(cmdstring, timeout=None, shell=True):
+    if shell:
+      cmdstring_list = cmdstring
+    else:   
+      cmdstring_list = shlex.split(cmdstring)
+    if timeout:
+      end_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+    
+    sub = subprocess.Popen(cmdstring_list, stdout=subprocess.PIPE,stderr=subprocess.PIPE, stdin=subprocess.PIPE,shell=shell)
+    
+    while sub.poll() is None:
+      time.sleep(0.1)
+      if timeout:
+        if end_time <= datetime.datetime.now():
+          raise Exception(1, "Timeout:%s"%cmdstring)
+          
+    stdout,stderr = sub.communicate()
+    if sub.returncode != 0:
+      raise Exception(sub.returncode, stdout+stderr)
+    return sub.returncode,stdout+stderr
 
 class HiveServer(Script):
 
@@ -59,6 +84,18 @@ class HiveServer(Script):
     setup_ranger_hive()    
     hive_service( 'hiveserver2', action = 'start',
       rolling_restart=rolling_restart )
+    
+    self._createHiveDatabase(env)
+      
+      
+  def _createHiveDatabase(self,env):
+    import params
+    env.set_params(params)
+    host_name = params.hive_server_host
+    hive_port = params.hive_server_port
+    ddl_create_database_cmd = "create database if not exists tdw_inter_db"
+    cmd = "/usr/hdp/2.2.0.0-2041/hive/bin/beeline -n hive -p hive -u jdbc:hive2://{0}:{1} -e \"{2}\" ".format(host_name, hive_port, ddl_create_database_cmd)
+    _execute_command(cmd,90)
 
 
   def stop(self, env, rolling_restart=False):

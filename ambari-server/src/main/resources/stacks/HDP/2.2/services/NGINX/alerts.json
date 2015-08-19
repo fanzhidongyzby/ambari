@@ -1,0 +1,96 @@
+{
+  "DEMO": {
+    "service": [
+      {
+        "name": "dse_server_process_percent",
+        "label": "Percent DSE Server Available",
+        "description": "This service-level alert is triggered if the configured percentage of DSE Server processes cannot be determined to be up and listening on the network for the configured warning and critical thresholds. It aggregates the results of RegionServer process down checks.",
+        "interval": 1,
+        "scope": "SERVICE",
+        "enabled": true,
+        "source": {
+          "type": "AGGREGATE",
+          "alert_name": "dse_server_process",
+          "reporting": {
+            "ok": {
+              "text": "affected: [{1}], total: [{0}]"
+            },
+            "warning": {
+              "text": "affected: [{1}], total: [{0}]",
+              "value": 0.1
+            },
+            "critical": {
+              "text": "affected: [{1}], total: [{0}]",
+              "value": 0.3
+            }
+          }
+        }
+      }
+    ],
+    "DSE_SERVER": [
+      {
+        "name": "dse_server_process",
+        "label": "DSE Server Process",
+        "description": "This alert is triggered if the DSE Server cannot be confirmed to be up and listening on the configured port for number of seconds equal to threshold.",
+        "interval": 1,
+        "scope": "ANY",
+        "enabled": true,
+        "source": {
+          "type": "PORT",
+          "uri": "{{dse-site/dse.server.address}}",
+          "default_port": 50888,
+          "reporting": {
+            "ok": {
+              "text": "TCP OK - {0:.3f}s response on port {1}"
+            },
+            "warning": {
+              "text": "TCP OK - {0:.3f}s response on port {1}",
+              "value": 1.5
+            },
+            "critical": {
+              "text": "Connection failed: {0} to {1}:{2}",
+              "value": 5.0
+            }
+          }
+        }
+      },
+      {
+        "name": "dse_server_web",
+        "label": "DSE Server Web",
+        "description": "This host-level alert is triggered if the DSE Server Web UI is unreachable.",
+        "interval": 1,
+        "scope": "HOST",
+        "enabled": true,
+        "source": {
+          "type": "WEB",
+          "uri": {
+            "http": "{{dse-site/dse.server.web.url}}"
+          },
+          "reporting": {
+            "ok": {
+              "text": "HTTP {0} response in {2:.3f}s"
+            },
+            "warning":{
+              "text": "HTTP {0} response from {1} in {2:.3f}s ({3})"
+            },
+            "critical": {
+              "text": "Connection failed to {1} ({3})"
+            }
+          }
+        }
+      },
+      {
+        "name": "dse_server_ps",
+        "label": "DSE Server Process PS",
+        "description": "This alert is triggered if the DSE Server cannot be confirmed to be up and listening on the configured port for number of seconds equal to threshold.",
+        "interval": 1,
+        "scope": "ANY",
+        "enabled": true,
+        "source": {
+          "type": "SCRIPT",
+          "path": "HDP/2.2/services/DEMO/package/alerts/alert_ps_server.py"
+        }
+      }
+    ]
+  }
+}

@@ -20,7 +20,10 @@ limitations under the License.
 
 from resource_management import *
 
+
 config = Script.get_config()
 
 kafka_pid_dir = config['configurations']['kafka-env']['kafka_pid_dir']
 kafka_pid_file = format("{kafka_pid_dir}/kafka.pid")
+# Added by junz for integrating kafka-manager
+kafka_manager_pid_file = "/usr/local/kafka-manager/RUNNING_PID"

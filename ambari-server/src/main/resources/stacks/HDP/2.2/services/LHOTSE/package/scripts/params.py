@@ -23,6 +23,7 @@ lhotse_runner_hadoop_env = '/etc/hadoop/conf/hadoop-env.sh'
 lhotse_runner_proc_name = 'lhotse_task_loader.jar'
 lhotse_runner_cgi_port = default("/configurations/lhotse-runner/cgi.port", 80)
 lhotse_runner_hosts = default("/clusterHostInfo/lhotse_runner_hosts", ["127.0.0.1"])
+lhotse_runner_type_list =  default("/configurations/lhotse-runner/type.list", "50,66,67,68,69,70,71,72,75,92,118,119,120")
 
 #lhotse base config
 lhotse_base_hosts = default("/clusterHostInfo/lhotse_base_hosts", ["127.0.0.1"])[0]

@@ -1,0 +1,19 @@
+{
+  "REDIS":{
+    "service": [],
+    "REDIS_SERVER":[
+	    {
+	        "name": "redis_service_check",
+	        "label": "Redis Service Check",
+	        "description": "redis service check。",
+	        "interval": 1,
+	        "scope": "ANY",
+	        "enabled": true,
+	        "source": {
+	          "type": "SCRIPT",
+	          "path": "REDIS/3.0.3/package/alerts/redis_service_check.py"
+	        }
+	      }
+    ]
+  }
+}

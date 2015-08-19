@@ -345,6 +345,20 @@ class DefaultStackAdvisor(StackAdvisor):
       if hostName not in hostsComponentsMap:
         hostsComponentsMap[hostName] = []
 
+    #Added by junz for preventing port conflicts among components
+    #build existing host-ports mapping
+    hostsPortsMap = {}
+    for host in hostsList:
+      hostsPortsMap[host] = []
+    for service in services["services"]:
+        for component in service["components"]:
+            if self.isComponentHostsPopulated(component):
+                for host in component["StackServiceComponents"]["hostnames"]:
+                    for port in component["StackServiceComponents"]["used_ports"]:
+                        if port.isdigit():
+                            if port not in hostsPortsMap[host]:
+                                hostsPortsMap[host].append(port)
+
     #extend 'hostsComponentsMap' with MASTER components
     for service in services["services"]:
       masterComponents = [component for component in service["components"] if self.isMasterComponent(component)]
@@ -366,9 +380,9 @@ class DefaultStackAdvisor(StackAdvisor):
                   hostsForComponent.append(currentHost)
                 hostIndex += 1
             else:
-              hostsForComponent = [self.getHostForComponent(component, hostsList)]
+              hostsForComponent = [self.getHostForComponent(component, hostsList, hostsPortsMap)]
           else:
-            hostsForComponent = [self.getHostForComponent(component, hostsList)]
+            hostsForComponent = [self.getHostForComponent(component, hostsList, hostsPortsMap)]
 
         #extend 'hostsComponentsMap' with 'hostsForComponent'
         for hostName in hostsForComponent:
@@ -538,7 +552,7 @@ class DefaultStackAdvisor(StackAdvisor):
   def getComponentCardinality(self, componentName):
     return self.getCardinalitiesDict().get(componentName, {"min": 1, "max": 1})
 
-  def getHostForComponent(self, component, hostsList):
+  def getHostForComponent(self, component, hostsList, hostsPortsMap):
     componentName = self.getComponentName(component)
 
     if len(hostsList) != 1:
@@ -547,9 +561,21 @@ class DefaultStackAdvisor(StackAdvisor):
         hostIndex = next((index for key, index in scheme.iteritems() if isinstance(key, ( int, long )) and len(hostsList) < key), scheme['else'])
       else:
         hostIndex = 0
+
       for host in hostsList[hostIndex:]:
+        #Added by junz for preventing port conflicts among components
+        hostSuitable = False
         if self.isHostSuitableForComponent(host, component):
+          hostSuitable = True
+          for port in component["StackServiceComponents"]["used_ports"]:
+            if port.isdigit() and port in hostsPortsMap[host]:
+              hostSuitable = False
+        if hostSuitable:
+          for port in component["StackServiceComponents"]["used_ports"]:
+            if port.isdigit():
+              hostsPortsMap[host].append(port)
           return host
+
     return hostsList[0]
 
   def getComponentLayoutScheme(self, componentName):

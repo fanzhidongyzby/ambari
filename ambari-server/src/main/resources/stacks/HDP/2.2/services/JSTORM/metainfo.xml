@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<metainfo>
+  <schemaVersion>2.0</schemaVersion>
+  <services>
+    <service>
+      <name>JSTORM</name>
+      <displayName>JStorm</displayName>
+      <comment>
+                                    腾讯自研JSTROM
+      </comment>
+      <version>0.9.0</version>
+      <deleted>true</deleted>
+      <components>
+        <component>
+          <name>JSTORM_NIMBUS</name>
+          <displayName>Jstorm_Nimbus</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+          <dependencies>
+            <dependency>
+              <name>ZOOKEEPER/ZOOKEEPER_SERVER</name>
+              <scope>cluster</scope>
+              <auto-deploy>
+                <enabled>true</enabled>
+              </auto-deploy>
+            </dependency>
+          </dependencies>
+          <commandScript>
+            <script>scripts/nimbus.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+        <component>
+          <name>JSTORM_SUPERVISOR</name>
+          <displayName>Jstorm Supervisor</displayName>
+          <category>SLAVE</category>
+          <cardinality>1</cardinality>
+          <commandScript>
+            <script>scripts/supervisor.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+
+        <component>
+          <name>JSTORM_UI_SERVER</name>
+          <displayName>Jstorm UI Server</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+          <versionAdvertised>true</versionAdvertised>
+          <commandScript>
+            <script>scripts/ui_server.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>1200</timeout>
+          </commandScript>
+        </component>
+      </components>
+
+      <osSpecifics>
+        <osSpecific>
+          <osFamily>redhat5,redhat6,suse11</osFamily>
+          <packages>
+            <package>
+              <name>jstorm-*</name>
+            </package>
+          </packages>
+        </osSpecific>
+      </osSpecifics>
+           
+      <commandScript>
+	    <script>scripts/service_check.py</script>
+	    <scriptType>PYTHON</scriptType>
+	    <timeout>300</timeout>
+	  </commandScript>
+	  
+	  <requiredServices>
+        <service>ZOOKEEPER</service>
+      </requiredServices>
+
+      <configuration-dependencies>
+        <config-type>jstorm-yaml</config-type>
+        <config-type>jstorm-env</config-type>
+      </configuration-dependencies>
+
+    </service>
+  </services>
+</metainfo>

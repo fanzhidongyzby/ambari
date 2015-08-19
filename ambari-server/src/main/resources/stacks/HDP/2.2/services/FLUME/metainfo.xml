@@ -22,7 +22,6 @@
       <name>FLUME</name>
       <displayName>Flume</displayName>
       <version>1.5.2.2.2</version>
-      <deleted>true</deleted>
       <osSpecifics>
         <osSpecific>
           <osFamily>redhat5,redhat6,suse11</osFamily>

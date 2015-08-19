@@ -584,7 +584,7 @@
         }
       }
     ],
-    HDFS_CLIENT:[
+    "HDFS_CLIENT":[
 	    {
 	        "name": "hdfs_service_check",
 	        "label": "Hdfs Service Check",

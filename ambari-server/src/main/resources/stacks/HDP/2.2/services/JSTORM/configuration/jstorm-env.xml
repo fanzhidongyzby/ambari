@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<configuration>
+  <property>
+    <name>jstorm.user</name>
+    <value>jstorm</value>
+    <property-type>USER</property-type>
+    <description></description>
+  </property>
+  <property>
+	 <name>jstorm.group</name>
+	 <value>tencent</value>
+	 <property-type>GROUP</property-type>
+	 <final>true</final>
+	 <description></description>
+  </property> 
+  <!-- storm-env.sh -->
+  <property>
+    <name>content</name>
+    <description>This is the jinja template for storm-env.sh file</description>
+    <value>
+export JAVA_HOME={{java64_home}}
+export NIMBUS_CHILDOPTS="-Xms3g -Xmx3g -XX:MaxDirectMemorySize=600m -XX:ParallelGCThreads=4"
+export SUPERVISOR_CHILDOPTS=" -Xms256m -Xmx256m -XX:MaxDirectMemorySize=256m -XX:ParallelGCThreads=4"
+export DRPC_CHILDOPTS="-Xmx768m -XX:MaxDirectMemorySize=600m -XX:ParallelGCThreads=4"
+    </value>
+  </property>
+</configuration>

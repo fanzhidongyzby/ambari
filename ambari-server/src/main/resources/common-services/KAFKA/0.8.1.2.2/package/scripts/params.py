@@ -94,3 +94,9 @@ if has_metric_collector:
 
 # Security-related params
 security_enabled = config['configurations']['cluster-env']['security_enabled']
+
+# Added by junz for integrating kafka-manager
+zookeeper_connect = config['configurations']['kafka-broker']['zookeeper.connect']
+kafka_manager_dir = '/usr/local/kafka-manager'
+kafka_manager_pid_file = kafka_manager_dir + "/RUNNING_PID"
+kafka_manager_http_port = config['configurations']['kafka-manager']['http.port']

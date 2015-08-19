@@ -372,7 +372,7 @@
         }
       }
     ],
-    YARN_CLIENT:[
+    "YARN_CLIENT":[
 	    {
 	        "name": "yarn_service_check",
 	        "label": "Yarn Service Check",
