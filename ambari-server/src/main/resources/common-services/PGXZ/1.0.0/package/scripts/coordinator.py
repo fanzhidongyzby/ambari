@@ -33,6 +33,10 @@ class Coordinator(Script):
     utils().exe(params.coordinator_install)
     utils().check_install(params.coordinator_path)
 
+    Links(params.new_pgxz_install_path, params.pgxz_install_path)
+    Links(params.new_pgxz_conf_path_coordinator, params.pgxz_conf_path_coordinator)
+    Links(params.new_pgxz_data_path_coordinator, params.pgxz_data_path_coordinator)
+
   def start(self, env):
     import params
     Logger.info("create coordinator config")

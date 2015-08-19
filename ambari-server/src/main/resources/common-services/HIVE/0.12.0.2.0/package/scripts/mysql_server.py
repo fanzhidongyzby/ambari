@@ -33,6 +33,11 @@ class MysqlServer(Script):
     self.install_packages(env, exclude_packages=params.hive_exclude_packages)
     self.configure(env)
 
+    import params
+    Links(params.new_hive_config_path_mysql, params.hive_config_path_mysql)
+    Links(params.new_hive_log_path_mysql, params.hive_log_path_mysql)
+    Links(params.new_hive_data_path_mysql, params.hive_data_path_mysql)
+
   def clean(self, env):
     import params
     env.set_params(params)

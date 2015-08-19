@@ -38,6 +38,11 @@ class ApplicationTimelineServer(Script):
     self.install_packages(env)
     #self.configure(env)
 
+    import params
+    Links(params.new_yarn_install_path, params.yarn_install_path)
+    Links(params.new_yarn_config_path, params.yarn_config_path)
+    Links(params.new_yarn_log_path, params.yarn_log_path)
+
   def configure(self, env):
     import params
     env.set_params(params)

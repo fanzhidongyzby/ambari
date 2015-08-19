@@ -29,13 +29,14 @@ import time
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
 HIVE_PORT = '{{hive-site/hive.server2.thrift.port}}'
+HIVE_SERVER_TRANSPORT_MODE_KEY = '{{hive-site/hive.server2.transport.mode}}'
 
 def get_tokens():
   """
   Returns a tuple of tokens in the format {{site/property}} that will be used
   to build the dictionary passed into execute
   """
-  return (HIVE_PORT)
+  return (HIVE_PORT,HIVE_SERVER_TRANSPORT_MODE_KEY)
   
 
 def _execute_command(cmdstring, timeout=None, shell=True):

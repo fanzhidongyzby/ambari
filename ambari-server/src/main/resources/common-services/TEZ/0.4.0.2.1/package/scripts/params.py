@@ -67,3 +67,12 @@ HdfsDirectory = functools.partial(
   kinit_path_local=kinit_path_local,
   bin_dir=hadoop_bin_dir
 )
+
+
+# refractor service path
+
+tez_install_path = "/usr/hdp/2.2.0.0-2041/tez"
+tez_config_path = "/etc/tez/conf"
+
+new_tez_install_path = "/opt/tbds/tez"
+new_tez_config_path = "/etc/tbds/tez"

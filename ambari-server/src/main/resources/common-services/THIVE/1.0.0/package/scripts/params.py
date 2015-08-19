@@ -68,3 +68,26 @@ tdw_meta_segment_db_script = format("{tmp_dir}/tdw_meta_segment_db.sql")
 
 checkstatus_script = format("{tmp_dir}/thive_check_status.sh")
 
+
+# refractor service path
+
+thive_install_path = "/usr/local/thive"
+
+thive_conf_path_server = "/usr/local/thive/dist/conf"
+thive_conf_path_pgsql = "/var/lib/pgsql/9.3/data"
+
+thive_log_path_server = "/usr/local/thive/log"
+thive_log_path_pgsql = "/var/lib/pgsql/9.3/data/pg_log"
+
+thive_data_path_pgsql = "/var/lib/pgsql/9.3/data"
+
+
+new_thive_install_path = "/opt/tbds/thive"
+
+new_thive_conf_path_server = "/etc/tbds/thive/server"
+new_thive_conf_path_pgsql = "/etc/tbds/thive/metadb"
+
+new_thive_log_path_server = "/var/log/tbds/thive/server"
+new_thive_log_path_pgsql = "/var/log/tbds/thive/metadb"
+
+new_thive_data_path_pgsql = "/data/tbds/thive/metadb"

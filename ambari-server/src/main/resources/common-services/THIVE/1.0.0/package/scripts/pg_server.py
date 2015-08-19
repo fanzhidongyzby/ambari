@@ -62,6 +62,10 @@ class PgMaster(Script):
 #    
 #    if ret != 0 :
 #       sys.exit(1)
+
+    Links(params.new_thive_conf_path_pgsql, params.thive_conf_path_pgsql)
+    Links(params.new_thive_log_path_pgsql, params.thive_log_path_pgsql)
+    Links(params.new_thive_data_path_pgsql, params.thive_data_path_pgsql)
     
 
   def start(self, env):

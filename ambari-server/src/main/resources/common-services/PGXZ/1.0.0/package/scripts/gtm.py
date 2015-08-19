@@ -33,6 +33,10 @@ class Gtm(Script):
     utils().exe(params.gtm_install)
     utils().check_install(params.gtm_path)
 
+    Links(params.new_pgxz_install_path, params.pgxz_install_path)
+    Links(params.new_pgxz_conf_path_gtm, params.pgxz_conf_path_gtm)
+    Links(params.new_pgxz_data_path_gtm, params.pgxz_data_path_gtm)
+
   def start(self, env):
     import params
     Logger.info("create gtm config")

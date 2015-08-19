@@ -20,8 +20,10 @@ Ambari Agent
 
 """
 
-__all__ = ["File", "Directory", "Link", "Execute", "ExecuteScript", "Mount"]
+__all__ = ["File", "Directory", "Link", "DirLink", "MultiLinks", "Execute", "ExecuteScript", "Mount"]
 
+import commands
+from resource_management.core.exceptions import Fail
 from resource_management.core.base import Resource, ForcedListArgument, ResourceArgument, BooleanArgument
 
 
@@ -82,6 +84,54 @@ class Link(Resource):
 
   actions = Resource.actions + ["create", "delete"]
 
+class Links():
+  def __init__(self, link, to):
+    dirs = to.split(",")
+    index = 0
+    for dir in dirs:
+      index += 1
+      dir = dir.strip()
+      src = link
+      if len(dirs) != 1:
+        src += str(index)
+
+      self.single_link(src, dir)
+
+  def single_link(self, link, to):
+    if link == "" or to == "":
+      raise Fail("path is empty when create link \"{0}\" -> \"{1}\"".format(link, to))
+    cmd = "mkdir -p `dirname {0}`".format(link)
+    (ret, dir) = commands.getstatusoutput(cmd)
+    if ret != 0:
+      raise Fail("make directory name of link {0} error: {1}".format(link, dir))
+
+    Link(link, to = to)
+
+class MultiLinks():
+  def __init__(self, link, to):
+    dirs = to.split(",")
+    index = 0
+    for dir in dirs:
+      index += 1
+      dir = dir.strip()
+      src = link
+      if len(dirs) != 1:
+        src += str(index)
+
+      DirLink(src, dir)
+
+  def genLinks(rawSrc, targets):
+    dirs = targets.split(",")
+
+    index = 0
+    for dir in dirs:
+      index += 1
+      dir = dir.strip()
+      src =rawSrc
+      if len(dirs) != 1:
+        src += str(index)
+
+      DirLink(src, dir)
 
 class Execute(Resource):
   action = ForcedListArgument(default="run")

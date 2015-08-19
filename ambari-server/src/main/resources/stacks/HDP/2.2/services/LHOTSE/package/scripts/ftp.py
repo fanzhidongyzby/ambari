@@ -33,6 +33,11 @@ class Ftp(Script):
     self.install_packages(env,excludePackage)
     self.configure(env)
 
+    Links(params.new_lhotse_install_path_ftp, params.lhotse_install_path_ftp)
+    Links(params.new_lhotse_log_path_ftp, params.lhotse_log_path_ftp)
+    Links(params.new_lhotse_config_path_ftp, params.lhotse_config_path_ftp)
+    Links(params.new_lhotse_data_path_ftp, params.lhotse_data_path_ftp)
+
   def configure(self, env):
     import params
     env.set_params(params)

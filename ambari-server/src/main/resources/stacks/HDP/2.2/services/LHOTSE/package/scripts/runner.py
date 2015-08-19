@@ -21,6 +21,11 @@ class Runner(Script):
     else:
         print 'initLogScript.sh is not exist'
 
+    Links(params.new_lhotse_install_path_runner, params.lhotse_install_path_runner)
+    Links(params.new_lhotse_log_path_runner, params.lhotse_log_path_runner)
+    Links(params.new_lhotse_config_path_runner, params.lhotse_config_path_runner)
+    Links(params.new_lhotse_config_path_runner_cgi, params.lhotse_config_path_runner_cgi)
+
 
   def stop(self, env):
     import params
@@ -62,7 +67,7 @@ class Runner(Script):
         content=StaticFile('checkStatus.sh')
     )
  
-    cmd = format("bash -x {check_status_script} {lhotse_runner_proc_name} 8")
+    cmd = format("bash -x {check_status_script} {lhotse_runner_proc_name} 10")
     
     var= os.system(cmd)
 

@@ -28,13 +28,14 @@ import time
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
 HDFS_USER = '{{hadoop-env/hdfs_user}}'
+NN_HTTP_ADDRESS_KEY = '{{hdfs-site/dfs.namenode.http-address}}'
 
 def get_tokens():
   """
   Returns a tuple of tokens in the format {{site/property}} that will be used
   to build the dictionary passed into execute
   """
-  return (HDFS_USER)
+  return (HDFS_USER,NN_HTTP_ADDRESS_KEY)
   
 def execute_command(cmdstring, timeout=None, shell=True):
     if shell:

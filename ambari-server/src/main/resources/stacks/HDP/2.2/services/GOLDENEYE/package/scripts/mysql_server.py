@@ -38,6 +38,10 @@ class MysqlServer(Script):
     print 'update configs'
     self.configure(env)
 
+    Links(params.new_goldeneye_conf_path_metadb, params.goldeneye_conf_path_metadb)
+    Links(params.new_goldeneye_log_path_metadb, params.goldeneye_log_path_metadb)
+    Links(params.new_goldeneye_data_path_metadb, params.goldeneye_data_path_metadb)
+
   def configure(self, env):
     import params
     env.set_params(params)

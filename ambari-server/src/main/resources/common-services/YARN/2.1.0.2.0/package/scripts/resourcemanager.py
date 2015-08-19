@@ -37,6 +37,11 @@ class Resourcemanager(Script):
   def install(self, env):
     self.install_packages(env)
 
+    import params
+    Links(params.new_yarn_install_path, params.yarn_install_path)
+    Links(params.new_yarn_config_path, params.yarn_config_path)
+    Links(params.new_yarn_log_path, params.yarn_log_path)
+
   def configure(self, env):
     import params
 

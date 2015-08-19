@@ -408,3 +408,23 @@ ranger_driver_curl_target = format("{java_share_dir}/{ranger_jdbc_jar_name}")
 
 if security_enabled:
   hive_principal = hive_server_principal.replace('_HOST',hostname.lower())
+
+
+# refractor service path
+
+hive_install_path = "/usr/hdp/2.2.0.0-2041/hive"
+hive_config_path = "/etc/hive"
+hive_log_path = "/var/log/hive"
+
+hive_config_path_mysql = "/etc/my.cnf"
+hive_log_path_mysql = "/var/log/mysqld.log"
+hive_data_path_mysql = "/data/mysql_data"
+
+new_hive_install_path = "/opt/tbds/hive"
+new_hive_config_path = "/etc/tbds/hive"
+new_hive_log_path = "/var/log/tbds/hive"
+
+new_hive_config_path_mysql = "/etc/tbds/hive/mysql/my.cnf"
+new_hive_log_path_mysql = "/var/log/tbds/hive/mysql/mysqld.log"
+new_hive_data_path_mysql = "/data/tbds/hive/mysql"
+

@@ -31,9 +31,13 @@ class Web(Script):
 
   def install(self, env):
     import params
-    
+
     self.install_packages(env)
     self.configure(env)
+
+    Links(params.new_lhotse_install_path_web, params.lhotse_install_path_web)
+    Links(params.new_lhotse_log_path_web, params.lhotse_log_path_web)
+    Links(params.new_lhotse_config_path_web, params.lhotse_config_path_web)
 
   def configure(self, env):
     import params
