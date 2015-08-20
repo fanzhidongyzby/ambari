@@ -29,9 +29,9 @@ from ambari_commons import OSConst,OSCheck
 
 # PostgreSQL settings
 PG_STATUS_RUNNING_DEFAULT = "running"
-PG_HBA_ROOT_DEFAULT = "/var/lib/pgsql/9.3/data"
+PG_HBA_ROOT_DEFAULT = "/var/lib/pgsql/data"
 PG_HBA_INIT_FILES = {'ubuntu': '/etc/postgresql',
-                     'redhat': '/etc/rc.d/init.d/postgresql-9.3',
+                     'redhat': '/etc/rc.d/init.d/postgresql',
                      'suse': '/etc/init.d/postgresql'}
 
 #Environment
@@ -210,8 +210,8 @@ def get_postgre_hba_dir(OS_FAMILY):
     # Like: /etc/postgresql/9.1/main/
     return os.path.join(PG_HBA_INIT_FILES[OS_FAMILY], get_ubuntu_pg_version(),
                         "main")
-  elif OSCheck.is_redhat7():
-    return PG_HBA_ROOT_DEFAULT
+  # elif OSCheck.is_redhat7():
+  #   return PG_HBA_ROOT_DEFAULT
   else:
     if not os.path.isfile(PG_HBA_INIT_FILES[OS_FAMILY]):
       # Link: /etc/init.d/postgresql --> /etc/init.d/postgresql-9.1

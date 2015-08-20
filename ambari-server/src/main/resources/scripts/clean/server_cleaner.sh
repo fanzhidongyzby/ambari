@@ -4,7 +4,7 @@ echo "stop tbds server ..."
 tbds-server stop
 
 echo "stop postgresql ..."
-service postgresql-9.3 stop
+service postgresql stop
 
 echo "delete processes and ipcs of postgres in case of someone has kill-9 postgresql"
 for x in `ps aux | grep "/usr/pgsql-9.3/bin/postmaster" | grep -v grep | awk '{print $2}'`; do kill -9 $x; done
