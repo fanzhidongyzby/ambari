@@ -705,7 +705,7 @@ App.ServiceConfigProperty = Em.Object.extend({
         break;
       case 'yarn.nodemanager.log-dirs':
       case 'yarn.nodemanager.local-dirs':
-        temp = slaveComponentHostsInDB.findProperty('componentName', 'NODEMANAGER') ;
+        temp = slaveComponentHostsInDB.findProperty('componentName', 'NODEMANAGER');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
         }, this);

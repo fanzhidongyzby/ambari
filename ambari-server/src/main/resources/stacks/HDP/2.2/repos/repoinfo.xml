@@ -16,11 +16,18 @@
    limitations under the License.
 -->
 <reposinfo>
-  <os family="redhat7">
-    <repo>
-      <baseurl>${repo_url}</baseurl>
-      <repoid>TDP-2.2</repoid>
-      <reponame>TDP</reponame>
-    </repo>
-  </os>
+    <os family="redhat6">
+        <repo>
+            <baseurl>${repo_url}</baseurl>
+            <repoid>TDP-2.2</repoid>
+            <reponame>TDP</reponame>
+        </repo>
+    </os>
+    <os family="redhat7">
+        <repo>
+            <baseurl>${repo_url}</baseurl>
+            <repoid>TDP-2.2</repoid>
+            <reponame>TDP</reponame>
+        </repo>
+    </os>
 </reposinfo>
