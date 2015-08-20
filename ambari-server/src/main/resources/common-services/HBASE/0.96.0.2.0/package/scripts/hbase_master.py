@@ -36,6 +36,11 @@ class HbaseMaster(Script):
 
   def install(self, env):
     self.install_packages(env)
+
+    import params
+    Links(params.new_hbase_install_path, params.hbase_install_path)
+    Links(params.new_hbase_config_path, params.hbase_config_path)
+    Links(params.new_hbase_log_path, params.hbase_log_path)
     
   def configure(self, env):
     import params

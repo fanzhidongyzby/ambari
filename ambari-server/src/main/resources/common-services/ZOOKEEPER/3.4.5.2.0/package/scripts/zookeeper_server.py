@@ -19,7 +19,7 @@ Ambari Agent
 
 """
 import random
-
+from resource_management import *
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.functions import get_unique_id_and_date
 from resource_management.libraries.functions.version import compare_versions, format_hdp_stack_version
@@ -45,6 +45,11 @@ class ZookeeperServer(Script):
     self.install_packages(env)
     self.configure(env)
 
+    import params
+    Links(params.new_zookeeper_install_path, params.zookeeper_install_path)
+    Links(params.new_zookeeper_config_path, params.zookeeper_config_path)
+    Links(params.new_zookeeper_log_path, params.zookeeper_log_path)
+
   def configure(self, env):
     import params
     env.set_params(params)
@@ -63,6 +68,9 @@ class ZookeeperServer(Script):
     env.set_params(params)
     self.configure(env)
     zookeeper_service(action = 'start')
+
+    Links(params.new_zookeeper_data_path, params.zookeeper_data_path)
+
 
   def post_rolling_restart(self, env):
     Logger.info("Executing Rolling Upgrade post-restart")

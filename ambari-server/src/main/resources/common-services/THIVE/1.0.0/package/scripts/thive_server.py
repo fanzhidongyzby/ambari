@@ -52,6 +52,10 @@ class Master(Script):
     print "[output]"
     print output
 
+    Links(params.new_thive_install_path, params.thive_install_path)
+    Links(params.new_thive_conf_path_server, params.thive_conf_path_server)
+    Links(params.new_thive_log_path_server, params.thive_log_path_server)
+
 
   def stop(self, env):
     import params

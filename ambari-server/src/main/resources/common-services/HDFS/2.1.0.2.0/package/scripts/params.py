@@ -400,3 +400,20 @@ downloaded_custom_connector = format("{tmp_dir}/{jdbc_jar_name}")
 
 driver_curl_source = format("{jdk_location}/{jdbc_symlink_name}")
 driver_curl_target = format("{java_share_dir}/{jdbc_jar_name}")
+
+# refractor service path
+hdfs_install_path = "/usr/hdp/2.2.0.0-2041/hadoop-hdfs"
+hdfs_config_path = "/etc/hadoop/conf"
+hdfs_log_path = "/var/log/hadoop/hdfs"
+
+hdfs_namenode_data_paths = default("/configurations/hdfs-site/dfs.namenode.name.dir", "")
+hdfs_snamenode_data_paths = default("/configurations/hdfs-site/dfs.namenode.checkpoint.dir", "")
+hdfs_datanode_data_paths = default("/configurations/hdfs-site/dfs.datanode.data.dir", "")
+
+new_hdfs_install_path = "/opt/tbds/hdfs"
+new_hdfs_config_path = "/etc/tbds/hdfs"
+new_hdfs_log_path = "/var/log/tbds/hdfs"
+
+new_hdfs_namenode_data_path = "/data/tbds/hdfs/namenode/data"
+new_hdfs_snamenode_data_path = "/data/tbds/hdfs/snamenode/data"
+new_hdfs_datanode_data_path = "/data/tbds/hdfs/datanode/data"

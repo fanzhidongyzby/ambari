@@ -96,3 +96,18 @@ if (('zookeeper-log4j' in config['configurations']) and ('content' in config['co
   log4j_props = config['configurations']['zookeeper-log4j']['content']
 else:
   log4j_props = None
+
+
+# refractor service path
+
+zookeeper_install_path = "/usr/hdp/2.2.0.0-2041/zookeeper"
+zookeeper_config_path = "/etc/zookeeper/conf"
+zookeeper_log_path = "/var/log/zookeeper"
+zookeeper_data_path = default("/configurations/zoo.cfg/dataDir", "")
+
+new_zookeeper_install_path = "/opt/tbds/zookeeper"
+new_zookeeper_config_path = "/etc/tbds/zookeeper"
+new_zookeeper_log_path = "/var/log/tbds/zookeeper"
+new_zookeeper_data_path = "/data/tbds/zookeeper"
+
+

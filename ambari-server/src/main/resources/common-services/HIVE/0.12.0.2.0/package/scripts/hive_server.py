@@ -63,6 +63,10 @@ class HiveServer(Script):
     import params
     self.install_packages(env, exclude_packages=params.hive_exclude_packages)
 
+    import params
+    Links(params.new_hive_install_path, params.hive_install_path)
+    Links(params.new_hive_config_path, params.hive_config_path)
+    Links(params.new_hive_log_path, params.hive_log_path)
 
   def configure(self, env):
     import params

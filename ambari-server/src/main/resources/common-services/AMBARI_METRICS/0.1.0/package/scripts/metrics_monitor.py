@@ -28,6 +28,12 @@ class AmsMonitor(Script):
     self.install_packages(env, exclude_packages = ['ambari-metrics-collector'])
     self.configure(env) # for security
 
+    import params
+    Links(params.new_metrics_install_path_monitor_bin, params.metrics_install_path_monitor_bin)
+    Links(params.new_metrics_install_path_monitor_lib, params.metrics_install_path_monitor_lib)
+    Links(params.new_metrics_config_path_hbase, params.metrics_config_path_hbase)
+    Links(params.new_metrics_config_path_monitor, params.metrics_config_path_monitor)
+
   def configure(self, env):
     import params
     env.set_params(params)
@@ -39,6 +45,9 @@ class AmsMonitor(Script):
     ams_service( 'monitor',
                  action = 'start'
     )
+
+    import params
+    Links(params.new_metrics_log_path_monitor, params.metrics_log_path_monitor)
 
   def stop(self, env):
     import params

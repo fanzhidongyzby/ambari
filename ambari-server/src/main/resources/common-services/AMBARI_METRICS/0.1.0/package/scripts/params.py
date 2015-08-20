@@ -179,5 +179,34 @@ HdfsDirectory = functools.partial(
   bin_dir = hadoop_bin_dir
 )
 
+# refractor service path
+metrics_install_path_collector_bin = "/usr/sbin/ambari-metrics-collector"
+metrics_install_path_collector_lib = "/usr/lib/ambari-metrics-collector"
+metrics_install_path_monitor_bin = "/usr/sbin/ambari-metrics-monitor"
+metrics_install_path_monitor_lib = "/usr/lib/python2.6/site-packages/resource_monitoring"
+
+metrics_config_path_collector = "/etc/ambari-metrics-collector/conf"
+metrics_config_path_hbase = "/etc/ams-hbase/conf"
+metrics_config_path_monitor = "/etc/ambari-metrics-monitor/conf"
+
+metrics_log_path_collector = default("/configurations/ams-env/metrics_collector_log_dir", "/var/log/ambari-metrics-collector")
+metrics_log_path_monitor = default("/configurations/ams-env/metrics_monitor_log_dir", "/var/log/ambari-metrics-monitor")
+
+metrics_data_path_collector = "/data/ambari-metrics-collector/hbase"
+
+new_metrics_install_path_collector_bin = "/opt/tbds/metrics/collector/ambari-metrics-collector"
+new_metrics_install_path_collector_lib = "/opt/tbds/metrics/collector/lib"
+new_metrics_install_path_monitor_bin = "/opt/tbds/metrics/monitor/ambari-metrics-monitor"
+new_metrics_install_path_monitor_lib = "/opt/tbds/metrics/monitor/lib"
+
+new_metrics_config_path_collector = "/etc/tbds/metrics/collector/collector"
+new_metrics_config_path_hbase = "/etc/tbds/metrics/collector/hbase"
+new_metrics_config_path_monitor = "/etc/tbds/metrics/monitor"
+
+new_metrics_log_path_collector = "/var/log/tbds/metrics/collector"
+new_metrics_log_path_monitor = "/var/log/tbds/metrics/monitor"
+
+new_metrics_data_path_collector = "/data/tbds/metrics"
+
 
 

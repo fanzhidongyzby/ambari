@@ -37,6 +37,10 @@ class SNameNode(Script):
 
     self.install_packages(env, params.exclude_packages)
 
+    Links(params.new_hdfs_install_path, params.hdfs_install_path)
+    Links(params.new_hdfs_config_path, params.hdfs_config_path)
+    Links(params.new_hdfs_log_path, params.hdfs_log_path)
+
   def pre_rolling_restart(self, env):
     # Secondary namenode is actually removed in an HA cluster, which is a pre-requisite for Rolling Upgrade,
     # so it does not need any Rolling Restart logic.
@@ -48,6 +52,7 @@ class SNameNode(Script):
 
     self.configure(env)
     snamenode(action="start")
+    Links(params.new_hdfs_snamenode_data_path, params.hdfs_snamenode_data_paths)
 
   def stop(self, env, rolling_restart=False):
     import params

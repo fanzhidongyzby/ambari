@@ -242,3 +242,14 @@ downloaded_custom_connector = format("{exec_tmp_dir}/{jdbc_jar_name}")
 
 driver_curl_source = format("{jdk_location}/{jdbc_symlink_name}")
 driver_curl_target = format("{java_share_dir}/{jdbc_jar_name}")
+
+# refractor service path
+
+hbase_install_path = "/usr/hdp/2.2.0.0-2041/hbase"
+hbase_config_path = "/etc/hbase/conf"
+hbase_log_path = "/var/log/hbase"
+
+new_hbase_install_path = "/opt/tbds/hbase"
+new_hbase_config_path = "/etc/tbds/hbase"
+new_hbase_log_path = "/var/log/tbds/hbase"
+

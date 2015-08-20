@@ -38,6 +38,11 @@ class HistoryServer(Script):
   def install(self, env):
     self.install_packages(env)
 
+    import params
+    Links(params.new_mapreduce_install_path, params.mapreduce_install_path)
+    Links(params.new_mapreduce_config_path, params.mapreduce_config_path)
+    Links(params.new_mapreduce_log_path, params.mapreduce_log_path)
+
   def configure(self, env):
     import params
     env.set_params(params)

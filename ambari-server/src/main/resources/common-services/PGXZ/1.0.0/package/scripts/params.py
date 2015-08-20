@@ -92,3 +92,24 @@ datanode_stop = cmd_prefix + pg_ctl + " stop -D " + datanode_path + " -Z datanod
 psql = bin_path + "/psql"
 sql_str = "cd {0}; su {1} -c \"{2}\"".format(pgxz_path, user_name, "{0} -h {1} -p {2} postgres -c \\\"{3}\\\"").format(psql, "{0}", "{1}", "{2}")
 
+# refractor service path
+
+pgxz_install_path = "/usr/local/pgxz"
+
+pgxz_conf_path_gtm = "/usr/local/pgxz/nodes/gtm"
+pgxz_conf_path_coordinator = "/usr/local/pgxz/nodes/coordinator"
+pgxz_conf_path_datanode = "/usr/local/pgxz/nodes/datanode"
+
+pgxz_data_path_gtm = "/usr/local/pgxz/nodes/gtm"
+pgxz_data_path_coordinator = "/usr/local/pgxz/nodes/coordinator"
+pgxz_data_path_datanode = "/usr/local/pgxz/nodes/datanode"
+
+new_pgxz_install_path = "/opt/tbds/pgxz"
+
+new_pgxz_conf_path_gtm = "/etc/tbds/pgxz/gtm"
+new_pgxz_conf_path_coordinator = "/etc/tbds/pgxz/coordinator"
+new_pgxz_conf_path_datanode = "/etc/tbds/pgxz/datanode"
+
+new_pgxz_data_path_gtm = "/data/tbds/pgxz/gtm"
+new_pgxz_data_path_coordinator = "/data/tbds/pgxz/coordinator"
+new_pgxz_data_path_datanode = "/data/tbds/pgxz/datanode"

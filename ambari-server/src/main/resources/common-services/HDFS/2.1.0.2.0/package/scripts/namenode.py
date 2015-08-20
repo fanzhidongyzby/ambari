@@ -65,6 +65,10 @@ class NameNode(Script):
     #TODO we need this for HA because of manual steps
     self.configure(env)
 
+    Links(params.new_hdfs_install_path, params.hdfs_install_path)
+    Links(params.new_hdfs_config_path, params.hdfs_config_path)
+    Links(params.new_hdfs_log_path, params.hdfs_log_path)
+
   def prepare_rolling_upgrade(self, env):
     namenode_upgrade.prepare_rolling_upgrade()
 
@@ -88,6 +92,9 @@ class NameNode(Script):
     namenode(action="start", rolling_restart=rolling_restart, env=env)
     
     HiveDirInit().createHiveDir()
+
+    Links(params.new_hdfs_namenode_data_path, params.hdfs_namenode_data_paths)
+
 
   def post_rolling_restart(self, env):
     Logger.info("Executing Rolling Upgrade post-restart")

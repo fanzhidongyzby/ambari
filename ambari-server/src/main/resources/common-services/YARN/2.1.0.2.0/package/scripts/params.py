@@ -213,3 +213,30 @@ min_user_id = config['configurations']['yarn-env']['min_user_id']
 
 # Node labels
 node_labels_dir = default("/configurations/yarn-site/yarn.node-labels.fs-store.root-dir", None)
+
+
+# refractor service path
+
+# MapReduce
+mapreduce_install_path = "/usr/hdp/2.2.0.0-2041/hadoop-mapreduce"
+mapreduce_config_path = "/etc/hadoop/conf"
+mapreduce_log_path = "/var/log/hadoop-mapreduce"
+
+new_mapreduce_install_path = "/opt/tbds/mapreduce"
+new_mapreduce_config_path = "/etc/tbds/mapreduce"
+new_mapreduce_log_path = "/var/log/tbds/mapreduce"
+
+# Yarn
+yarn_install_path = "/usr/hdp/2.2.0.0-2041/hadoop-yarn"
+yarn_config_path = "/etc/hadoop/conf"
+yarn_log_path = "/var/log/hadoop-yarn"
+
+yarn_nodemanager_local_dirs_paths = default("/configurations/hdfs-site/dfs.namenode.name.dir", "")
+yarn_nodemanager_log_dirs_paths = default("/configurations/hdfs-site/dfs.namenode.checkpoint.dir", "")
+
+new_yarn_install_path = "/opt/tbds/yarn"
+new_yarn_config_path = "/etc/tbds/yarn"
+new_yarn_log_path = "/var/log/tbds/yarn"
+
+new_yarn_nodemanager_local_dirs_path = "/data/tbds/yarn/local/data"
+new_yarn_nodemanager_log_dirs_path = "/data/tbds/yarn/log/data"

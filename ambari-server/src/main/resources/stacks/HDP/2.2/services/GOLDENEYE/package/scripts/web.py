@@ -35,6 +35,10 @@ class Web(Script):
     self.install_packages(env,excludePackage)
     self.configure(env)
 
+    Links(params.new_goldeneye_install_path, params.goldeneye_install_path)
+    Links(params.new_goldeneye_conf_path_web, params.goldeneye_conf_path_web)
+    Links(params.new_goldeneye_log_path_web, params.goldeneye_log_path_web)
+
   def configure(self, env):
     import params
     env.set_params(params)
