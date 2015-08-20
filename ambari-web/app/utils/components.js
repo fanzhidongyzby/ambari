@@ -104,8 +104,7 @@ module.exports = {
         if (error && $(error).text()) {
           var errorObj = JSON.parse($(error).text());
           if (errorObj && errorObj.message && errorObj.status) {
-            //isNoConfigs = errorObj.message.indexOf(Em.I18n.t('services.service.actions.downloadClientConfigs.fail.noConfigFile')) !== -1;
-            isNoConfigs = errorObj.message.indexOf("No configuration files") !== -1;
+            isNoConfigs = errorObj.message.indexOf(Em.I18n.t('services.service.actions.downloadClientConfigs.fail.noConfigFile')) !== -1;
             errorMessage += isNoConfigs ? Em.I18n.t('services.service.actions.downloadClientConfigs.fail.noConfigFile') :
               Em.I18n.t('services.service.actions.downloadClientConfigs.fail.popup.body.errorMessage').format(data.displayName, errorObj.status, errorObj.message);
           } else {

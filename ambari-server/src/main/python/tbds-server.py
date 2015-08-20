@@ -307,7 +307,7 @@ def init_parser_options(parser):
   parser.add_option('--hostname', default=None, dest="hostname",
                     help="Specifies the hostname")
 
-  parser.add_option('--use_default', default="yes", dest="use_default",
+  parser.add_option('--use-default', default="yes", dest="use_default",
                       help="use default value to setup yes, no")
 
   # -b, -i, -k and -x the remaining available short options
@@ -375,7 +375,7 @@ def init_parser_options(parser):
   parser.add_option('--hostname', default=None, dest="hostname",
                     help="Specifies the hostname")
 
-  parser.add_option('--use_default', default="yes", dest="use_default",
+  parser.add_option('--use-default', default="yes", dest="use_default",
                       help="use default value to setup yes, no")
 
 

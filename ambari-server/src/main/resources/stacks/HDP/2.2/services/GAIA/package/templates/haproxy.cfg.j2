@@ -1,0 +1,64 @@
+global
+	daemon
+	pidfile /usr/local/haproxy/haproxy.pid
+	maxconn 10000
+
+defaults
+	clitimeout 120000
+	srvtimeout 3000000
+	contimeout 30000
+	retries 3
+	mode http
+	balance roundrobin
+	option abortonclose
+	option tcpka
+	option forwardfor
+	option redispatch
+
+frontend http_proxy
+	bind :80
+
+	acl 36006 path_beg /port_36006/
+	acl 36006a hdr_end(Referer) -i /port_36006/
+
+	acl 8080 path_beg /port_8080/
+	acl 8080a hdr_end(Referer) -i /port_8080/
+
+	acl 36007 path_beg /port_36007/
+	acl 36007a hdr_end(Referer) -i /port_36007/
+
+  acl api path_beg /api/
+  acl apia hdr_end(Referer) -i /api/
+
+	default_backend 8080_server
+
+	use_backend 36006_server if 36006
+	use_backend 36006_server if 36006a
+	use_backend 8080_server if 8080
+	use_backend 8080_server if 8080a
+	use_backend 36007_server if 36007
+	use_backend 36007_server if 36007a
+  use_backend api_server if api
+  use_backend api_server if apia
+
+
+backend 36006_server
+	option httpclose
+	reqrep ^([^\ ]*)\ /port_36006/(.*)     \1\ /\2
+	server 36006 :36006 check weight 100 maxconn 100
+
+backend 8080_server
+	option httpclose
+	reqrep ^([^\ ]*)\ /port_8080/(.*)     \1\ /\2
+	server 8080 :8080 check weight 100 maxconn 100
+
+backend 36007_server
+	option httpclose
+	reqrep ^([^\ ]*)\ /port_36007/(.*)     \1\ /\2
+	server 36007 :36007 check weight 100 maxconn 100
+
+backend api_server
+	option httpclose
+	reqrep ^([^\ ]*)\ /api/(.*)     \1\ /\2
+	server {{gaia_apiserver_host1}} {{gaia_apiserver_host1}}:{{server_port}} check weight 100 maxconn 100
+	server {{gaia_apiserver_host2}} {{gaia_apiserver_host2}}:{{server_port}} check weight 100 maxconn 100

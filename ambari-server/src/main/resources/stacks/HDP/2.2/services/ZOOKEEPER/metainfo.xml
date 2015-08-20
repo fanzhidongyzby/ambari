@@ -25,7 +25,7 @@
       <version>3.4.6.2.2</version>
       <osSpecifics>
         <osSpecific>
-          <osFamily>redhat5,redhat6,suse11</osFamily>
+          <osFamily>redhat5,redhat6,suse11,redhat7</osFamily>
           <packages>
             <package>
               <name>zookeeper_2_2_*</name>

@@ -1,0 +1,104 @@
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+<configuration supports_final="false">
+  <property>
+    <name>hadoop.home</name>
+    <value>/gaia/hadoop</value>
+  </property>
+
+  <property>
+    <name>hadoop.tmpdir</name>
+    <value>/gaia/hadoop/hdfsadmin/hdfsenv/runtime</value>
+  </property>
+
+  <property require-input = "true">
+    <name>namenode.host</name>
+    <value></value>
+    <description>如: 192.168.0.1</description>
+  </property>
+
+  <property>
+    <name>namenode.rpc.port</name>
+    <value>9000</value>
+  </property>
+
+  <property>
+    <name>namenode.http.port</name>
+    <value>8080</value>
+  </property>
+
+
+  <property>
+    <name>namenode.edits.dir</name>
+    <value>/data/editlog</value>
+  </property>
+
+  <property require-input = "true">
+    <name>snamenode.host</name>
+    <value></value>
+    <description>如: 192.168.0.1</description>
+  </property>
+
+  <property>
+    <name>snamenode.rpc.port</name>
+    <value>9000</value>
+  </property>
+
+  <property>
+    <name>snamenode.http.port</name>
+    <value>8080</value>
+  </property>
+
+  <property require-input = "true">
+    <name>journalnode.hosts</name>
+    <value></value>
+    <description>如: 192.168.0.1,192.168.0.2,192.168.0.3</description>
+  </property>
+
+  <property>
+    <name>journalnode.rpc.port</name>
+    <value>8485</value>
+  </property>
+
+  <property>
+    <name>journalnode.http.port</name>
+    <value>8087</value>
+  </property>
+
+  <property>
+    <name>journalnode.edits.dir</name>
+    <value>/gaia/hadoop/hdfsadmin/hdfsenv/runtime/dfsnamespace/journal</value>
+  </property>
+
+  <property>
+    <name>datanode.data.dirs</name>
+    <value>/data/hadoop</value>
+  </property>
+
+  <!--<property>-->
+    <!--<name>datanode.data.subdir</name>-->
+    <!--<value>/hadoop</value>-->
+    <!--<description>如：填写/hadoop, 有data分区1、2，将得到路径/data1/hadoop,/data2/hadoop</description>-->
+  <!--</property>-->
+</configuration>
+
+
+

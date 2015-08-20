@@ -88,7 +88,7 @@ hive_server_port = default("/configurations/hive-site/hive.server2.thrift.port",
 namenode_info = default("/configurations/core-site/fs.defaultFS", 'hdfs://127.0.0.1:8020')
 print namenode_info
 if namenode_info.startswith('hdfs'):
-    namenode_info = namenode_info[7:]
+  namenode_info = namenode_info[7:]
 default_hdfs_host = namenode_info.split(':')[0]
 print "default hdfs host:" + default_hdfs_host
 default_hdfs_port = namenode_info.split(':')[1]
