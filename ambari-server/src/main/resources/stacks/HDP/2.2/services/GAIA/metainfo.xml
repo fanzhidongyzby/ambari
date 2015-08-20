@@ -22,7 +22,8 @@
       <name>GAIA</name>
       <displayName>Gaia</displayName>
       <version>0.1.0</version>
-      <comment>gaia</comment>
+      <comment>GAIA 资源调度</comment>
+      <deleted>true</deleted>
       <components>
 
         <component>
