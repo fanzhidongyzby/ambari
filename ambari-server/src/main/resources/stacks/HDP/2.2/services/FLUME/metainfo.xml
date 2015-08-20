@@ -27,9 +27,6 @@
           <osFamily>redhat5,redhat6,suse11</osFamily>
           <packages>
             <package>
-              <name>flume_2_2_*</name>
-            </package>
-            <package>
               <name>flume-1.6-0</name>
             </package>
           </packages>
@@ -37,9 +34,6 @@
         <osSpecific>
           <osFamily>ubuntu12</osFamily>
           <packages>
-            <package>
-              <name>flume-2-2-.*</name>
-            </package>
             <package>
               <name>flume-1.6-0</name>
             </package>

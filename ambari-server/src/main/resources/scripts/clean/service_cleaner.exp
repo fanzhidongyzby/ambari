@@ -17,12 +17,12 @@ expect {
 }
 expect {
         "$*" {
-        	send "python /usr/lib/python2.6/site-packages/ambari_agent/AmbariCleaner.py\r"
+        	send "python /usr/lib/python2.6/site-packages/ambari_agent/AmbariCleaner.py > /var/log/ambari-agent/clean.log 2>&1 \r"
             expect "$*"
             send "\r"
         }
         "#*" {
-        	send "python /usr/lib/python2.6/site-packages/ambari_agent/AmbariCleaner.py\r"
+        	send "python /usr/lib/python2.6/site-packages/ambari_agent/AmbariCleaner.py > /var/log/ambari-agent/clean.log 2>&1 \r"
             expect "#*"
             send "\r"
         }

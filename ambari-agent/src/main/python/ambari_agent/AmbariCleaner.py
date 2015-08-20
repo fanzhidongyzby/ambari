@@ -2,72 +2,75 @@
 import os
 import sys
 import commands
+import socket
+import fileinput
 
-from resource_management import *
-from ambari_agent.HostInfo import HostInfo, HostInfoLinux
-sys.path.append("/var/lib/ambari-agent/cache/custom_actions/scripts/")
-from check_host import CheckHost
 
-class AmbariCleaner(Script):
+class AmbariCleaner:
 
-  def hostcheck(self):
-    h = HostInfo()
-    struct = {}
-    h.register(struct,False,False)
-    print struct
+  repo_name_key = "repo_name"
+  directory_key = "directory"
 
-  def servicecheck(self):
-    cmd = "sudo python /var/lib/ambari-agent/cache/custom_actions/scripts/check_host.py ACTIONEXECUTE /usr/lib/python2.6/site-packages/ambari_agent/service_info.json /var/lib/ambari-agent/cache/common-services/HDFS/2.1.0.2.0/package /tmp/my.txt INFO /var/lib/ambari-agent/data/tmp"
-    self.run_cmd(cmd)
+  def __init__(self):
+    self.onServer = self.isServerHost()
+    self.dirs = self.readServiceInfo(self.directory_key)
+    self.repos = self.readServiceInfo(self.repo_name_key)
 
-  def cleaner_services(self):
-    self.hostcheck()
-    self.servicecheck()
+  def isServerHost(self):
+    print "get server host"
+    cmd = "cat  /etc/ambari-agent/conf/ambari-agent.ini|grep hostname|awk -F '=' '{print $2}'"
+    serverhost =  self.run_cmd(cmd)
 
-    cmd = "sudo python /usr/lib/python2.6/site-packages/ambari_agent/HostCleanupManually.py --skip \"users\" 1>/tmp/ambari_clean.log"
-    self.run_cmd(cmd)
+    print "get local host"
+    localhost = socket.gethostname()
 
-  def eraseagent(self):
-    print "ambari-agent stop"
+    if localhost == serverhost:
+      return True
+    else:
+      return False
+
+  def readServiceInfo(self,key):
+    res = []
+    findkey = False
+
+    for line in fileinput.input("/usr/lib/python2.6/site-packages/ambari_agent/service_remove.txt"):
+      print(line)
+      line = line.strip()
+      if ( line=="" ):
+        continue
+
+      if (findkey):
+        if(line.find("[") < 0):
+          print("add list: " + line)
+          res.append(line)
+        else:
+          break
+
+      elif (line.find(key)>=0) :
+        findkey = True
+
+    fileinput.close()
+    return res
+
+  def run_cmd(self,cmd):
+    print cmd
+    (ret, output) = commands.getstatusoutput(cmd)
+    print output
+    print ret
+    return output
+
+  def stop_agent(self):
     cmd = "sudo ambari-agent stop"
     self.run_cmd(cmd)
 
-    print "yum erase agent"
-    cmd = "sudo yum erase -y ambari-agent*"
-    self.run_cmd(cmd)
 
-  def erasemetrics(self):
-    print "yum erase metrics"
-    cmd = "sudo yum erase -y ambari-metrics*"
-    self.run_cmd(cmd)
-
-  def remove_dir(self):
-    cmd = "sudo rm -rf /var/lib/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/lib/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /var/log/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /var/run/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/bin/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/sbin/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/lib/python2.6/site-packages/ambari*"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /usr/lib/python2.6/site-packages/resource_management"
-    self.run_cmd(cmd)
-
-    cmd = "sudo rm -rf /etc/ambari*"
-    self.run_cmd(cmd)
+  def remove_services_installed_rpm(self):
+    if not self.onServer:
+      for repo in self.repos:
+        if self.onServer and ("tbds-server" in repo) :
+          continue
+        cmd = "yum list installed 2>/dev/null |grep " + repo + " | xargs yum remove -y"
+        self.run_cmd(cmd)
 
   def yum_clean(self):
     print "yum clean all"
@@ -75,22 +78,28 @@ class AmbariCleaner(Script):
     (ret, output) = commands.getstatusoutput(cmd)
     print output
     print ret
-  
-  def run_cmd(self,cmd):
-    print cmd
-    (ret, output) = commands.getstatusoutput(cmd)
-    print output
-    print ret
+
+  def release_resources(self):
+    self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
+
+  def remove_dir(self):
+    self.release_resources()
+    if not self.onServer:
+      for dir in self.dirs:
+        cmd = "sudo rm -rf {}".format(dir)
+        self.run_cmd(cmd)
+
+
 
   def main(self):
-    self.cleaner_services()
+    # stop agent first
+    self.stop_agent()
 
-    self.erasemetrics()
-
-    self.eraseagent()
-
+    # remove yum rpms
+    self.remove_services_installed_rpm()
     self.yum_clean()
 
+    # remove user defined dirs
     self.remove_dir()
 
 if __name__ == '__main__':
