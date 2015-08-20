@@ -9,7 +9,6 @@
                                     腾讯自研JSTROM
       </comment>
       <version>0.9.0</version>
-      <deleted>true</deleted>
       <components>
         <component>
           <name>JSTORM_NIMBUS</name>

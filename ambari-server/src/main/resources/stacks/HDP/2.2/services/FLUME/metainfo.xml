@@ -21,13 +21,16 @@
     <service>
       <name>FLUME</name>
       <displayName>Flume</displayName>
-      <version>1.5.2.2.2</version>
+      <version>1.6.0</version>
       <osSpecifics>
         <osSpecific>
           <osFamily>redhat5,redhat6,suse11</osFamily>
           <packages>
             <package>
               <name>flume_2_2_*</name>
+            </package>
+            <package>
+              <name>flume-1.6-0</name>
             </package>
           </packages>
         </osSpecific>
@@ -36,6 +39,9 @@
           <packages>
             <package>
               <name>flume-2-2-.*</name>
+            </package>
+            <package>
+              <name>flume-1.6-0</name>
             </package>
           </packages>
         </osSpecific>

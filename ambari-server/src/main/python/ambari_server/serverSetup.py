@@ -963,13 +963,20 @@ def _check_repo_options(options):
     return options.repo_url is not None
 
 def configureRepoURL(repoURL):
+    repoURL = "http://" + repoURL
     repoURL = repoURL.replace("/", "\/")
-    jdkLocation = repoURL + "\/" + "java"
-    cmd = "sed -i 's/public-repo-1.hortonworks.com\/ARTIFACTS/" + jdkLocation + "/g'" + " /etc/tbds-server/conf/tbds.properties"
+    jdkURL = repoURL + "\/" + "java"
+
+    cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.6\.jcpol-url", jdkURL + "\/jce_policy-6\.zip")
+    os.system(cmd)
+    cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.6\.url", jdkURL + "\/jdk-6u31-linux-x64\.bin")
+    os.system(cmd)
+    cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.7\.jcpol-url", jdkURL + "\/UnlimitedJCEPolicyJDK7\.zip")
+    os.system(cmd)
+    cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.7\.url", jdkURL + "\/jdk-7u67-linux-x64\.tar\.gz")
     os.system(cmd)
 
-    yumRepoURL = "http:\/\/" + repoURL
-    cmd = "sed -i 's/${repo_url}/" + yumRepoURL + "/g'" + " /var/lib/tbds-server/resources/stacks/HDP/2.2/repos/repoinfo.xml"
+    cmd = 'sed -i "s/<baseurl>.*<\/baseurl>/<baseurl>{0}<\/baseurl>/g" {1}'.format(repoURL, "/var/lib/tbds-server/resources/stacks/HDP/2.2/repos/repoinfo.xml")
     os.system(cmd)
     
 def _check_hostname(options):

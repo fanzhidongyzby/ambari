@@ -23,7 +23,6 @@
       <displayName>DSE</displayName>
       <version>0.1.0</version>
       <comment>dse</comment>
-      <deleted>true</deleted>
       <components>
         <component>
           <name>DSE_SERVER</name>

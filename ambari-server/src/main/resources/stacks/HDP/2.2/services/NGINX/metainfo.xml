@@ -23,7 +23,6 @@
       <displayName>Nginx</displayName>
       <version>0.1.0</version>
       <comment>nginx</comment>
-      <deleted>true</deleted>
       <components>
         <component>
           <name>NGINX_SERVER</name>
