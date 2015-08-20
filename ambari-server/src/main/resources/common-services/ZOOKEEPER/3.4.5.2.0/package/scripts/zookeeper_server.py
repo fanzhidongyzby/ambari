@@ -19,7 +19,7 @@ Ambari Agent
 
 """
 import random
-
+from resource_management import *
 from resource_management.libraries.script.script import Script
 from resource_management.libraries.functions import get_unique_id_and_date
 from resource_management.libraries.functions.version import compare_versions, format_hdp_stack_version

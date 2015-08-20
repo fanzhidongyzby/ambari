@@ -20,7 +20,7 @@ Ambari Agent
 
 """
 
-__all__ = ["File", "Directory", "Link", "DirLink", "MultiLinks", "Execute", "ExecuteScript", "Mount"]
+__all__ = ["File", "Directory", "Link", "Links", "Execute", "ExecuteScript", "Mount"]
 
 import commands
 from resource_management.core.exceptions import Fail
@@ -106,32 +106,6 @@ class Links():
       raise Fail("make directory name of link {0} error: {1}".format(link, dir))
 
     Link(link, to = to)
-
-class MultiLinks():
-  def __init__(self, link, to):
-    dirs = to.split(",")
-    index = 0
-    for dir in dirs:
-      index += 1
-      dir = dir.strip()
-      src = link
-      if len(dirs) != 1:
-        src += str(index)
-
-      DirLink(src, dir)
-
-  def genLinks(rawSrc, targets):
-    dirs = targets.split(",")
-
-    index = 0
-    for dir in dirs:
-      index += 1
-      dir = dir.strip()
-      src =rawSrc
-      if len(dirs) != 1:
-        src += str(index)
-
-      DirLink(src, dir)
 
 class Execute(Resource):
   action = ForcedListArgument(default="run")
