@@ -8,7 +8,7 @@
       <comment>
                                     腾讯自研JSTROM
       </comment>
-      <version>0.9.0</version>
+      <version>1.0.3</version>
       <components>
         <component>
           <name>JSTORM_NIMBUS</name>
@@ -62,7 +62,7 @@
           <osFamily>redhat5,redhat6,suse11</osFamily>
           <packages>
             <package>
-              <name>jstorm-*</name>
+              <name>jstorm-1.0.3*</name>
             </package>
           </packages>
         </osSpecific>

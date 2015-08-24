@@ -23,8 +23,8 @@ import commands
 
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
-UI_PORT = '{{jstorm/ui.port}}'
-SLOTS = '{{jstorm/supervisor.slots.ports}}'
+UI_PORT = '{{jstorm-yaml/ui.port}}'
+SLOTS = '{{jstorm-yaml/supervisor.slots.ports}}'
 
 def get_tokens():
   """
@@ -63,7 +63,7 @@ def execute(parameters=None, host_name=None):
     try:
       summary = json.loads(out)
       freeSlots = summary['slotsFree']
-      if freeSlots < slots_num:
+      if freeSlots <= slots_num:
         result_code = "WARNING"
         label = "jstorm is busy now, free slots:{0}".format(freeSlots)
     except Exception,e:
