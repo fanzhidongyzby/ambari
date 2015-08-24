@@ -21,8 +21,8 @@
   </log_client>
 
   <center>
-    center_master_host = {{center_mcd0_center_host}}:{{center_mcd0_center_port}}
-    center_slave_host = {{center_mcd0_center_host}}:{{center_mcd0_center_port}}
+    center_master_host = {{center_host}}:{{center_port}}
+    center_slave_host = {{center_host}}:{{center_port}}
     center_is_master = {{center_mcd0_center_is_master}}
 
     heart_beat_cycle = {{center_mcd0_heart_beat_cycle}}
@@ -32,6 +32,22 @@
   <handle>
     handle_time_out = {{center_mcd0_handle_time_out}}
   </handle>
+
+  <confdb>
+    ip = {{pg_host}}
+    port = {{pg_port}}
+    name = {{pg_name}}
+    user = {{pg_user}}
+  </confdb>
+
+  <log>
+    log_level = 2
+    log_type = 0
+    log_path = ./../log/
+    log_name_prefix = center_mcd
+    log_file_max_size = 1073741824
+    log_file_max_no = 1
+  </log>
 
   <agent>
   </agent>

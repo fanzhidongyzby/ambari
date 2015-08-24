@@ -113,14 +113,46 @@ class config(Script):
     Logger.info('create postgresql.conf')
     File(os.path.join(params.pgxm_pg_conf,'postgresql.conf'),
          mode=0644,
-         content=Template("postgresql.conf.j2")
+         content=Template("pg_postgresql.conf.j2")
          )
 
     Logger.info('create pg_hba.conf')
     File(os.path.join(params.pgxm_pg_conf,'pg_hba.conf'),
          mode=0644,
-         content=Template("pg_hba.conf.j2")
+         content=Template("pg_pg_hba.conf.j2")
          )
+
+  def update_cgi(self, env):
+    import params
+
+    Logger.info('create pgxzm-cgi.conf')
+    File(os.path.join(params.httpd_conf_dir,'pgxzm-cgi.conf'),
+         mode=0644,
+         content=Template("cgi_httpd.conf.j2")
+         )
+
+    Logger.info('create server.conf')
+    File(os.path.join(params.cgi_conf_dir,'server.conf'),
+         mode=0644,
+         content=Template("cgi_server.conf.j2")
+         )
+
+  def update_web(self, env):
+    import params
+
+    Logger.info('create pgxzm-web.conf')
+    File(os.path.join(params.httpd_conf_dir,'pgxzm-web.conf'),
+         mode=0644,
+         content=Template("web_httpd.conf.j2")
+         )
+
+    Logger.info('create config.conf')
+    File(os.path.join(params.web_conf_dir,'setting.php'),
+         mode=0644,
+         content=Template("web_setting.php.j2")
+         )
+
+
 
 if __name__ == "__main__":
   pass

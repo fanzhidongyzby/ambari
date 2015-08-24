@@ -29,7 +29,7 @@ import time
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
 USER = 'postgres'
-PORT = '{{pgxzm_database/pgxzm.database.port}}'
+PORT = '{{pgxzm_global/pgxzm.database.port}}'
 
 def get_tokens():
   """

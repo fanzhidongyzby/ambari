@@ -23,17 +23,17 @@ from resource_management.core.logger import Logger
 from utils import utils
 from config import config
 
-class Center(Script):
+class Web(Script):
 
   def install(self, env):
-    Logger.info("install Center")
-    excludePackage = ["pgxzm-agent", "pgxzm-cgi", "pgxzm-web", "postgresql93*"]
+    Logger.info("install Web")
+    excludePackage = ["pgxzm-center", "pgxzm-agent", "pgxzm-cgi", "postgresql93*"]
     self.install_packages(env,excludePackage)
 
 
   def configure(self, env):
-    Logger.info('configure Center')
-    config().update_center(env)
+    Logger.info('configure Web')
+    config().update_web(env)
 
   def start(self, env):
     import params
@@ -41,22 +41,22 @@ class Center(Script):
 
     self.configure(env)
 
-    Logger.info("start Center")
-    utils().exe(params.center_start)
+    Logger.info("start Web")
+    utils().exe(params.web_start)
 
   def stop(self, env):
     import params
     env.set_params(params)
 
-    Logger.info("stop Center")
-    utils().exe(params.center_stop)
+    Logger.info("stop Web")
+    utils().exe(params.web_stop)
 
   def status(self, env):
     import params
-    Logger.info("check status of Center")
-    utils().check_process(params.center_status)
+    Logger.info("check status of Web")
+    utils().check_url(params.web_status)
 
 if __name__ == "__main__":
-    Center().execute()
+    Web().execute()
 
 

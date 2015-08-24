@@ -1,0 +1,10 @@
+{% if web_need_listen_port %}
+Listen {{web_port}}
+{% endif %}
+Alias /pgxzm "/usr/local/pgxzm/web"
+<Directory "/usr/local/pgxzm/web">
+   Options FollowSymLinks
+   AllowOverride None
+   Order allow,deny
+   Allow from all
+</Directory>

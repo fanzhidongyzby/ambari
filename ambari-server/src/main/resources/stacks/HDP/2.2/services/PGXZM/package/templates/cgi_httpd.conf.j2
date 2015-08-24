@@ -1,0 +1,9 @@
+{% if cgi_need_listen_port %}
+Listen {{cgi_port}}
+{% endif %}
+ScriptAlias /pgxzm-cgi "/usr/local/pgxzm/cgi"
+<Directory "/usr/local/pgxzm/cgi">
+   AllowOverride None
+   Order allow,deny
+   Allow from all
+</Directory>

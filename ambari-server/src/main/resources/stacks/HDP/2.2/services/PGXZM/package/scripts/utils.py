@@ -64,5 +64,14 @@ class utils:
       Logger.error("service not exist")
       raise ComponentIsNotRunning()
 
+  # check url
+  def check_url(self, url):
+    Logger.info("check url: {0}".format(url))
+    cmd = "curl -I \"" + url + "\" 2> /dev/null | awk 'NR==1{print}' | awk '{print $2}'"
+    result = self.exe(cmd)
+    if (result != "200"):
+      Logger.error("service not exist")
+      raise ComponentIsNotRunning()
+
 if __name__ == "__main__":
     pass

@@ -51,6 +51,32 @@
         </component>
 
         <component>
+          <name>PGXZM_CGI</name>
+          <displayName>CGI</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+
+          <commandScript>
+            <script>scripts/cgi.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
+
+        <component>
+          <name>PGXZM_WEB</name>
+          <displayName>Web</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+
+          <commandScript>
+            <script>scripts/web.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
+
+        <component>
           <name>PGXZM_AGENT</name>
           <displayName>Agent</displayName>
           <category>SLAVE</category>
@@ -69,7 +95,23 @@
           <osFamily>redhat5,redhat6,suse11</osFamily>
           <packages>
             <package>
-              <name>pgxzm</name>
+              <name>pgxzm-center</name>
+            </package>
+
+            <package>
+              <name>pgxzm-agent</name>
+            </package>
+
+            <package>
+              <name>pgxzm-cgi</name>
+            </package>
+
+            <package>
+              <name>pgxzm-web</name>
+            </package>
+
+            <package>
+              <name>postgresql93*</name>
             </package>
           </packages>
         </osSpecific>

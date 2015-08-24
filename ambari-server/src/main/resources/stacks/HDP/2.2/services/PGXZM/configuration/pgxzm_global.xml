@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?> 
+<configuration>
+  <property>
+    <name>pgxzm.database.port</name>
+    <value>5432</value>
+  </property>
+
+  <property>
+    <name>pgxzm.database.name</name>
+    <value>postgres</value>
+  </property>
+
+  <property>
+    <name>pgxzm.database.user</name>
+    <value>postgres</value>
+  </property>
+
+  <property>
+    <name>pgxzm.cgi.port</name>
+    <value>80</value>
+  </property>
+
+  <property>
+    <name>pgxzm.web.port</name>
+    <value>80</value>
+  </property>
+
+</configuration>
+

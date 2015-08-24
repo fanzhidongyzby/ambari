@@ -28,7 +28,8 @@ class Agent(Script):
 
   def install(self, env):
     Logger.info("install Agent")
-    self.install_packages(env)
+    excludePackage = ["pgxzm-center", "pgxzm-cgi", "pgxzm-web", "postgresql93*"]
+    self.install_packages(env,excludePackage)
 
 
   def configure(self, env):

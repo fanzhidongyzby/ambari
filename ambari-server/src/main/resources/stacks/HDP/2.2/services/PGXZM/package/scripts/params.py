@@ -25,15 +25,20 @@ tmp_dir = Script.get_tmp_dir()
 # global
 pgxzm_install_path = "/usr/local/pgxzm"
 
-pgxzm_center_etc_sys = "/usr/local/pgxzm/center/etc/sys"
-pgxzm_center_etc_sys_mq = "/usr/local/pgxzm/center/etc/sys/mq"
+pgxzm_center_etc_sys = "{0}/center/etc/sys".format(pgxzm_install_path)
+pgxzm_center_etc_sys_mq = "{0}/center/etc/sys/mq".format(pgxzm_install_path)
 
-pgxzm_agent_etc_sys = "/usr/local/pgxzm/agent/etc/sys"
-pgxzm_agent_etc_sys_mq = "/usr/local/pgxzm/agent/etc/sys/mq"
-
-pgxzm_cmd = "({0}&) &> /dev/null"
+pgxzm_agent_etc_sys = "{0}/agent/etc/sys".format(pgxzm_install_path)
+pgxzm_agent_etc_sys_mq = "{0}/agent/etc/sys/mq".format(pgxzm_install_path)
 
 pgxm_pg_conf = "/var/lib/pgsql/9.3/data"
+
+httpd_conf_dir = "/etc/httpd/conf.d"
+cgi_conf_dir = "{0}/cgi"
+web_conf_dir = "{0}/web/config"
+
+pgxzm_cmd = "({0}&) &> /dev/null"
+restart_httpd = "service httpd restart"
 
 # Center
 center_start = "{0}/center/tools/op/start.sh".format(pgxzm_install_path)
@@ -44,12 +49,12 @@ center_stop = pgxzm_cmd.format(center_stop)
 
 center_status = "./center_watchdog"
 
-center_mcd0_center_host = default("/clusterHostInfo/pgxzm_center_hosts", ["127.0.0.1"])[0]
+center_host = default("/clusterHostInfo/pgxzm_center_hosts", ["127.0.0.1"])[0]
+center_port = default("/configurations/center_mcd0/center.port", 55001)
 
 center_ccd_shm_key = default("/configurations/center_ccd/shm_key", 7151)
 center_dcc_shm_key = default("/configurations/center_dcc/shm_key", 7161)
 
-center_mcd0_center_port = default("/configurations/center_mcd0/center.port", 55001)
 center_mcd0_shm_key = default("/configurations/center_mcd0/shm_key", 7111)
 center_mcd0_center_is_master = default("/configurations/center_mcd0/center_is_master", 1)
 center_mcd0_heart_beat_cycle = default("/configurations/center_mcd0/heart_beat_cycle", 5)
@@ -100,14 +105,30 @@ agent_watchdog_key = default("/configurations/agent_watchdog/watchdog_key", 911)
 pg_bin = "/etc/init.d/postgresql-9.3 {0}"
 
 pg_init = pg_bin.format("initdb")
-
 pg_start = pg_bin.format("start")
-
 pg_stop = pg_bin.format("stop")
-
 pg_status = pg_bin.format("status")
 
-pg_port = default("/configurations/pgxzm_database/pgxzm.database.port", 5432)
+pg_host = default("/clusterHostInfo/pgxzm_global_hosts", ["127.0.0.1"])[0]
+pg_port = default("/configurations/pgxzm_global/pgxzm.database.port", 5432)
+pg_name = default("/configurations/pgxzm_global/pgxzm.database.name", "postgres")
+pg_user = default("/configurations/pgxzm_global/pgxzm.database.user", "postgres")
 
+# Cgi
+cgi_host = default("/clusterHostInfo/pgxzm_cgi_hosts", ["127.0.0.1"])[0]
+cgi_port = default("/configurations/pgxzm_global/pgxzm.cgi.port", 80)
+cgi_need_listen_port = (cgi_port == 80)
 
+cgi_start = restart_httpd
+cgi_stop = "rm -f {0}/pgczm-cgi.conf; {1}".format(httpd_conf_dir, restart_httpd)
+cgi_status = "htpp://{0}:{1}/pgxzm-cgi".format(cgi_host, cgi_port)
+
+# Web
+web_host = default("/clusterHostInfo/pgxzm_web_hosts", ["127.0.0.1"])[0]
+web_port = default("/configurations/pgxzm_global/pgxzm.web.port", 80)
+web_need_listen_port = (web_port == 80)
+
+web_start = restart_httpd
+web_stop = "rm -f {0}/pgczm-web.conf; {1}".format(httpd_conf_dir, restart_httpd)
+web_status = "htpp://{0}:{1}/pgxzm".format(web_host, web_port)
 

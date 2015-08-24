@@ -17,7 +17,13 @@
   </log_client>
 
   <http>
-    {{center_mcd0_center_host}}:{{center_mcd0_center_port}}
+    {{center_host}}:{{center_port}}
   </http>
-	
+
+  <confdb>
+    ip = {{pg_host}}
+    port = {{pg_port}}
+    name = {{pg_name}}
+    user = {{pg_user}}
+  </confdb>
 </root>

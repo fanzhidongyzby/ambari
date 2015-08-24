@@ -26,10 +26,12 @@ from config import config
 class Pg(Script):
 
   def install(self, env):
-    import params
     Logger.info("install Pg")
-    self.install_packages(env)
+    excludePackage = ["pgxzm-center", "pgxzm-agent", "pgxzm-cgi", "pgxzm-web"]
+    self.install_packages(env,excludePackage)
+
     Logger.info("init Pg")
+    import params
     utils().exe(params.pg_init)
 
 
