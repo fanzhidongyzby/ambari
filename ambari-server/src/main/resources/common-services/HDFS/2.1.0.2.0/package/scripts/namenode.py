@@ -84,6 +84,8 @@ class NameNode(Script):
     self.configure(env)
     setup_ranger_hdfs()
     namenode(action="start", rolling_restart=rolling_restart, env=env)
+    
+    HiveDirInit().createHiveDir()
 
   def post_rolling_restart(self, env):
     Logger.info("Executing Rolling Upgrade post-restart")

@@ -164,11 +164,11 @@ def execute(parameters=None, host_name=None):
     _executeHadoop(hdfs_user, create_input_cmd)
     
     _executeHadoop(hdfs_user, wordcount_command)
-    
-    _executeHadoop(hdfs_user, cleanup_input_cmd, None, test_input_exists)
-    _executeHadoop(hdfs_user, cleanup_output_cmd, None, test_output_exists)
   except Exception,e:
     result_code = "CRITICAL"
     label = 'yarn service is down:'+str(e)
+  
+  _executeHadoop(hdfs_user, cleanup_input_cmd, None, test_input_exists)
+  _executeHadoop(hdfs_user, cleanup_output_cmd, None, test_output_exists)
   
   return ((result_code, [label]))
