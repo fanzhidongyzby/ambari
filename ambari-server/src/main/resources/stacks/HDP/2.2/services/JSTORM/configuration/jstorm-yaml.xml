@@ -49,7 +49,7 @@
   </property>
   <property>
     <name>logviewer.port</name>
-    <value>8081</value>
+    <value>8083</value>
     <description>HTTP UI port for log viewer.</description>
   </property>
   <property>

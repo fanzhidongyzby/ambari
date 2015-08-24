@@ -142,5 +142,10 @@
     "KAFKA_MANAGER": [
       "kafka-manager/http.port"
     ]
+  },
+  "JSTORM":{
+    "JSTORM_UI_SERVER":[
+      "jstorm-yaml/ui.port"
+    ]
   }
 }
