@@ -326,7 +326,7 @@ class JDKSetup(object):
     self.JDK_MIN_FILESIZE = 5000
     self.JAVA_BIN = ""
 
-    self.jdk_index = 0
+    self.jdk_index = 1
 
   #
   # Downloads and installs the JDK and the JCE policy archive
