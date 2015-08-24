@@ -36,7 +36,7 @@
 	        "enabled": true,
 	        "source": {
 	          "type": "SCRIPT",
-	          "path": "HDP/2.2/services/THIVE/package/alerts/thive_service_check.py"
+	          "path": "THIVE/1.0.0/package/alerts/thive_service_check.py"
 	        }
 	   }
     ],

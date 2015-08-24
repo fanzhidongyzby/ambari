@@ -1,0 +1,54 @@
+<root>
+  app_conf_file = ../etc/sys/center_mcd0.conf
+  user_conf_file = ../etc/user.conf
+
+  app_so_file = ./center_mcd.so
+  create_app_func = create_app
+
+  <mq>
+    mq_ccd_2_mcd = ../etc/sys/mq/mq_ccd_2_mcd0.conf
+    mq_mcd_2_ccd = ../etc/sys/mq/mq_mcd0_2_ccd.conf
+
+    mq_mcd_2_dcc = ../etc/sys/mq/mq_mcd0_2_dcc.conf
+    mq_dcc_2_mcd = ../etc/sys/mq/mq_dcc_2_mcd0.conf
+  </mq>
+
+  mcppp_reportor_conf_file = ../etc/sys/mcp_reporter.conf
+  watchdog_conf_file=../etc/sys/center_watchdog.conf
+
+  <log_client>
+    shm_key = {{center_mcd0_shm_key}}
+  </log_client>
+
+  <center>
+    center_master_host = {{center_host}}:{{center_port}}
+    center_slave_host = {{center_host}}:{{center_port}}
+    center_is_master = {{center_mcd0_center_is_master}}
+
+    heart_beat_cycle = {{center_mcd0_heart_beat_cycle}}
+    heart_beat_retry = {{center_mcd0_heart_beat_retry}}
+  </center>
+
+  <handle>
+    handle_time_out = {{center_mcd0_handle_time_out}}
+  </handle>
+
+  <confdb>
+    ip = {{pg_host}}
+    port = {{pg_port}}
+    name = {{pg_name}}
+    user = {{pg_user}}
+  </confdb>
+
+  <log>
+    log_level = 2
+    log_type = 0
+    log_path = ./../log/
+    log_name_prefix = center_mcd
+    log_file_max_size = 1073741824
+    log_file_max_no = 1
+  </log>
+
+  <agent>
+  </agent>
+</root>
