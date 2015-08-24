@@ -95,7 +95,6 @@ class NameNode(Script):
 
     Links(params.new_hdfs_namenode_data_path, params.hdfs_namenode_data_paths)
 
-
   def post_rolling_restart(self, env):
     Logger.info("Executing Rolling Upgrade post-restart")
     import params
