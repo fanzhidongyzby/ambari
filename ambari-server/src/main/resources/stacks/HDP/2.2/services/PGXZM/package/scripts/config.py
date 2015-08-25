@@ -146,7 +146,7 @@ class config(Script):
          content=Template("web_httpd.conf.j2")
          )
 
-    Logger.info('create config.conf')
+    Logger.info('create setting.php')
     File(os.path.join(params.web_conf_dir,'setting.php'),
          mode=0644,
          content=Template("web_setting.php.j2")
