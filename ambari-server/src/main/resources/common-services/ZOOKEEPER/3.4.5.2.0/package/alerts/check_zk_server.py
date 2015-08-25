@@ -40,7 +40,7 @@ def execute(parameters=None, host_name=None):
   host_name (string): the name of this host where the alert is running
   """
 
-  cmd = '/usr/hdp/current/zookeeper-server/bin/zkServer.sh status 2> /dev/null | grep -E "Mode: (follower|leader)" | awk \'{print $2}\''
+  cmd = '/usr/hdp/current/zookeeper-server/bin/zkServer.sh status 2> /dev/null | grep -E "Mode: (follower|leader|standalone)" | awk \'{print $2}\''
   (ret, out) = commands.getstatusoutput(cmd)
   label = 'zookeeper server ' + socket.gethostname()
   if out != "":
