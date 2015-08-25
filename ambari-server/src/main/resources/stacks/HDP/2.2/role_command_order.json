@@ -71,7 +71,7 @@
     ],
     "DSE_SERVER-START": [
       "DSE_DATABASE-START"
-    ]
+    ],
     "GAIA_RESOURCEMANAGER-INSTALL": [
       "ETCD_SERVER-INSTALL"
     ],
