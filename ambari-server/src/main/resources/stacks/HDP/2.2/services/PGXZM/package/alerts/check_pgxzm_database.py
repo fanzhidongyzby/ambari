@@ -18,12 +18,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import json
-import datetime
-import uuid
-import shlex
-import subprocess
-import time
+import commands
 
 
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'

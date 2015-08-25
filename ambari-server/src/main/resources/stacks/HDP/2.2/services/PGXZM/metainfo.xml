@@ -28,7 +28,7 @@
           <name>PGXZM_CENTER</name>
           <displayName>Center</displayName>
           <category>MASTER</category>
-          <cardinality>1</cardinality>
+          <cardinality>1+</cardinality>
 
           <commandScript>
             <script>scripts/center.py</script>

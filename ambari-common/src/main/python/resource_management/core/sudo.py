@@ -23,6 +23,7 @@ import os
 import tempfile
 from resource_management.core import shell
 from resource_management.core.logger import Logger
+import codecs
 
 # os.chown replacement
 def chown(path, owner, group):
@@ -72,7 +73,7 @@ def create_file(filename, content):
   tmpf = tempfile.NamedTemporaryFile()
   
   if content:
-    with open(tmpf.name, "wb") as fp:
+    with codecs.open(tmpf.name, "wb") as fp:
       fp.write(content)
   
   with tmpf:    

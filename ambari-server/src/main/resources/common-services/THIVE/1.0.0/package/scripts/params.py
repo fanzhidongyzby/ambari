@@ -46,7 +46,7 @@ pg_server_port = '5432'
 pg_server_user = default("/configurations/pg-config-env/pg.user","pgmeta")
 pg_server_password = default("/configurations/pg-config-env/pg.password","pgmeta")
 
-pg_authorized_ip = default("/configurations/pg-config-env/authorized.ip","host    all             all             10.151.135.1/24         trust")
+pg_authorized_ip = default("/configurations/pg-hba-env/content","host    all             all             0.0.0.0/0         trust")
 
 pg_postgresql_conf = default("/configurations/pg-config-env/content","")
 

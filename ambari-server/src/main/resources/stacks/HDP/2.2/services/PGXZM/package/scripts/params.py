@@ -114,21 +114,23 @@ pg_port = default("/configurations/pgxzm_global/pgxzm.database.port", 5432)
 pg_name = default("/configurations/pgxzm_global/pgxzm.database.name", "postgres")
 pg_user = default("/configurations/pgxzm_global/pgxzm.database.user", "postgres")
 
+pg_hba_cont = default("/configurations/pgxzm-database-env/content", "host    all             all             0.0.0.0/0         trust")
+
 # Cgi
 cgi_host = default("/clusterHostInfo/pgxzm_cgi_hosts", ["127.0.0.1"])[0]
 cgi_port = default("/configurations/pgxzm_global/pgxzm.cgi.port", 80)
-cgi_need_listen_port = (cgi_port == 80)
+cgi_need_listen_port = (cgi_port != 80)
 
 cgi_start = restart_httpd
 cgi_stop = "rm -f {0}/pgczm-cgi.conf; {1}".format(httpd_conf_dir, restart_httpd)
-cgi_status = "htpp://{0}:{1}/pgxzm-cgi".format(cgi_host, cgi_port)
+cgi_status = "http://{0}:{1}/pgxzm-cgi".format(cgi_host, cgi_port)
 
 # Web
 web_host = default("/clusterHostInfo/pgxzm_web_hosts", ["127.0.0.1"])[0]
 web_port = default("/configurations/pgxzm_global/pgxzm.web.port", 80)
-web_need_listen_port = (web_port == 80)
+web_need_listen_port = (web_port != 80)
 
 web_start = restart_httpd
 web_stop = "rm -f {0}/pgczm-web.conf; {1}".format(httpd_conf_dir, restart_httpd)
-web_status = "htpp://{0}:{1}/pgxzm".format(web_host, web_port)
+web_status = "http://{0}:{1}/pgxzm".format(web_host, web_port)
 
