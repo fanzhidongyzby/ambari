@@ -18,6 +18,7 @@ psql -h $1 -p $2 -U postgres  -f ./tdw_meta_init.sql
 
 echo "step3: tdw_meta_global_db.sql"
 psql -h $1 -p $2 -U postgres -f ./tdw_meta_global_db.sql
+psql -h $1 -p $2 -U postgres global -c "insert into seg_split values('jdbc:postgresql://$1:$2/seg_1','[0,10000)')"
 
 echo "step4: tdw_meta_query_info_db.sql"
 
