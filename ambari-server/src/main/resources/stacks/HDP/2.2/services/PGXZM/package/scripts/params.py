@@ -114,6 +114,8 @@ pg_port = default("/configurations/pgxzm_global/pgxzm.database.port", 5432)
 pg_name = default("/configurations/pgxzm_global/pgxzm.database.name", "postgres")
 pg_user = default("/configurations/pgxzm_global/pgxzm.database.user", "postgres")
 
+pg_hba_cont = default("/configurations/pgxzm-database-env/content", "host    all             all             0.0.0.0/0         trust")
+
 # Cgi
 cgi_host = default("/clusterHostInfo/pgxzm_cgi_hosts", ["127.0.0.1"])[0]
 cgi_port = default("/configurations/pgxzm_global/pgxzm.cgi.port", 80)
