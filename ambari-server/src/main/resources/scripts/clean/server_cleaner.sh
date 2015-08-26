@@ -20,6 +20,12 @@ rm -rf /var/lib/pgsql/
 rm -rf /var/run/post*
 rm -rf /var/lock/subsys/postgresql*
 
+echo "remove links on server ..."
+rm -rf /opt/tbds
+rm -rf /etc/tbds
+rm -rf /var/log/tbds
+rm -rf /data/tbds
+
 echo "remove residual files on server ..."
 rm -rf /var/lib/tbds*
 rm -rf /usr/lib/tbds*

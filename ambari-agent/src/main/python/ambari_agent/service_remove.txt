@@ -14,3 +14,7 @@ TDP-2.2
 /etc/ambari*
 /gaia/*
 /usr/hdp
+/opt/tbds
+/etc/tbds
+/var/log/tbds
+/data/tbds
