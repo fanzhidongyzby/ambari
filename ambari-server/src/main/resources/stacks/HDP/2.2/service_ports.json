@@ -147,5 +147,46 @@
     "JSTORM_UI_SERVER":[
       "jstorm-yaml/ui.port"
     ]
+  },
+
+  "GAIA":{
+    "GAIA_RESOURCEMANAGER":[
+      "gaia-yarn-site/gaia.resourcemanager.address.rm1",
+      "gaia-yarn-site/gaia.resourcemanager.admin.address.rm1",
+      "gaia-yarn-site/gaia.resourcemanager.resource-tracker.address.rm1",
+      "gaia-yarn-site/gaia.resourcemanager.scheduler.address.rm1",
+      "gaia-yarn-site/gaia.resourcemanager.webapp.address.rm1",
+      "gaia-yarn-site/gaia.web-proxy.address.rm1",
+      "gaia-yarn-site/gaia.resourcemanager.address.rm2",
+      "gaia-yarn-site/gaia.resourcemanager.admin.address.rm2",
+      "gaia-yarn-site/gaia.resourcemanager.resource-tracker.address.rm2",
+      "gaia-yarn-site/gaia.resourcemanager.scheduler.address.rm2",
+      "gaia-yarn-site/gaia.resourcemanager.webapp.address.rm2",
+      "gaia-yarn-site/gaia.web-proxy.address.rm2"
+    ],
+    "RMHAPROXY":[
+      "80"
+    ],
+    "APISERVER":[
+      "application-proerties/server.port",
+      "application-proerties/management.port"
+    ],
+    "JOBHISTORY":[
+      "gaia-yarn-site/gaia.timeline-service.webapp.address"
+    ],
+    "GAIA_NODEMANAGER":[
+      "gaia-yarn-site/gaia.nodemanager.address",
+      "gaia-yarn-site/gaia.nodemanager.localizer.address",
+      "gaia-yarn-site/gaia.nodemanager.webapp.address"
+    ],
+    "NMHAPROXY":[
+      "80"
+    ],
+    "DOCKER":[
+      "application-proerties/docker.default.port"
+    ],
+    "RESOURCEMONITOR":[
+      "resourcemonitor/listen.port"
+    ]
   }
 }
