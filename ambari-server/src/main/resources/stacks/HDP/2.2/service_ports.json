@@ -188,5 +188,25 @@
     "RESOURCEMONITOR":[
       "resourcemonitor/listen.port"
     ]
+  },
+  "PGXZM":{
+    "PGXZM_CENTER":[
+      "pgxzm_global/center.port"
+    ],
+    "PGXZM_CENTER_HA":[
+      "pgxzm_global/center.port"
+    ],
+    "PGXZM_DATABASE":[
+      "pgxzm_global/pgxzm.database.port"
+    ],
+    "PGXZM_CGI":[
+      "pgxzm_global/pgxzm.cgi.port"
+    ],
+    "PGXZM_WEB":[
+      "pgxzm_global/pgxzm.web.port"
+    ],
+    "PGXZM_AGENT":[
+      "pgxzm_global/agent.port"
+    ]
   }
 }
