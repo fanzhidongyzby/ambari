@@ -23,8 +23,12 @@ from resource_management.core.logger import Logger
 
 class config(Script):
 
-  def update_center(self, env):
+  def update_center(self, env, is_master = True):
     import params
+
+    # handle center master or slave
+    if not is_master:
+      params.center_mcd0_center_is_master = 0
 
     Logger.info('create center_ccd.conf')
     File(os.path.join(params.pgxzm_center_etc_sys,'center_ccd.conf'),
@@ -42,6 +46,12 @@ class config(Script):
     File(os.path.join(params.pgxzm_center_etc_sys,'center_mcd0.conf'),
          mode=0644,
          content=Template("center_mcd0.conf.j2")
+         )
+
+    Logger.info('create service.conf')
+    File(os.path.join(params.pgxzm_center_etc_sys,'service.conf'),
+         mode=0644,
+         content=Template("center_service.conf.j2")
          )
 
     Logger.info('create center_watchdog.conf')
@@ -87,6 +97,12 @@ class config(Script):
     File(os.path.join(params.pgxzm_agent_etc_sys,'agent_mcd0.conf'),
          mode=0644,
          content=Template("agent_mcd0.conf.j2")
+         )
+
+    Logger.info('create service.conf')
+    File(os.path.join(params.pgxzm_agent_etc_sys,'service.conf'),
+         mode=0644,
+         content=Template("agent_service.conf.j2")
          )
 
     Logger.info('create agent_watchdog.conf')

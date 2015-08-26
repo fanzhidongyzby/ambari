@@ -50,13 +50,14 @@ center_stop = pgxzm_cmd.format(center_stop)
 center_status = "./center_watchdog"
 
 center_host = default("/clusterHostInfo/pgxzm_center_hosts", ["127.0.0.1"])[0]
-center_port = default("/configurations/center_mcd0/center.port", 55001)
+center_ha_host = default("/clusterHostInfo/pgxzm_center_ha_hosts", ["127.0.0.1"])[0]
+center_port = default("/configurations/pgxzm_global/center.port", 55001)
 
 center_ccd_shm_key = default("/configurations/center_ccd/shm_key", 7151)
 center_dcc_shm_key = default("/configurations/center_dcc/shm_key", 7161)
 
 center_mcd0_shm_key = default("/configurations/center_mcd0/shm_key", 7111)
-center_mcd0_center_is_master = default("/configurations/center_mcd0/center_is_master", 1)
+center_mcd0_center_is_master = 1
 center_mcd0_heart_beat_cycle = default("/configurations/center_mcd0/heart_beat_cycle", 5)
 center_mcd0_heart_beat_retry = default("/configurations/center_mcd0/heart_beat_retry", 3)
 center_mcd0_handle_time_out = default("/configurations/center_mcd0/handle_time_out", 500)
@@ -88,8 +89,10 @@ agent_stop = pgxzm_cmd.format(agent_stop)
 
 agent_status = "./agent_watchdog"
 
+agent_port = default("/configurations/pgxzm_global/agent.port", 55002)
+
 agent_dcc_shm_key = default("/configurations/agent_dcc/shm_key", 5002)
-agent_mcd0_shm_key = default("/configurations/agent_mcd0/center.port", 5001)
+agent_mcd0_shm_key = default("/configurations/agent_mcd0/shm_key", 5001)
 
 agent_mq_dcc_2_mcd0_shm_key = default("/configurations/agent_mq_dcc_2_mcd0/shm_key", 1)
 agent_mq_dcc_2_mcd0_sem_name = default("/configurations/agent_mq_dcc_2_mcd0/sem_name", "/qguo_2mcd0")

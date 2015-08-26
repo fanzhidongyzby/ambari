@@ -2,18 +2,8 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?> 
 <configuration>
   <property>
-    <name>center.port</name>
-    <value>55001</value>
-  </property>
-
-  <property>
     <name>shm_key</name>
     <value>7111</value>
-  </property>
-
-  <property>
-    <name>center_is_master</name>
-    <value>1</value>
   </property>
 
   <property>

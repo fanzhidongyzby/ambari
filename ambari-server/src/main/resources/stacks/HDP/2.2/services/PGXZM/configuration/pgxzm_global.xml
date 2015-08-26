@@ -2,6 +2,16 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?> 
 <configuration>
   <property>
+    <name>center.port</name>
+    <value>55001</value>
+  </property>
+
+  <property>
+    <name>agent.port</name>
+    <value>55002</value>
+  </property>
+
+  <property>
     <name>pgxzm.database.port</name>
     <value>5432</value>
   </property>

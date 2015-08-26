@@ -28,7 +28,7 @@
         <component>
           <name>ETCD_SERVICE</name>
           <displayName>etcd service</displayName>
-          <category>SLAVE</category>
+          <category>MASTER</category>
           <cardinality>1+</cardinality>
           <versionAdvertised>true</versionAdvertised>
           <commandScript>

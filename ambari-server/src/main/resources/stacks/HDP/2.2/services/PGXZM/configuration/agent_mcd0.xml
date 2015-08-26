@@ -2,7 +2,7 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?> 
 <configuration>
   <property>
-    <name>center.port</name>
+    <name>shm_key</name>
     <value>5001</value>
   </property>
 

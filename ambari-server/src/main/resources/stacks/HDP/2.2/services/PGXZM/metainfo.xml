@@ -26,12 +26,25 @@
       <components>
         <component>
           <name>PGXZM_CENTER</name>
-          <displayName>Center</displayName>
+          <displayName>Center(主)</displayName>
           <category>MASTER</category>
-          <cardinality>1+</cardinality>
+          <cardinality>1</cardinality>
 
           <commandScript>
             <script>scripts/center.py</script>
+            <scriptType>PYTHON</scriptType>
+            <timeout>600</timeout>
+          </commandScript>
+        </component>
+
+        <component>
+          <name>PGXZM_CENTER_HA</name>
+          <displayName>Center(备)</displayName>
+          <category>MASTER</category>
+          <cardinality>1</cardinality>
+
+          <commandScript>
+            <script>scripts/center_ha.py</script>
             <scriptType>PYTHON</scriptType>
             <timeout>600</timeout>
           </commandScript>
