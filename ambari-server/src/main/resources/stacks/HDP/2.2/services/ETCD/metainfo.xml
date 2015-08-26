@@ -22,7 +22,8 @@
       <name>ETCD</name>
       <displayName>ETCD</displayName>
       <version>0.1.0</version>
-      <comment>etcd</comment>
+      <comment>ETCD：一个高可用的键值存储系统，主要用于共享配置和服务发现。</comment>
+      <deleted>true</deleted>
       <components>
 
         <component>

@@ -21,7 +21,8 @@
     <service>
       <name>PGXZM</name>
       <displayName>PGXZM</displayName>
-      <comment>PGXZ监控系统</comment>
+      <comment>PGXZM：用于PGXZ集群的监控系统。</comment>
+      <deleted>true</deleted>
       <version>1.0.0</version>
       <components>
         <component>
