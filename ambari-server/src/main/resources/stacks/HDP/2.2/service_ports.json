@@ -208,5 +208,10 @@
     "PGXZM_AGENT":[
       "pgxzm_global/agent.port"
     ]
+  },
+  "DSE":{
+    "DSE_DATABASE":[
+      "3306"
+    ]
   }
 }
