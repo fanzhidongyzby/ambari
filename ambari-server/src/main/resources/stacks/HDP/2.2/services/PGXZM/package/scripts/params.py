@@ -34,8 +34,8 @@ pgxzm_agent_etc_sys_mq = "{0}/agent/etc/sys/mq".format(pgxzm_install_path)
 pgxm_pg_conf = "/var/lib/pgsql/9.3/data"
 
 httpd_conf_dir = "/etc/httpd/conf.d"
-cgi_conf_dir = "{0}/cgi"
-web_conf_dir = "{0}/web/config"
+cgi_conf_dir = "{0}/cgi".format(pgxzm_install_path)
+web_conf_dir = "{0}/web/config".format(pgxzm_install_path)
 
 pgxzm_cmd = "({0}&) &> /dev/null"
 restart_httpd = "service httpd restart"
@@ -126,7 +126,7 @@ cgi_need_listen_port = (cgi_port != 80)
 
 cgi_start = restart_httpd
 cgi_stop = "rm -f {0}/pgczm-cgi.conf; {1}".format(httpd_conf_dir, restart_httpd)
-cgi_status = "http://{0}:{1}/pgxzm-cgi".format(cgi_host, cgi_port)
+cgi_status = "http://{0}:{1}/pgxzm-cgi/nodelist?cmdtype=0".format(cgi_host, cgi_port)
 
 # Web
 web_host = default("/clusterHostInfo/pgxzm_web_hosts", ["127.0.0.1"])[0]
@@ -135,5 +135,5 @@ web_need_listen_port = (web_port != 80)
 
 web_start = restart_httpd
 web_stop = "rm -f {0}/pgczm-web.conf; {1}".format(httpd_conf_dir, restart_httpd)
-web_status = "http://{0}:{1}/pgxzm".format(web_host, web_port)
+web_status = "http://{0}:{1}/pgxzm/".format(web_host, web_port)
 
