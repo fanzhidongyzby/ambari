@@ -63,7 +63,7 @@ class Nodemanager(Script):
     self.configure(env) # FOR SECURITY
     service('nodemanager',action='start')
 
-    Links(params.new_yarn_nodemanager_local_dirs_path, params.yarn_nodemanager_local_dirs_path)
+    Links(params.new_yarn_nodemanager_local_dirs_path, params.yarn_nodemanager_local_dirs_paths)
     Links(params.new_yarn_nodemanager_log_dirs_path, params.yarn_nodemanager_log_dirs_paths)
 
   def post_rolling_restart(self, env):
