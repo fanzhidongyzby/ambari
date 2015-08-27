@@ -11,7 +11,8 @@ for x in `ps aux | grep "/usr/pgsql-9.3/bin/postmaster" | grep -v grep | awk '{p
 for x in `ipcs -m | grep postgres | awk '{print $2}'` ; do ipcrm -m $x ; done
 for x in `ipcs -s | grep postgres | awk '{print $2}'` ; do ipcrm -s $x ; done
 
-echo "uninstall all the rpm packages of TDP-2.2 repo ..."
+echo "uninstall all the rpm packages ..."
+yum remove -y postgresql*
 yum list installed 2>/dev/null | grep "TDP-2.2" | xargs yum remove -y
 yum clean all
 
