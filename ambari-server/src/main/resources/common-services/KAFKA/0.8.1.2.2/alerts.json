@@ -26,7 +26,22 @@
             }
           }
         }
-      }
+      },
+      
+      {
+        "name": "kafka_service_check",
+        "label": "Kafka Service Check",
+        "description": "Kafka service check.",
+        "interval": 1,
+        "scope": "ANY",
+        "enabled": true,
+        "source": {
+          "type": "SCRIPT",
+          "path": "KAFKA/0.8.1.2.2/package/alerts/kafka_service_check.py"
+        }
+      }    
+      
+      
     ]
   }
 }
