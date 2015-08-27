@@ -1,0 +1,30 @@
+#!/bin/sh
+
+#source /etc/profile
+#!/bin/sh
+
+#source /etc/profile
+export JAVA_HOME={{java_home}}
+export PATH=$JAVA_HOME/bin/:$PATH
+# modify the main class, max value of memory and the jmx port here
+# modify the main class, max value of memory and the jmx port here
+java_xmx=2048m
+jmx_port=$1
+pro_name=externalDataImport
+main_class="com.qq.taserver.startup.Main"
+
+
+# get the path of this app
+app_path=`cd "$(dirname "$0")"; cd ..; pwd`
+
+echo "kill the app first if it is running..."
+$app_path/bin/kill.sh
+
+#echo $app_path > /data/home/dsf/dse_apptest/DSE-service/t.txt
+# auto format the jars in classpath
+lib_jars=`ls $app_path/lib/ | grep jar | awk -v apppath=$app_path 'BEGIN{jars="";}{jars=sprintf("%s:%s/lib/%s", jars, apppath, $1);} END{print jars}'` 
+
+run_cmd="nohup java -Xmx$java_xmx -Dprocess.name=$pro_name -Dserver.root=${app_path} -Dcom.sun.management.jmxremote.port=$jmx_port -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false -verbosegc -XX:+PrintGCDetails  -cp $app_path/conf:${lib_jars} ${main_class} "
+echo "start command: $run_cmd"
+echo "start..."
+       $run_cmd > $app_path/log/jvm.log 2> $app_path/log/jvm.log  &

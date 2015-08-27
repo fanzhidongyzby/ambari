@@ -26,15 +26,20 @@ config = Script.get_config()
 tmp_dir = Script.get_tmp_dir()
 
 #dse
+dse_server_home = "/data/tbds/dse/DSE-service"
+
 kafka_properties_path = "/data/tbds/dse/DSE-service/ambariConfig/"
 db_properties_path = "/data/tbds/dse/DSE-service/ambariConfig/"
 server_conf_path = "/data/tbds/dse/DSE-service/conf/"
-dse_server_home = config['configurations']['dse-env']['dse.server.home']
-dse_server_pid_dir = default('/configurations/dse-env/dse.server.pid.dir', '/tmp')
+
+
 dse_server_host = default("/clusterHostInfo/dse_server_hosts", ["127.0.0.1"])[0]
 dse_server_local_host = socket.gethostbyname(socket.gethostname())
 dse_server_port = default('/configurations/dse-env/dse.server.port', 54301)
 dse_server_jmx_port = default('/configurations/dse-env/dse.server.jmx.port', 10007)
+
+java_home = default('/hostLevelParams/hostLevelParams', "/usr/jdk64/jdk1.7.0_67")
+dse_bin_dir = "{0}/bin".format(dse_server_home)
 
 dse_start_command = "sudo /data/tbds/dse/DSE-service/bin/start.sh {0}".format(dse_server_jmx_port)
 dse_stop_command = "sudo /data/tbds/dse/DSE-service/bin/kill.sh {0}".format(dse_server_jmx_port)

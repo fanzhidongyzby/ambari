@@ -41,8 +41,19 @@ class dse(Script):
         File(os.path.join(params.server_conf_path,'server.conf'),
           mode=0755,
           content=Template("server.conf.j2")
-        )               
- 
+        )
+
+        Logger.info("update start.sh")
+        File(os.path.join(params.dse_bin_dir,'start.sh'),
+             mode=0755,
+             content=Template("server.start.sh.j2")
+             )
+
+        Logger.info("update kill.sh")
+        File(os.path.join(params.dse_bin_dir,'kill.sh'),
+             mode=0755,
+             content=Template("server.kill.sh.j2")
+             )
 
         Logger.info("update db.properties")
         File(os.path.join(params.db_properties_path,'db.properties'),

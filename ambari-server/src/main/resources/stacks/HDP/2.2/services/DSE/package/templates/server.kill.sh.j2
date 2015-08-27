@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# modify the process flag here
+export JAVA_HOME={{java_home}}
+export PATH=$JAVA_HOME/bin/:$PATH
+app_path=`cd "$(dirname "$0")"; cd ..; pwd`
+app_count=`ps axw | grep "java" | grep "${app_path}" | grep -v grep | wc -l`
+if [ $app_count -gt 0 ]
+then 
+    echo "app is runing with ${app_count} processes";
+else
+    echo "app is not runing";
+fi
+
+echo "just kill it"
+ps axw | grep "java" | grep "${app_path}" | grep -v grep | awk '{print("kill -9", $1)}' | bash
+
+exit
