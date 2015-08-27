@@ -21,6 +21,7 @@ case "$1" in
     fi
     mkdir -p /etc/sudoers.d
     echo "Defaults:root !requiretty" > /etc/sudoers.d/ambari-agent
+    chmod 440 /etc/sudoers.d/ambari-agent
     chkconfig --add ambari-agent
   ;;
   2) # Action upgrade
