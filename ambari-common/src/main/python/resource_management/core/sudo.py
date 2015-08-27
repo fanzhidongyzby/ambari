@@ -73,7 +73,7 @@ def create_file(filename, content):
   tmpf = tempfile.NamedTemporaryFile()
   
   if content:
-    with codecs.open(tmpf.name, "wb") as fp:
+    with codecs.open(tmpf.name, "wb", "utf-8") as fp:
       fp.write(content)
   
   with tmpf:    
