@@ -12,6 +12,7 @@ home_root="/home"
 if [ ! -d ${home_root} ]; then
   mkdir -p ${home_root}
 fi
+cp ./ambari.repo /etc/yum.repos.d/
 if cat /etc/passwd | awk -F : '{print $1}' | grep "^${name}$" >/dev/null 2>&1
   then
     home_root=`cat /etc/passwd | grep ${name}: | awk -F':' '{print $6}' | xargs dirname`

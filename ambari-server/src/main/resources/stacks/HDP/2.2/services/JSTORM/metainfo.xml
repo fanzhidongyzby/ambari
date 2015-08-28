@@ -35,7 +35,7 @@
           <name>JSTORM_SUPERVISOR</name>
           <displayName>Jstorm Supervisor</displayName>
           <category>SLAVE</category>
-          <cardinality>1</cardinality>
+          <cardinality>1+</cardinality>
           <commandScript>
             <script>scripts/supervisor.py</script>
             <scriptType>PYTHON</scriptType>
