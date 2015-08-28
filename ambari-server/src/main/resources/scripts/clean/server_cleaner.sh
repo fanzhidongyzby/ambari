@@ -13,7 +13,7 @@ for x in `ipcs -s | grep postgres | awk '{print $2}'`; do ipcrm -s $x; done
 
 echo "uninstall all the rpm packages ..."
 yum remove -y postgresql*
-for x in `yum list installed 2>/dev/null | grep "TDP" | awk '{print $1}'`; do echo "removing $x ..."; yum remove -y $x 2>&1 >/dev/null | grep Error; done
+for x in `yum list installed 2>/dev/null | grep "TDP" | awk '{print $1}'`; do echo "removing $x ..."; yum remove -y $x 2>&1 >/dev/null | grep -i error; done
 yum clean all
 
 echo "remove postgresql data files ..."
