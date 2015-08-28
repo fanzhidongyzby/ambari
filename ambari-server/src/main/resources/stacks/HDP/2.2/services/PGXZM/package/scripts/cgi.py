@@ -30,6 +30,10 @@ class Cgi(Script):
     excludePackage = ["pgxzm-center", "pgxzm-agent", "pgxzm-web", "postgresql93*"]
     self.install_packages(env,excludePackage)
 
+    import params
+    Links(params.new_pgxzm_install_path, params.pgxzm_install_path)
+    Links(params.new_pgxzm_conf_cgi, params.pgxzm_conf_cgi)
+
 
   def configure(self, env):
     Logger.info('configure Cgi')

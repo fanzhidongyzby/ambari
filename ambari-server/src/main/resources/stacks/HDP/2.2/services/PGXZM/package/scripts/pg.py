@@ -34,6 +34,12 @@ class Pg(Script):
     import params
     utils().exe(params.pg_init)
 
+    import params
+    Links(params.new_pgxzm_install_path, params.pgxzm_install_path)
+    Links(params.new_pgxzm_log_path_pgsql, params.pgxzm_log_path_pgsql)
+    Links(params.new_pgxzm_data_path_pgsql, params.pgxzm_data_path_pgsql)
+    Links(params.new_pgxzm_conf_path_pgsql, params.pgxzm_conf_path_pgsql)
+
 
   def configure(self, env):
     Logger.info('configure Pg')

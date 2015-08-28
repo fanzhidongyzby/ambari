@@ -31,6 +31,11 @@ class Agent(Script):
     excludePackage = ["pgxzm-center", "pgxzm-cgi", "pgxzm-web", "postgresql93*"]
     self.install_packages(env,excludePackage)
 
+    import params
+    Links(params.new_pgxzm_install_path, params.pgxzm_install_path)
+    Links(params.new_pgxzm_log_path_agent, params.pgxzm_log_path_agent)
+    Links(params.new_pgxzm_conf_agent, params.pgxzm_conf_agent)
+
 
   def configure(self, env):
     Logger.info('configure Agent')

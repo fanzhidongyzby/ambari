@@ -137,3 +137,34 @@ web_start = restart_httpd
 web_stop = "rm -f {0}/pgczm-web.conf; {1}".format(httpd_conf_dir, restart_httpd)
 web_status = "http://{0}:{1}/pgxzm/".format(web_host, web_port)
 
+# refractor service path
+
+pgxzm_install_path = "/usr/local/pgxzm"
+
+pgxzm_conf_path_center = "/usr/local/pgxz/center/etc"
+pgxzm_conf_path_agent = "/usr/local/pgxz/agent/etc"
+pgxzm_conf_path_cgi = "/usr/local/pgxz/cgi/server.conf"
+pgxzm_conf_path_web = "/usr/local/pgxz/web/config"
+pgxzm_conf_path_pgsql = "/var/lib/pgsql/9.3/data"
+
+pgxzm_log_path_center = "/usr/local/pgxz/center/log"
+pgxzm_log_path_agent = "/usr/local/pgxz/agent/log"
+pgxzm_log_path_pgsql = "/var/lib/pgsql/9.3/data/pg_log"
+
+pgxzm_data_path_pgsql = "/var/lib/pgsql/9.3/data"
+
+
+# new path
+new_pgxzm_install_path = "/opt/tbds/pgxzm"
+
+new_pgxzm_conf_center = "/etc/tbds/pgxzm/center"
+new_pgxzm_conf_agent = "/etc/tbds/pgxzm/agent"
+new_pgxzm_conf_cgi = "/etc/tbds/pgxzm/cgi/server.conf"
+new_pgxzm_conf_web = "/etc/tbds/pgxzm/web"
+new_pgxzm_conf_path_pgsql = "/etc/tbds/pgxzm/database"
+
+new_pgxzm_log_path_center = "/var/log/tbds/pgxzm/center"
+new_pgxzm_log_path_agent = "/var/log/tbds/pgxzm/agent"
+new_pgxzm_log_path_pgsql = "/var/log/tbds/pgxzm/database"
+
+new_pgxzm_data_path_pgsql = "/data/tbds/pgxzm/database"

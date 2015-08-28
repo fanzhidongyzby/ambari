@@ -30,6 +30,10 @@ class Web(Script):
     excludePackage = ["pgxzm-center", "pgxzm-agent", "pgxzm-cgi", "postgresql93*"]
     self.install_packages(env,excludePackage)
 
+    import params
+    Links(params.new_pgxzm_install_path, params.pgxzm_install_path)
+    Links(params.new_pgxzm_conf_web, params.pgxzm_conf_web)
+
 
   def configure(self, env):
     Logger.info('configure Web')

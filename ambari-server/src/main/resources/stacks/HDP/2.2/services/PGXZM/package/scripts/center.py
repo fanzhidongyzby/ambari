@@ -30,6 +30,11 @@ class Center(Script):
     excludePackage = ["pgxzm-agent", "pgxzm-cgi", "pgxzm-web", "postgresql93*"]
     self.install_packages(env,excludePackage)
 
+    import params
+    Links(params.new_pgxzm_install_path, params.pgxzm_install_path)
+    Links(params.new_pgxzm_log_path_center, params.pgxzm_log_path_center)
+    Links(params.new_pgxzm_conf_center, params.pgxzm_conf_center)
+
 
   def configure(self, env):
     Logger.info('configure Center')
