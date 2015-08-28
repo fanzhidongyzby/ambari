@@ -22,7 +22,7 @@ from resource_management import *
 
 
 def mysql_service(daemon_name=None, action='start'):
-  status_cmd = 'service {0} status | grep running'.format(daemon_name)
+  status_cmd = 'service {0} status | grep pid'.format(daemon_name)
   print status_cmd
   cmd = 'service {0} {1}'.format(daemon_name,action)
   print cmd

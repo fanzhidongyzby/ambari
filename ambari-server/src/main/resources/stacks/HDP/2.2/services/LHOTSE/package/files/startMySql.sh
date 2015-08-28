@@ -21,7 +21,7 @@ DEFAULT_SLEEP_SECONDS=5
 echo "Stop and clean mysql first"
 
 # Stop the mysql and clear the data if it's running before
-IS_RUNNING=`service mysqld status | grep running | wc -l`
+IS_RUNNING=`service mysqld status | grep pid | wc -l`
 if [ "$IS_RUNNING" == 1 ]; then
     service mysqld stop
 fi
@@ -53,7 +53,7 @@ echo "Customize the configuration successfully"
 
 # Start mysql
 service mysqld start
-IS_RUNNING=`service mysqld status | grep running | wc -l`
+IS_RUNNING=`service mysqld status | grep pid | wc -l`
 if [ "$IS_RUNNING" == 0 ]; then
    echo "Start mysql failed, just exit"
    exit 1
