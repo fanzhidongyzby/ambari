@@ -141,7 +141,6 @@ lhotse_config_path_web = "/etc/httpd/conf.d/lhotse_web.conf"
 lhotse_config_path_ftp = "/etc/vsftpd"
 lhotse_config_path_mysql = "/etc/my.cnf"
 
-lhotse_data_path_service = "/usr/local/lhotse_service/templates"
 lhotse_data_path_mysql = "/data/mysql_data"
 lhotse_data_path_ftp = "/data/ftp_data"
 
@@ -167,6 +166,5 @@ new_lhotse_config_path_web = "/etc/tbds/lhotse/lhotse_web/httpd/lhotse_web.conf"
 new_lhotse_config_path_ftp = "/etc/tbds/lhotse/lhotse_ftp"
 new_lhotse_config_path_mysql = "/etc/tbds/lhotse/lhotse_database/my.cnf"
 
-new_lhotse_data_path_service = "/data/tbds/lhotse/lhoste_service"
 new_lhotse_data_path_mysql = "/data/tbds/lhotse/lhoste_database"
 new_lhotse_data_path_ftp = "/data/tbds/lhotse/lhoste_ftp"
