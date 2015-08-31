@@ -35,3 +35,12 @@ default_conf_path = "/etc/nginx/conf.d/"
 nginx_service = "nginx"
 
 nginx_status_key = "running"
+
+
+nginx_server_host = socket.gethostbyname(socket.gethostname())
+nginx_server_port = default('/configurations/nginx-config/nginx.port',8086)
+
+#dse
+dse_server_hosts = default("/clusterHostInfo/dse_server_hosts", ["127.0.0.1"])
+dse_server_port = default('/configurations/dse-env/dse.server.port', 54301)
+dse_server_host_port = utils().bind_hosts_port(dse_server_hosts,dse_server_port,';','server ')

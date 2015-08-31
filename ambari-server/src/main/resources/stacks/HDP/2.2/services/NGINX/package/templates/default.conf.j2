@@ -1,1 +1,15 @@
-{{default_conf}}
+server {
+    listen       {{nginx_server_port}};
+    server_name  {{nginx_server_host}};
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/log/host.access.log  main;
+    
+
+    location / {
+        proxy_pass  http://mysvr;
+
+    }
+    
+
+}

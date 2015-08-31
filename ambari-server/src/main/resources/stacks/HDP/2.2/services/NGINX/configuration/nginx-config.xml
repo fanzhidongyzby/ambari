@@ -20,26 +20,8 @@
 -->
 <configuration supports_final="false">
     <property>
-        <name>content</name>
-        <value>
-server {
-    listen       8086;
-    server_name  10.149.27.91;
-
-    #charset koi8-r;
-    #access_log  /var/log/nginx/log/host.access.log  main;
-    
-
-    location / {
-        proxy_pass  http://mysvr;
-
-    }
-    
-
-}
-
-        </value>
-        <description>default.conf</description>
+        <name>nginx.port</name>
+        <value>8086</value>
+        <description>nginx.port</description>
     </property>
-
 </configuration>

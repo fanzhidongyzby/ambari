@@ -49,9 +49,14 @@
         </osSpecific>
       </osSpecifics>
 
+      <requiredServices>
+          <service>DSE</service>
+      </requiredServices>
+
       <configuration-dependencies>
           <config-type>default-conf-env</config-type>
           <config-type>nginx-conf-env</config-type>
+          <config-type>dse-env</config-type>
       </configuration-dependencies>
 
     </service>

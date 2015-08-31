@@ -354,7 +354,7 @@ class DefaultStackAdvisor(StackAdvisor):
         for component in service["components"]:
             if self.isComponentHostsPopulated(component):
                 for host in component["StackServiceComponents"]["hostnames"]:
-                    for port in component["StackServiceComponents"]["used_ports"]:
+                    for port in component["StackServiceComponents"][" used_ports"]:
                         if port.isdigit():
                             if port not in hostsPortsMap[host]:
                                 hostsPortsMap[host].append(port)
