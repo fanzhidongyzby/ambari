@@ -4,6 +4,7 @@ import sys
 import commands
 import socket
 import fileinput
+import time
 
 
 class AmbariCleaner:
@@ -12,16 +13,24 @@ class AmbariCleaner:
   directory_key = "directory"
 
   def __init__(self):
+    logfile = open("/tmp/agent_clean.log", "a+")
     self.onServer = self.isServerHost()
     self.dirs = self.readServiceInfo(self.directory_key)
     self.repos = self.readServiceInfo(self.repo_name_key)
 
-  def isServerHost(self):
-    print "get server host"
-    cmd = "cat  /etc/ambari-agent/conf/ambari-agent.ini|grep hostname|awk -F '=' '{print $2}'"
-    serverhost =  self.run_cmd(cmd)
+  def __del__(self):
+    logfile.close()
 
-    print "get local host"
+  def log(self, str):
+    now = time.strftime("%H:%M:%S", time.localtime())
+    logfile.write("[{0}] {1}\n".format(now, str))
+
+  def isServerHost(self):
+    self.log("get server host")
+    cmd = "cat /etc/ambari-agent/conf/ambari-agent.ini | grep hostname | awk -F '=' '{print $2}'"
+    serverhost = self.run_cmd(cmd)
+
+    self.log("get local host")
     localhost = socket.gethostname()
 
     if localhost == serverhost:
@@ -53,11 +62,10 @@ class AmbariCleaner:
     return res
 
   def run_cmd(self,cmd):
-    print cmd
+    self.log("Running commmand: " + cmd)
     (ret, output) = commands.getstatusoutput(cmd)
-    print output
-    print ret
-    return output
+    self.log(output)
+    return (ret == 0,output)
 
   def stop_agent(self):
     cmd = "sudo ambari-agent stop"
@@ -69,15 +77,17 @@ class AmbariCleaner:
       for repo in self.repos:
         if self.onServer and ("tbds-server" in repo) :
           continue
-        cmd = "yum list installed 2>/dev/null |grep " + repo + " | xargs yum remove -y"
-        self.run_cmd(cmd)
+        cmd = "yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}' | xargs sudo yum remove -y"
+        (ok, output) = self.run_cmd(cmd)
+
+        if not ok:
+          cmd = "for x in `yum list installed 2>/dev/null | grep HDP | awk '{print $1}'`; do echo \"removing $x ...\"; sudo yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
+          self.run_cmd(cmd)
+
 
   def yum_clean(self):
-    print "yum clean all"
     cmd = "sudo yum clean all"
-    (ret, output) = commands.getstatusoutput(cmd)
-    print output
-    print ret
+    self.run_cmd(cmd)
 
   def release_resources(self):
     self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
