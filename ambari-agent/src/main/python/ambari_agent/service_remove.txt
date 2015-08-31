@@ -18,3 +18,5 @@ TDP-2.2
 /etc/tbds
 /var/log/tbds
 /data/tbds
+/var/lib/pgsql/9.3/data
+/data/mysql_data

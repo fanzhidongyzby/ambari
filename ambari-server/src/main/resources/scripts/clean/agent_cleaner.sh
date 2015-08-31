@@ -15,13 +15,19 @@ request=`curl -H "ContentType:application/json" -H "X-requested-By: florianfan" 
 
 # wait services stopped
 echo "request sent ok, waiting services to be stopped ..."
-if [[ $request != "" ]]; then
+if [[ "$request" != "" ]]; then
 	# wait services stopped
+	times=1
 	while true; do
 		status=`curl --user admin:admin $request 2> /dev/null | grep request_status | awk -F '"' '{print $4}'`
 		if [[ "$status" == "IN_PROGRESS" || "$status" == "PENDING" ]]; then
 			echo -n \>
 			sleep 5
+			times=$((times+1))
+			if [[ $times -eq 60 ]]; then
+			  echo -e "\nservices stopped timeout! please stop all the services manually."
+			  break
+			fi
 		elif [[ "$status" == "COMPLETED" ]]; then
 			echo -e "\nservices stopped success !!!"
 			break
@@ -74,6 +80,8 @@ do
       echo "waiting $p_num agents clean over ..."
   done
 done
-echo "agents clean OK !"
+
+echo "waiting agents cleaning ..."
 
 wait
+echo "agents clean OK !"
