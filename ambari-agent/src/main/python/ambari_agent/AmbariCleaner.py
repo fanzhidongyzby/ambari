@@ -68,7 +68,7 @@ class AmbariCleaner:
     return (ret == 0,output)
 
   def stop_agent(self):
-    cmd = "sudo ambari-agent stop"
+    cmd = "ambari-agent stop"
     self.run_cmd(cmd)
 
 
@@ -77,16 +77,16 @@ class AmbariCleaner:
       for repo in self.repos:
         if self.onServer and ("tbds-server" in repo) :
           continue
-        cmd = "yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}' | xargs sudo yum remove -y"
+        cmd = "yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}' | xargs yum remove -y"
         (ok, output) = self.run_cmd(cmd)
 
         if not ok:
-          cmd = "for x in `yum list installed 2>/dev/null | grep HDP | awk '{print $1}'`; do echo \"removing $x ...\"; sudo yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
+          cmd = "for x in `yum list installed 2>/dev/null | grep HDP | awk '{print $1}'`; do echo \"removing $x ...\"; yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
           self.run_cmd(cmd)
 
 
   def yum_clean(self):
-    cmd = "sudo yum clean all"
+    cmd = "yum clean all"
     self.run_cmd(cmd)
 
   def release_resources(self):
@@ -96,7 +96,7 @@ class AmbariCleaner:
     self.release_resources()
     if not self.onServer:
       for dir in self.dirs:
-        cmd = "sudo rm -rf {}".format(dir)
+        cmd = "rm -rf {}".format(dir)
         self.run_cmd(cmd)
 
 
