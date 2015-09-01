@@ -130,7 +130,14 @@ class utils:
     self.generate_certification_script(env)
     cmd = "su gaia -c 'bash -x {0} '".format(params.certification_script)
     self.exe(cmd)
- 
+
+  def bind_hosts_port(self, hosts, port, sep, prefix = ""):
+    address = ""
+    for host in hosts:
+      address += prefix + host.strip() + ":" + str(port) + sep
+
+    address = address[:-1] if len(address) > 0 else address
+    return address
 
 if __name__ == "__main__":
     cmd="bash -x /var/lib/ambari-agent/data/tmp/env.sh slave"
