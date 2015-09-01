@@ -19,6 +19,8 @@ limitations under the License.
 
 from resource_management.libraries.functions.default import default
 from resource_management import *
+import socket
+from utils import utils
 
 config = Script.get_config()
 
