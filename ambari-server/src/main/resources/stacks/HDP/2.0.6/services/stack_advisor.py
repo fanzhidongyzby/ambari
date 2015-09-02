@@ -319,8 +319,11 @@ class HDP206StackAdvisor(DefaultStackAdvisor):
                 if "//" in propertyValue:
                   i = propertyValue.index("//")
                   propertyValue = propertyValue[i+2:]
-                i = propertyValue.index(":")
-                usedPort = propertyValue[i+1:]
+                if ":" in propertyValue:
+                  i = propertyValue.index(":")
+                  usedPort = propertyValue[i+1:]
+                else:
+                  usedPort = propertyValue
           else:
               configType = "NA"
               propertyKey = "NA"
