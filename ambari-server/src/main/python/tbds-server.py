@@ -557,6 +557,9 @@ def main(options, args, parser):
 
   action = args[0]
 
+  if action == "setup" and options.repo_url is None:
+      parser.error("--repo-url must be given")
+
   try:
     action_obj = action_map[action]
   except KeyError:
