@@ -26,7 +26,7 @@ if [[ "$request" != "" ]]; then
 			times=$((times+1))
 			if [[ $times -eq 60 ]]; then
 			  echo -e "\nservices stopped timeout! please stop all the services manually."
-			  break
+			  exit 1
 			fi
 		elif [[ "$status" == "COMPLETED" ]]; then
 			echo -e "\nservices stopped success !!!"
