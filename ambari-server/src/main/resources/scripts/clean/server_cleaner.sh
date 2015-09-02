@@ -53,9 +53,17 @@ rm -rf /usr/sbin/ambari*
 rm -rf /usr/lib/python2.6/site-packages/ambari*
 rm -rf /usr/lib/python2.6/site-packages/resource_management
 rm -rf /etc/ambari*
+
+echo "remove gaia files ..."
 rm -rf /gaia/*
+
+echo "remove hadoop files ..."
 rm -rf /usr/hdp
+
+echo "remove postgresql files ..."
 rm -rf /var/lib/pgsql/9.3/data
+
+echo "remove mysql files ..."
 rm -rf /data/mysql_data
 
 echo "server cleaned success !!!"
