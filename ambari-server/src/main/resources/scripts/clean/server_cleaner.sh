@@ -65,5 +65,9 @@ rm -rf /var/lib/pgsql/9.3/data
 
 echo "remove mysql files ..."
 rm -rf /data/mysql_data
+rm -rf /data/goldeneye/mysql_data
+
+echo "remove ftp files ..."
+rm -rf /data/ftp_data
 
 echo "server cleaned success !!!"
