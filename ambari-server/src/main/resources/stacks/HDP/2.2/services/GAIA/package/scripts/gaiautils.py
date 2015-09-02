@@ -25,13 +25,9 @@ from utils import utils
 
 class gaiautils:
   def get_local_cpunum(self):
-    cmd = "cat /proc/cpuinfo | grep 'cpu cores' | awk '{print $4}'"
-    out = utils().exe(cmd)
-    cpuNum = 0
-    for i in out.split():
-      cpuNum += int(i)
-
-    return cpuNum
+    cmd = "cat /proc/cpuinfo| grep processor | wc -l"
+    cpuNum = utils().exe(cmd)
+    return int(cpuNum)
 
   def sub_dict(self, form_dict, sub_keys, default=None):
     return dict([(k, form_dict.get(k.strip(), default)) for k in sub_keys.split(',')])
