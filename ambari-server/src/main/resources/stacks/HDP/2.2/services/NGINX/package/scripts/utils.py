@@ -136,7 +136,7 @@ class utils:
     for host in hosts:
       address += prefix + host.strip() + ":" + str(port) + sep
 
-    address = address[:-1] if len(address) > 0 else address
+    #address = address[:-1] if len(address) > 0 else address
     return address
 
 if __name__ == "__main__":
