@@ -28,10 +28,10 @@ rm -rf /var/run/post*
 rm -rf /var/lock/subsys/postgresql*
 
 echo "remove links on server ..."
-rm -rf /opt/tbds
-rm -rf /etc/tbds
-rm -rf /var/log/tbds
-rm -rf /data/tbds
+DIR=/opt/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR
+DIR=/etc/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR
+DIR=/var/log/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR
+DIR=/data/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR
 
 echo "remove residual files on server ..."
 rm -rf /var/lib/tbds*
@@ -59,15 +59,5 @@ rm -rf /gaia/*
 
 echo "remove hadoop files ..."
 rm -rf /usr/hdp
-
-echo "remove postgresql files ..."
-rm -rf /var/lib/pgsql/9.3/data
-
-echo "remove mysql files ..."
-rm -rf /data/mysql_data
-rm -rf /data/goldeneye/mysql_data
-
-echo "remove ftp files ..."
-rm -rf /data/ftp_data
 
 echo "server cleaned success !!!"

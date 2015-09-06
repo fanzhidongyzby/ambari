@@ -97,8 +97,10 @@ class AmbariCleaner:
       for dir in self.dirs:
         cmd = "rm -rf {0}".format(dir)
         self.run_cmd(cmd)
-
-
+      self.run_cmd("DIR=/opt/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+      self.run_cmd("DIR=/etc/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+      self.run_cmd("DIR=/var/log/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+      self.run_cmd("DIR=/data/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
 
   def main(self):
     # stop agent first
