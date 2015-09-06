@@ -13,25 +13,24 @@ class AmbariCleaner:
   directory_key = "directory"
 
   def __init__(self):
-    logfile = open("/tmp/agent_clean.log", "a+")
+    self.logfile = open("/tmp/clean_agent.log", "w")
     self.onServer = self.isServerHost()
     self.dirs = self.readServiceInfo(self.directory_key)
     self.repos = self.readServiceInfo(self.repo_name_key)
 
   def __del__(self):
-    logfile.close()
+    self.logfile.close()
 
   def log(self, str):
     now = time.strftime("%H:%M:%S", time.localtime())
-    logfile.write("[{0}] {1}\n".format(now, str))
+    self.logfile.write("[{0}] {1}\n".format(now, str))
 
   def isServerHost(self):
-    self.log("get server host")
     cmd = "cat /etc/ambari-agent/conf/ambari-agent.ini | grep hostname | awk -F '=' '{print $2}'"
-    serverhost = self.run_cmd(cmd)
+    (ret, serverhost) = self.run_cmd(cmd)
 
-    self.log("get local host")
     localhost = socket.gethostname()
+    self.log("localhost is '{0}', serverhost is '{1}'".format(localhost,serverhost))
 
     if localhost == serverhost:
       return True
@@ -45,12 +44,12 @@ class AmbariCleaner:
     for line in fileinput.input("/usr/lib/python2.6/site-packages/ambari_agent/service_remove.txt"):
       print(line)
       line = line.strip()
-      if ( line=="" ):
+      if (line == ""):
         continue
 
       if (findkey):
         if(line.find("[") < 0):
-          print("add list: " + line)
+          self.log("get value: {0}".format(line))
           res.append(line)
         else:
           break
@@ -96,7 +95,7 @@ class AmbariCleaner:
     self.release_resources()
     if not self.onServer:
       for dir in self.dirs:
-        cmd = "rm -rf {}".format(dir)
+        cmd = "rm -rf {0}".format(dir)
         self.run_cmd(cmd)
 
 
@@ -113,5 +112,5 @@ class AmbariCleaner:
     self.remove_dir()
 
 if __name__ == '__main__':
-   obj = AmbariCleaner()
-   obj.main()
+  obj = AmbariCleaner()
+  obj.main()
