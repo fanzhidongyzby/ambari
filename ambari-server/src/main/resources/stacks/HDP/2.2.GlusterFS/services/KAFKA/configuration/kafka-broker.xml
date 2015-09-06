@@ -128,7 +128,7 @@
   </property>
   <property>
     <name>log.retention.hours</name>
-    <value>168</value>
+    <value>72</value>
     <description>
       The number of hours to keep a log segment before it is deleted, i.e. the default data retention window for all topics. Note that if both log.retention.hours and log.retention.bytes are both set we delete a segment when either limit is exceeded.
     </description>
@@ -194,7 +194,7 @@
   </property>
   <property>
     <name>default.replication.factor</name>
-    <value>3</value>
+    <value>1</value>
     <description>The default replication factor for automatically created topics.</description>
   </property>
   <property>

@@ -39,7 +39,7 @@
 
   <property>
     <name>mysql.data.dir</name>
-    <value>/data/mysql_data</value>
+    <value>/dse/mysql_data</value>
     <description>data base dir</description>
   </property>
 </configuration>

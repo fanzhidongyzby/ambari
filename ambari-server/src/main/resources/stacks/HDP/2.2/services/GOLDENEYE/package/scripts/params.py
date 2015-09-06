@@ -43,7 +43,7 @@ web_http_path = '/etc/httpd/conf.d'
 #golden eye db
 goldeneye_database_host = default("/clusterHostInfo/goldeneye_metadata_database_hosts", ["localhost"])[0]
 
-goldeneye_data_dir = default("/configurations/goldeneye-database/data.dir", "/data/goldeneye/mysql_data")
+goldeneye_data_dir = default("/configurations/goldeneye-database/goldeneye.data.dir", "/data/goldeneye/mysql_data")
 goldeneye_database_port = default("/configurations/goldeneye-database/database.port", 3306)
 goldeneye_database_username = default("/configurations/goldeneye-database/goldeneye.username", "root")
 goldeneye_database_password = default("/configurations/goldeneye-database/goldeneye.password", "")

@@ -23,8 +23,8 @@
     -->
 
  <property>
-   <name>data.dir</name>
-   <value>/data/goldeneye/mysql_data</value>
+   <name>goldeneye.data.dir</name>
+   <value>/goldeneye/mysql_data</value>
    <description>Golden Eye 数据库文件路径(仅首次安装时,修改生效)</description>
  </property>
 

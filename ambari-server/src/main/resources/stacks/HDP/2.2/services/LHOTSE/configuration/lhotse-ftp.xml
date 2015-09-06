@@ -21,7 +21,7 @@
  
   <property>
     <name>root.path</name>
-    <value>/data/ftp_data</value>
+    <value>/lhotse/ftp_data</value>
     <description>ftp root path(仅首次安装时,修改生效)</description>
   </property>
 

@@ -603,6 +603,26 @@ App.ServiceConfigProperty = Em.Object.extend({
       case '*.falcon.graph.serialize.path':
         this.unionAllMountPoints(isOnlyFirstOneNeeded, localDB);
         break;
+      //Added by junz for union log/data dirs
+      case 'zk_log_dir':
+      case 'hdfs_log_dir_prefix':
+      case 'mapred_log_dir_prefix':
+      case 'yarn_log_dir_prefix':
+      case 'hbase_log_dir':
+      case 'hive_log_dir':
+      case 'hcat_log_dir':
+      case 'storm_log_dir':
+      case 'flume_log_dir':
+      case 'kafka_log_dir':
+      case 'redis_log_file':
+      case 'data.dir':
+      case 'root.path':
+      case 'metrics_monitor_log_dir':
+      case 'metrics_collector_log_dir':
+      case 'mysql.data.dir':
+      case 'goldeneye.data.dir':
+        this.unionAllMountPoints(isOnlyFirstOneNeeded, localDB);
+        break;
       case '*.broker.url':
         var falconServerHost = masterComponentHostsInDB.findProperty('component', 'FALCON_SERVER').hostName;
         this.setDefaultValue('localhost', falconServerHost);
@@ -692,12 +712,14 @@ App.ServiceConfigProperty = Em.Object.extend({
         break;
       case 'dfs.data.dir':
       case 'dfs.datanode.data.dir':
+      case 'hdfs_log_dir_prefix':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'DATANODE');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
         }, this);
         break;
       case 'mapred.local.dir':
+      case 'mapred_log_dir_prefix':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'TASKTRACKER') || slaveComponentHostsInDB.findProperty('componentName', 'NODEMANAGER');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
@@ -705,6 +727,7 @@ App.ServiceConfigProperty = Em.Object.extend({
         break;
       case 'yarn.nodemanager.log-dirs':
       case 'yarn.nodemanager.local-dirs':
+      case 'yarn_log_dir_prefix':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'NODEMANAGER');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
@@ -717,6 +740,7 @@ App.ServiceConfigProperty = Em.Object.extend({
         }, this);
         break;
       case 'dataDir':
+      case 'zk_log_dir':
         components = masterComponentHostsInDB.filterProperty('component', 'ZOOKEEPER_SERVER');
         components.forEach(function (component) {
           setOfHostNames.push(component.hostName);
@@ -729,12 +753,20 @@ App.ServiceConfigProperty = Em.Object.extend({
         }, this);
         break;
       case 'hbase.tmp.dir':
+      case 'hbase_log_dir':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'HBASE_REGIONSERVER');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
         }, this);
+        if (setOfHostNames.length === 0) {
+            temp = slaveComponentHostsInDB.findProperty('componentName', 'METRICS_COLLECTOR');
+                temp.hosts.forEach(function (host) {
+                  setOfHostNames.push(host.hostName);
+                }, this);
+        }
         break;
       case 'storm.local.dir':
+      case 'storm_log_dir':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'SUPERVISOR');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
@@ -752,7 +784,63 @@ App.ServiceConfigProperty = Em.Object.extend({
         }, this);
         break;
       case 'log.dirs':
+      case 'kafka_log_dir':
         components = masterComponentHostsInDB.filterProperty('component', 'KAFKA_BROKER');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'hive_log_dir':
+      case 'hcat_log_dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'HIVE_SERVER');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'flume_log_dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'FLUME_HANDLER');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'metrics_collector_log_dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'METRICS_COLLECTOR');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'metrics_monitor_log_dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'METRICS_MONITOR');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'redis_log_file':
+        components = masterComponentHostsInDB.filterProperty('component', 'REDIS_SERVER');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'mysql.data.dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'DSE_DATABASE');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'data.dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'LHOTSE_DATABASE');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'root.path':
+        components = masterComponentHostsInDB.filterProperty('component', 'LHOTSE_FTP');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'goldeneye.data.dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'GOLDENEYE_METADATA_DATABASE');
         components.forEach(function (component) {
           setOfHostNames.push(component.hostName);
         }, this);
