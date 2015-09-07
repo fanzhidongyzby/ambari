@@ -51,6 +51,7 @@ def execute_command(cmdstring, timeout=None, shell=True):
       time.sleep(0.1)
       if timeout:
         if end_time <= datetime.datetime.now():
+          sub.terminate()
           return 1,"Timeout:%s"%cmdstring
         
     stdout,stderr = sub.communicate()

@@ -54,6 +54,7 @@ def execute_command(cmdstring, timeout=None, shell=True):
       time.sleep(0.1)
       if timeout:
         if end_time <= datetime.datetime.now():
+          sub.terminate()
           return 1,"Timeout:%s"%cmdstring
         
     stdout,stderr = sub.communicate()
@@ -90,7 +91,7 @@ def execute(parameters=None, host_name=None):
   ddl_cmd = "create table {0}(id int); drop table {1};".format(tmp_table, tmp_table)
   #ddl_cmd = "show tables;"
   cmd = 'export PLCLIENT_PATH=/usr/local/thive/dist/PLClient; su -c \"/usr/local/thive/dist/PLClient/PLC {0} {1} {2} {3} \\\"{4}\\\"\" {5}'.format(thive_user, thive_password, host_name, thive_port,  ddl_cmd, hdfs_user)
-  (ret, out) = execute_command(cmd,60)
+  (ret, out) = execute_command(cmd,120)
   
   if ret == 0:
     label = 'thive service is running.'

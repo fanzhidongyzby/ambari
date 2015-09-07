@@ -31,7 +31,7 @@
 	        "name": "thive_service_check",
 	        "label": "Thive Service Check",
 	        "description": "thive service check。",
-	        "interval": 2,
+	        "interval": 5,
 	        "scope": "ANY",
 	        "enabled": true,
 	        "source": {
