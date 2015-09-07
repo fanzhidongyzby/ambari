@@ -4,11 +4,12 @@ BINDIR=`dirname "$0"`
 cd $BINDIR
 currentPath=`pwd`
 password="tencent"
-
+echo "[BOOTSTRAP]1. start to generate certificate of user:${sshUser}"
 sshUser=$1
-homePath=`cat /etc/passwd | grep ${sshUser}: | awk -F':' '{print $6}'`
+homePath=`cat /etc/passwd | grep tencent: | awk -F':' '{print $6}'`
 if [ "${homePath}" == "" ]
   then 
+    echo "[BOOTSTRAP]1.1 create certificate user: ${sshUser}"
     yum -y install perl
     pass=$(perl -e 'print crypt($ARGV[0], "wtf")' ${password})
     sudo /usr/sbin/groupadd tencent
@@ -24,3 +25,4 @@ if [ "${executor}" == "${sshUser}" ]
   else
     su -c "${currentPath}/bootstrap_agent_ssh_keygen.exp ${homePath}" - ${sshUser}
 fi
+echo "[BOOTSTRAP]1. end generate certificate"
