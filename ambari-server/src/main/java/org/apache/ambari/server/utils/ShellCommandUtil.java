@@ -51,7 +51,9 @@ public class ShellCommandUtil {
     Result runCommand = ShellCommandUtil.runCommand(cmds);
     LOG.info("exitCode:"+runCommand.getExitCode());
     LOG.info("stdout:"+runCommand.getStdout());
-    LOG.error("stderr:"+runCommand.getStderr());
+    if(runCommand.getExitCode() != 0){
+    	LOG.error("stderr:"+runCommand.getStderr());
+    }
     return runCommand;
   }
   

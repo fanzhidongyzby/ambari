@@ -29,11 +29,23 @@
 		<description>日志运行模式</description>
 	</property>
 
+    <property>
+        <name>debug.mode</name>
+        <value>true</value>
+        <description>日志运行模式</description>
+    </property>
+
 	<property>
-		<name>issuer.logging.level</name>
-		<value>DEBUG</value>
-		<description>下发日志级别</description>
+		<name>coredump.dir</name>
+		<value>/lhotse/base/coredumps/</value>
+		<description>coredump日志路径</description>
 	</property>
+
+    <property>
+        <name>gclog.dir</name>
+        <value>/lhotse/base/gclogs/</value>
+        <description>gclog日志路径</description>
+    </property>
 
 	<property>
 		<name>thrift.server.port</name>

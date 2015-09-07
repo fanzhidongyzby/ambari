@@ -23,7 +23,7 @@
 <configuration>
   <property>
     <name>hbase_log_dir</name>
-    <value>/var/log/ambari-metrics-collector</value>
+    <value>/var/log/tbds/metrics/collector</value>
     <description>Log Directories for HBase.</description>
   </property>
   <property>

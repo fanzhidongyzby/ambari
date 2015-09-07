@@ -33,7 +33,8 @@ lhotse_base_debug_mode = default("/configurations/lhotse-base-env/debug.mode", "
 lhotse_base_issuer_logging_level = default("/configurations/lhotse-base-env/issuer.logging.level", "DEBUG")
 lhotse_base_thrift_server_port = default("/configurations/lhotse-base-env/thrift.server.port", 8183)
 lhotse_base_proc_name = 'lhotse_base.jar'
-
+lhotse_base_logpath_coredump = default("/configurations/lhotse-base-env/coredump.dir", "/data/tbds/lhotse/base/coredumps/")
+lhotse_base_logpath_gclog = default("/configurations/lhotse-base-env/gclog.dir", "/data/tbds/lhotse/base/gclogs/")
 
 #lhotse database config
 lhotse_database_hosts = default("/clusterHostInfo/lhotse_database_hosts", ["127.0.0.1"])[0]

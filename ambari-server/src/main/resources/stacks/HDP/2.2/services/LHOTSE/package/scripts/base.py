@@ -26,9 +26,9 @@ class Base(Script):
 
     print 'start the base';
     print params.java_home
-    val= os.system("su lhotse -c '/usr/local/lhotse_base/start_base.sh " + params.java_home + "'")
+    val= os.system("su lhotse -c '/usr/local/lhotse_base/start_base.sh " + params.java_home +" " + params.lhotse_base_logpath_coredump + " " + params.lhotse_base_logpath_gclog +  "'")
     print val
-     
+
 
   def configure(self, env):
     print 'create the config file call configinit()';

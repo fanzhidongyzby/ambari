@@ -24,4 +24,17 @@
         <value>8086</value>
         <description>nginx.port</description>
     </property>
+
+    <property>
+        <name>nginx.log.path</name>
+        <value>/nginx/log/</value>
+        <description>nginx日志路径</description>
+    </property>
+
+    <property>
+        <name>nginx.errorlog.level</name>
+        <value>crit</value>
+        <description>debug,info,notice,warn,error,crit,alert,emerg 级别</description>
+    </property>
+
 </configuration>

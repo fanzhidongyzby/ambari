@@ -621,6 +621,9 @@ App.ServiceConfigProperty = Em.Object.extend({
       case 'metrics_collector_log_dir':
       case 'mysql.data.dir':
       case 'goldeneye.data.dir':
+      case 'coredump.dir':
+      case 'gclog.dir':
+      case 'nginx.log.path':
         this.unionAllMountPoints(isOnlyFirstOneNeeded, localDB);
         break;
       case '*.broker.url':
@@ -753,17 +756,10 @@ App.ServiceConfigProperty = Em.Object.extend({
         }, this);
         break;
       case 'hbase.tmp.dir':
-      case 'hbase_log_dir':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'HBASE_REGIONSERVER');
         temp.hosts.forEach(function (host) {
           setOfHostNames.push(host.hostName);
         }, this);
-        if (setOfHostNames.length === 0) {
-            temp = slaveComponentHostsInDB.findProperty('componentName', 'METRICS_COLLECTOR');
-                temp.hosts.forEach(function (host) {
-                  setOfHostNames.push(host.hostName);
-                }, this);
-        }
         break;
       case 'storm.local.dir':
       case 'storm_log_dir':
@@ -804,6 +800,8 @@ App.ServiceConfigProperty = Em.Object.extend({
         }, this);
         break;
       case 'metrics_collector_log_dir':
+      case 'hbase_log_dir':
+      case 'metrics_monitor_log_dir':
         components = masterComponentHostsInDB.filterProperty('component', 'METRICS_COLLECTOR');
         components.forEach(function (component) {
           setOfHostNames.push(component.hostName);
@@ -841,6 +839,19 @@ App.ServiceConfigProperty = Em.Object.extend({
         break;
       case 'goldeneye.data.dir':
         components = masterComponentHostsInDB.filterProperty('component', 'GOLDENEYE_METADATA_DATABASE');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'coredump.dir':
+      case 'gclog.dir':
+        components = masterComponentHostsInDB.filterProperty('component', 'LHOTSE_BASE');
+        components.forEach(function (component) {
+          setOfHostNames.push(component.hostName);
+        }, this);
+        break;
+      case 'nginx.log.path':
+        components = masterComponentHostsInDB.filterProperty('component', 'NGINX_SERVER');
         components.forEach(function (component) {
           setOfHostNames.push(component.hostName);
         }, this);

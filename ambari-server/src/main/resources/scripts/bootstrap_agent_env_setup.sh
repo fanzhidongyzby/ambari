@@ -7,7 +7,7 @@ hostIP=$1
 sshUser=$2
 sshPass=$3
 
-homePath=`cat /etc/passwd | grep tencent: | awk -F':' '{print $6}'`
+homePath=`cat /etc/passwd | grep ${sshUser}: | awk -F':' '{print $6}'`
 #copy and execute ambari_agent_env.sh
 if [ "${homePath}" == "" ]
   then 

@@ -22,6 +22,32 @@ var hdp2properties = [
   //***************************************** HDP stack **************************************
  /**********************************************LHOTSE***************************************/
     {
+       "id": "site property",
+       "name": "gclog.dir",
+       "displayName": "gclog.dir",
+       "defaultDirectory": "/lhotse/base/gclogs",
+       "isReconfigurable": false,
+       "displayType": "directory",
+       "isOverridable": false,
+       "isVisible": true,
+       "serviceName": "LHOTSE",
+       "filename": "lhotse-base-env.xml",
+       "category": "Advanced lhotse-base-env"
+    },
+    {
+       "id": "site property",
+       "name": "coredump.dir",
+       "displayName": "coredump.dir",
+       "defaultDirectory": "/lhotse/base/coredumps",
+       "isReconfigurable": false,
+       "displayType": "directory",
+       "isOverridable": false,
+       "isVisible": true,
+       "serviceName": "LHOTSE",
+       "filename": "lhotse-base-env.xml",
+       "category": "Advanced lhotse-base-env"
+    },
+    {
       "id": "site property",
       "name": "data.dir",
       "displayName": "data目录",
@@ -109,10 +135,10 @@ var hdp2properties = [
     },
     /**********************************************GOLDENEYE***************************************/
     {
-      "id": "site property",
-      "name": "data.dir",
+      "id": "puppet var",
+      "name": "goldeneye.data.dir",
       "displayName": "data目录",
-      "defaultValue": "/goldeneye/mysql_data",
+      "defaultDirectory": "/goldeneye/mysql_data",
       "isReconfigurable": false,
       "displayType": "directory",
       "isOverridable": false,
@@ -4886,17 +4912,17 @@ var atsProperties = [
   },
   {
     "id": "puppet var",
-    "name": "goldeneye.data.dir",
-    "displayName": "data目录",
-    "description": "Golden Eye 数据库文件路径(仅首次安装时,修改生效)",
-    "defaultDirectory": "/goldeneye/mysql_data",
+    "name": "nginx.log.path",
+    "displayName": "nginx.log.path",
+    "description": "nginx日志路径",
+    "defaultDirectory": "/var/log/nginx",
     "isReconfigurable": false,
     "displayType": "directory",
     "isOverridable": false,
     "isVisible": true,
-    "serviceName": "DSE",
-    "filename": "goldeneye-database.xml",
-    "category": "Advanced goldeneye-database"
+    "serviceName": "NGINX",
+    "filename": "nginx-config.xml",
+    "category": "Advanced nginx-config"
   }
 ];
 
