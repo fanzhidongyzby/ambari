@@ -7,7 +7,7 @@ hostIP=$1
 sshUser=$2
 sshPass=$3
 echo "[BOOTSTRAP]2 start to init environment of host: ${hostIP}"
-homePath=`cat /etc/passwd | grep ${sshUser}: | awk -F':' '{print $6}'`
+homePath=`cat /etc/passwd | grep tencent: | awk -F':' '{print $6}'`
 #copy and execute ambari_agent_env.sh
 if [ "${homePath}" == "" ]
   then 

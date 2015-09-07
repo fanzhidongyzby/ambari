@@ -37,6 +37,11 @@ class nginx(Script):
         import params
         Logger.info("update nginx.conf")
 
+        File(os.path.join(params.nginx_log_path, 'access.log'),
+             mode=0644,
+             content=""
+        )
+
         File(os.path.join(params.nginx_conf_path, 'nginx.conf'),
          mode=0644,
          content=Template("nginx.conf.j2")

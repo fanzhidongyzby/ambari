@@ -134,7 +134,7 @@ class utils:
   def bind_hosts_port(self, hosts, port, sep, prefix = ""):
     address = ""
     for host in hosts:
-      address += prefix + host.strip() + ":" + str(port) + sep
+      address += prefix + " " + host.strip() + ":" + str(port) + sep
 
     #address = address[:-1] if len(address) > 0 else address
     return address
