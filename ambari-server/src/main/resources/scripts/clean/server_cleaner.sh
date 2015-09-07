@@ -17,7 +17,7 @@ yum remove -y postgresql*
 RPMS=`yum list installed 2>/dev/null | grep "TDP" | awk '{print $1}'`
 echo "removing rpms of TDP repo ..."
 RPMS_RM_OK=`echo $RPMS | xargs yum remove -y &>/dev/null; echo $?`
-if [[ ! $RPMS_RM_OK ]]; then
+if [[ $RPMS_RM_OK -ne 0 ]]; then
   for x in $RPMS; do echo "removing $x ..."; yum remove -y $x 2>&1 >/dev/null | grep -i error; done
 fi
 yum clean all
