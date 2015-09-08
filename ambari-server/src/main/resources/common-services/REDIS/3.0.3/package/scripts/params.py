@@ -33,3 +33,16 @@ redis_port = config['configurations']['redis-env']['redis_port']
 redis_log_file = config['configurations']['redis-env']['redis_log_file']
 redis_conf_dir = config['configurations']['redis-env']['redis_conf_dir']
 redis_pid_file = status_params.redis_pid_file
+
+# refractor service path
+
+redis_install_path = "/usr/bin/redis-server"
+redis_config_path = "/etc/redis.conf"
+redis_log_path = default("/configurations/redis-env/redis_log_file", "/var/log/redis")
+redis_data_path = "/var/lib/redis"
+
+new_redis_install_path = "/opt/tbds/redis/redis"
+new_redis_config_path = "/etc/tbds/redis/redis.conf"
+new_redis_log_path = "/var/log/tbds/redis"
+new_redis_data_path = "/data/tbds/redis"
+

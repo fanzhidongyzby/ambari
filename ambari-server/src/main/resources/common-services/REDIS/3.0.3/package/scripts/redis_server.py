@@ -37,6 +37,10 @@ class RedisServer(Script):
          content=""
     )
 
+    Links(params.new_redis_install_path, params.new_redis_install_path)
+    Links(params.new_redis_config_path, params.new_redis_config_path)
+    Links(params.new_redis_data_path, params.new_redis_data_path)
+
   def configure(self, env):
     import params
     env.set_params(params)
@@ -55,6 +59,8 @@ class RedisServer(Script):
     Execute(daemon_cmd,
             user=params.redis_user
     )
+    Links(params.new_redis_log_path, params.new_redis_log_path)
+
 
   def stop(self, env, rolling_restart=False):
     import params
