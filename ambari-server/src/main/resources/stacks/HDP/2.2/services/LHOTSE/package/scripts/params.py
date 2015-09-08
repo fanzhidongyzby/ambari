@@ -133,6 +133,8 @@ lhotse_log_path_web = "/usr/local/lhotse_web/logs"
 lhotse_log_path_ftp = "/usr/sbin/vsftpd/logs"
 lhotse_log_path_mysql = "/var/log/mysqld.log"
 
+lhotse_log_base_coredump = default("/configurations/lhotse-base-env/coredump.dir", "/data/tbds/lhotse/base/coredumps/")
+lhotse_log_base_gclog = default("/configurations/lhotse-base-env/gclog.dir", "/data/tbds/lhotse/base/gclogs/")
 
 lhotse_config_path_base = "/usr/local/lhotse_base/cfg"
 lhotse_config_path_runner = "/usr/local/lhotse_runners/cfg"
@@ -142,9 +144,8 @@ lhotse_config_path_web = "/etc/httpd/conf.d/lhotse_web.conf"
 lhotse_config_path_ftp = "/etc/vsftpd"
 lhotse_config_path_mysql = "/etc/my.cnf"
 
-lhotse_data_path_mysql = "/data/mysql_data"
-lhotse_data_path_ftp = "/data/ftp_data"
-
+lhotse_data_path_mysql = default("/configurations/lhotse-database/data.dir", "/data/mysql_data")
+lhotse_data_path_ftp = default("/configurations/lhotse-ftp/data.dir", "/data/ftp_data")
 
 new_lhotse_install_path_base = "/opt/tbds/lhotse/lhotse_base"
 new_lhotse_install_path_runner = "/opt/tbds/lhotse/lhotse_runner"
@@ -158,6 +159,9 @@ new_lhotse_log_path_service = "/var/log/tbds/lhotse/lhotse_service"
 new_lhotse_log_path_web = "/var/log/tbds/lhotse/lhotse_web"
 new_lhotse_log_path_ftp = "/var/log/tbds/lhotse/lhotse_ftp"
 new_lhotse_log_path_mysql = "/var/log/tbds/lhotse/lhotse_mysql"
+
+new_lhotse_log_base_coredump = "/var/log/tbds/lhotse/lhotse_base/coredumps"
+new_lhotse_log_base_gclog = "/var/log/tbds/lhotse/lhotse_base/gclogs"
 
 new_lhotse_config_path_base = "/etc/tbds/lhotse/lhotse_base"
 new_lhotse_config_path_runner = "/etc/tbds/lhotse/lhotse_runner"

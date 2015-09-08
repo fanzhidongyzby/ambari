@@ -251,5 +251,5 @@ hbase_log_path = "/var/log/hbase"
 
 new_hbase_install_path = "/opt/tbds/hbase"
 new_hbase_config_path = "/etc/tbds/hbase"
-new_hbase_log_path = "/var/log/tbds/hbase"
+new_hbase_log_path = default("/configurations/hbase-env/hbase_log_dir", "/var/log/tbds/hbase")
 

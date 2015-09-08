@@ -16,6 +16,8 @@ class Base(Script):
     import params
     Links(params.new_lhotse_install_path_base, params.lhotse_install_path_base)
     Links(params.new_lhotse_log_path_base, params.lhotse_log_path_base)
+    Links(params.new_lhotse_log_base_coredump, params.lhotse_log_base_coredump)
+    Links(params.new_lhotse_log_base_gclog, params.lhotse_log_base_gclog)
     Links(params.new_lhotse_config_path_base, params.lhotse_config_path_base)
 
   def start(self, env):

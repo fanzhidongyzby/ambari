@@ -64,7 +64,7 @@ goldeneye_conf_path_metadb = "/etc/my.cnf"
 goldeneye_log_path_web = "/usr/local/goldeneye/goldeneye-web/logs"
 goldeneye_log_path_metadb = "/var/log/mysqld.log"
 
-goldeneye_data_path_metadb = "/data/goldeneye/mysql_data"
+goldeneye_data_path_metadb = default("/configurations/goldeneye-database/goldeneye.data.dir", "/data/goldeneye/mysql_data")
 
 
 new_goldeneye_install_path = "/opt/tbds/goldeneye"

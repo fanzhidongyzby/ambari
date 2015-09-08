@@ -102,7 +102,7 @@ else:
 
 zookeeper_install_path = "/usr/hdp/2.2.0.0-2041/zookeeper"
 zookeeper_config_path = "/etc/zookeeper/conf"
-zookeeper_log_path = "/var/log/zookeeper"
+zookeeper_log_path = default("/configurations/zookeeper-env/zk_log_dir", "/var/log/zookeeper")
 zookeeper_data_path = default("/configurations/zoo.cfg/dataDir", "")
 
 new_zookeeper_install_path = "/opt/tbds/zookeeper"

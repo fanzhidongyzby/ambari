@@ -41,6 +41,7 @@ class HiveMetastore(Script):
     Links(params.new_hive_install_path, params.hive_install_path)
     Links(params.new_hive_config_path, params.hive_config_path)
     Links(params.new_hive_log_path, params.hive_log_path)
+    Links(params.new_hive_log_path_hcat, params.hive_log_path_hcat)
 
 
   def configure(self, env):

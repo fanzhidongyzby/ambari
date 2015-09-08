@@ -414,7 +414,8 @@ if security_enabled:
 
 hive_install_path = "/usr/hdp/2.2.0.0-2041/hive"
 hive_config_path = "/etc/hive"
-hive_log_path = "/var/log/hive"
+hive_log_path = default("/configurations/hive-env/hive_log_dir", "/var/log/hive")
+hive_log_path_hcat = default("/configurations/hive-env/hcat_log_dir", "/var/log/webhcat")
 
 hive_config_path_mysql = "/etc/my.cnf"
 hive_log_path_mysql = "/var/log/mysqld.log"
@@ -422,7 +423,8 @@ hive_data_path_mysql = "/data/mysql_data"
 
 new_hive_install_path = "/opt/tbds/hive"
 new_hive_config_path = "/etc/tbds/hive"
-new_hive_log_path = "/var/log/tbds/hive"
+new_hive_log_path = "/var/log/tbds/hive/server"
+new_hive_log_path_hcat = "/var/log/tbds/hive/webhcat"
 
 new_hive_config_path_mysql = "/etc/tbds/hive/mysql/my.cnf"
 new_hive_log_path_mysql = "/var/log/tbds/hive/mysql/mysqld.log"
