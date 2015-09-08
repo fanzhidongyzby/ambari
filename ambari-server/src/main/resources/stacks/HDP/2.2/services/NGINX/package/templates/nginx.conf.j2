@@ -33,7 +33,7 @@ http {
 
 upstream mysvr{
   {{dse_server_host_port}}
-  keepalive 100;
+   keepalive 2000;
 }
    include /etc/nginx/conf.d/*.conf;
 }

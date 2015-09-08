@@ -24,6 +24,8 @@ import uuid
 import shlex
 import subprocess
 import time
+import os
+import signal
 
 
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
@@ -54,7 +56,7 @@ def execute_command(cmdstring, timeout=None, shell=True):
       time.sleep(0.1)
       if timeout:
         if end_time <= datetime.datetime.now():
-          sub.terminate()
+          os.killpg(sub.pid, signal.SIGTERM)
           return 1,"Timeout:%s"%cmdstring
         
     stdout,stderr = sub.communicate()
