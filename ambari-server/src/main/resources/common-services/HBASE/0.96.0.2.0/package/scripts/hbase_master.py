@@ -61,6 +61,8 @@ class HbaseMaster(Script):
     hbase_service( 'master',
       action = 'start'
     )
+
+    Links(params.new_hbase_log_path, params.hbase_log_path)
     
   def stop(self, env, rolling_restart=False):
     import params
