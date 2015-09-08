@@ -37,7 +37,6 @@ class WebHCatServer(Script):
     import params
     Links(params.new_hive_install_path, params.hive_install_path)
     Links(params.new_hive_config_path, params.hive_config_path)
-    Links(params.new_hive_log_path, params.hive_log_path)
 
 
   def configure(self, env):
@@ -52,8 +51,10 @@ class WebHCatServer(Script):
     self.configure(env) # FOR SECURITY
     webhcat_service(action = 'start')
 
+    Links(params.new_hive_log_path, params.hive_log_path)
 
-  def stop(self, env, rolling_restart=False):
+
+def stop(self, env, rolling_restart=False):
     import params
     env.set_params(params)
 

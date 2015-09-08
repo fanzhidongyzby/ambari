@@ -40,8 +40,6 @@ class HiveMetastore(Script):
     import params
     Links(params.new_hive_install_path, params.hive_install_path)
     Links(params.new_hive_config_path, params.hive_config_path)
-    Links(params.new_hive_log_path, params.hive_log_path)
-    Links(params.new_hive_log_path_hcat, params.hive_log_path_hcat)
 
 
   def configure(self, env):
@@ -59,8 +57,11 @@ class HiveMetastore(Script):
     self.configure(env)  # FOR SECURITY
     hive_service('metastore', action = 'start')
 
+    Links(params.new_hive_log_path_hcat, params.hive_log_path_hcat)
+    Links(params.new_hive_log_path, params.hive_log_path)
 
-  def stop(self, env, rolling_restart = False):
+
+def stop(self, env, rolling_restart = False):
     import params
 
     env.set_params(params)

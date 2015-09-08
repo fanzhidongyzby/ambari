@@ -66,7 +66,6 @@ class HiveServer(Script):
     import params
     Links(params.new_hive_install_path, params.hive_install_path)
     Links(params.new_hive_config_path, params.hive_config_path)
-    Links(params.new_hive_log_path, params.hive_log_path)
 
   def configure(self, env):
     import params
@@ -90,9 +89,11 @@ class HiveServer(Script):
       rolling_restart=rolling_restart )
     
     self._createHiveDatabase(env)
-      
-      
-  def _createHiveDatabase(self,env):
+
+    Links(params.new_hive_log_path, params.hive_log_path)
+
+
+def _createHiveDatabase(self,env):
     import params
     env.set_params(params)
     host_name = params.hive_server_host
