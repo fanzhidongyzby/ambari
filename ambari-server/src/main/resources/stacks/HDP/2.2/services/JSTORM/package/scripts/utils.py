@@ -76,7 +76,7 @@ class utils:
   def check_port_stop(self, port, timeout=None):
     if timeout:
       end_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
-    cmd = "netstat -anp | grep {0} | wc -l".format(port)
+    cmd = "netstat -anp | grep ':{0}\s' | wc -l".format(port)
     result = self.exe(cmd)
     while result != "0":
       time.sleep(0.5)
