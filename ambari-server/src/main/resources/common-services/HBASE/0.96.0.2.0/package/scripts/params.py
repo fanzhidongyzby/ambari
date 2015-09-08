@@ -247,9 +247,9 @@ driver_curl_target = format("{java_share_dir}/{jdbc_jar_name}")
 
 hbase_install_path = "/usr/hdp/2.2.0.0-2041/hbase"
 hbase_config_path = "/etc/hbase/conf"
-hbase_log_path = "/var/log/hbase"
+hbase_log_path = default("/configurations/hbase-env/hbase_log_dir", "/var/log/hbase")
 
 new_hbase_install_path = "/opt/tbds/hbase"
 new_hbase_config_path = "/etc/tbds/hbase"
-new_hbase_log_path = default("/configurations/hbase-env/hbase_log_dir", "/var/log/tbds/hbase")
+new_hbase_log_path = "/var/log/tbds/hbase"
 
