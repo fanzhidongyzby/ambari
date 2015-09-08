@@ -68,7 +68,7 @@ class HbaseRegionServer(Script):
 
     Links(params.new_hbase_log_path, params.hbase_log_path)
 
-def stop(self, env, rolling_restart=False):
+  def stop(self, env, rolling_restart=False):
     import params
     env.set_params(params)
 

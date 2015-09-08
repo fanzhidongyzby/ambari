@@ -93,7 +93,7 @@ class HiveServer(Script):
     Links(params.new_hive_log_path, params.hive_log_path)
 
 
-def _createHiveDatabase(self,env):
+  def _createHiveDatabase(self,env):
     import params
     env.set_params(params)
     host_name = params.hive_server_host

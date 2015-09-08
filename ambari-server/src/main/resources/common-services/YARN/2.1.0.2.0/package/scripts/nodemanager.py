@@ -66,7 +66,7 @@ class Nodemanager(Script):
     Links(params.new_yarn_nodemanager_log_dirs_path, params.yarn_nodemanager_log_dirs_paths)
     Links(params.new_yarn_log_path, params.yarn_log_path)
 
-def post_rolling_restart(self, env):
+  def post_rolling_restart(self, env):
     Logger.info("Executing NodeManager Rolling Upgrade post-restart")
     import params
     env.set_params(params)

@@ -61,7 +61,7 @@ class HiveMetastore(Script):
     Links(params.new_hive_log_path, params.hive_log_path)
 
 
-def stop(self, env, rolling_restart = False):
+  def stop(self, env, rolling_restart = False):
     import params
 
     env.set_params(params)
