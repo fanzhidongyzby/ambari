@@ -38,7 +38,6 @@ class DataNode(Script):
 
     Links(params.new_hdfs_install_path, params.hdfs_install_path)
     Links(params.new_hdfs_config_path, params.hdfs_config_path)
-    Links(params.new_hdfs_log_path, params.hdfs_log_path)
 
 
   def pre_rolling_restart(self, env):
@@ -66,8 +65,9 @@ class DataNode(Script):
     self.configure(env)
     datanode(action="start")
     Links(params.new_hdfs_datanode_data_path, params.hdfs_datanode_data_paths)
+    Links(params.new_hdfs_log_path, params.hdfs_log_path)
 
-  def stop(self, env, rolling_restart=False):
+def stop(self, env, rolling_restart=False):
     import params
 
     env.set_params(params)
