@@ -25,3 +25,4 @@ velocity.log*
 ambari-metrics/ambari-metrics-host-monitoring/src/main/python/psutil/build/
 *.rpm
 *.versionsBackup
+sync_svn.sh
