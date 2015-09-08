@@ -192,7 +192,7 @@ metrics_config_path_monitor = "/etc/ambari-metrics-monitor/conf"
 metrics_log_path_collector = default("/configurations/ams-env/metrics_collector_log_dir", "/var/log/ambari-metrics-collector")
 metrics_log_path_monitor = default("/configurations/ams-env/metrics_monitor_log_dir", "/var/log/ambari-metrics-monitor")
 
-metrics_data_path_collector_hbase = default("/configurations/ams-hbase-site/hbase.rootdir", "/var/lib/ambari-metrics-collector/hbase")
+metrics_data_path_collector_hbase = default("/configurations/ams-hbase-site/hbase.rootdir", "file:///var/lib/ambari-metrics-collector/hbase").split("//")[-1]
 metrics_data_path_collector_checkpoint = default("/configurations/ams-site/timeline.metrics.aggregator.checkpoint.dir", "/var/lib/ambari-metrics-collector/checkpoint")
 metrics_data_path_collector_hbasetmp = default("/configurations/ams-hbase-site/hbase.tmp.dir", "/var/lib/ambari-metrics-collector/hbase-tmp")
 
