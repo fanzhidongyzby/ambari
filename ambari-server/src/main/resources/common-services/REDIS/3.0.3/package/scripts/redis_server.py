@@ -22,12 +22,20 @@ import os
 
 class RedisServer(Script):
   def install(self, env):
+    import params
     self.install_packages(env)
     self.configure(env)
     #Workaround to fix "couldn't open session when su redis"
     code, out = shell.call(["rm","/etc/security/limits.d/95-redis.conf"])
     if code:
         Logger.warning("Failed to remove 95-redis.conf")
+
+    File(params.redis_log_file,
+         owner=params.redis_user,
+         group='hadoop',
+         mode=0644,
+         content=""
+    )
 
   def configure(self, env):
     import params

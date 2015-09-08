@@ -24,13 +24,16 @@ class ServiceCheck(Script):
     import params
     env.set_params(params)
 
+    """
     testRedisCmd = format('{params.redis_bin_dir}/redis-cli -p {params.redis_port} set foo bar')
+
     Execute(testRedisCmd,
             logoutput=True,
             try_sleep=3,
             tries=5,
             user=params.smoke_user
     )
+    """
 
 if __name__ == "__main__":
     ServiceCheck().execute()
