@@ -36,7 +36,9 @@ class AmsCollector(Script):
     Links(params.new_metrics_install_path_collector_bin, params.metrics_install_path_collector_bin)
     Links(params.new_metrics_install_path_collector_lib, params.metrics_install_path_collector_lib)
     Links(params.new_metrics_config_path_collector, params.metrics_config_path_collector)
-    Links(params.new_metrics_data_path_collector, params.metrics_data_path_collector)
+    Links(params.new_metrics_data_path_collector_hbase, params.metrics_data_path_collector_hbase)
+    Links(params.new_metrics_data_path_collector_checkpoint, params.metrics_data_path_collector_checkpoint)
+    Links(params.new_metrics_data_path_collector_hbasetmp, params.metrics_data_path_collector_hbasetmp)
 
 
   def configure(self, env):

@@ -192,7 +192,9 @@ metrics_config_path_monitor = "/etc/ambari-metrics-monitor/conf"
 metrics_log_path_collector = default("/configurations/ams-env/metrics_collector_log_dir", "/var/log/ambari-metrics-collector")
 metrics_log_path_monitor = default("/configurations/ams-env/metrics_monitor_log_dir", "/var/log/ambari-metrics-monitor")
 
-metrics_data_path_collector = "/data/ambari-metrics-collector/hbase"
+metrics_data_path_collector_hbase = default("/configurations/ams-hbase-site/hbase.rootdir", "/var/lib/ambari-metrics-collector/hbase")
+metrics_data_path_collector_checkpoint = default("/configurations/ams-site/timeline.metrics.aggregator.checkpoint.dir", "/var/lib/ambari-metrics-collector/checkpoint")
+metrics_data_path_collector_hbasetmp = default("/configurations/ams-hbase-site/hbase.tmp.dir", "/var/lib/ambari-metrics-collector/hbase-tmp")
 
 new_metrics_install_path_collector_bin = "/opt/tbds/metrics/collector/ambari-metrics-collector"
 new_metrics_install_path_collector_lib = "/opt/tbds/metrics/collector/lib"
@@ -206,7 +208,8 @@ new_metrics_config_path_monitor = "/etc/tbds/metrics/monitor"
 new_metrics_log_path_collector = "/var/log/tbds/metrics/collector"
 new_metrics_log_path_monitor = "/var/log/tbds/metrics/monitor"
 
-new_metrics_data_path_collector = "/data/tbds/metrics"
-
+new_metrics_data_path_collector_hbase = "/data/tbds/metrics/hbase"
+new_metrics_data_path_collector_checkpoint = "/data/tbds/metrics/checkpoint"
+new_metrics_data_path_collector_hbasetmp = "/data/tbds/metrics/hbase-tmp"
 
 
