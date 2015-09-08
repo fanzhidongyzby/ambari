@@ -48,7 +48,6 @@ class ZookeeperServer(Script):
     import params
     Links(params.new_zookeeper_install_path, params.zookeeper_install_path)
     Links(params.new_zookeeper_config_path, params.zookeeper_config_path)
-    Links(params.new_zookeeper_log_path, params.zookeeper_log_path)
 
   def configure(self, env):
     import params
@@ -70,6 +69,7 @@ class ZookeeperServer(Script):
     zookeeper_service(action = 'start')
 
     Links(params.new_zookeeper_data_path, params.zookeeper_data_path)
+    Links(params.new_zookeeper_log_path, params.zookeeper_log_path)
 
 
   def post_rolling_restart(self, env):
