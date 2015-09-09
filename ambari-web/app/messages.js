@@ -1993,7 +1993,7 @@ Em.I18n.translations = {
 
   'dashboard.services.yarn.summary':'{1}个节点中的{0}个为活跃',
   'dashboard.services.yarn.resourceManager':'资源管理器',
-  'dashboard.services.yarn.nodeManagers':'节点管理器列表',
+  'dashboard.services.yarn.nodeManagers':'NodeManager',
   'dashboard.services.yarn.nodeManager':'节点管理器',
   'dashboard.services.yarn.clients':'YARN客户端列表',
   'dashboard.services.yarn.client':'YARN客户端',

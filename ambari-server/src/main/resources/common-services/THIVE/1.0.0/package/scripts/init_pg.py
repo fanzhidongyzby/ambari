@@ -37,6 +37,9 @@ class init_pg(Script):
     print 'step3: tdw_meta_global_db.sql'
     cmd = format("psql -h {pg_server_hosts} -p {pg_server_port} -U postgres -f {tdw_meta_global_db_script}")
     self.run(cmd)
+    print 'init db info'
+    cmd = format("psql -h {pg_server_hosts} -p {pg_server_port} -U postgres global -c \"insert into seg_split values('jdbc:postgresql://{pg_server_hosts}:{pg_server_port}/seg_1','[0,10000)')\"")
+    self.run(cmd)
 
     print 'step4: tdw_meta_query_info_db.sql'
     cmd = format("psql -h {pg_server_hosts} -p {pg_server_port} -U postgres -f {tdw_meta_query_info_db_script}")
