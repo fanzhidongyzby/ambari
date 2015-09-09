@@ -45,9 +45,9 @@ expect {
 	"]#*" {
 		send "cd ${tmp_path}\r"
 		expect "#*"
-		send "rm -f `basename ${tarFile}`\r"
-		expect "#*"
 		send "tar -xzvf `basename ${tarFile}`\r"
+		expect "#*"
+		send "rm -f `basename ${tarFile}`\r"
 		expect "#*"
 		send "chmod 777 ./${agent_env_script}\r"
 		expect "#*"
