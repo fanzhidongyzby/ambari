@@ -80,3 +80,16 @@ supervisor_slots_ports = format(config['configurations']['jstorm-yaml']['supervi
 
 #script
 check_status_script = "{0}/checkStatus.sh".format(tmp_dir)
+
+
+# refractor service path
+
+jstorm_install_path = "/usr/local/jstorm"
+jstorm_config_path = "/usr/local/jstorm/conf"
+jstorm_data_path = default("/configurations/jstorm-yaml/jstorm.local.dir", "/data/jstorm/c001")
+jstorm_log_path = "/usr/local/jstorm/logs"
+
+new_jstorm_install_path = "/opt/tbds/jstorm"
+new_jstorm_config_path = "/etc/tbds/jstorm"
+new_jstorm_data_path = "/data/tbds/jstorm/data"
+new_jstorm_log_path = "/var/log/tbds/jstorm/server"

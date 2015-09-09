@@ -32,6 +32,10 @@ class Nimbus(Script):
     env.set_params(params)
     self.install_packages(env)
 
+    Links(params.new_jstorm_install_path, params.jstorm_install_path)
+    Links(params.new_jstorm_config_path, params.jstorm_config_path)
+    Links(params.new_jstorm_log_path, params.jstorm_log_path)
+
   def configure(self, env):
     import params
     env.set_params(params)
@@ -51,7 +55,10 @@ class Nimbus(Script):
     cmd = "su {0} -c '{1}/start-nimbus.sh'".format(params.storm_user, params.bin_dir)
     Logger.info("start nimbus")
     utils().exe(cmd)
-    utils().check_process(status_params.proc_nimbus_name) 
+    utils().check_process(status_params.proc_nimbus_name)
+
+    Links(params.new_jstorm_data_path, params.jstorm_data_path)
+
 
   def stop(self, env, rolling_restart=False):
     import params
