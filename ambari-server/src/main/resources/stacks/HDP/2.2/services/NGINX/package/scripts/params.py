@@ -41,7 +41,7 @@ nginx_status_key = "running"
 
 nginx_server_host = socket.gethostbyname(socket.gethostname())
 nginx_server_port = default('/configurations/nginx-config/nginx.port',8086)
-nginx_log_path = default('/configurations/nginx-config/nginx.log.path','/data/tbds/nginx/log/')
+nginx_log_path = default('/configurations/nginx-config/nginx.log.path','/data/nginx/log/')
 nginx_errorlog_level = default('/configurations/nginx-config/nginx.errorlog.level','crit')
 
 nginx_log_accesslog = format("{nginx_log_path}/access.log")
@@ -52,3 +52,13 @@ nginx_log_errorlog = format("{nginx_log_path}/error.log")
 dse_server_hosts = default("/clusterHostInfo/dse_server_hosts", ["127.0.0.1"])
 dse_server_port = default('/configurations/dse-env/dse.server.port', 54301)
 dse_server_host_port = utils().bind_hosts_port(dse_server_hosts,dse_server_port,';','server')
+
+# refractor service path
+
+nginx_install_path = "/var/cache/nginx"
+nginx_config_path = "/etc/nginx"
+nginx_log_path = default("/configurations/nginx-config/nginx.log.path", "/data/nginx/log")
+
+new_nginx_install_path = "/opt/tbds/nginx"
+new_nginx_config_path = "/etc/tbds/nginx"
+new_nginx_log_path = "/var/log/tbds/nginx/server"

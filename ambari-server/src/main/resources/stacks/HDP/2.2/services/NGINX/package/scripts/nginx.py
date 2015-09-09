@@ -32,6 +32,11 @@ class nginx(Script):
         Logger.info("installed nginx")
         self.install_packages(env)
 
+        import params
+        Links(params.new_nginx_install_path, params.nginx_install_path)
+        Links(params.new_nginx_config_path, params.nginx_config_path)
+        Links(params.new_nginx_log_path, params.nginx_log_path)
+
 
     def configure(self, env):
         import params
@@ -63,6 +68,8 @@ class nginx(Script):
 
         Logger.info("start nginx")
         utils().exe(params.nginx_start_command)
+
+        Links(params.new_nginx_log_path, params.nginx_log_path)
 
     def stop(self, env):
         import os
