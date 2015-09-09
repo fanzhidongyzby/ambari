@@ -32,6 +32,10 @@ class KafkaBroker(Script):
     self.install_packages(env)
     self.configure(env)
 
+    import params
+    Links(params.new_kafka_install_path, params.kafka_install_path)
+    Links(params.new_kafka_config_path, params.kafka_config_path)
+
   def configure(self, env):
     import params
     env.set_params(params)
@@ -52,6 +56,9 @@ class KafkaBroker(Script):
             user=params.kafka_user,
             not_if=no_op_test
     )
+
+    Links(params.new_kafka_data_path, params.kafka_data_path)
+    Links(params.new_kafka_log_path, params.kafka_log_path)
 
   def stop(self, env, rolling_restart=False):
     import params
