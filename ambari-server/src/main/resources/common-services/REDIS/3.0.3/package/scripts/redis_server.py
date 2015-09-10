@@ -37,9 +37,9 @@ class RedisServer(Script):
          content=""
     )
 
-    Links(params.new_redis_install_path, params.new_redis_install_path)
-    Links(params.new_redis_config_path, params.new_redis_config_path)
-    Links(params.new_redis_data_path, params.new_redis_data_path)
+    Links(params.new_redis_install_path, params.redis_install_path)
+    Links(params.new_redis_config_path, params.redis_config_path)
+    Links(params.new_redis_data_path, params.redis_data_path)
 
   def configure(self, env):
     import params
