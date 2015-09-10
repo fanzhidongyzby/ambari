@@ -1076,18 +1076,20 @@ public class HostImpl implements Host {
             }
         }else{
             //Added by junz: keep the maximum mountpoint only
-            DiskInfo maxDiskInfo = r.getDisksInfo().get(0);
-            for(DiskInfo diskInfo : r.getDisksInfo()){
-                if(Long.valueOf(diskInfo.getSize()) > Long.valueOf(maxDiskInfo.getSize())){
-                    maxDiskInfo = diskInfo;
+            if(r.getDisksInfo().size() > 0) {
+                DiskInfo maxDiskInfo = r.getDisksInfo().get(0);
+                for (DiskInfo diskInfo : r.getDisksInfo()) {
+                    if (Long.valueOf(diskInfo.getSize()) > Long.valueOf(maxDiskInfo.getSize())) {
+                        maxDiskInfo = diskInfo;
+                    }
                 }
-            }
 
-            Iterator<DiskInfo> itr = r.getDisksInfo().iterator();
-            while(itr.hasNext()){
-                DiskInfo disk = itr.next();
-                if(!maxDiskInfo.getMountPoint().equals(disk.getMountPoint())){
-                    itr.remove();
+                Iterator<DiskInfo> itr = r.getDisksInfo().iterator();
+                while (itr.hasNext()) {
+                    DiskInfo disk = itr.next();
+                    if (!maxDiskInfo.getMountPoint().equals(disk.getMountPoint())) {
+                        itr.remove();
+                    }
                 }
             }
         }
