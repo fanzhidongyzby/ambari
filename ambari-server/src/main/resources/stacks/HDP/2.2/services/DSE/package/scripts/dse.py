@@ -32,6 +32,9 @@ class dse(Script):
         excludePackage = ['mysql-server*']
 
         self.install_packages(env,excludePackage)
+        import params
+        Links(params.new_dse_config_path, params.dse_config_path)
+        Links(params.new_dse_log_path, params.dse_log_path)
 
 
     def configure(self, env):

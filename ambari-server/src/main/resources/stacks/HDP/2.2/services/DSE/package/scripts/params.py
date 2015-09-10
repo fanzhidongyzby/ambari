@@ -64,3 +64,12 @@ mysql_init_command = "sudo bash -x {0} {1} {2} {3} {4} {5}".format(startmysql_sc
 kafka_hosts = default("/clusterHostInfo/kafka_broker_hosts", ["127.0.0.1"])
 kafka_port = default('/configurations/kafka-broker/port', 6667)
 kafka_host_port = utils().bind_hosts_port(kafka_hosts,kafka_port,',','')
+
+
+# refractor service path
+
+dse_config_path = "/data/tbds/dse/DSE-service/conf"
+dse_log_path = "/data/tbds/dse/DSE-service/log"
+
+new_dse_config_path = "/etc/tbds/dse"
+new_dse_log_path = "/var/log/tbds/dse"

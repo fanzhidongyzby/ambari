@@ -42,7 +42,7 @@ class FlumeHandler(Script):
     self.install_packages(env)
     env.set_params(params)
 
-    Links(params.flume_install_path, params.new_flume_install_path)
+    Links(params.new_flume_install_path, params.flume_install_path)
 
 
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
@@ -52,7 +52,7 @@ class FlumeHandler(Script):
     self.configure(env)
 
     import params
-    Links(params.flume_install_path, params.new_flume_install_path)
+    Links(params.new_flume_install_path, params.flume_install_path)
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
   def start(self, env, rolling_restart=False):
@@ -61,8 +61,8 @@ class FlumeHandler(Script):
     self.configure(env)
     flume(action='start')
 
-    Links(params.flume_config_path, params.new_flume_config_path)
-    Links(params.flume_log_path, params.new_flume_log_path)
+    Links(params.new_flume_config_path, params.flume_config_path)
+    Links(params.new_flume_log_path, params.flume_log_path)
 
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
   def start(self, env):
@@ -72,8 +72,8 @@ class FlumeHandler(Script):
     Service(service_mapping.flume_win_service_name, action="start")
     # flume(action='start')
 
-    Links(params.flume_config_path, params.new_flume_config_path)
-    Links(params.flume_log_path, params.new_flume_log_path)
+    Links(params.new_flume_config_path, params.flume_config_path)
+    Links(params.new_flume_log_path, params.flume_log_path)
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
   def stop(self, env, rolling_restart=False):

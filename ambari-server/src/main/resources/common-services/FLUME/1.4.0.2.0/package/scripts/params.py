@@ -99,7 +99,7 @@ flume_install_path = "/usr/hdp/2.2.0.0-2041/flume"
 flume_config_path = default("/configurations/flume-env/flume_conf_dir", "/etc/flume/conf")
 flume_log_path = default("/configurations/flume-env/flume_log_dir", "/var/log/flume")
 
-new_flume_install_path = "/opt/tbds/flume/flume"
+new_flume_install_path = "/opt/tbds/flume"
 new_flume_config_path = "/etc/tbds/flume"
 new_flume_log_path = "/var/log/tbds/flume"
 
