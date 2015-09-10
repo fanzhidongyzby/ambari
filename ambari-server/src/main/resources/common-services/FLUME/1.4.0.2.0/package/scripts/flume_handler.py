@@ -42,11 +42,17 @@ class FlumeHandler(Script):
     self.install_packages(env)
     env.set_params(params)
 
+    Links(params.flume_install_path, params.new_flume_install_path)
+
+
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
   def install(self, env):
     if not check_windows_service_exists(service_mapping.flume_win_service_name):
       self.install_packages(env)
     self.configure(env)
+
+    import params
+    Links(params.flume_install_path, params.new_flume_install_path)
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
   def start(self, env, rolling_restart=False):
@@ -55,6 +61,9 @@ class FlumeHandler(Script):
     self.configure(env)
     flume(action='start')
 
+    Links(params.flume_config_path, params.new_flume_config_path)
+    Links(params.flume_log_path, params.new_flume_log_path)
+
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
   def start(self, env):
     import params
@@ -62,6 +71,9 @@ class FlumeHandler(Script):
     self.configure(env)
     Service(service_mapping.flume_win_service_name, action="start")
     # flume(action='start')
+
+    Links(params.flume_config_path, params.new_flume_config_path)
+    Links(params.flume_log_path, params.new_flume_log_path)
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
   def stop(self, env, rolling_restart=False):
