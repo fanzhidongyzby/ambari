@@ -2,6 +2,7 @@
 echo "----------   CLEAN TBDS SERVER  ----------"
 echo "stop tbds server ..."
 tbds-server stop
+ambari-agent stop
 
 echo "stop postgresql ..."
 service postgresql stop

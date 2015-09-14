@@ -102,8 +102,8 @@ class Toolkit():
     Toolkit.yum_remove(package)
     paths = ["/opt", "/etc", "/data", "/var/log"]
     for path in paths:
-      path += "/" + service
-      Toolkit.remove_links_dir(service)
+      path += "/tbds/" + service
+      Toolkit.remove_links_dir(path)
 
 if __name__ == '__main__':
   # export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.6/site-packages
