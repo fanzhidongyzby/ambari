@@ -148,7 +148,7 @@ def stop(args):
 
   if status:
     try:
-      os.killpg(os.getpgid(pid), signal.SIGKILL)
+      os.kill(pid, signal.SIGKILL)
     except OSError, e:
       print_info_msg("Unable to stop TBDS Server - " + str(e))
       return
