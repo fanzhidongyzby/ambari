@@ -36,7 +36,7 @@ default_conf_path = "/etc/nginx/conf.d/"
 
 nginx_service = "nginx"
 
-nginx_status_key = "running"
+nginx_status_key = "pid"
 
 
 nginx_server_host = socket.gethostbyname(socket.gethostname())
