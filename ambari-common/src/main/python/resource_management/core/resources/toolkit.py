@@ -23,6 +23,9 @@ Ambari Agent
 __all__ = ["Toolkit"]
 
 import commands
+import os
+import signal
+import re
 from resource_management.core.exceptions import Fail
 from resource_management.core.logger import Logger
 from resource_management.core.resources import Package
@@ -102,8 +105,23 @@ class Toolkit():
     Toolkit.yum_remove(package)
     paths = ["/opt", "/etc", "/data", "/var/log"]
     for path in paths:
+<<<<<<< HEAD
       path += "/tbds/" + service
       Toolkit.remove_links_dir(path)
+=======
+      path += "/" + service
+      Toolkit.remove_links_dir(service)
+      
+  # kill all the child processes of the specified pid
+  # return : None 
+  @staticmethod    
+  def kill_child_processes(pid):
+     strPids= os.popen("pstree -p "+pid).read()
+     patt = re.compile(r"\((.*?)\)", re.I|re.X)
+     pids = patt.findall(strPids)
+     for childPid in pids:
+       os.kill(int(childPid),signal.SIGTERM)
+>>>>>>> 6905b798396861d02989cdba5db4145f09bf94a1
 
 if __name__ == '__main__':
   # export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.6/site-packages

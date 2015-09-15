@@ -56,7 +56,7 @@ mysql_user = default('/configurations/db-properties/dse.mysql.user', 'ambari')
 mysql_password = default('/configurations/db-properties/dse.mysql.password', 123456)
 mysql_data_dir = default('/configurations/db-properties/mysql.data.dir', '/data/mysql_data')
 mysql_service = "mysqld"
-mysql_keyword = "running"
+mysql_keyword = "pid"
 
 mysql_init_command = "sudo bash -x {0} {1} {2} {3} {4} {5}".format(startmysql_script,mysql_host,mysql_data_dir,mysql_user,mysql_password,mysql_port)
 
