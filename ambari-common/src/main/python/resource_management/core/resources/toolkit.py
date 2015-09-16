@@ -105,13 +105,9 @@ class Toolkit():
     Toolkit.yum_remove(package)
     paths = ["/opt", "/etc", "/data", "/var/log"]
     for path in paths:
-<<<<<<< HEAD
       path += "/tbds/" + service
       Toolkit.remove_links_dir(path)
-=======
-      path += "/" + service
-      Toolkit.remove_links_dir(service)
-      
+
   # kill all the child processes of the specified pid
   # return : None 
   @staticmethod    
@@ -121,7 +117,6 @@ class Toolkit():
      pids = patt.findall(strPids)
      for childPid in pids:
        os.kill(int(childPid),signal.SIGTERM)
->>>>>>> 6905b798396861d02989cdba5db4145f09bf94a1
 
 if __name__ == '__main__':
   # export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.6/site-packages
