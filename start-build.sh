@@ -3,6 +3,14 @@ BUILD_DIR=`pwd`
 
 export AMBARI_BUILD_HOME=/data/home/docker_common/jerryjzhang/ambari-build
 
+rm ambari-web/node_modules
+rm ambari-admin/src/main/resources/ui/admin-web/node_modules
+rm ambari-admin/src/main/resources/ui/admin-web/node
+
+ln -s $AMBARI_BUILD_HOME/ambari-web/node_modules ambari-web/node_modules
+ln -s $AMBARI_BUILD_HOME/ambari-admin/node_modules ambari-admin/src/main/resources/ui/admin-web/node_modules
+ln -s $AMBARI_BUILD_HOME/ambari-admin/node ambari-admin/src/main/resources/ui/admin-web/node
+
 echo "Building $BUILD_DIR"
 
 docker run -it --rm -v $BUILD_DIR:/ambari \
@@ -13,3 +21,4 @@ docker run -it --rm -v $BUILD_DIR:/ambari \
     -w /ambari \
     --entrypoint /bin/bash \
     docker.oa.com:8080/ambari/build:1.7.0
+

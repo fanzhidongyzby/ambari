@@ -1,6 +1,7 @@
 #!/bin/sh
 
 distVersion=2.4.0.0
+shareDir=~/jerryjzhang/ambari-build
 
 mvn clean
 
@@ -18,14 +19,10 @@ cp -r ambari-agent/src/main/python/ambari_agent/  ambari-agent/target/ambari-age
 cp -r ambari-client/python-client/src/main/python/ambari_client ambari-client/python-client/target/python-client-$distVersion/
 cp -r ambari-shell/ambari-python-shell/src/main/python/ambari_shell ambari-shell/ambari-python-shell/target/ambari-python-shell-$distVersion/
 
-ln -s ~/jerryjzhang/ambari-build/ambari-web/node_modules ambari-web/node_modules
-ln -s ~/jerryjzhang/ambari-build/ambari-admin/node_modules ambari-admin/src/main/resources/ui/admin-web/node_modules
-ln -s ~/jerryjzhang/ambari-build/ambari-admin/node ambari-admin/src/main/resources/ui/admin-web/node
-ln -s ~/jerryjzhang/ambari-build/ambari-admin/target ambari-admin/target
-
 mvn versions:set -DnewVersion=$distVersion
 pushd ambari-metrics
 mvn versions:set -DnewVersion=$distVersion
 popd
 mvn install package rpm:rpm -Dfindbugs.skip -DskipTests -Drat.skip -Dmaven.test.skip -DskipAssembly -DnewVersion=$distVersion -Dpython.ver="python >= 2.6" -X
 # mvn install -pl ambari-agent package rpm:rpm -Dfindbugs.skip -DskipTests -Drat.skip -Dmaven.test.skip -DskipAssembly -DnewVersion=$distVersion -Dpython.ver="python >= 2.6" -X
+

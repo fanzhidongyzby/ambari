@@ -102,7 +102,7 @@
                 <exec dir="${basedir}" executable="${executable.rmdir}">
                   <arg value="${args.rm.clean}"/>
                   <arg value="public"/>
-                  <arg value="node_modules"/>
+                  <arg value="target"/>
                 </exec>
                 <exec dir="${basedir}" executable="${executable.mkdir}">
                   <arg value="${args.mkdir.clean}"/>

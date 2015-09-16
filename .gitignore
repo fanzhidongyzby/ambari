@@ -11,7 +11,7 @@ target
 /ambari-server/pass.txt
 /ambari-web/npm-debug.log
 /ambari-web/public/
-/ambari-web/node_modules/
+ambari-web/node_modules
 *.pyc
 *.py~
 *.iml
