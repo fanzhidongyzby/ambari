@@ -19,6 +19,12 @@ STACKS_FOLDER_OLD=/var/lib/ambari-agent/cache/stacks_$(date '+%d_%m_%y_%H_%M').o
 COMMON_SERVICES_FOLDER="/var/lib/ambari-agent/cache/common-services"
 COMMON_SERVICES_FOLDER_OLD=/var/lib/ambari-agent/cache/common-services_$(date '+%d_%m_%y_%H_%M').old
 
+PYTHON_LIB=$(ls /usr/lib/python*.* -d 2>/dev/null | xargs | awk '{print $1}')
+if [[ -d "$PYTHON_LIB" && ! "$PYTHON_LIB" == "/usr/lib/python2.6" ]];
+then
+    ln -s $PYTHON_LIB /usr/lib/python2.6
+fi
+
 if [ -d "/etc/ambari-agent/conf.save" ]
 then
     mv /etc/ambari-agent/conf.save /etc/ambari-agent/conf_$(date '+%d_%m_%y_%H_%M').save

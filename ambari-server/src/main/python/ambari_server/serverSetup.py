@@ -975,6 +975,10 @@ def configureRepoURL(repoURL):
     os.system(cmd)
     cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.7\.url", jdkURL + "\/jdk-7u67-linux-x64\.tar\.gz")
     os.system(cmd)
+    cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.8\.jcpol-url", jdkURL + "\/jce_policy-8\.zip")
+    os.system(cmd)
+    cmd = 'sed -i "s/{0}=.*/{0}={1}/g" /etc/tbds-server/conf/tbds.properties'.format("jdk1\.8\.url", jdkURL + "\/jdk-8u51-linux-x64\.tar\.gz")
+    os.system(cmd)
 
     cmd = 'sed -i "s/<baseurl>.*<\/baseurl>/<baseurl>{0}<\/baseurl>/g" {1}'.format(repoURL, "/var/lib/tbds-server/resources/stacks/HDP/2.2/repos/repoinfo.xml")
     os.system(cmd)

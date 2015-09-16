@@ -19,6 +19,12 @@ STACKS_FOLDER_OLD=/var/lib/tbds-server/resources/stacks_$(date '+%d_%m_%y_%H_%M'
 COMMON_SERVICES_FOLDER="/var/lib/tbds-server/resources/common-services"
 COMMON_SERVICES_FOLDER_OLD=/var/lib/tbds-server/resources/common-services_$(date '+%d_%m_%y_%H_%M').old
 
+PYTHON_LIB=$(ls /usr/lib/python*.* -d 2>/dev/null | xargs | awk '{print $1}')
+if [[ -d "$PYTHON_LIB" && ! "$PYTHON_LIB" == "/usr/lib/python2.6" ]];
+then
+    ln -s $PYTHON_LIB /usr/lib/python2.6
+fi
+
 if [ -d "/etc/tbds-server/conf.save" ]
 then
     mv /etc/tbds-server/conf.save /etc/tbds-server/conf_$(date '+%d_%m_%y_%H_%M').save
