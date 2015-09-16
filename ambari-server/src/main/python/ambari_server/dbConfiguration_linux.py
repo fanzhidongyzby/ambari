@@ -527,7 +527,7 @@ class PGConfig(LinuxDBMSConfig):
   def _get_postgre_status():
     retcode, out, err = run_os_command(PGConfig.PG_ST_CMD)
     try:
-      pg_status = re.search('(stopped|running)', out, re.IGNORECASE).group(0).lower()
+      pg_status = re.search('(stopped|running|active)', out, re.IGNORECASE).group(0).lower()
     except AttributeError:
       pg_status = None
     return pg_status, retcode, out, err

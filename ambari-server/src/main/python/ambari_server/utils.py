@@ -238,6 +238,8 @@ def get_postgre_running_status(OS_FAMILY):
   """Return postgre running status indicator"""
   if OS_FAMILY == OSConst.UBUNTU_FAMILY:
     return os.path.join(get_ubuntu_pg_version(), "main")
+  elif OSCheck.is_redhat7():
+    return "active"
   else:
     return PG_STATUS_RUNNING_DEFAULT
 
