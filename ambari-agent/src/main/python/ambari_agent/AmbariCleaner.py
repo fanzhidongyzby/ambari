@@ -13,7 +13,7 @@ class AmbariCleaner:
   directory_key = "directory"
 
   def __init__(self):
-    self.logfile = open("/tmp/clean_agent.log", "w")
+    self.logfile = open("/tmp/clean_agent.log", "a")
     self.onServer = self.isServerHost()
     self.dirs = self.readServiceInfo(self.directory_key)
     self.repos = self.readServiceInfo(self.repo_name_key)
