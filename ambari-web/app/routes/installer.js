@@ -36,7 +36,7 @@ module.exports = Em.Route.extend(App.RouterRedirections, {
         App.router.get('installerController').checkServerClientVersion().done(function () {
 
           var name = 'Cluster Install Wizard';
-          $('title').text('Ambari - ' + name);
+          $('title').text('TBDS - ' + name);
 
           App.router.get('mainViewsController').loadAmbariViews();
           if (App.isAccessible('ADMIN')) {
