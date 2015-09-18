@@ -26,6 +26,9 @@ import commands
 import os
 import signal
 import re
+import datetime
+import time
+import subprocess
 from resource_management.core.exceptions import Fail
 from resource_management.core.logger import Logger
 from resource_management.core.resources import Package
@@ -112,11 +115,39 @@ class Toolkit():
   # return : None 
   @staticmethod    
   def kill_child_processes(pid):
-     strPids= os.popen("pstree -p "+pid).read()
+     strPids= os.popen("pstree -p "+str(pid)).read()
      patt = re.compile(r"\((.*?)\)", re.I|re.X)
      pids = patt.findall(strPids)
      for childPid in pids:
        os.kill(int(childPid),signal.SIGTERM)
+       
+  # execute shell
+  # cmd
+  # tries
+  # timeout
+  # return code,stdout,stderr
+  @staticmethod
+  def execute_shell(cmd, tries=1, timeout=10):
+    index = 0
+    errorContent = ""
+    while True:
+      if(index >= tries):
+        raise Exception(-1,"[{0}] try {1} times still fail:{2}".format(cmd,tries,errorContent))
+
+      if timeout:
+        end_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
+      sub = subprocess.Popen(cmd, stdout=subprocess.PIPE,stderr=subprocess.PIPE, stdin=subprocess.PIPE,shell=True)
+      while sub.poll() is None:
+        time.sleep(0.1)
+        if timeout:
+          if end_time <= datetime.datetime.now():
+            Toolkit.kill_child_processes(sub.pid)
+      stdout,stderr = sub.communicate()
+      if sub.returncode == 0:
+        return sub.returncode,stdout
+      else:
+        errorContent = stderr
+      index += 1
 
 if __name__ == '__main__':
   # export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.6/site-packages

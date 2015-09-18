@@ -12,7 +12,7 @@
         "enabled": true,
         "source": {
           "type": "SCRIPT",
-          "path": "alert_disk_space.py"
+          "path": "alert_disks_space.py"
         }
       }
     ]
