@@ -27,14 +27,10 @@ import commands
 import os
 import signal
 import re
-<<<<<<< Updated upstream
 import datetime
 import time
 import subprocess
-from resource_management.core.exceptions import Fail
-=======
 from resource_management.core.exceptions import Fail, ComponentIsNotRunning
->>>>>>> Stashed changes
 from resource_management.core.logger import Logger
 from resource_management.core.resources import Package
 
