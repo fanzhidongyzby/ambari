@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+#coding=utf-8
 """
 Licensed to the Apache Software Foundation (ASF) under one
 or more contributor license agreements.  See the NOTICE file
@@ -26,10 +27,14 @@ import commands
 import os
 import signal
 import re
+<<<<<<< Updated upstream
 import datetime
 import time
 import subprocess
 from resource_management.core.exceptions import Fail
+=======
+from resource_management.core.exceptions import Fail, ComponentIsNotRunning
+>>>>>>> Stashed changes
 from resource_management.core.logger import Logger
 from resource_management.core.resources import Package
 
@@ -55,6 +60,46 @@ class Toolkit():
     else:
       Logger.info(output)
       return (status == 0, output)
+
+  # check process status by key
+  # keyword : checking key
+  # return : None
+  @staticmethod
+  def check_process(keyword):
+    Logger.info("check process by: {0}".format(keyword))
+    cmd = "ps aux | grep -E '" + keyword + "' | grep -v grep | cat"
+    result = Toolkit.exe(cmd)
+    if (result == ""):
+      Logger.error("process checked by {0} not exist".format(keyword))
+      raise ComponentIsNotRunning()
+
+  # check service process status
+  # service : service name
+  # return : None
+  @staticmethod
+  def check_service(service):
+    keyword = "running|active|运行"
+    cmd = "service {0} status | grep -E '{1}'".format(service, keyword)
+    Logger.info("check service: {0}".format(service))
+    output = Toolkit.exe(cmd)
+    if (output == ""):
+      Logger.error("service {0} not running".format(service))
+      raise ComponentIsNotRunning()
+
+  # kill process by key
+  # keyword : checking key
+  # return : None
+  @staticmethod
+  def kill_process(keyword):
+    keyword = str(keyword)
+    Logger.info("kill process by pid: {0}".format(keyword))
+    cmd = "ps aux | grep -E '" + keyword + "' | grep -v grep | awk '{print $2}'"
+    result = Toolkit.exe(cmd)
+    if result != None:
+      pids = result.split()
+      for pid in pids:
+        Toolkit.exe("kill -9 " + pid)
+        Logger.info("process {0} was killed".format(pid))
 
   # remove dir, when it contains links, remove links' targets together
   # dir : directory to remove
