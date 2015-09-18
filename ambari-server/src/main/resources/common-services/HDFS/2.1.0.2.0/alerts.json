@@ -589,7 +589,7 @@
 	        "name": "hdfs_service_check",
 	        "label": "Hdfs Service Check",
 	        "description": "hadoop service check。",
-	        "interval": 1,
+	        "interval": 10,
 	        "scope": "ANY",
 	        "enabled": true,
 	        "source": {

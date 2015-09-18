@@ -79,7 +79,7 @@ def execute(parameters=None, host_name=None):
   if ZOOKEEPER_CONNECT in parameters:
     zk_connect = parameters[ZOOKEEPER_CONNECT]
     
-  topic = "ambari_kafka_service_check"
+  topic = "tencent_kafka_service_check"
   jarPath = "/var/lib/ambari-agent/cache/common-services/KAFKA/0.8.1.2.2/package/files/kafka_service_check.jar:/usr/hdp/2.2.0.0-2041/kafka/libs/*"
     
   producer_cmd = "/usr/jdk64/jdk1.7.0_67/bin/java -cp "+jarPath+" kafka.KafkaProducer "+topic+" "+host_name+":"+port
