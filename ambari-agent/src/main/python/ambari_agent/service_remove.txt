@@ -1,6 +1,6 @@
 [repo_name]
 TDP-2.2
-
+HDP-2.2
 
 [directory]
 /var/lib/ambari*
