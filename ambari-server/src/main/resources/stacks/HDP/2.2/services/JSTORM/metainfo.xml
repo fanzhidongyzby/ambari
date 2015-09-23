@@ -5,9 +5,7 @@
     <service>
       <name>JSTORM</name>
       <displayName>JStorm</displayName>
-      <comment>
-                                    腾讯自研JSTROM
-      </comment>
+      <comment> 实时计算系统：使用Java实现的基于社区STORM的分布式、容错实时计算系统 </comment>
       <version>1.0.3</version>
       <components>
         <component>

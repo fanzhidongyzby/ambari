@@ -22,8 +22,7 @@
       <name>AMBARI_METRICS</name>
       <displayName>Metrics</displayName>
       <version>0.1.0</version>
-      <comment>指标收集服务：从集群各个节点收集主机/服务的指标，存储到HBase并提供查询接口。注：必须安装该服务才能从界面展示指标。
-      </comment>
+      <comment>指标收集服务：从集群各个节点收集主机/服务的指标，存储到HBase并提供查询接口。注：必须安装该服务才能从界面展示指标</comment>
       <components>
         <component>
           <name>METRICS_COLLECTOR</name>

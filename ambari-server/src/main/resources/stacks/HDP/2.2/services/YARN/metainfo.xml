@@ -23,7 +23,7 @@
       <name>YARN</name>
       <displayName>YARN</displayName>
       <version>2.6.0.2.2</version>
-      <comment>Hadoop 2.0</comment>
+      <comment>YARN(Yet Another Resource Negotiator)：用于Hadoop 2.0的通用资源管理系统，可为上层应用提供统一的资源管理和调度</comment>
       <components>
         <component>
           <name>APP_TIMELINE_SERVER</name>
@@ -64,6 +64,7 @@
       <name>MAPREDUCE2</name>
       <displayName>MapReduce2</displayName>
       <version>2.6.0.2.2</version>
+      <comment>Hadoop下一代 MapReduce计算引擎：基于Map和Reduce的编程模型，对大规模数据集进行并行运算</comment>
       <osSpecifics>
         <osSpecific>
           <osFamily>redhat5,redhat6,suse11</osFamily>

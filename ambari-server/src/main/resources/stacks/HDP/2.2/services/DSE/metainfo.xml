@@ -20,9 +20,9 @@
   <services>
     <service>
       <name>DSE</name>
-      <displayName>DSE</displayName>
+      <displayName>RealtimeDataLoader</displayName>
       <version>0.1.0</version>
-      <comment>dse</comment>
+      <comment>实时数据接入服务：高性能、多协议、分布式数据接入服务</comment>
       <components>
         <component>
           <name>DSE_SERVER</name>

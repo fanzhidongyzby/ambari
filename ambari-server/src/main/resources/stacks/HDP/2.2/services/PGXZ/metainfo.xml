@@ -21,6 +21,8 @@
     <service>
       <name>PGXZ</name>
       <extends>common-services/PGXZ/1.0.0</extends>
+      <displayName>DistributedPostgreSql</displayName>
+      <comment>分布式PostgreSQL数据库系统：通过数据库事务分流、数据分布式存储以及并行计算，提高数据库的性能和稳定性</comment>
     </service>
   </services>
 </metainfo>

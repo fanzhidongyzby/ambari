@@ -22,7 +22,7 @@
       <name>NGINX</name>
       <displayName>Nginx</displayName>
       <version>0.1.0</version>
-      <comment>nginx</comment>
+      <comment>Nginx服务器：高性能HTTP服务器、反向代理服务器以及电子邮件代理服务器</comment>
       <components>
         <component>
           <name>NGINX_SERVER</name>

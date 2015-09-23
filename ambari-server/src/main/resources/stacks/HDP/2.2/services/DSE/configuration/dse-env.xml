@@ -22,12 +22,12 @@
     <property>
         <name>dse.server.port</name>
         <value>54301</value>
-        <description>dse server port</description>
+        <description>服务接入端口</description>
     </property>
 
     <property>
         <name>dse.server.jmx.port</name>
         <value>10007</value>
-        <description>dse server jmx port</description>
+        <description>服务管理端口</description>
     </property>
 </configuration>

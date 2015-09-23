@@ -21,7 +21,7 @@
     <service>
       <name>HIVE</name>
       <version>0.14.0.2.2</version>
-      <comment>基于Hadoop的数据仓库工具</comment>
+      <comment>基于Hadoop的数据仓库工具：将结构化的数据文件映射为数据库表，并提供简单的SQL查询功能，可以将SQL语句转换为MapReduce任务运行</comment>
       <components>
         <component>
             <name>HIVE_METASTORE</name>

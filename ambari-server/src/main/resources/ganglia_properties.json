@@ -317,6 +317,31 @@
         "pointInTime":true,
         "temporal":true
       },
+      "metrics/network/tcp_connect":{
+        "metric":"tcp_connect",
+        "pointInTime":true,
+        "temporal":true
+      },
+      "metrics/network/tcp_closewait":{
+        "metric":"tcp_closewait",
+        "pointInTime":true,
+        "temporal":true
+      },
+      "metrics/network/http_process":{
+        "metric":"http_process",
+        "pointInTime":true,
+        "temporal":true
+      },
+      "metrics/network/udp_package_receive":{
+        "metric":"udp_package_receive",
+        "pointInTime":true,
+        "temporal":true
+      },
+      "metrics/network/udp_package_send":{
+        "metric":"udp_package_send",
+        "pointInTime":true,
+        "temporal":true
+      },
       "metrics/part_max_used":{
         "metric":"part_max_used",
         "pointInTime":true,

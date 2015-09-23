@@ -22,6 +22,7 @@
       <name>FLUME</name>
       <displayName>Flume</displayName>
       <version>1.6.0</version>
+      <comment>Flume日志系统：一个高可用的、高可靠的、分布式的海量日志采集、聚合和传输的系统，支持在日志系统中定制各种数据发送方用于收集数据，并提供对数据进行简单处理写到各种数据接受方的能力</comment>
       <osSpecifics>
         <osSpecific>
           <osFamily>redhat5,redhat6,suse11</osFamily>

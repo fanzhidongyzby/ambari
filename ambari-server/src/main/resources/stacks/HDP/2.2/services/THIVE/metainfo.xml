@@ -20,6 +20,7 @@
   <services>
     <service>
       <name>THIVE</name>
+      <deleted>true</deleted>
       <extends>common-services/THIVE/1.0.0</extends>
     </service>
   </services>

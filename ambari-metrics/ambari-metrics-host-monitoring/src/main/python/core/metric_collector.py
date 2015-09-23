@@ -73,6 +73,7 @@ class MetricsCollector():
       metrics.update(self.host_info.get_cpu_times())
       metrics.update(self.host_info.get_combined_disk_usage())
       metrics.update(self.host_info.get_network_info())
+      metrics.update(self.host_info.get_network_proxy_info())
       metrics.update(self.host_info.get_mem_info())
       metrics.update(self.host_info.get_process_info())
 

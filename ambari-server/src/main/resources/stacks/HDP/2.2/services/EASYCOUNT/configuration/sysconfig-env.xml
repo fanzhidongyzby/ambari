@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <!--
 /**
@@ -18,28 +19,18 @@
  * limitations under the License.
  */
 -->
-<configuration supports_final="false">
+
+<configuration>
     <property>
-        <name>dse.mysql.user</name>
-        <value>ambari</value>
-        <description>DSE配置库使用的Mysql用户名</description>
+        <name>content</name>
+        <value>[system]
+#moniter.tube.master=tl-vip-tube-master
+#moniter.tube.port=8609
+#moniter.tube.topic=teg_trc_monitor
+#moniter.tube.interfaceId=trc_mon
+#moniter.tube.kvsplitter=cnt
+#moniter.tube.emit.interval=60
+#moniter.send.status=true</value>
+        <description>系统配置文件内容</description>
     </property>
-
-    <property>
-        <name>dse.mysql.password</name>
-        <value>123456</value>
-        <description>Mysql密码</description>
-    </property>
-
-  <property>
-    <name>dse.mysql.port</name>
-    <value>3306</value>
-    <description>Mysql端口</description>
-  </property>
-
-  <property>
-    <name>mysql.data.dir</name>
-    <value>/dse/mysql_data</value>
-    <description>Mysql数据目录</description>
-  </property>
 </configuration>

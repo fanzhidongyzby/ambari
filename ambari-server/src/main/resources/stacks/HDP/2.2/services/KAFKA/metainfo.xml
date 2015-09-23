@@ -20,6 +20,7 @@
   <services>
     <service>
       <name>KAFKA</name>
+      <comment>分布式消息中间件：一种高吞吐量的分布式发布订阅消息系统 </comment>
       <extends>common-services/KAFKA/0.8.1.2.2</extends>
     </service>
   </services>

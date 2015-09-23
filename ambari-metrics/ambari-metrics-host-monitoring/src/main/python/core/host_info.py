@@ -126,6 +126,30 @@ class HostInfo():
       'disk_total' : disk_usage.get("disk_total")
     }
   pass
+  
+  def get_network_proxy_info(self):
+  
+    f = open("/proc/net/snmp", 'rb')
+    try:
+      lines = f.readlines()
+    finally:
+      f.close()    
+    #tcp_connect = self._getProxyVal("CurrEstab", lines)
+    #udp_receive = _getProxyVal("InDatagrams", lines)
+    #udp_send = _getProxyVal("OutDatagrams", lines)
+    
+    http_process = int(os.popen("ps aux|grep httpd|wc -l").read()) - 2
+    tcp_connect = int(os.popen("netstat -an | grep tcp | grep ESTABLISHED | wc -l").read())
+    tcp_closewait = int(os.popen("netstat -an | grep tcp | grep CLOSE_WAIT | wc -l").read())
+    
+    return {
+      'http_process' : http_process,
+      #'udp_package_receive' : 100,
+      #'udp_package_send' : 100,
+      'tcp_connect' : tcp_connect,
+      'tcp_closewait' : tcp_closewait
+    }
+  pass
 
   def get_network_info(self):
     """
@@ -271,3 +295,15 @@ class HostInfo():
 
   def get_ip_address(self):
     return socket.gethostbyname(socket.getfqdn())
+    
+  def _getProxyVal(self, key, lines):
+    index = -1
+    num = 0
+    for line in lines:
+      items = line.split()
+      if index != -1:
+        num = int(items[index])
+        break;
+      if key in items:
+        index = items.index(key)
+    return num

@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <!--
 /**
@@ -18,28 +19,25 @@
  * limitations under the License.
  */
 -->
-<configuration supports_final="false">
+
+<configuration>
     <property>
-        <name>dse.mysql.user</name>
-        <value>ambari</value>
-        <description>DSE配置库使用的Mysql用户名</description>
+        <name>Topology Data Path</name>
+        <value>/data/tbds/easycount</value>
+        <description>被提交topology所在目录,任务提交执行文件为easycount.sh</description>
     </property>
-
     <property>
-        <name>dse.mysql.password</name>
-        <value>123456</value>
-        <description>Mysql密码</description>
+        <name>content</name>
+        <value>[system]
+#sql=
+
+[tabledesc-2]
+#table.name=
+#table.fields=
+
+[tabledesc-1-res1]
+#table.name=
+#table.fields=</value>
+        <description>脚本内容</description>
     </property>
-
-  <property>
-    <name>dse.mysql.port</name>
-    <value>3306</value>
-    <description>Mysql端口</description>
-  </property>
-
-  <property>
-    <name>mysql.data.dir</name>
-    <value>/dse/mysql_data</value>
-    <description>Mysql数据目录</description>
-  </property>
 </configuration>

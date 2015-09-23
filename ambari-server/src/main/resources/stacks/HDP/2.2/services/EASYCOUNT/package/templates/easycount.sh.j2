@@ -1,0 +1,12 @@
+#!/bin/bash
+# export JSTORM env
+JSTORM_PATH={{jstorm_install_path}}/bin
+PATH=$PATH:$JSTORM_PATH
+export PATH
+
+# command for sql toplogy
+storm jar {{new_easycount_install_path}}/easycount-1.0.0.jar  com.tencent.trc.driver.Driver \
+topologyname={{toplogyname}} consumergroup={{consumergroup}}  configfile=sql_configfile.ec \
+sysconfig=sys_configfile  localMode={{localMode}}  real.work.num={{real_work_num}}   work.num={{work_num}} \
+work.tasknum.decrease.factor={{work_tasknum_decrease_factor}}  moniter.send.status={{moniter_send_status}} \
+consumefrommaxoffset={{consumefrommaxoffset}}

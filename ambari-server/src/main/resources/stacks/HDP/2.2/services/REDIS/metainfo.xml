@@ -21,7 +21,7 @@
   <service>
     <name>REDIS</name>
     <displayName>Redis</displayName>
-    <comment>高性能键值存储系统</comment>
+    <comment>高性能键值存储系统：使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API</comment>
     <version>3.0.3</version>
     <extends>common-services/REDIS/3.0.3</extends>
   </service>

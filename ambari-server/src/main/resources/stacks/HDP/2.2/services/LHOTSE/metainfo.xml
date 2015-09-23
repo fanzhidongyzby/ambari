@@ -4,10 +4,8 @@
   <services>
     <service>
       <name>LHOTSE</name>
-      <displayName>Lhotse</displayName>
-      <comment>
-        Lhotse任务调度系统：支持HDFS与数据库(Mysql,Postgre,Oracle)之间的数据流转，以及MapReduce计算任务的执行，同时集任务配置、运维管理为一体，为用户提供一站式的离线数据处理任务调度服务
-      </comment>
+      <displayName>TaskScheduler</displayName>
+      <comment>任务调度系统：支持HDFS与数据库(Mysql,Postgre,Oracle)之间的数据流转，以及MapReduce计算任务的执行，同时集任务配置、运维管理为一体，为用户提供一站式的离线数据处理任务调度服务</comment>
       <version>1.0.0</version>
       <components>
         <component>

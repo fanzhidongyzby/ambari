@@ -22,7 +22,7 @@
       <name>HBASE</name>
       <displayName>HBase</displayName>
       <version>0.98.4.2.2</version>
-      <comment>基于HDFS的分布式列式数据库</comment>
+      <comment>基于HDFS的分布式列式数据库：一个高可靠性、高性能、面向列、可伸缩的分布式存储系统</comment>
       <osSpecifics>
         <osSpecific>
           <osFamily>redhat5,redhat6,suse11</osFamily>

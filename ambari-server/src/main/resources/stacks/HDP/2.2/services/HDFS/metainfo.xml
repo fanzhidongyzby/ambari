@@ -22,7 +22,7 @@
       <name>HDFS</name>
       <displayName>HDFS</displayName>
       <version>2.6.0.2.2</version>
-      <comment>Hadoop分布式文件系统</comment>
+      <comment>Hadoop分布式文件系统：支持高吞吐量、高度容错性，适合运行在通用硬件上的海量数据分布式文件系统</comment>
       <osSpecifics>
         <osSpecific>
           <osFamily>redhat5,redhat6,suse11</osFamily>

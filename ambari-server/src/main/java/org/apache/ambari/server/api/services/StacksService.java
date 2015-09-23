@@ -18,14 +18,9 @@
 
 package org.apache.ambari.server.api.services;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URLDecoder;
-import java.util.ArrayList;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.GET;
@@ -34,18 +29,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.PathSegment;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.UriInfo;
 
-import org.apache.ambari.server.api.predicate.QueryLexer;
 import org.apache.ambari.server.api.resources.ResourceInstance;
 import org.apache.ambari.server.controller.spi.Resource;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.commons.io.IOUtils;
 
 /**
  * Service for stacks management.
@@ -130,6 +120,43 @@ public class StacksService extends BaseService {
     return handleRequest(headers, body, ui, Request.Type.GET,
         createStackServiceResource(stackName, stackVersion, null));
   }
+
+  /**
+     * Handles URL: /clusters/{clusterId}/category
+     * Get all services for a cluster.
+     *
+     * @param headers http headers
+     * @param ui      uri info
+     * @return service collection resource representation
+   */
+  @GET
+  @Path("{stackName}/versions/{stackVersion}/category")
+  @Produces("text/plain")
+  public Response getServicesGroups(String body, @Context HttpHeaders headers,
+                                    @Context UriInfo ui, @PathParam("stackName") String stackName,
+                                    @PathParam("stackVersion") String stackVersion) {
+
+    String SERVICE_TYPE_FILE = "service_type.json";
+    String result = "";
+    InputStream rcoInputStream = null;
+    try {
+      rcoInputStream = ClassLoader.getSystemResourceAsStream(SERVICE_TYPE_FILE);
+      result =IOUtils.toString(rcoInputStream);
+    }catch(Exception e) {
+    }finally{
+       if(rcoInputStream != null){
+    	    try{
+    		  rcoInputStream.close();
+    		}catch(Exception e){
+    		  System.out.println("inputstream close failed");	
+    		}
+    	}
+    }
+    ResponseBuilder builder = Response.ok(result);  
+    return builder.build(); 
+  }
+
+
 
   @GET
   @Path("{stackName}/versions/{stackVersion}/services/{serviceName}")
@@ -396,5 +423,7 @@ public class StacksService extends BaseService {
         Collections.singletonMap(Resource.Type.Stack, stackName));
 
   }
+
+
 }
 

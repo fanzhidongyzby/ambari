@@ -21,7 +21,7 @@
     <service>
       <name>ZOOKEEPER</name>
       <displayName>ZooKeeper</displayName>
-      <comment>Centralized service which provides highly reliable distributed coordination</comment>
+      <comment>分布式协调服务：为分布式应用提供一致性服务，提供配置维护、名字服务、分布式同步、组服务等功能</comment>
       <version>3.4.5.2.0</version>
       <components>
 

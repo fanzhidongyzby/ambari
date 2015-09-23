@@ -20,8 +20,8 @@
   <services>
     <service>
       <name>GOLDENEYE</name>
-      <displayName>GoldenEye</displayName>
-      <comment>黄金眼：可视化运营报表工具。自助创建报表门户，无需coding基础; 可视化数据源配置,支持mysql,postgre,oracle等多种数据库; 标准报表页面模块，灵活拖拽布局。</comment>
+      <displayName>ReportSystem</displayName>
+      <comment>报表系统：可视化运营报表工具。自助创建报表门户，无需coding基础; 可视化数据源配置,支持mysql,postgre,oracle等多种数据库; </comment>
       <version>1.0.0</version>
       <components>
         <component>
