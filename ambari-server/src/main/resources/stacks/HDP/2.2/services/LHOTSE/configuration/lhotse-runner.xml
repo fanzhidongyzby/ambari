@@ -4,7 +4,7 @@
   <property>
     <name>cgi.port</name>
     <value>80</value>
-    <description>cgi port for log</description>
+    <description>cgi端口</description>
   </property>
   <property>
     <name>type.list</name>

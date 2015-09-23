@@ -24,48 +24,43 @@
   <property>
     <name>java.library.path</name>
     <value>/usr/local/jstorm/depends_lib/zeromq/lib:/usr/local/jstorm/depends_lib/jzmq/lib:/usr/local/lib:/opt/local/lib:/usr/lib</value>
-    <description>This value is passed to spawned JVMs (e.g., Nimbus, Supervisor, and Workers)
-       for the java.library.path value. java.library.path tells the JVM where
-       to look for native libraries. It is necessary to set this config correctly since
-       Storm uses the ZeroMQ and JZMQ native libs. </description>
+    <description>本地库路径 </description>
   </property>
   <property>
     <name>jstorm.local.dir</name>
     <value>/data/jstorm/c001</value>
-    <description>A directory on the local filesystem used by Storm for any local
-       filesystem usage it needs. The directory must exist and the Storm daemons must
-       have permission to read/write from this location.</description>
+    <description>本地目录，需要存在且有读写权限</description>
   </property>
   <property>
     <name>storm.zookeeper.root</name>
     <value>/jstorm/c_001</value>
-    <description>The root location at which Storm stores data in ZooKeeper.</description>
+    <description>元数据保存在Zookeeper的根路径</description>
   </property>
   
   <property>
     <name>ui.port</name>
     <value>8080</value>
-    <description>port of Storm UI</description>
+    <description>UI服务端口</description>
   </property>
   <property>
     <name>logviewer.port</name>
     <value>8083</value>
-    <description>HTTP UI port for log viewer.</description>
+    <description>Storm logviewer服务端口号</description>
   </property>
   <property>
     <name>storm.scheduler</name>
     <value>com.tencent.jstorm.scheduler.AbsoluteScheduler</value>
-    <description></description>
+    <description>任务分配器，默认值，不建议修改</description>
   </property>
   <property>
     <name>storm.messaging.transport</name>
     <value>com.tencent.jstorm.message.zeroMq.MQContext</value>
-    <description></description>
+    <description>传输协议，默认值，不建议修改</description>
   </property>
   <property>
     <name>supervisor.slots.ports</name>
     <value>6700, 6701, 6702, 6703</value>
-    <description></description>
+    <description>可被Worker用来接收消息的端口</description>
   </property>
   
 </configuration>

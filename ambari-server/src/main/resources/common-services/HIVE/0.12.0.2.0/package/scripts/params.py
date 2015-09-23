@@ -430,3 +430,7 @@ new_hive_config_path_mysql = "/etc/tbds/hive/mysql/my.cnf"
 new_hive_log_path_mysql = "/var/log/tbds/hive/mysql/mysqld.log"
 new_hive_data_path_mysql = "/data/tbds/hive/mysql"
 
+hwi_cmd = "({0}&) &> /dev/null"
+
+hwi_start_command=hwi_cmd.format('/usr/hdp/2.2.0.0-2041/hive/bin/hive --service hwi')
+hwi_exclude_packages = ['mysql-connector-java', 'mysql', 'mysql-server','']

@@ -37,7 +37,7 @@
   <!-- storm-env.sh -->
   <property>
     <name>content</name>
-    <description>This is the jinja template for storm-env.sh file</description>
+    <description>环境变量信息 storm-env.sh </description>
     <value>
 export JAVA_HOME={{java64_home}}
 export NIMBUS_CHILDOPTS="-Xms3g -Xmx3g -XX:MaxDirectMemorySize=600m -XX:ParallelGCThreads=4"
