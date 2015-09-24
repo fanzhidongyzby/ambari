@@ -220,7 +220,7 @@ node_labels_dir = default("/configurations/yarn-site/yarn.node-labels.fs-store.r
 # MapReduce
 mapreduce_install_path = "/usr/hdp/2.2.0.0-2041/hadoop-mapreduce"
 mapreduce_config_path = "/etc/hadoop/conf"
-mapreduce_log_path = default("/configurations/mapred-env/mapred_log_dir_prefix", "/var/log/hadoop-mapreduce")
+mapreduce_log_path = default("/configurations/mapred-env/mapred_log_dir_prefix", "/data/var/log/hadoop-mapreduce")
 
 new_mapreduce_install_path = "/opt/tbds/mapreduce"
 new_mapreduce_config_path = "/etc/tbds/mapreduce"
@@ -229,14 +229,16 @@ new_mapreduce_log_path = "/var/log/tbds/mapreduce"
 # Yarn
 yarn_install_path = "/usr/hdp/2.2.0.0-2041/hadoop-yarn"
 yarn_config_path = "/etc/hadoop/conf"
-yarn_log_path = default("/configurations/yarn-env/yarn_log_dir_prefix", "/var/log/hadoop-yarn")
+yarn_log_path = default("/configurations/yarn-env/yarn_log_dir_prefix", "/data/var/log/hadoop-yarn")
 
-yarn_nodemanager_local_dirs_paths = default("/configurations/hdfs-site/dfs.namenode.name.dir", "")
-yarn_nodemanager_log_dirs_paths = default("/configurations/hdfs-site/dfs.namenode.checkpoint.dir", "")
+yarn_nodemanager_local_dirs_paths = default("/configurations/yarn-site/yarn.nodemanager.local-dirs", "/data/hadoop/yarn/local")
+yarn_nodemanager_log_dirs_paths = default("/configurations/yarn-site/yarn.nodemanager.log-dirs", "/data/hadoop/yarn/log")
+yarn_timeline_data_path = default("/configurations/yarn-site/yarn.timeline-service.leveldb-timeline-store.path", "/data/hadoop/yarn/timeline")
 
 new_yarn_install_path = "/opt/tbds/yarn"
 new_yarn_config_path = "/etc/tbds/yarn"
 new_yarn_log_path = "/var/log/tbds/yarn"
 
-new_yarn_nodemanager_local_dirs_path = "/data/tbds/yarn/local/data"
-new_yarn_nodemanager_log_dirs_path = "/data/tbds/yarn/log/data"
+new_yarn_nodemanager_local_dirs_path = "/data/tbds/yarn/local"
+new_yarn_nodemanager_log_dirs_path = "/data/tbds/yarn/log"
+new_yarn_timeline_data_path = "/data/tbds/yarn/timeline"

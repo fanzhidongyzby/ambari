@@ -404,11 +404,11 @@ driver_curl_target = format("{java_share_dir}/{jdbc_jar_name}")
 # refractor service path
 hdfs_install_path = "/usr/hdp/2.2.0.0-2041/hadoop-hdfs"
 hdfs_config_path = "/etc/hadoop/conf"
-hdfs_log_path = default("/configurations/hadoop-env/hdfs_log_dir_prefix", "/var/log/hadoop/hdfs")
+hdfs_log_path = default("/configurations/hadoop-env/hdfs_log_dir_prefix", "/data/var/log/hadoop/hdfs")
 
-hdfs_namenode_data_paths = default("/configurations/hdfs-site/dfs.namenode.name.dir", "")
-hdfs_snamenode_data_paths = default("/configurations/hdfs-site/dfs.namenode.checkpoint.dir", "")
-hdfs_datanode_data_paths = default("/configurations/hdfs-site/dfs.datanode.data.dir", "")
+hdfs_namenode_data_paths = default("/configurations/hdfs-site/dfs.namenode.name.dir", "/data/hadoop/hdfs/namenode")
+hdfs_snamenode_data_paths = default("/configurations/hdfs-site/dfs.namenode.checkpoint.dir", "/data/hadoop/hdfs/namesecondary")
+hdfs_datanode_data_paths = default("/configurations/hdfs-site/dfs.datanode.data.dir", "/data/hadoop/hdfs/data")
 
 new_hdfs_install_path = "/opt/tbds/hdfs"
 new_hdfs_config_path = "/etc/tbds/hdfs"

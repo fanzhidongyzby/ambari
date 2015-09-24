@@ -73,8 +73,7 @@ class Toolkit():
   # service : service name
   # return : None
   @staticmethod
-  def check_service(service):
-    keyword = "running|active|运行"
+  def check_service(service, keyword = "running|active|运行"):
     cmd = "service {0} status | grep -E '{1}'".format(service, keyword)
     Logger.info("check service: {0}".format(service))
     output = Toolkit.exe(cmd)

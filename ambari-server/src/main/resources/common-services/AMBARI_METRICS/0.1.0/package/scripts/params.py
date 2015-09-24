@@ -189,12 +189,13 @@ metrics_config_path_collector = "/etc/ambari-metrics-collector/conf"
 metrics_config_path_hbase = "/etc/ams-hbase/conf"
 metrics_config_path_monitor = "/etc/ambari-metrics-monitor/conf"
 
-metrics_log_path_collector = default("/configurations/ams-env/metrics_collector_log_dir", "/var/log/ambari-metrics-collector")
-metrics_log_path_monitor = default("/configurations/ams-env/metrics_monitor_log_dir", "/var/log/ambari-metrics-monitor")
+metrics_log_path_collector = default("/configurations/ams-env/metrics_collector_log_dir", "/data/var/log/ambari-metrics-collector")
+metrics_log_path_hbase = default("/configurations/ams-hbase-env/hbase_log_dir", "/data/var/log/ambari-metrics-collector")
+metrics_log_path_monitor = default("/configurations/ams-env/metrics_monitor_log_dir", "/data/var/log/ambari-metrics-monitor")
 
-metrics_data_path_collector_hbase = default("/configurations/ams-hbase-site/hbase.rootdir", "file:///var/lib/ambari-metrics-collector/hbase").split("//")[-1]
-metrics_data_path_collector_checkpoint = default("/configurations/ams-site/timeline.metrics.aggregator.checkpoint.dir", "/var/lib/ambari-metrics-collector/checkpoint")
-metrics_data_path_collector_hbasetmp = default("/configurations/ams-hbase-site/hbase.tmp.dir", "/var/lib/ambari-metrics-collector/hbase-tmp")
+metrics_data_path_collector_hbase = default("/configurations/ams-hbase-site/hbase.rootdir", "file:///data/var/lib/ambari-metrics-collector/hbase").split("//")[-1]
+metrics_data_path_collector_checkpoint = default("/configurations/ams-site/timeline.metrics.aggregator.checkpoint.dir", "/data/var/lib/ambari-metrics-collector/checkpoint")
+metrics_data_path_collector_hbasetmp = default("/configurations/ams-hbase-site/hbase.tmp.dir", "/data/var/lib/ambari-metrics-collector/hbase-tmp")
 
 new_metrics_install_path_collector_bin = "/opt/tbds/metrics/collector/ambari-metrics-collector"
 new_metrics_install_path_collector_lib = "/opt/tbds/metrics/collector/lib"
@@ -205,7 +206,8 @@ new_metrics_config_path_collector = "/etc/tbds/metrics/collector/collector"
 new_metrics_config_path_hbase = "/etc/tbds/metrics/collector/hbase"
 new_metrics_config_path_monitor = "/etc/tbds/metrics/monitor"
 
-new_metrics_log_path_collector = "/var/log/tbds/metrics/collector"
+new_metrics_log_path_collector = "/var/log/tbds/metrics/collector/collector"
+new_metrics_log_path_hbase = "/var/log/tbds/metrics/collector/hbase"
 new_metrics_log_path_monitor = "/var/log/tbds/metrics/monitor"
 
 new_metrics_data_path_collector_hbase = "/data/tbds/metrics/hbase"

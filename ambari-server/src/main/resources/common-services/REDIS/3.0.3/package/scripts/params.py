@@ -38,7 +38,7 @@ redis_pid_file = status_params.redis_pid_file
 
 redis_install_path = "/usr/bin/redis-server"
 redis_config_path = "/etc/redis.conf"
-redis_log_path = default("/configurations/redis-env/redis_log_file", "/var/log/redis")
+redis_log_path = default("/configurations/redis-env/redis_log_file", "/data/var/log/redis")
 redis_data_path = "/var/lib/redis"
 
 new_redis_install_path = "/opt/tbds/redis"

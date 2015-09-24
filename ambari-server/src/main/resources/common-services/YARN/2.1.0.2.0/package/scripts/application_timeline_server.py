@@ -62,6 +62,7 @@ class ApplicationTimelineServer(Script):
     service('timelineserver', action='start')
 
     Links(params.new_yarn_log_path, params.yarn_log_path)
+    Links(params.new_yarn_timeline_data_path, params.yarn_timeline_data_path)
 
   def stop(self, env, rolling_restart=False):
     import params
