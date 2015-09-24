@@ -41,6 +41,7 @@ real_work_num = config['configurations']['configfile']['real.work.num']
 
 # configfile-env.xml
 sql_config_content = config['configurations']['configfile-env']['content']
+TopologyDataPath = config['configurations']['configfile-env']['TopologyExePath']
 
 # sysconfig-env.xml
 sys_config_content = config['configurations']['sysconfig-env']['content']

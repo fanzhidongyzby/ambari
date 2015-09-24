@@ -24,8 +24,6 @@
   <property>
     <name>http.port</name>
     <value>8081</value>
-    <description>
-      The http port kafka-manager serves for kafka cluster management
-    </description>
+    <description>kafka manager服务端口</description>
   </property>
 </configuration>

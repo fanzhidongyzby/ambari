@@ -11,7 +11,7 @@ host    all             all             0.0.0.0/0               trust
 host    all             all             ::1/128                 ident
 ]]>
     </value>
-    <description>pg_hba.conf配置</description>
+    <description>客户端认证配置文件pg_hba.conf</description>
   </property>
 
 </configuration>

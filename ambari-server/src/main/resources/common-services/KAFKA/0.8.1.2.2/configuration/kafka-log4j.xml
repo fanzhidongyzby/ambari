@@ -24,7 +24,7 @@
 
   <property>
     <name>content</name>
-    <description>Custom log4j.properties</description>
+    <description>log4j.properties配置模版</description>
     <value>
 #
 #

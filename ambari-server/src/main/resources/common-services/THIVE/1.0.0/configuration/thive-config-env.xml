@@ -22,47 +22,51 @@
 <property>
         <name>hive.plc.user</name>
         <value>thive</value>
+        <description>PLC客户端连接hive使用的用户名</description>
 </property>
 
 
 <property>
         <name>hive.plc.password</name>
         <value>thive</value>
+        <description>PLC客户端连接hive使用的密码</description>
 </property>
 
 
 <property>
         <name>thive.server.port</name>
         <value>10002</value>
+        <description>服务端口</description>
 </property>
 
 <property>
         <name>fs.default.name</name>
         <value>hdfs://10.151.135.220:8020/</value>
+        <description>默认HDFS文件系统地址</description>
 </property>
 
 <property>
    <name>analysisbuffer.tmp.addr</name>
    <value>/tmp/thive/tmp</value>
-   <description>analysisbuffer local dir</description>
+   <description>本地临时目录</description>
 </property>
 
 <property>
   <name>hive.rctmpfile.path</name>
   <value>/tmp/thive/tdw_rctmp/</value>
-  <description>this is the tmp dir for RowContainer's tmp files</description>
+  <description>RowContainer的临时文件</description>
 </property>
 
 <property>
   <name>hive.multi.rctmpfile.path.number</name>
   <value>5</value>
-  <description>numbers of rctmpfile path </description>
+  <description>临时路径个数 </description>
 </property>
 
 <property>
   <name>hive.multi.rctmpfile.path</name>
 <value>/data1/tdw_rctmp/,/data2/tdw_rctmp/,/data3/tdw_rctmp/,/data4/tdw_rctmp/,/data5/tdw_rctmp/</value>
-  <description> rctmpfile path list </description>
+  <description> SQL在做JOIN等操作时，如果内存不够用，会将数据写入到MR task本地磁盘。这个配置指定多个路径，他们可以分散到多个磁盘，以提高IO效率。配置路径以逗号分隔，且必须是绝对路径 </description>
 </property>
 
 <property>
@@ -128,7 +132,7 @@ log4j.appender.DayLog.Threshold=INFO
 log4j.appender.DayLog.DatePattern=.yyyy-MM-dd
 log4j.appender.DayLog.layout=org.apache.log4j.PatternLayout
 </value>
-  <description> rctmpfile path list </description>
+  <description> 日志配置 </description>
 </property>
 
 </configuration>

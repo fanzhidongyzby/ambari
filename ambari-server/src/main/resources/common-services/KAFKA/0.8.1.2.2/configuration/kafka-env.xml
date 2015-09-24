@@ -30,18 +30,18 @@
   <property>
     <name>kafka_log_dir</name>
     <value>/var/log/kafka</value>
-    <description></description>
+    <description>日志目录</description>
   </property>
   <property>
     <name>kafka_pid_dir</name>
     <value>/var/run/kafka</value>
-    <description></description>
+    <description>pid文件存储路径</description>
   </property>
 
   <!-- kafka-env.sh -->
   <property>
     <name>content</name>
-    <description>This is the jinja template for kafka-env.sh file</description>
+    <description>kafka配置文件 kafka-env.sh 模版</description>
     <value>
 #!/bin/bash
 

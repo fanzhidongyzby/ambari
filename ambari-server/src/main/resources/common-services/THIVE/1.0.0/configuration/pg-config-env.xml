@@ -3,12 +3,12 @@
   <property>
     <name>pg.user</name>
     <value>pgmeta</value>
-    <description>This is user to register thive metadb</description>
+    <description>元数据保存在PG库的用户</description>
  </property>
    <property>
     <name>pg.password</name>
     <value>pgmeta</value>
-    <description>this is password</description>
+    <description>密码</description>
  </property>
 
    <property>
@@ -23,7 +23,7 @@ host    all             all             ::1/128                 ident
 
 
 </value>
-    <description>This is the port</description>
+    <description>IP白名单</description>
  </property>
 
 
@@ -630,7 +630,7 @@ default_text_search_config = 'pg_catalog.english'
 
 ]]>
 </value>
-    <description>This is postgresql.conf</description>
+    <description>高级配置</description>
  </property>
 
 </configuration>
