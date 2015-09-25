@@ -23,7 +23,7 @@
 <configuration>
   <property>
     <name>hbase.rootdir</name>
-    <value>file:///data/var/lib/ambari-metrics-collector/hbase</value>
+    <value>file:///var/lib/ambari-metrics-collector/hbase</value>
     <description>
       Ambari Metrics service uses HBase as default storage backend. Set the rootdir for
       HBase to either local filesystem path if using Ambari Metrics in embedded mode or
@@ -32,7 +32,7 @@
   </property>
   <property>
     <name>hbase.tmp.dir</name>
-    <value>/data/var/lib/ambari-metrics-collector/hbase-tmp</value>
+    <value>/var/lib/ambari-metrics-collector/hbase-tmp</value>
     <description>
       Temporary directory on the local filesystem.
       Change this setting to point to a location more permanent

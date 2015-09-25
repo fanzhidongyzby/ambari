@@ -4337,12 +4337,35 @@ var hdp2properties = [
     "category": "General",
     "index": 5
   },
+  // add by florian
+  {
+    "id": "puppet var",
+    "name": "hbase.rootdir",
+    "displayName": "hbase.rootdir",
+    "description": "The root directory of HBase in metrics.",
+    "defaultDirectory": "file:///var/lib/ambari-metrics-collector/hbase",
+    "serviceName": "AMBARI_METRICS",
+    "filename": "ams-hbase-site.xml",
+    "category": "Advanced ams-hbase-site"
+  },
+  {
+    "id": "puppet var",
+    "name": "hbase.tmp.dir",
+    "displayName": "hbase.tmp.dir",
+    "description": "The temp directory of HBase in metrics.",
+    "defaultDirectory": "/var/lib/ambari-metrics-collector/hbase-tmp",
+    "displayType": "directory",
+    "isVisible": true,
+    "serviceName": "AMBARI_METRICS",
+    "filename": "ams-hbase-site.xml",
+    "category": "Advanced ams-hbase-site"
+  },
   {
     "id": "site property",
     "name": "timeline.metrics.aggregator.checkpoint.dir",
     "displayName": "Aggregator checkpoint directory",
     "description": "\n      Directory to store aggregator checkpoints\n    ",
-    "defaultValue": "/tmp",
+    "defaultDirectory": "/var/lib/ambari-metrics-collector/checkpoint",
     "displayType": "directory",
     "serviceName": "AMBARI_METRICS",
     "filename": "ams-site.xml",

@@ -81,6 +81,19 @@ class Toolkit():
       Logger.error("service {0} not running".format(service))
       raise ComponentIsNotRunning()
 
+  # check command process status
+  # command : command line
+  # keyword : checking key
+  # return : None
+  @staticmethod
+  def check_command(command, keyword):
+    cmd = "{0} | grep -E '{1}'".format(command, keyword)
+    Logger.info("check command: {0}".format(command))
+    output = Toolkit.exe(cmd)
+    if (output == ""):
+      Logger.error("command {0} not running".format(command))
+      raise ComponentIsNotRunning()
+
   # kill process by key
   # keyword : checking key
   # return : None

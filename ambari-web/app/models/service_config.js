@@ -313,8 +313,15 @@ App.ServiceConfigProperty = Em.Object.extend({
         this.setDefaultValue(hostWithPrefix,'://' + nnHost);
         break;
       case 'hbase.rootdir':
-        var nnHost = masterComponentHostsInDB.filterProperty('component', 'NAMENODE').mapProperty('hostName');
-        this.setDefaultValue(hostWithPrefix,'://' + nnHost);
+        if (this.get('filename') == 'ams-hbase-site.xml') {
+          var nnHost = masterComponentHostsInDB.filterProperty('component', 'METRICS_COLLECTOR').mapProperty('hostName');
+          this.setDefaultValue(hostWithPrefix,'://' + nnHost);
+          this.unionAllMountPoints(isOnlyFirstOneNeeded, localDB);
+        } else {
+          var nnHost = masterComponentHostsInDB.filterProperty('component', 'NAMENODE').mapProperty('hostName');
+          this.setDefaultValue(hostWithPrefix,'://' + nnHost);
+        }
+
         break;
       case 'snamenode_host':
         // Secondary NameNode does not exist when NameNode HA is enabled
@@ -589,7 +596,7 @@ App.ServiceConfigProperty = Em.Object.extend({
         this.unionAllMountPoints(!isOnlyFirstOneNeeded, localDB);
         break;
       case 'hbase.tmp.dir':
-        if (this.get('filename') == 'hbase-site.xml') {
+        if (this.get('filename') == 'hbase-site.xml' || this.get('filename') == 'ams-hbase-site.xml') {
           this.unionAllMountPoints(isOnlyFirstOneNeeded, localDB);
         }
         break;
@@ -618,6 +625,7 @@ App.ServiceConfigProperty = Em.Object.extend({
       case 'data.dir':
       case 'root.path':
       case 'metrics_monitor_log_dir':
+      case 'timeline.metrics.aggregator.checkpoint.dir':
       case 'metrics_collector_log_dir':
       case 'mysql.data.dir':
       case 'goldeneye.data.dir':
@@ -757,9 +765,14 @@ App.ServiceConfigProperty = Em.Object.extend({
         break;
       case 'hbase.tmp.dir':
         temp = slaveComponentHostsInDB.findProperty('componentName', 'HBASE_REGIONSERVER');
-        temp.hosts.forEach(function (host) {
-          setOfHostNames.push(host.hostName);
-        }, this);
+        if(temp) {
+          temp.hosts.forEach(function (host) {
+            setOfHostNames.push(host.hostName);
+          }, this);
+        } else {
+          temp = masterComponentHostsInDB.findProperty('component', 'METRICS_COLLECTOR');
+          setOfHostNames.push(temp.hostName);
+        }
         break;
       case 'storm.local.dir':
       case 'storm_log_dir':
@@ -799,6 +812,8 @@ App.ServiceConfigProperty = Em.Object.extend({
           setOfHostNames.push(component.hostName);
         }, this);
         break;
+      case 'hbase.rootdir':
+      case 'timeline.metrics.aggregator.checkpoint.dir':
       case 'metrics_collector_log_dir':
       case 'hbase_log_dir':
       case 'metrics_monitor_log_dir':
@@ -946,7 +961,11 @@ App.ServiceConfigProperty = Em.Object.extend({
             mPoint = winDrive + winDir + "\n";
         }
       } else {
-        mPoint = mPoint + this.get('defaultDirectory');
+        if (this.get('name') == 'hbase.rootdir') {
+          mPoint = this.get('defaultDirectory').replace("file:///", "file://" + mPoint + "/");
+        } else {
+          mPoint = mPoint + this.get('defaultDirectory');
+        }
       }
       this.set('value', mPoint);
       this.set('defaultValue', mPoint);
