@@ -651,103 +651,186 @@ module.exports = Em.Route.extend(App.RouterRedirections, {
           router.get('mainServiceItemController').connectOutlet('mainServiceInfoAudit', item);
         }
       }),
-	  showHost : function () {
-		
-		var numberUtils = require('utils/number_utils');
-		if ($('#hostListDiv').length > 0) {
-			$('#hostListDiv').show();
-		} else {
-			$('.nav-tabs').next().next().after('<div id="hostListDiv">loading...</div>');
-		}
-		$('.nav-tabs').next().next().hide();
-		var prefix = App.get('apiPrefix') + '/clusters/' + App.router.getClusterName();
+        showHost : function () {
 
-		var url = prefix + '/hosts?fields=Hosts/host_name,Hosts/maintenance_state,Hosts/public_host_name,Hosts/cpu_count,Hosts/ph_cpu_count,alerts_summary,'
-				+ 'Hosts/host_status,Hosts/last_heartbeat_time,Hosts/ip,host_components/HostRoles/state,host_components/HostRoles/maintenance_state,'
-				+ 'host_components/HostRoles/stale_configs,host_components/HostRoles/service_name,host_components/HostRoles/desired_admin_state,'
-				+ 'metrics/disk,metrics/load/load_one,Hosts/total_mem,stack_versions/HostStackVersions,stack_versions/repository_versions/RepositoryVersions/repository_version,'
-				+ 'stack_versions/repository_versions/RepositoryVersions/id,stack_versions/repository_versions/RepositoryVersions/display_name&minimal_response=true&sortBy=Hosts/host_name.asc';
-				
-		var hash = window.location.hash;
+            var numberUtils = require('utils/number_utils');
+            if ($('#hostListDiv').length > 0) {
+                $('#hostListDiv').show();
+            } else {
+                $('.nav-tabs').next().next().after('<div id="hostListDiv">loading...</div>');
+            }
+            $('.nav-tabs').next().next().hide();
+            var prefix = App.get('apiPrefix') + '/clusters/' + App.router.getClusterName();
 
-		var service_name = hash.split('/')[3];
-		$.getJSON(url, function(json){
-			var list = json.items;
-			var data = {};
-			var length = 0;
-			for (var i=0; i<list.length; i++) {
-				var flag = 0;
-				var d = list[i]['host_components'];
-				for (var j=0; j<d.length; j++) {
-					if (d[j]['HostRoles']['service_name'] == service_name) {
-						flag = 1;
-						if (typeof (data[d[j]['HostRoles']['component_name']]) == 'undefined') {
-							data[d[j]['HostRoles']['component_name']] = [list[i]];
-						} else {
-							data[d[j]['HostRoles']['component_name']].push(list[i]);
-						}
-					}
-				}
-				if (flag == 1) {
-					length ++;
-				}
-			} 
-			var str = '<div id="hostList" class="host-list">';
-			str += '<div class="hd"><h3 class="modules"><i class="icon-ok-sign health-status-LIVE"></i>'+service_name+'</h3><h3 class="hosts">'+length+'主机</h3></div><div class="bd open">';
-			str +='<table class="host-table">';
-			str += '<tr><th class="modules">包含组件</th><th class="host">运行的主机</th><th class="trigger"></th></tr>';
-			var flag = 0;
-			for (var key in data) {
-				str += flag==0 ? '<tr class="open">' : '<tr>';
-				str += '<td class="modules">'+key+'</td><td class="host">'+data[key].length+'主机</td><td class="trigger"><i class="caret"></i></td><div></div></tr>';
-				str += flag==0 ? '<tr class="open show-detail">' : '<tr class="show-detail">';
-				//str += '<tr class="show-detail">';
-				flag = 1;
-				
-				str += '<td colspan="3"><table class="detail-table">';
-				str += '<tr><th>名字</th><th>IP地址</th><th>Cores (CPU)</th><th>内存</th><th>磁盘用量</th><th>平均负载</th></tr>';
-				for (var i=0; i<data[key].length; i++) {
-					str += '<tr>';
-					// host_status
-					str += '<td><div class="host-name"><i class="icon-ok-sign health-status-LIVE"></i><a href="#/main/hosts/'+data[key][i].Hosts.ip+'/summary">'+data[key][i].Hosts.host_name+'</a></div></td>';
-					str += '<td><div class="host-ip">'+data[key][i].Hosts.ip+'</div></td>';
-					str += '<td>'+data[key][i].Hosts.cpu_count+'('+data[key][i].Hosts.ph_cpu_count+')</td>';
-					str += '<td>'+numberUtils.bytesToSize(data[key][i].Hosts.total_mem, 2, 'parseFloat', 1024)+'</td>'; 
-					
-					if (typeof(data[key][i].metrics) == 'undefined') {
-						str += '<td></td><td></td>';
-					} else {
-						var process = Math.round(((data[key][i].metrics.disk.disk_total-data[key][i].metrics.disk.disk_free)/data[key][i].metrics.disk.disk_total) * Math.pow(10, 4)) / Math.pow(10, 2);
-						
-						str += '<td><div class="progress-wrap"><div class="progress progress-info"><div style="width:'+process+'%" class="bar"></div></div><span>'+process+'%</span></div></td>';
-						// metrics/load/load_one
-						str += '<td>'+Math.round(data[key][i].metrics.load.load_one * Math.pow(10, 2)) / Math.pow(10, 4)+'</td>';
-					}
-					str += '</tr>';
-					// loadAvg
-				}
-				str += '</table></td>';
-				
-				str += '</tr>';
-			}
-			str += '</table>';
-			str += '</div>';
-			$('#hostListDiv').html(str);
-			$('#hostListDiv').find('.caret').parent().parent().click(function(){
-				var $this = $(this);
-				var target = $this.next();
-				if (!target.hasClass('open')) {
-					$this.addClass('open');
-					target.addClass('open');
-				} else {
-					target.removeClass('open');
-					$this.removeClass('open');
-				}
-			});
-		});
-	
+            var url = prefix + '/hosts?fields=Hosts/host_name,Hosts/maintenance_state,Hosts/public_host_name,Hosts/cpu_count,Hosts/ph_cpu_count,alerts_summary,'
+                + 'Hosts/host_status,Hosts/last_heartbeat_time,Hosts/ip,host_components/HostRoles/state,host_components/HostRoles/maintenance_state,'
+                + 'host_components/HostRoles/stale_configs,host_components/HostRoles/service_name,host_components/HostRoles/desired_admin_state,'
+                + 'metrics/disk,metrics/load/load_one,Hosts/total_mem,stack_versions/HostStackVersions,stack_versions/repository_versions/RepositoryVersions/repository_version,'
+                + 'stack_versions/repository_versions/RepositoryVersions/id,stack_versions/repository_versions/RepositoryVersions/display_name&minimal_response=true&sortBy=Hosts/host_name.asc';
 
-	  },
+            var hash = window.location.hash;
+
+            var service_name = hash.split('/')[3];
+            $.getJSON(url, function(json){
+                var list = json.items;
+                var data = {};
+                var length = 0;
+                for (var i=0; i<list.length; i++) {
+                    var flag = 0;
+                    var d = list[i]['host_components'];
+                    for (var j=0; j<d.length; j++) {
+                        if (d[j]['HostRoles']['service_name'] == service_name) {
+                            flag = 1;
+                            if (typeof (data[d[j]['HostRoles']['component_name']]) == 'undefined') {
+                                data[d[j]['HostRoles']['component_name']] = [list[i]];
+                            } else {
+                                data[d[j]['HostRoles']['component_name']].push(list[i]);
+                            }
+                        }
+                    }
+                    if (flag == 1) {
+                        length ++;
+                    }
+                }
+                var str = '<div id="hostList" class="host-list">';
+                str += '<div class="hd"><button  class="btn btn-success" id="btn_restart">重启</button><h3 class="modules"><i class="icon-ok-sign health-status-LIVE"></i>'+service_name+'</h3><h3 class="hosts">'+length+'主机</h3></div><div class="bd open">';
+                str +='<table class="host-table">';
+                str += '<tr><th class="modules">包含组件</th><th class="host">运行的主机</th><th class="trigger"></th></tr>';
+                var flag = 0;
+                for (var key in data) {
+                    str += flag==0 ? '<tr class="open">' : '<tr>';
+                    str += '<td class="modules">'+'<input type="checkbox" class="sum_select_all" style="vertical-align: middle;display: inline-block;margin: -2px 10px 0;"/><span class="host_name">'+key+'</span></td><td class="host">'+data[key].length+'主机</td><td class="trigger"><i class="caret"></i></td><div></div></tr>';
+                    str += flag==0 ? '<tr class="open show-detail">' : '<tr class="show-detail">';
+                    //str += '<tr class="show-detail">';
+                    flag = 1;
+
+                    str += '<td colspan="3"><table class="detail-table">';
+                    str += '<tr><th>名字</th><th>IP地址</th><th>Cores (CPU)</th><th>内存</th><th>磁盘用量</th><th>平均负载</th></tr>';
+                    for (var i=0; i<data[key].length; i++) {
+                        str += '<tr>';
+                        // host_status
+                        str += '<td><div class="host-name"><input type="checkbox" class="input_restart" style="vertical-align: middle;display: inline-block;margin: -2px 10px 0;"/><i class="icon-ok-sign health-status-LIVE"></i><a href="#/main/hosts/'+data[key][i].Hosts.ip+'/summary">'+data[key][i].Hosts.host_name+'</a></div></td>';
+                        str += '<td><div class="host-ip">'+data[key][i].Hosts.ip+'</div></td>';
+                        str += '<td>'+data[key][i].Hosts.cpu_count+'('+data[key][i].Hosts.ph_cpu_count+')</td>';
+                        str += '<td>'+numberUtils.bytesToSize(data[key][i].Hosts.total_mem, 2, 'parseFloat', 1024)+'</td>';
+
+                        if (typeof(data[key][i].metrics) == 'undefined') {
+                            str += '<td></td><td></td>';
+                        } else {
+                            var process = Math.round(((data[key][i].metrics.disk.disk_total-data[key][i].metrics.disk.disk_free)/data[key][i].metrics.disk.disk_total) * Math.pow(10, 4)) / Math.pow(10, 2);
+
+                            str += '<td><div class="progress-wrap"><div class="progress progress-info"><div style="width:'+process+'%" class="bar"></div></div><span>'+process+'%</span></div></td>';
+                            // metrics/load/load_one
+                            str += '<td>'+Math.round(data[key][i].metrics.load.load_one * Math.pow(10, 2)) / Math.pow(10, 4)+'</td>';
+                        }
+                        str += '</tr>';
+                        // loadAvg
+                    }
+                    str += '</table></td>';
+
+                    str += '</tr>';
+                }
+                str += '</table>';
+                str += '</div>';
+                $('#hostListDiv').html(str);
+                //$('#hostListDiv').find('.caret').parent().parent().click(function(){
+                $('#hostListDiv').find('.caret').click(function(){
+                    var $this = $(this).parent().parent();
+                    var target = $this.next();
+                    if (!target.hasClass('open')) {
+                        $this.addClass('open');
+                        target.addClass('open');
+                    } else {
+                        target.removeClass('open');
+                        $this.removeClass('open');
+                    }
+                });
+                $('.sum_select_all').bind('click', function(){
+                    var $this = $(this);
+                    if($this.is(':checked') === true) {
+                        $this.parent().parent().next().find('.input_restart').attr("checked", true);
+                    } else {
+                        $this.parent().parent().next().find('.input_restart').attr("checked", false);
+                    }
+                });
+                $('#btn_restart').bind('click', function(){
+                    var host = "";
+                    var restartComponents = [];
+                    $('.input_restart:checked').each(function(){
+                        host += $(this).next().next().text() + "<br/>";
+                        var host_name = $(this).parent().parent().parent().parent().parent().parent().parent().prev().find('.host_name').text();
+                        restartComponents.push({
+                            restartComponents : host_name,
+                            hostName : $(this).parent().parent().next().find('.host-ip').text(),
+                            serviceName : $('#btn_restart').next().text()
+                        });
+
+                    });
+                    if(host === '') {
+                        return false;
+                    }
+                    var defaultSuccessCallback = function(data, ajaxOptions, params) {
+                        App.router.get('applicationController').dataLoading().done(function(initValue) {
+                            params.query && params.query.set('status', 'SUCCESS');
+                            if (initValue) {
+                                App.router.get('backgroundOperationsController').showPopup();
+                            }
+                        });
+                    };
+                    var defaultErrorCallback = function(xhr, textStatus, error, opt, params) {
+                        params.query && params.query.set('status', 'FAIL');
+                        App.ajax.defaultErrorHandler(xhr, opt.url, 'POST', xhr.status);
+                    };
+                    var batches =[];
+                    if(restartComponents.length > 0) {
+                        for(count=0; count<restartComponents.length; count++) {
+                            batches.push({
+                                "order_id" : count + 1,
+                                "type" : "POST",
+                                "uri" : App.apiPrefix + "/clusters/" + App.get('clusterName') + "/requests",
+                                "RequestBodyInfo" : {
+                                    "RequestInfo" : {
+                                        "context" : "_PARSE_.ROLLING-RESTART." + restartComponents[count].restartComponents + "." + (count + 1) + "." + restartComponents.length,
+                                        "command" : "RESTART"
+                                    },
+                                    "Requests/resource_filters": [{
+                                        "service_name" : restartComponents[count].serviceName,
+                                        "component_name" : restartComponents[count].restartComponents,
+                                        "hosts" : restartComponents[count].hostName
+                                    }]
+                                }
+                            });
+                        }
+                    }
+                    App.ModalPopup.show({
+                        header : "灰度重启以下主机：",
+                        bodyClass : Em.View.extend({
+                            template : Em.Handlebars.compile('<div class="alert alert-warning">' + host + '</div>')
+                        }),
+                        classNames : [ 'rolling-restart-popup' ],
+                        primary : Em.I18n.t('rollingrestart.dialog.primary'),
+                        onPrimary : function() {
+                            var dialog = this;
+                            App.ajax.send({
+                                name: 'rolling_restart.post',
+                                sender: {
+                                    successCallback: defaultSuccessCallback,
+                                    errorCallback: defaultErrorCallback
+                                },
+                                data: {
+                                    intervalTimeSeconds: 120,
+                                    tolerateSize: 1,
+                                    batches: batches
+                                },
+                                success: 'successCallback',
+                                error: 'errorCallback'
+                            });
+                            dialog.hide();
+                        }
+                    });
+                });
+            });
+        },
       showInfo: function (router, event) {
 		var self = this;
         var mainServiceInfoConfigsController = App.router.get('mainServiceInfoConfigsController');

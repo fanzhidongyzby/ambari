@@ -32,7 +32,7 @@
         "name": "kafka_service_check",
         "label": "Kafka Service Check",
         "description": "Kafka service check.",
-        "interval": 1,
+        "interval": 5,
         "scope": "ANY",
         "enabled": true,
         "source": {

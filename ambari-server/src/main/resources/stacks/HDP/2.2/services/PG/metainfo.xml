@@ -20,13 +20,13 @@
     <services>
         <service>
             <name>POSTGRESQL</name>
-            <displayName>POSTGRESQL</displayName>
-            <comment>POSTGRESQL compont</comment>
+            <displayName>Postgresql</displayName>
+            <comment>Postgresql Server</comment>
             <version>9.3.5</version>
             <components>
                 <component>
                     <name>POSTGRESQL_SERVER</name>
-                    <displayName>POSTGRESQL Server</displayName>
+                    <displayName>Postgresql Server</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
                     <commandScript>

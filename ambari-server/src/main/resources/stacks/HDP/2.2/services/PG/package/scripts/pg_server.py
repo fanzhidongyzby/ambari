@@ -22,7 +22,7 @@ import sys
 import os
 import commands
 from configinit import configinit
-from toolkit1 import Toolkit1
+
 
 from resource_management import *
 from resource_management.core.logger import Logger
@@ -115,7 +115,8 @@ class PgMaster(Script):
 		#	import params
 		#	utils().exe_status(params.pg_status)
 		import params
-		Toolkit1.check_service(params.pg_status)
+		#Toolkit1.check_service(params.pg_status)
+		Toolkit.check_command(params.pg_status,keyword = "is running")
 #	import params
 #	utils.check_postgre_running(params.pg_status)
 

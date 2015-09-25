@@ -17,5 +17,10 @@
         <value>32</value>
         <description>this is define shared buffers</description>
     </property>
+    <property>
+        <name>postgresql.postgre.listen_addresses</name>
+        <value>*</value>
+        <description>the server is to listen for connections from client applications</description>
+    </property>
 
 </configuration>

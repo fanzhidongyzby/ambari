@@ -4,13 +4,13 @@
 
     <property>
         <name>postgresql.hba.local</name>
-        <value>local	all	all		trust</value>
+        <value>local	all	        all		                          trust</value>
         <description>This is trust conncet info for local</description>
     </property>
     <property>
         <name>postgresql.hba.ipv4</name>
-        <value>host    all         all         127.0.0.1/32          trust</value>
-        <description>this is trust conncet info for ipv4</description>
+        <value>host    all         all         0.0.0.0/0          trust</value>
+        <description>this is trust conncet info for ipv4(if setting md5 ,then need password when login)</description>
     </property>
 
     <property>

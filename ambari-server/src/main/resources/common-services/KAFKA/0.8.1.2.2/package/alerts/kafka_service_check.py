@@ -18,12 +18,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-import json
-import commands
-import time
-import datetime
-import shlex
-import subprocess
+from resource_management import *
 
 LABEL = 'Last Checkpoint: [{h} hours, {m} minutes, {tx} transactions]'
 
@@ -36,28 +31,6 @@ def get_tokens():
   to build the dictionary passed into execute
   """
   return (PORT, ZOOKEEPER_CONNECT)
-  
-def _execute_command(cmdstring, timeout=None, shell=True):
-    if shell:
-      cmdstring_list = cmdstring
-    else:   
-      cmdstring_list = shlex.split(cmdstring)
-    if timeout:
-      end_time = datetime.datetime.now() + datetime.timedelta(seconds=timeout)
-    
-    sub = subprocess.Popen(cmdstring_list, stdout=subprocess.PIPE,stderr=subprocess.PIPE, stdin=subprocess.PIPE,shell=shell)
-    
-    while sub.poll() is None:
-      time.sleep(0.1)
-      if timeout:
-        if end_time <= datetime.datetime.now():
-          sub.terminate()
-          raise Exception(1, "Timeout:%s"%cmdstring)
-          
-    stdout,stderr = sub.communicate()
-    if sub.returncode != 0:
-      raise Exception(sub.returncode, stdout+stderr)
-    return sub.returncode,stdout+stderr
     
 def execute(parameters=None, host_name=None):
   """
@@ -89,8 +62,8 @@ def execute(parameters=None, host_name=None):
   label = 'kafka service is running.'
   
   try:
-    _execute_command(producer_cmd,90)
-    _execute_command(consumer_cmd,90)
+    Toolkit.execute_shell(producer_cmd,timeout=90)
+    Toolkit.execute_shell(consumer_cmd,timeout=90)
   except Exception,e:
     result_code = "CRITICAL"
     label = 'kafka service runs failed:'+str(e)

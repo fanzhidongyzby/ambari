@@ -46,14 +46,15 @@ create_log_dir = " mkdir -p " + pgxx_log_path
 chown_log_dir = " chown -R "+ pgxx_user+ " " +pgxx_log_path
 
 #new add for hba
-pgxx_hba_local =  default("/configurations/postgresql-hba-env/postgresql.hba.local","local	all	all		trust")
-pgxx_hba_ipv4 =  default("/configurations/postgresql-hba-env/postgresql.hba.ipv4","host    all         all         127.0.0.1/32          trust")
+pgxx_hba_local =  default("/configurations/postgresql-hba-env/postgresql.hba.local","local	all	        all		                        trust")
+pgxx_hba_ipv4 =  default("/configurations/postgresql-hba-env/postgresql.hba.ipv4","host    all         all         0.0.0.0/0         trust")
 pgxx_hba_ipv6 =  default("/configurations/postgresql-hba-env/postgresql.hba.ipv6","host    all         all         ::1/128               trust")
 
 #new add for postgre
 pgxx_postgre_max_connections =  default("/configurations/postgresql-postgre-env/postgresql.postgre.max_connections",100)
 pgxx_postgre_shared_buffers =  default("/configurations/postgresql-postgre-env/postgresql.postgre.shared_buffers",32)
 pgxx_postgre_port = default("/configurations/postgresql-postgre-env/postgresql.postgre.port",5432)
+pgxx_postgre_listen_addresses = default("/configurations/postgresql-postgre-env/postgresql.postgre.listen_addresses","*")
 
 
 # create
