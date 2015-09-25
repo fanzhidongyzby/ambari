@@ -27,9 +27,12 @@ import commands
 import os
 import signal
 import re
+<<<<<<< Updated upstream
 import datetime
 import time
 import subprocess
+=======
+>>>>>>> Stashed changes
 from resource_management.core.exceptions import Fail, ComponentIsNotRunning
 from resource_management.core.logger import Logger
 from resource_management.core.resources import Package
@@ -73,7 +76,12 @@ class Toolkit():
   # service : service name
   # return : None
   @staticmethod
+<<<<<<< Updated upstream
   def check_service(service, keyword = "running|active|运行"):
+=======
+  def check_service(service):
+    keyword = "running|active|运行"
+>>>>>>> Stashed changes
     cmd = "service {0} status | grep -E '{1}'".format(service, keyword)
     Logger.info("check service: {0}".format(service))
     output = Toolkit.exe(cmd)
@@ -81,6 +89,7 @@ class Toolkit():
       Logger.error("service {0} not running".format(service))
       raise ComponentIsNotRunning()
 
+<<<<<<< Updated upstream
   # check command process status
   # command : command line
   # keyword : checking key
@@ -94,6 +103,8 @@ class Toolkit():
       Logger.error("command {0} not running".format(command))
       raise ComponentIsNotRunning()
 
+=======
+>>>>>>> Stashed changes
   # kill process by key
   # keyword : checking key
   # return : None
