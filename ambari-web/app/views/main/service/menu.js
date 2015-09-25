@@ -73,6 +73,10 @@ App.MainServiceMenuView = Em.CollectionView.extend({
     alertsCount: function () {
       return this.get('content.alertsCount');
     }.property('content.alertsCount'),
+	
+	menuTitle: function() {
+	  return this.get('content.menuTitle');
+	}.property('content.menuTitle'),
 
     hasCriticalAlerts: function () {
       return this.get('content.hasCriticalAlerts');
@@ -175,7 +179,11 @@ App.TopNavServiceMenuView = Em.CollectionView.extend({
     alertsCount: function () {
       return this.get('content.alertsCount');
     }.property('content.alertsCount'),
-
+	
+	menuTitle: function() {
+	  return this.get('content.menuTitle');
+	}.property('content.menuTitle'),
+	
     hasCriticalAlerts: function () {
       return this.get('content.hasCriticalAlerts');
     }.property('content.hasCriticalAlerts'),

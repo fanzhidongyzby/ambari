@@ -15,7 +15,9 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 }}
-
+{{#if view.menuTitle}}
+<div style='border-bottom:1px solid #D3D4D8;font-size:14px;padding-left:26px'>{{view.menuTitle}}</div>
+{{/if}}
 <a {{bindAttr href="view.link"}}>
   {{#if view.alertsCount}}
     <span {{bindAttr class=":label :alerts-count view.hasCriticalAlerts:alerts-crit-count:alerts-warn-count"}}>

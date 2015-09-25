@@ -42,9 +42,6 @@
                     <osFamily>redhat5,redhat6,suse11</osFamily>
                     <packages>
                         <package>
-                            <name>pgxzm-center</name>
-                        </package>
-                        <package>
                             <name>postgresql93*</name>
                         </package>
                     </packages>

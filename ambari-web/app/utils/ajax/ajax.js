@@ -1148,6 +1148,21 @@ var urls = {
     'mock': '/data/hosts/metrics/processes.json',
     'testInProduction': true
   },
+  'host.network.closewait': {
+    'real': '/clusters/{clusterName}/hosts/{hostName}?fields=metrics/network/tcp_closewait[{fromSeconds},{toSeconds},{stepSeconds}]',
+    'mock': '/data/hosts/metrics/closewait.json',
+    'testInProduction': true
+  },
+  'host.network.connect': {
+    'real': '/clusters/{clusterName}/hosts/{hostName}?fields=metrics/network/tcp_connect[{fromSeconds},{toSeconds},{stepSeconds}]',
+    'mock': '/data/hosts/metrics/connect.json',
+    'testInProduction': true
+  },
+  'host.network.process': {
+    'real': '/clusters/{clusterName}/hosts/{hostName}?fields=metrics/network/http_process[{fromSeconds},{toSeconds},{stepSeconds}]',
+    'mock': '/data/hosts/metrics/process.json',
+    'testInProduction': true
+  },
   'admin.security_status': {
     'real': '/clusters/{clusterName}?fields=Clusters/security_type',
     'mock': '',

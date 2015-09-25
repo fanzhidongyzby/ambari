@@ -22,6 +22,7 @@
     {{t installer.step8.body}}
   </div>
 
+  {{#if controller.clusterInfo.length}}
   <div id="step8-content" class="well pre-scrollable">
     <div id="step8-info">
       {{#each item in controller.clusterInfo}}
@@ -63,6 +64,7 @@
       </div>
     </div>
   </div>
+  {{/if}}
   <div class="btn-area">
     <a class="btn pull-left installer-back-btn" {{bindAttr disabled="controller.isBackBtnDisabled"}} {{action back}}>&larr; {{t common.back}}</a>
     <a class="btn btn-success pull-right"
