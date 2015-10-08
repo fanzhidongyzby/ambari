@@ -44,11 +44,11 @@ def hostname(config):
       if (0 == osStat.returncode and 0 != len(out.strip())):
         cached_hostname = out.strip()
       else:
-        cached_hostname = socket.getfqdn()
+        cached_hostname = socket.getfqdn().lower()
     except:
-      cached_hostname = socket.getfqdn()
+      cached_hostname = socket.getfqdn().lower()
   except:
-    cached_hostname = socket.getfqdn()
+    cached_hostname = socket.getfqdn().lower()
   return cached_hostname
 
 
