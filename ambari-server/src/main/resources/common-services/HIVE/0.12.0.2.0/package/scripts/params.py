@@ -413,7 +413,7 @@ if security_enabled:
 
 hwi_cmd = "({0}&) &> /dev/null"
 
-hwi_start_command=hwi_cmd.format('/usr/hdp/2.2.0.0-2041/hive/bin/hive --service hwi')
+hwi_start_command=hwi_cmd.format("su hive -c '/usr/hdp/2.2.0.0-2041/hive/bin/hive --service hwi'")
 hwi_exclude_packages = ['mysql-connector-java', 'mysql', 'mysql-server','']
 
 # refractor service path

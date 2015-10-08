@@ -35,6 +35,9 @@
     <tbody>
     {{#each controller}}
       {{#unless isHiddenOnSelectServicePage}}
+        {{#if view.menuTitle}}
+        <tr style="border-bottom:1px solid #D3D4D8;font-size:14px;padding-left:26px"><td>{{view.menuTitle}}</td><td></td><td></td></tr>
+        {{/if}}
         <tr {{bindAttr class="isSelected:success:"}}>
           <td><label class="checkbox">{{view Ember.Checkbox classBinding="serviceName"
           disabledBinding="isInstalled"

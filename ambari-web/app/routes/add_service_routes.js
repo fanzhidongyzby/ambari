@@ -107,7 +107,41 @@ module.exports = App.WizardRoute.extend({
         controller.loadAllPriorSteps().done(function () {
           var wizardStep4Controller = router.get('wizardStep4Controller');
           wizardStep4Controller.set('wizardController', controller);
-          controller.connectOutlet('wizardStep4', controller.get('content.services').filterProperty('isInstallable', true));
+            //服务分类排序
+            var items = controller.get('content.services').filterProperty('isInstallable', true);
+            var category = App.service_category;
+            var new_items = [];
+            var arr_service = [];
+            for (var key in category) {
+                var flag = false;
+                var services = category[key].join(',');
+                for (var i=0; i<items.length; i++) {
+                    var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+                    if (services.indexOf(service_name) != -1) {
+                        if (!flag) {
+                            Em.set(items[i], 'menuTitle', key);
+                            flag = true;
+                        }
+                        arr_service.push(service_name);
+                        new_items.push(items[i]);
+                    }
+                }
+            }
+            if (new_items.length != items.length) {
+                var flag = false;
+                var str_service = arr_service.join(',');
+                for (var i=0; i<items.length; i++) {
+                    var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+                    if (str_service.indexOf(service_name) == -1) {
+                        if (!flag) {
+                            Em.set(items[i], 'menuTitle', '其他');
+                            flag = true;
+                        }
+                        new_items.push(items[i]);
+                    }
+                }
+            }
+          controller.connectOutlet('wizardStep4', new_items);
         });
       });
     },

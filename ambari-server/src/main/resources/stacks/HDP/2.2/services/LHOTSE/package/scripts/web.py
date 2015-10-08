@@ -32,7 +32,9 @@ class Web(Script):
   def install(self, env):
     import params
 
-    self.install_packages(env)
+		excludePackage = [lhotse-base*','mysql-server*','mysql','lhotse-service*','lhotse-runner*','vsftpd*']
+		self.install_packages(env,excludePackage)
+
     self.configure(env)
 
     Links(params.new_lhotse_install_path_web, params.lhotse_install_path_web)

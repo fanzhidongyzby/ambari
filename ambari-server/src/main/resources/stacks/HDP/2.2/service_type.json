@@ -20,6 +20,9 @@
      "PGXZ",
      "REDIS"
   ],
+  "APPLY":[
+     "GOLDENEYE"
+    ],
   "OTHER":[
      "KAFKA",
      "NGINX",

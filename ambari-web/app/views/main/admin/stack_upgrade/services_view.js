@@ -26,8 +26,41 @@ App.MainAdminStackServicesView = Em.View.extend({
    * @type {Array}
    */
   services: function() {
-    var services = App.supports.installGanglia ? App.StackService.find() : App.StackService.find().without(App.StackService.find('GANGLIA'));
-    return services.map(function(s) {
+      var items = App.supports.installGanglia ? App.StackService.find() : App.StackService.find().without(App.StackService.find('GANGLIA'));
+      //服务分类排序
+      var category = App.service_category;
+      var new_items = [];
+      var arr_service = [];
+      for (var key in category) {
+          var flag = false;
+          var services = category[key].join(',');
+          for (var i=0; i<items.length; i++) {
+              var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+              if (services.indexOf(service_name) != -1) {
+                  if (!flag) {
+                      Em.set(items[i], 'menuTitle', key);
+                      flag = true;
+                  }
+                  arr_service.push(service_name);
+                  new_items.push(items[i]);
+              }
+          }
+      }
+      if (new_items.length != items.length) {
+          var flag = false;
+          var str_service = arr_service.join(',');
+          for (var i=0; i<items.length; i++) {
+              var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+              if (str_service.indexOf(service_name) == -1) {
+                  if (!flag) {
+                      Em.set(items[i], 'menuTitle', '其他');
+                      flag = true;
+                  }
+                  new_items.push(items[i]);
+              }
+          }
+      }
+    return new_items.map(function(s) {
 	  var serviceName = s.get('serviceName');
 	  if (serviceName == 'LHOTSE' || serviceName == 'PGXZ' || serviceName == 'THIVE') {
 		s.set('isIencent', true);

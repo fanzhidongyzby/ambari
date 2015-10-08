@@ -28,7 +28,8 @@ class Services(Script):
   def install(self, env):
     import params
 
-    self.install_packages(env)
+		excludePackage = [lhotse-base*','mysql-server*','mysql','lhotse-runner*','lhotse-web*','vsftpd*']
+		self.install_packages(env,excludePackage)
     self.configure(env)
 
     Links(params.new_lhotse_install_path_service, params.lhotse_install_path_service)

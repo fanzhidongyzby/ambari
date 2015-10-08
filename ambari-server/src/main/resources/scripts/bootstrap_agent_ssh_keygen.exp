@@ -1,19 +1,9 @@
 #!/usr/bin/expect 
 
-set homePath       [ lindex $argv 0 ]
-
-if { [ file isfile "${homePath}/.ssh/id_rsa" ] } {
-  send_user "${homePath}/.ssh/id_rsa has exists\n"
-  exit
-}
-
 spawn ssh-keygen -t rsa
-expect "*:"
-send "\r"
-expect "*:"
-send "\r"
-expect "*:"
-send "\r"
-expect "*:"
-send "\r"
-exit
+
+expect {
+    "*y/n)?" {send "\n"; exp_continue}
+    "*:" {send "\n"; exp_continue }
+    eof { exit 0 }
+}

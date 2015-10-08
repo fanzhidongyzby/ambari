@@ -26,6 +26,63 @@ App.MainServiceMenuView = Em.CollectionView.extend({
     var items = App.router.get('mainServiceController.content').filter(function(item){
       return !this.get('disabledServices').contains(item.get('id'));
     }, this);
+	
+	var category = {
+  "接入":[
+     "DSE",
+     "FLUME"
+  ],
+  "计算":[
+     "HIVE",
+     "JSTORM",
+     "TEZ",
+     "THIVE",
+     "MAPREDUCE2"
+  ],
+  "调度":[
+     "LHOTSE",
+     "YARN"
+  ],
+  "存储":[
+     "HBASE",
+     "HDFS",
+     "PGXZ",
+     "REDIS"
+  ]
+};
+	var new_items = [];
+	var arr_service = [];
+	for (var key in category) {
+		var flag = false;
+		var services = category[key].join(',');
+		for (var i=0; i<items.length; i++) {
+			var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+			if (services.indexOf(service_name) != -1) {
+				if (!flag) {
+					Em.set(items[i], 'menuTitle', key);
+					flag = true;
+				}
+				arr_service.push(service_name);
+				new_items.push(items[i]);
+			}
+		}
+	}
+	if (new_items.length != items.length) {
+		var flag = false;
+		var str_service = arr_service.join(',');
+		for (var i=0; i<items.length; i++) {
+			var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+			if (str_service.indexOf(service_name) == -1) {
+				if (!flag) {
+					Em.set(items[i], 'menuTitle', '其他');
+					flag = true;
+				}
+				new_items.push(items[i]);
+			}
+		}
+	}
+	return new_items;
+	
     var stackServices = App.StackService.find().mapProperty('serviceName');
     return misc.sortByOrder(stackServices, items);
   }.property('App.router.mainServiceController.content', 'App.router.mainServiceController.content.length'),
@@ -134,6 +191,61 @@ App.TopNavServiceMenuView = Em.CollectionView.extend({
     var items = App.router.get('mainServiceController.content').filter(function(item){
       return !this.get('disabledServices').contains(item.get('id'));
     }, this);
+	var category = {
+  "接入":[
+     "DSE",
+     "FLUME"
+  ],
+  "计算":[
+     "HIVE",
+     "JSTORM",
+     "TEZ",
+     "THIVE",
+     "MAPREDUCE2"
+  ],
+  "调度":[
+     "LHOTSE",
+     "YARN"
+  ],
+  "存储":[
+     "HBASE",
+     "HDFS",
+     "PGXZ",
+     "REDIS"
+  ]
+};
+	var new_items = [];
+	var arr_service = [];
+	for (var key in category) {
+		var flag = false;
+		var services = category[key].join(',');
+		for (var i=0; i<items.length; i++) {
+			var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+			if (services.indexOf(service_name) != -1) {
+				if (!flag) {
+					Em.set(items[i], 'menuTitle', key);
+					flag = true;
+				}
+				arr_service.push(service_name);
+				new_items.push(items[i]);
+			}
+		}
+	}
+	if (new_items.length != items.length) {
+		var flag = false;
+		var str_service = arr_service.join(',');
+		for (var i=0; i<items.length; i++) {
+			var service_name = Em.get(items[i], 'serviceName').toUpperCase();
+			if (str_service.indexOf(service_name) == -1) {
+				if (!flag) {
+					Em.set(items[i], 'menuTitle', '其他');
+					flag = true;
+				}
+				new_items.push(items[i]);
+			}
+		}
+	}
+	return new_items;
     var stackServices = App.StackService.find().mapProperty('serviceName');
     return misc.sortByOrder(stackServices, items);
   }.property('App.router.mainServiceController.content', 'App.router.mainServiceController.content.length'),

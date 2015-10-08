@@ -106,3 +106,30 @@ App.lhotse_task_type = {
   "119": Em.I18n.t('services.service.info.metrics.lhotse.taskType.119'),
   "120": Em.I18n.t('services.service.info.metrics.lhotse.taskType.120')
 };
+
+/**
+ * 服务分类
+ */
+App.service_category = {
+    "接入":[
+        "DSE",
+        "FLUME"
+    ],
+    "计算":[
+        "HIVE",
+        "JSTORM",
+        "TEZ",
+        "THIVE",
+        "MAPREDUCE2"
+    ],
+    "调度":[
+        "LHOTSE",
+        "YARN"
+    ],
+    "存储":[
+        "HBASE",
+        "HDFS",
+        "PGXZ",
+        "REDIS"
+    ]
+};

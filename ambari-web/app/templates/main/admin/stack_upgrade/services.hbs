@@ -28,6 +28,9 @@
   </thead>
   <tbody>
     {{#each service in view.services}}
+    {{#if service.menuTitle}}
+        <tr style="border-bottom:1px solid #D3D4D8;font-size:14px;padding-left:26px"><td>{{service.menuTitle}}</td><td></td><td></td></tr>
+    {{/if}}
     <tr {{bindAttr class="service.isIencent:success"}}>
       <td class="service-display-name">{{service.displayName}}</td>
       <td class="service-stack-version">{{service.serviceVersion}}</td>
