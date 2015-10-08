@@ -1,0 +1,50 @@
+{
+  "configurations": [
+  ],
+  "host_groups": [
+    {
+      "name": "gateway",
+      "components": [
+        {
+          "name": "AMBARI_SERVER"
+        },
+        {
+          "name": "METRICS_COLLECTOR"
+        },       
+        {
+          "name": "METRICS_MONITOR"
+        },
+        {
+          "name": "ZOOKEEPER_SERVER"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        }          
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "master_2",
+      "components": [
+        {
+          "name": "METRICS_MONITOR"
+        }           
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "slave_1",
+      "components": [
+        {
+          "name" : "METRICS_MONITOR"
+        }  
+      ],
+      "cardinality": "${slavesCount}"
+    }
+  ],
+  "Blueprints": {
+    "blueprint_name": "tdp",
+    "stack_name": "HDP",
+    "stack_version": "2.2"
+  }
+}

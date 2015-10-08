@@ -1,0 +1,77 @@
+{
+  "configurations": [
+  ],
+  "host_groups": [
+    {
+      "name": "gateway",
+      "components": [
+        {
+          "name": "AMBARI_SERVER"
+        },
+        {
+          "name": "NAMENODE"
+        },
+        {
+          "name": "ZOOKEEPER_SERVER"
+        },
+        {
+          "name": "METRICS_COLLECTOR"
+        },
+        {
+          "name": "HDFS_CLIENT"
+        },
+        {
+          "name": "YARN_CLIENT"
+        },        
+        {
+          "name": "METRICS_MONITOR"
+        },
+        {
+          "name": "RESOURCEMANAGER"
+        },
+        {
+          "name": "ZOOKEEPER_CLIENT"
+        }               
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "master_2",
+      "components": [
+        {
+          "name": "HISTORYSERVER"
+        },
+        {
+          "name": "SECONDARY_NAMENODE"
+        },
+        {
+          "name": "METRICS_MONITOR"
+        },
+        {
+          "name": "APP_TIMELINE_SERVER"
+        }               
+      ],
+      "cardinality": "1"
+    },
+    {
+      "name": "slave_1",
+      "components": [
+        {
+          "name" : "METRICS_MONITOR"
+        },
+        {
+          "name": "NODEMANAGER"
+        },
+        {
+          "name": "DATANODE"
+        }     
+      ],
+      "cardinality": "${slavesCount}"
+    }
+  ],
+  "Blueprints": {
+    "blueprint_name": "tdp",
+    "stack_name": "HDP",
+    "stack_version": "2.2"
+  }
+}

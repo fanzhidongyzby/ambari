@@ -1,0 +1,144 @@
+{
+  "configurations": [
+  ],
+  "host_groups" : [
+    {
+      "name" : "gateway",
+      "configurations" : [ ],
+      "components" : [
+        {
+          "name" : "ZOOKEEPER_SERVER"
+        },
+        {
+          "name" : "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name" : "AMBARI_SERVER"
+        },
+        {
+          "name" : "NAMENODE"
+        },
+        {
+          "name" : "NODEMANAGER"
+        },
+        {
+          "name" : "METRICS_COLLECTOR"
+        },
+        {
+          "name" : "METRICS_MONITOR"
+        },
+        {
+          "name" : "LHOTSE_DATABASE"
+        },
+        {
+          "name" : "LHOTSE_WEB"
+        },
+        {
+          "name" : "LHOTSE_SERVICE"
+        },
+        {
+          "name" : "LHOTSE_FTP"
+        },
+        {
+          "name" : "LHOTSE_BASE"
+        }
+      ],
+      "cardinality" : "1"
+    },
+    {
+      "name" : "slave_1",
+      "configurations" : [ ],
+      "components" : [
+        {
+          "name" : "ZOOKEEPER_SERVER"
+        },
+        {
+          "name" : "ZOOKEEPER_CLIENT"
+        },
+        {
+          "name" : "LHOTSE_RUNNER"
+        },
+        {
+          "name" : "HIVE_SERVER"
+        },
+        {
+          "name" : "HIVE_CLIENT"
+        },
+        {
+          "name" : "HDFS_CLIENT"
+        },
+        {
+          "name" : "YARN_CLIENT"
+        },
+        {
+          "name" : "HCAT"
+        },
+        {
+          "name" : "METRICS_MONITOR"
+        },
+        {
+          "name" : "MAPREDUCE2_CLIENT"
+        },
+        {
+          "name" : "DATANODE"
+        },
+        {
+          "name" : "MYSQL_SERVER"
+        },
+        {
+          "name" : "WEBHCAT_SERVER"
+        }
+      ],
+      "cardinality" : "1"
+    },
+    {
+      "name" : "master_2",
+      "configurations" : [ ],
+      "components" : [
+        {
+          "name" : "ZOOKEEPER_SERVER"
+        },
+        {
+          "name" : "LHOTSE_RUNNER"
+        },
+        {
+          "name" : "HIVE_METASTORE"
+        },
+        {
+          "name" : "HISTORYSERVER"
+        },
+        {
+          "name" : "APP_TIMELINE_SERVER"
+        },
+        {
+          "name" : "HDFS_CLIENT"
+        },
+        {
+          "name" : "GOLDENEYE_WEB"
+        },
+        {
+          "name" : "METRICS_MONITOR"
+        },
+        {
+          "name" : "GOLDENEYE_METADATA_DATABASE"
+        },
+        {
+          "name" : "SECONDARY_NAMENODE"
+        },
+        {
+          "name" : "DATANODE"
+        },
+        {
+          "name" : "RESOURCEMANAGER"
+        }
+      ],
+      "cardinality" : "1"
+    }
+  ],
+  "Blueprints": {
+    "blueprint_name": "tdp",
+    "stack_name": "HDP",
+    "stack_version": "2.2"
+  }
+}
+
