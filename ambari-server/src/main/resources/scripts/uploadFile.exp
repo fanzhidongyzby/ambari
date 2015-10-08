@@ -1,0 +1,28 @@
+#!/usr/bin/expect
+##############################################################
+## @Company: TENCENT Tech. Co., Ltd.
+## @Filename uploadFile.exp
+## @Usage 	 upload File
+## @Description upload File
+## @Options 
+## @History
+## @Version V100R00C00
+## @Created 2013.04.10
+##############################################################
+
+set remoteIP 		[lindex $argv 0]
+set remoteUserName 	[lindex $argv 1]
+set remotePassword 	[lindex $argv 2]
+set uploadFile 		[lindex $argv 3]
+set uploadPath 		[lindex $argv 4]
+set cmdTimeout 		[lindex $argv 5]
+
+set timeout ${cmdTimeout}
+spawn scp -r ${uploadFile} ${remoteUserName}@${remoteIP}:${uploadPath}
+expect {
+	"*yes/no)?" {send "yes\n"; exp_continue}
+	"*assword:"	{ send "${remotePassword}\n"; exp_continue}
+	"Last login:" {}
+	timeout 	{ exit 2}
+	eof			{exit 0}
+}
