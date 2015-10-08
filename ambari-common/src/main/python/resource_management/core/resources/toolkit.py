@@ -115,7 +115,8 @@ class Toolkit():
   @staticmethod
   def remove_links_dir(dir):
     Logger.info("remove links directory: {0}".format(dir))
-    cmd = "DIR={0}; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR".format(dir)
+    # cmd = "DIR={0}; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR".format(dir)
+    cmd = "DIR={0}; for x in $(find $DIR -type l); do tar=$(readlink -f $x); if [[ -d $tar ]]; then tar=${tar}/*; rm -rf $tar; fi; done; rm -rf $DIR".format(dir)
     Toolkit.exe(cmd)
 
   # convert var to array, if var is already list, return itself
@@ -151,18 +152,18 @@ class Toolkit():
       Package(pack, action = "remove")
 
   # uninstall service, including yum package and install directory
-  # package : yum package's or packages' name
   # service : service name
+  # reserve : whether to reserve data
   # return : None
   @staticmethod
-  def uninstall_service(package, service):
+  def uninstall_service(service, reserve = False):
     service = service.lower()
     Logger.info("uninstalling service {0}".format(service))
-    Toolkit.yum_remove(package)
-    paths = ["/opt", "/etc", "/data", "/var/log"]
-    for path in paths:
-      path += "/tbds/" + service
-      Toolkit.remove_links_dir(path)
+
+    if not reserve:
+      Toolkit.remove_links_dir("/data/tbds/" + service)
+
+    Toolkit.remove_links_dir("/var/log/tbds/" + service)
 
   # kill all the child processes of the specified pid
   # return : None 

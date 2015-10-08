@@ -11,18 +11,21 @@ import fileinput
 from command import *
 from log import logger
 
-def exe(cmd):
+def exe(cmd, test = False):
   logger.debug("RUNING command: {0}".format(cmd))
   # str = raw_input("confirm to continue(Y/no): ")
   # if str == "no":
   #   sys.exit(0)
   (status, output) = commands.getstatusoutput(cmd)
-  if status != 0:
-    logger.error("command exec error, return code = {0}".format(status))
-    logger.error(output)
-    sys.exit(-1)
-  logger.debug(output)
-  return output
+  if not test:
+    if status != 0:
+      logger.error("command exec error, return code = {0}".format(status))
+      logger.error(output)
+      sys.exit(-1)
+    logger.debug(output)
+    return output
+  else:
+    return status == 0, output
 
 def readHosts(path):
   lines = []
@@ -123,6 +126,27 @@ if __name__ == '__main__':
   curlPut = curl.format("-X PUT", "{0}")
   curlDelete = curl.format("-X DELETE", "{0}")
 
+  logger.info("Waiting tbds-server to be ready ...")
+  counter = 0
+  while True:
+    (ready, info) = exe(curlGet.format("/hosts"), test = True)
+    if not ready:
+      time.sleep(1)
+      counter += 1
+      if counter > 30:
+        logger.error("Waiting tbds-server ready timeout !")
+        sys.exit(-1)
+    else:
+      break
+
+
+  ######################################################################################################
+  logger.info("Adding license {0} to cluster".format(cmd.license))
+
+  # save license
+  exe(curlPost.format(cmd.license, "/license"))
+
+  ######################################################################################################
 
   logger.info("Registering hosts configured in {0}".format(cmd.hosts))
   # send request to add hosts: {"status":"OK","log":"Running Bootstrap now.","requestId":1}
@@ -152,10 +176,6 @@ if __name__ == '__main__':
       break
 
   ######################################################################################################
-  logger.info("Adding license {0} to cluster".format(cmd.license))
-
-  # save license
-  exe(curlPost.format(cmd.license, "/license"))
 
   logger.info("Running blueprint to install tbds case {0}".format(cmd.case))
   # cluster prepare ok, use blueprint to install
@@ -193,7 +213,8 @@ if __name__ == '__main__':
       time.sleep(60)
     elif status == "COMPLETED":
       clusterReady = True
-    elif status == "FAILED":
+    else:
+      logger.error("Excepted status {0} returned when install cluster {1}".format(status, clusterName))
       clusterReady = False
 
     print exe(bar.format(percent, title))
