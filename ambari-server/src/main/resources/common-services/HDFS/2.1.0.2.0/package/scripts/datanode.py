@@ -39,6 +39,8 @@ class DataNode(Script):
     Links(params.new_hdfs_install_path, params.hdfs_install_path)
     Links(params.new_hdfs_config_path, params.hdfs_config_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hdfs")
 
   def pre_rolling_restart(self, env):
     Logger.info("Executing DataNode Rolling Upgrade pre-restart")

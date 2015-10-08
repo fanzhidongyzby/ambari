@@ -32,6 +32,9 @@ class UiServer(Script):
     env.set_params(params)
     self.install_packages(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("jstorm")
+
   def configure(self, env):
     import params
     env.set_params(params)

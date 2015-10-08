@@ -68,6 +68,9 @@ class NameNode(Script):
     Links(params.new_hdfs_install_path, params.hdfs_install_path)
     Links(params.new_hdfs_config_path, params.hdfs_config_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hdfs")
+
   def prepare_rolling_upgrade(self, env):
     namenode_upgrade.prepare_rolling_upgrade()
 

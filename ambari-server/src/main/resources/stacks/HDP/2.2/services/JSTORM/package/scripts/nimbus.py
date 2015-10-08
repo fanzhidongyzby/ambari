@@ -36,6 +36,9 @@ class Nimbus(Script):
     Links(params.new_jstorm_config_path, params.jstorm_config_path)
     Links(params.new_jstorm_log_path, params.jstorm_log_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("jstorm")
+
   def configure(self, env):
     import params
     env.set_params(params)

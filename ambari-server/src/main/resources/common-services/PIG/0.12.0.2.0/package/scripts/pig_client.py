@@ -40,6 +40,9 @@ class PigClient(Script):
     self.install_packages(env)
     self.configure(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pig")
+
   def configure(self, env):
     import params
     env.set_params(params)

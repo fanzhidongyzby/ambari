@@ -40,6 +40,8 @@ class mysqlServer(Script):
         cmd = params.mysql_init_command
         utils().exe(cmd)
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("dse")
 
     def configure(self, env):
         import params

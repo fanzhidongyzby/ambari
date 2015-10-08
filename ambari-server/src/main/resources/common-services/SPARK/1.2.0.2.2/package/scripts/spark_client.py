@@ -42,6 +42,9 @@ class SparkClient(Script):
     self.install_packages(env)
     self.configure(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("spark")
+
   def configure(self, env):
     import params
 

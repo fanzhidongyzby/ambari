@@ -32,6 +32,9 @@ class HCatClient(Script):
     self.install_packages(env, exclude_packages=params.hive_exclude_packages)
     self.configure(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hive")
+
   def configure(self, env):
     import params
     env.set_params(params)

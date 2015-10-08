@@ -30,6 +30,9 @@ class NMHaproxy(Script):
     excludePackage = ['docker-ng', 'resource_monitor', 'portal_api_server', 'resource_monitor']
     self.install_packages(env,excludePackage)
 
+    def uninstall(self, env):
+      Toolkit.uninstall_service("gaia")
+
 
   def configure(self, env):
     print 'configure Haproxy on NodeManager'

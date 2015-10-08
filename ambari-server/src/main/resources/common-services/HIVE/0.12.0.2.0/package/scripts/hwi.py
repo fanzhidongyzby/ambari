@@ -28,6 +28,9 @@ class HWI(Script):
     import params
     Toolkit.yum_install("hive-hwi")
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hive")
+
   def start(self, env):
         import os
         import params

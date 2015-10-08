@@ -37,6 +37,9 @@ class Gtm(Script):
     Links(params.new_pgxz_conf_path_gtm, params.pgxz_conf_path_gtm)
     Links(params.new_pgxz_data_path_gtm, params.pgxz_data_path_gtm)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxz")
+
   def start(self, env):
     import params
     Logger.info("create gtm config")

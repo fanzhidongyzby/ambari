@@ -43,6 +43,9 @@ class Nodemanager(Script):
     Links(params.new_yarn_install_path, params.yarn_install_path)
     Links(params.new_yarn_config_path, params.yarn_config_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("yarn")
+
   def configure(self, env):
     import params
     env.set_params(params)

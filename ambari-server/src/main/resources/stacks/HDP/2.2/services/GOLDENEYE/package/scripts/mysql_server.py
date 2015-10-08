@@ -41,6 +41,9 @@ class MysqlServer(Script):
     Links(params.new_goldeneye_conf_path_metadb, params.goldeneye_conf_path_metadb)
     Links(params.new_goldeneye_log_path_metadb, params.goldeneye_log_path_metadb)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("goldeneye")
+
   def configure(self, env):
     import params
     env.set_params(params)

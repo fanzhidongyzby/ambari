@@ -18,6 +18,7 @@ limitations under the License.
 """
 
 from kerberos_common import *
+from resource_management import *
 
 class KerberosServer(KerberosScript):
   @staticmethod
@@ -79,6 +80,9 @@ class KerberosServer(KerberosScript):
     # Create or update the administrator account
     KerberosScript.create_or_update_administrator_identity()
 
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("kerberos")
 
   def start(self, env):
     os_family = System.get_instance().os_family

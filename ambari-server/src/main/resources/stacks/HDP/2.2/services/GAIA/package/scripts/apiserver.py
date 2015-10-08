@@ -32,6 +32,8 @@ class ApiServer(Script):
         excludePackage = ['docker-ng','hadoop-ng','haproxy-ng','resource_monitor']
         self.install_packages(env,excludePackage)
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("gaia")
 
     def configure(self, env):
         configinit().update_apiserver_configs(env)

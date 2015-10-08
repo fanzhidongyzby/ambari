@@ -36,6 +36,10 @@ class etcd(Script):
         cmd = cmd + " -initial-cluster-state new >>/gaia/etcd/backup/etcd.log  2>&1 &"
         cmd = "su gaia -c '{}'".format(cmd)
         utils().exe(cmd)
+        Links(params.new_etcd_install_path, params.etcd_install_path)
+
+    def uninstall(self, env):
+        Toolkit.uninstall_service("etcd")
 
     def configure(self, env):
         print 'configured etcd'

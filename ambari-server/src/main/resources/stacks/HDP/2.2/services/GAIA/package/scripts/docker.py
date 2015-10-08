@@ -30,6 +30,9 @@ class Docker(Script):
     excludePackage = ['haproxy-ng', 'hadoop-ng', 'portal_api_server', 'resource_monitor']
     self.install_packages(env,excludePackage)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("gaia")
+
 
   def configure(self, env):
     print 'configure Docker'

@@ -32,6 +32,9 @@ class EasyCountClient(Script):
         import params
         Links(params.new_easycount_install_path, params.easycount_install_path)
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("easycount")
+
     def configure(self, env):
         import params
         env.set_params(params)

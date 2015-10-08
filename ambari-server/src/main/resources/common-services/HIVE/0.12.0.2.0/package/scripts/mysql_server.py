@@ -38,6 +38,9 @@ class MysqlServer(Script):
     Links(params.new_hive_log_path_mysql, params.hive_log_path_mysql)
     Links(params.new_hive_data_path_mysql, params.hive_data_path_mysql)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hive")
+
   def clean(self, env):
     import params
     env.set_params(params)

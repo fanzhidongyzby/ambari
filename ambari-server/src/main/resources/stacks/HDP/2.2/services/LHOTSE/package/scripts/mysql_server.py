@@ -36,7 +36,10 @@ class MysqlServer(Script):
     Links(params.new_lhotse_log_path_mysql, params.lhotse_log_path_mysql)
     Links(params.new_lhotse_config_path_mysql, params.lhotse_config_path_mysql)
     Links(params.new_lhotse_data_path_mysql, params.lhotse_data_path_mysql)
-    
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("lhotse")
+
   def configure(self, env):
     import params
     env.set_params(params)

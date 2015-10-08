@@ -34,6 +34,9 @@ class ResourceMonitor(Script):
     utils().grant_local_privilege(env)
 
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("gaia")
+
   def configure(self, env):
     print 'configure ResourceMonitor'
 

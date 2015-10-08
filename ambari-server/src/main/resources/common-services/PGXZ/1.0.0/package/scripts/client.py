@@ -28,6 +28,9 @@ class Client(Script):
     self.install_packages(env)
     Logger.info("pgxz client is installed")
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxz")
+
   def configure(self, env):
     Logger.info("config pgxz client")
 

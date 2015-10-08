@@ -49,6 +49,9 @@ class JobHistoryServer(Script):
     import params
     env.set_params(params)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("spark")
+
   def stop(self, env, rolling_restart=False):
     import params
 

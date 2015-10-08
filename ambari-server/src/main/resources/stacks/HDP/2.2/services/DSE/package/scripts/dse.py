@@ -37,6 +37,10 @@ class dse(Script):
         Links(params.new_dse_log_path, params.dse_log_path)
 
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("dse")
+
+
     def configure(self, env):
         import params
         Logger.info('update config')

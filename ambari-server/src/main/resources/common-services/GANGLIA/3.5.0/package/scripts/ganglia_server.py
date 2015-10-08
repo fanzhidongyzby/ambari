@@ -37,6 +37,9 @@ class GangliaServer(Script):
     functions.turn_off_autostart(params.gmond_service_name) # since the package is installed as well
     functions.turn_off_autostart("gmetad")
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("ganglia")
+
   def start(self, env, rolling_restart=False):
     import params
     env.set_params(params)

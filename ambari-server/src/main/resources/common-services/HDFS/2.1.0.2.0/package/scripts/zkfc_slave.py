@@ -33,6 +33,9 @@ class ZkfcSlave(Script):
     self.install_packages(env, params.exclude_packages)
     env.set_params(params)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hdfs")
+
   def start(self, env, rolling_restart=False):
     import params
 

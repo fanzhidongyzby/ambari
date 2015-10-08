@@ -47,12 +47,20 @@ class SliderClient(Script):
     self.install_packages(env)
     self.configure(env)
 
+  @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
+  def uninstall(self, env):
+    Toolkit.uninstall_service("slider")
+
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
   def install(self, env):
     import params
     if params.slider_home is None:
       self.install_packages(env)
     self.configure(env)
+
+  @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
+  def uninstall(self, env):
+    Toolkit.uninstall_service("slider")
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
   def configure(self, env):

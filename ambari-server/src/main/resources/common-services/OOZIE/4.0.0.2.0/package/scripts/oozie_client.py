@@ -34,6 +34,8 @@ class OozieClient(Script):
     self.install_packages(env)
     self.configure(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("oozie")
 
   def configure(self, env):
     import params

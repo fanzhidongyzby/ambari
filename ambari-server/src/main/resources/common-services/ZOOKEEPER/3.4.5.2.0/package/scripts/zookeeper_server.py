@@ -49,6 +49,9 @@ class ZookeeperServer(Script):
     Links(params.new_zookeeper_install_path, params.zookeeper_install_path)
     Links(params.new_zookeeper_config_path, params.zookeeper_config_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("zookeeper")
+
   def configure(self, env):
     import params
     env.set_params(params)

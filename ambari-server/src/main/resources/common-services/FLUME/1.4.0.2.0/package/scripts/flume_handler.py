@@ -44,6 +44,9 @@ class FlumeHandler(Script):
 
     Links(params.new_flume_install_path, params.flume_install_path)
 
+  @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
+  def uninstall(self, env):
+    Toolkit.uninstall_service("flume")
 
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
   def install(self, env):
@@ -53,6 +56,10 @@ class FlumeHandler(Script):
 
     import params
     Links(params.new_flume_install_path, params.flume_install_path)
+
+  @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
+  def uninstall(self, env):
+    Toolkit.uninstall_service("flume")
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
   def start(self, env, rolling_restart=False):

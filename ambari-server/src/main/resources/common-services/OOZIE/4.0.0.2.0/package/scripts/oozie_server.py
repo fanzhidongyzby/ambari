@@ -20,6 +20,7 @@ limitations under the License.
 
 import oozie_server_upgrade
 
+from resource_management import *
 from resource_management.core import Logger
 from resource_management.core.resources.system import Execute
 from resource_management.libraries.functions import format
@@ -45,6 +46,9 @@ class OozieServer(Script):
   def install(self, env):
     self.install_packages(env)
 
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("oozie")
 
   def configure(self, env):
     import params

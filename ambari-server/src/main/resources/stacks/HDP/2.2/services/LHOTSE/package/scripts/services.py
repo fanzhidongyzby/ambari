@@ -28,13 +28,16 @@ class Services(Script):
   def install(self, env):
     import params
 
-		excludePackage = [lhotse-base*','mysql-server*','mysql','lhotse-runner*','lhotse-web*','vsftpd*']
-		self.install_packages(env,excludePackage)
+    excludePackage = ['lhotse-base*','mysql-server*','mysql','lhotse-runner*','lhotse-web*','vsftpd*']
+    self.install_packages(env,excludePackage)
     self.configure(env)
 
     Links(params.new_lhotse_install_path_service, params.lhotse_install_path_service)
     Links(params.new_lhotse_log_path_service, params.lhotse_log_path_service)
     Links(params.new_lhotse_config_path_service, params.lhotse_config_path_service)
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("lhotse")
 
   def configure(self, env):
     import params

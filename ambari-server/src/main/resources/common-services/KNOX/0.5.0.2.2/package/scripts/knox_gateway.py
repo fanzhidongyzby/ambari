@@ -47,6 +47,10 @@ class KnoxGateway(Script):
          action = "delete",
     )
 
+  @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
+  def uninstall(self, env):
+    Toolkit.uninstall_service("knox")
+
   @OsFamilyFuncImpl(os_family=OSConst.WINSRV_FAMILY)
   def install(self, env):
     import params
@@ -57,6 +61,10 @@ class KnoxGateway(Script):
     File(os.path.join(params.knox_conf_dir, 'topologies', 'sandbox.xml'),
          action = "delete",
     )
+
+  @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)
+  def uninstall(self, env):
+    Toolkit.uninstall_service("knox")
 
   def configure(self, env):
     import params

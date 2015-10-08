@@ -29,6 +29,9 @@ from hbase_decommission import hbase_decommission
 class HbaseMaster(Script):
   def install(self, env):
     self.install_packages(env)
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("metrics")
     
   def configure(self, env):
     import params

@@ -37,6 +37,9 @@ class ResourceManager(Script):
         self.install_packages(env,excludePackage)
 
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("gaia")
+
     def configure(self, env):
         print 'configured ResourceManager'
         configinit().update_rm_configs(env)

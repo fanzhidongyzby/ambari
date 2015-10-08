@@ -36,6 +36,8 @@ class Agent(Script):
     Links(params.new_pgxzm_log_path_agent, params.pgxzm_log_path_agent)
     Links(params.new_pgxzm_conf_agent, params.pgxzm_conf_agent)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxzm")
 
   def configure(self, env):
     Logger.info('configure Agent')

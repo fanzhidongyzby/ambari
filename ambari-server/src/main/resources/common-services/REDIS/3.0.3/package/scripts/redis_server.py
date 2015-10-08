@@ -41,6 +41,9 @@ class RedisServer(Script):
     Links(params.new_redis_config_path, params.redis_config_path)
     Links(params.new_redis_data_path, params.redis_data_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("redis")
+
   def configure(self, env):
     import params
     env.set_params(params)

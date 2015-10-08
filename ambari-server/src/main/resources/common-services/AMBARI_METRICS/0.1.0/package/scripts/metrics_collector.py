@@ -37,7 +37,8 @@ class AmsCollector(Script):
     Links(params.new_metrics_install_path_collector_lib, params.metrics_install_path_collector_lib)
     Links(params.new_metrics_config_path_collector, params.metrics_config_path_collector)
 
-
+  def uninstall(self, env):
+    Toolkit.uninstall_service("metrics")
 
   def configure(self, env):
     import params

@@ -65,7 +65,10 @@ class PgMaster(Script):
     Links(params.new_thive_conf_path_pgsql, params.thive_conf_path_pgsql)
     Links(params.new_thive_log_path_pgsql, params.thive_log_path_pgsql)
     Links(params.new_thive_data_path_pgsql, params.thive_data_path_pgsql)
-    
+
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("thive")
 
   def start(self, env):
     import params

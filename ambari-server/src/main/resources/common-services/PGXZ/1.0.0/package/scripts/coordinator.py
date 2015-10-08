@@ -37,6 +37,9 @@ class Coordinator(Script):
     Links(params.new_pgxz_conf_path_coordinator, params.pgxz_conf_path_coordinator)
     Links(params.new_pgxz_data_path_coordinator, params.pgxz_data_path_coordinator)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxz")
+
   def start(self, env):
     import params
     Logger.info("create coordinator config")

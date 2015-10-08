@@ -29,7 +29,10 @@ class FalconClient(Script):
   def install(self, env):
     self.install_packages(env)
     self.configure(env)
-  
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("falcon")
+
   def configure(self, env):
     import params
 

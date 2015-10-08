@@ -37,6 +37,9 @@ class Supervisor(Script):
     self.install_packages(env)
     self.configure(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("storm")
+
   def configure(self, env):
     import params
     env.set_params(params)

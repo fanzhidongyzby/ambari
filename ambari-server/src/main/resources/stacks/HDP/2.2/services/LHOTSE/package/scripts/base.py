@@ -18,6 +18,9 @@ class Base(Script):
     Links(params.new_lhotse_log_path_base, params.lhotse_log_path_base)
     Links(params.new_lhotse_config_path_base, params.lhotse_config_path_base)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("lhotse")
+
   def start(self, env):
     import params
     print 'call self.config'

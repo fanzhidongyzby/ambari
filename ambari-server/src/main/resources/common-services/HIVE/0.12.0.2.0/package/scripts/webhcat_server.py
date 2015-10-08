@@ -38,6 +38,8 @@ class WebHCatServer(Script):
     Links(params.new_hive_install_path, params.hive_install_path)
     Links(params.new_hive_config_path, params.hive_config_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hive")
 
   def configure(self, env):
     import params

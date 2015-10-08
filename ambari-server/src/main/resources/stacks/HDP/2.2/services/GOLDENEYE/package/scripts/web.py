@@ -39,6 +39,9 @@ class Web(Script):
     Links(params.new_goldeneye_conf_path_web, params.goldeneye_conf_path_web)
     Links(params.new_goldeneye_log_path_web, params.goldeneye_log_path_web)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("goldeneye")
+
   def configure(self, env):
     import params
     env.set_params(params)

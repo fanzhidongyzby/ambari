@@ -34,6 +34,9 @@ class AmsMonitor(Script):
     Links(params.new_metrics_config_path_hbase, params.metrics_config_path_hbase)
     Links(params.new_metrics_config_path_monitor, params.metrics_config_path_monitor)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("metrics")
+
   def configure(self, env):
     import params
     env.set_params(params)

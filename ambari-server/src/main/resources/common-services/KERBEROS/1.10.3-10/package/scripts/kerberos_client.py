@@ -18,6 +18,7 @@ limitations under the License.
 """
 
 from kerberos_common import *
+from resource_management import *
 from resource_management.libraries.functions.security_commons import cached_kinit_executor
 
 class KerberosClient(KerberosScript):
@@ -25,6 +26,9 @@ class KerberosClient(KerberosScript):
     self.install_packages(env, ['krb5-server', 'krb5-libs', 'krb5-auth-dialog', 'krb5', 'krb5-kdc', 'krb5-admin-server'])
     self.configure(env)
 
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("kerberos")
 
   def configure(self, env):
     import params

@@ -36,6 +36,9 @@ class Master(Script):
 
     configinit().init_checkstatus_script()
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("thive")
+
   def start(self, env):
     import params
     env.set_params(params)

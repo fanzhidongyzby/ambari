@@ -34,6 +34,8 @@ class Web(Script):
     Links(params.new_pgxzm_install_path, params.pgxzm_install_path)
     Links(params.new_pgxzm_conf_web, params.pgxzm_conf_web)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxzm")
 
   def configure(self, env):
     Logger.info('configure Web')

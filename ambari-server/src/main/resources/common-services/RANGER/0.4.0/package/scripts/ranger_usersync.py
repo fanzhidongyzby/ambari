@@ -36,6 +36,9 @@ class RangerUsersync(Script):
     self.install_packages(env)
     self.configure(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("ranger")
+
   def stop(self, env, rolling_restart=False):
     import params
 

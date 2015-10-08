@@ -41,6 +41,9 @@ class JournalNode(Script):
     self.install_packages(env, params.exclude_packages)
     env.set_params(params)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hdfs")
+
   def pre_rolling_restart(self, env):
     Logger.info("Executing Rolling Upgrade pre-restart")
     import params

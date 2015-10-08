@@ -27,6 +27,9 @@ class SampleClient(Script):
 
     self.install_packages(env,excludePackage)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("thive")
+
   def configure(self, env):
     print 'Configure the Sample Srv Client';
 if __name__ == "__main__":

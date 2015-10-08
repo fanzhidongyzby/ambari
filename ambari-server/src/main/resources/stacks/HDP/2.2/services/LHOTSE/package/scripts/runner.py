@@ -9,9 +9,9 @@ class Runner(Script):
   def install(self, env):
     import params
 
-    print 'Install the Runner Slave';
-		excludePackage = [lhotse-base*','mysql-server*','mysql','lhotse-service*','lhotse-web*','vsftpd*']
-		self.install_packages(env,excludePackage)
+    print 'Install the Runner Slave'
+    excludePackage = ['lhotse-base*','mysql-server*','mysql','lhotse-service*','lhotse-web*','vsftpd*']
+    self.install_packages(env,excludePackage)
 
     self.configure(env)
 
@@ -27,6 +27,9 @@ class Runner(Script):
     Links(params.new_lhotse_config_path_runner, params.lhotse_config_path_runner)
     Links(params.new_lhotse_config_path_runner_cgi, params.lhotse_config_path_runner_cgi)
 
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("lhotse")
 
   def stop(self, env):
     import params

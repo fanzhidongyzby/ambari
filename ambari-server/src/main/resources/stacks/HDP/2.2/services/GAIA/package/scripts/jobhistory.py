@@ -31,6 +31,9 @@ class JobHistory(Script):
         excludePackage = ['docker-ng','haproxy-ng','resource_monitor','portal_api_server']
         self.install_packages(env,excludePackage)
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("gaia")
+
 
     def configure(self, env):
         print 'configured JobHistory server'

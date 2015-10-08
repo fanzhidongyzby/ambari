@@ -34,8 +34,11 @@ class NodeManager(Script):
     Logger.info("install NodeManager")  
     excludePackage = ['docker-ng','haproxy-ng','resource_monitor','portal_api_server']
     self.install_packages(env,excludePackage)
-  
-  
+
+  def uninstall(self, env):
+    Toolkit.uninstall_service("gaia")
+
+
   def configure(self, env):
     print 'configure NodeManager'
     configinit().update_nm_configs(env)

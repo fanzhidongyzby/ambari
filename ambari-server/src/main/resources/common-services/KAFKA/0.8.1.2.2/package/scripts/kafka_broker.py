@@ -36,6 +36,9 @@ class KafkaBroker(Script):
     Links(params.new_kafka_install_path, params.kafka_install_path)
     Links(params.new_kafka_config_path, params.kafka_config_path)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("kafka")
+
   def configure(self, env):
     import params
     env.set_params(params)

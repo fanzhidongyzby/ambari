@@ -35,6 +35,8 @@ class Center(Script):
     Links(params.new_pgxzm_log_path_center, params.pgxzm_log_path_center)
     Links(params.new_pgxzm_conf_center, params.pgxzm_conf_center)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxzm")
 
   def configure(self, env):
     Logger.info('configure Center')

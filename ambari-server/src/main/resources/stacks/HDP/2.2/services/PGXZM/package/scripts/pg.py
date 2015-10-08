@@ -40,6 +40,8 @@ class Pg(Script):
     Links(params.new_pgxzm_data_path_pgsql, params.pgxzm_data_path_pgsql)
     Links(params.new_pgxzm_conf_path_pgsql, params.pgxzm_conf_path_pgsql)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("pgxzm")
 
   def configure(self, env):
     Logger.info('configure Pg')

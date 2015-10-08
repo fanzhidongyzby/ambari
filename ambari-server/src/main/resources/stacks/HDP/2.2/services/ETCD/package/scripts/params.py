@@ -44,3 +44,10 @@ etcd_start_cmd = "/gaia/etcd/etcd -name {} -data-dir=/gaia/etcd/backup -initial-
 
 
 etcd_keyword = "/gaia/etcd/etcd"
+
+
+# refractor service path
+etcd_install_path = "/gaia/etcd"
+
+new_etcd_install_path = "/opt/tbds/etcd"
+

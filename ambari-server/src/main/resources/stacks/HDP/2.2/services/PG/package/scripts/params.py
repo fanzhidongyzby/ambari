@@ -116,5 +116,13 @@ pg_restart_command = pg_init_path + "pg_ctl  -D "+ pgxx_install_path +" -l " + p
 pg_restart =  "su " + pgxx_user + " -c '" + pg_restart_command +"'"
 #pg_restart = "service  postgresql-9.3 restart"
 
+# refractor service path
+
+postgresql_install_path = "/usr/pgsql-9.3"
+postgresql_data_path =  default("/configurations/postgresql-main-env/postgresql.install.path","/data/postgre/data")
+postgresql_log_path =  default("/configurations/postgresql-main-env/postgresql.log.path","/data/postgre/log")
 
 
+new_postgresql_install_path = "/opt/tbds/postgresql"
+new_postgresql_data_path = "/data/tbds/postgresql"
+new_postgresql_log_path = "/var/log/tbds/postgresql"

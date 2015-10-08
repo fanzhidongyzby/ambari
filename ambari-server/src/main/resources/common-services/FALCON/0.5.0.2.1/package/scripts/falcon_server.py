@@ -37,6 +37,8 @@ class FalconServer(Script):
     self.install_packages(env)
     env.set_params(params)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("falcon")
 
   def start(self, env, rolling_restart=False):
     import params

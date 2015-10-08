@@ -37,6 +37,9 @@ class nginx(Script):
         Links(params.new_nginx_config_path, params.nginx_config_path)
         Links(params.new_nginx_log_path, params.nginx_log_path)
 
+    def uninstall(self, env):
+        Toolkit.uninstall_service("nginx")
+
 
     def configure(self, env):
         import params

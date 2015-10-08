@@ -37,6 +37,9 @@ class HdfsClient(Script):
     env.set_params(params)
     self.config(env)
 
+  def uninstall(self, env):
+    Toolkit.uninstall_service("hdfs")
+
   def pre_rolling_restart(self, env):
     import params
     env.set_params(params)
