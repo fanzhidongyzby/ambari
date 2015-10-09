@@ -86,6 +86,18 @@ var urls = {
       };
     }
   },
+  
+
+  'common.service.delete' : {
+    'real': '/clusters/{clusterName}/services/{serviceName}',
+    'mock': '/data/wizard/deploy/poll_1.json',
+    'format': function (data) {
+      return {
+        type: 'DELETE',
+        data: ''
+      };
+    }
+  },
 
   'common.service_component.info' : {
     'real': '/clusters/{clusterName}/services/{serviceName}/components/{componentName}?{urlParams}',

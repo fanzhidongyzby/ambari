@@ -27,29 +27,7 @@ App.MainServiceMenuView = Em.CollectionView.extend({
       return !this.get('disabledServices').contains(item.get('id'));
     }, this);
 	
-	var category = {
-  "接入":[
-     "DSE",
-     "FLUME"
-  ],
-  "计算":[
-     "HIVE",
-     "JSTORM",
-     "TEZ",
-     "THIVE",
-     "MAPREDUCE2"
-  ],
-  "调度":[
-     "LHOTSE",
-     "YARN"
-  ],
-  "存储":[
-     "HBASE",
-     "HDFS",
-     "PGXZ",
-     "REDIS"
-  ]
-};
+	var category = App.service_category;
 	var new_items = [];
 	var arr_service = [];
 	for (var key in category) {
@@ -191,29 +169,7 @@ App.TopNavServiceMenuView = Em.CollectionView.extend({
     var items = App.router.get('mainServiceController.content').filter(function(item){
       return !this.get('disabledServices').contains(item.get('id'));
     }, this);
-	var category = {
-  "接入":[
-     "DSE",
-     "FLUME"
-  ],
-  "计算":[
-     "HIVE",
-     "JSTORM",
-     "TEZ",
-     "THIVE",
-     "MAPREDUCE2"
-  ],
-  "调度":[
-     "LHOTSE",
-     "YARN"
-  ],
-  "存储":[
-     "HBASE",
-     "HDFS",
-     "PGXZ",
-     "REDIS"
-  ]
-};
+	var category = App.service_category;
 	var new_items = [];
 	var arr_service = [];
 	for (var key in category) {

@@ -30,6 +30,11 @@ class RedisServer(Script):
     if code:
         Logger.warning("Failed to remove 95-redis.conf")
 
+    #create the parent directory of log file
+    dirIndex = params.redis_log_file.rindex("/")
+    parentDir = params.redis_log_file[0:dirIndex]
+    Directory(parentDir)
+    #create log file
     File(params.redis_log_file,
          owner=params.redis_user,
          group='hadoop',

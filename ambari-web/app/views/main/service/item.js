@@ -53,6 +53,13 @@ App.MainServiceItemView = Em.View.extend({
         cssClass: 'icon-repeat',
         disabled: false
       },
+	  UNINSTALL: {
+        action: 'uninstallComponents',
+        context: this.get('serviceName'),
+        label: '卸载',
+        cssClass: 'icon-download-alt',
+        disabled: false
+      },
       RUN_SMOKE_TEST: {
         action: 'runSmokeTest',
         label: Em.I18n.t('services.service.actions.run.smoke'),

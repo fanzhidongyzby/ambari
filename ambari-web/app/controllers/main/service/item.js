@@ -455,6 +455,62 @@ App.MainServiceItemController = Em.Controller.extend({
       batchUtils.restartAllServiceHostComponents(serviceName, false, query, runMmOperation);
     }, bodyMessage);
   },
+  
+  // 卸载
+  uninstallComponents : function(serviceName) {
+	if (this.get('content.healthStatus') != 'red') {
+		return App.showAlertPopup(Em.I18n.t('common.error'), '请先停止该服务');
+	}
+	var _self = this;
+    return App.showConfirmationFeedBackPopup(function(query) {
+		_self.uninstallUpdate(query);
+    });
+  },
+  
+  // 先update
+  uninstallUpdate : function (query) {
+	var data = {
+	  'context': '卸载'+this.get('content.serviceName'),
+	  'serviceName': this.get('content.serviceName').toUpperCase(),
+	  'ServiceInfo': {
+		 'state': 'UNINSTALLED'
+	   },
+	  'query': query
+	};
+
+	return App.ajax.send({
+	  'name': 'common.service.update',
+	  'sender': this,
+	  'success': 'uninstallUpdateCallback',
+	  'error': 'uninstallFail',
+	  'data': data
+	});
+  },
+  
+  // 后delete
+  uninstallUpdateCallback : function (data, ajaxOptions, params) {
+	return App.ajax.send({
+	  'name': 'common.service.delete',
+	  'sender': this,
+	  'success': 'uninstallDeleteCallback',
+	  'error': 'uninstallFail'
+	});	
+  },
+  
+  // 成功
+  uninstallDeleteCallback : function(data, ajaxOptions, params) {
+	App.router.get('applicationController').dataLoading().done(function (initValue) {
+        if (initValue) {
+          App.router.get('backgroundOperationsController').showPopup();
+        }
+	});
+  },
+  
+  // 失败
+  uninstallFail : function(request, ajaxOptions, error, opt, params) {
+	debugger;
+	return App.showAlertPopup(Em.I18n.t('common.error'), '操作失败');
+  },
 
   turnOnOffPassive: function(label) {
     var self = this;
