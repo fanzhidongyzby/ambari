@@ -5,7 +5,7 @@ sys.setdefaultencoding('utf-8')
 
 import commands
 import time
-import json
+import socket
 import fileinput
 
 from command import *
@@ -222,10 +222,10 @@ if __name__ == '__main__':
     if clusterReady != None:
       break
 
-
-  webUrl = exe("echo -e '{0}:{1} @ \\033[4mhttp://0.0.0.0:{2}\\033[0m'".format(cmd.user, cmd.password, cmd.port))
+  localhost = socket.gethostbyname(socket.gethostname())
+  webUrl = exe("echo -e '{0}:{1} @ \\033[4mhttp://{2}:{3}\\033[0m'".format(cmd.user, cmd.password, localhost, cmd.port))
   if clusterReady == False:
-    logger.error("cluster {0} start failed, open url: {webUrl} to check cluster status, or use \"tbds-server clean\" command to remove cluster".format(clusterName, webUrl))
+    logger.error("cluster {0} start failed, open url: {1} to check cluster status, or use \"tbds-server clean\" command to remove cluster".format(clusterName, webUrl))
     sys.exit(-1)
   elif clusterReady == True:
     logger.info("cluster {0} started success, open url: {1} to visit tbds".format(clusterName, webUrl))

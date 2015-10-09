@@ -116,7 +116,7 @@ class Toolkit():
   def remove_links_dir(dir):
     Logger.info("remove links directory: {0}".format(dir))
     # cmd = "DIR={0}; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR".format(dir)
-    cmd = "DIR={0}; for x in $(find $DIR -type l); do tar=$(readlink -f $x); if [[ -d $tar ]]; then tar=${tar}/*; rm -rf $tar; fi; done; rm -rf $DIR".format(dir)
+    cmd = "DIR={0}; for x in $(find $DIR -type l); do tar=$(readlink -f $x); if [[ -d $tar ]]; then tar=$tar/*; rm -rf $tar; fi; done; rm -rf $DIR".format(dir)
     Toolkit.exe(cmd)
 
   # convert var to array, if var is already list, return itself
