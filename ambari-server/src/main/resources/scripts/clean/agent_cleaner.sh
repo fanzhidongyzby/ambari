@@ -1,5 +1,9 @@
 #!/bin/bash
-
+status=$(tbds-server status | grep "not running" | wc -l)
+if [[ "$status" == "1" ]]; then
+  echo "server is stoped ..."
+  exit -1
+fi
 
 echo "----------   STOP ALL THE SERVICES   ----------"
 # get server ip
