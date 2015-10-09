@@ -7,6 +7,7 @@ import commands
 import time
 import socket
 import fileinput
+import json
 
 from command import *
 from log import logger
@@ -162,15 +163,18 @@ if __name__ == '__main__':
     # {"status":"ERROR","hostsStatus":[{"hostName":"10.151.0.12","status":"DONE","statusCode":"0","log":""}]}
     addHostsRequestInfo = json.loads(exe(curlGet.format("/bootstrap/" + str(requestId))))
     status = addHostsRequestInfo.get("status")
-    hostsStatus = addHostsRequestInfo.get("hostsStatus")
     if status == "RUNNING":
       time.sleep(5)
     elif status == "ERROR":
-      for host in hostsStatus:
-        if host.get("status") == "FAILED":
-          hostName = host.get("hostName")
-          log = host.get("log")
-          logger.error("\nHost {0} add failed, log:\n{1}".format(hostName, log))
+      hostsStatus = addHostsRequestInfo.get("hostsStatus")
+      if hostsStatus:
+        for host in hostsStatus:
+          if host.get("status") == "FAILED":
+            hostName = host.get("hostName")
+            log = host.get("log")
+            logger.error("\nHost {0} add failed, log:\n{1}".format(hostName, log))
+      else:
+        logger.error("Hosts add failed")
       sys.exit(-1)
     elif status == "SUCCESS":
       break

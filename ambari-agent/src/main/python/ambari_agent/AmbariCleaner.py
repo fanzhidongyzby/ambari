@@ -80,7 +80,7 @@ class AmbariCleaner:
         (ok, output) = self.run_cmd(cmd)
 
         if not ok:
-          cmd = "for x in `yum list installed 2>/dev/null | grep HDP | awk '{print $1}'`; do echo \"removing $x ...\"; yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
+          cmd = "for x in `yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}'`; do echo \"removing $x ...\"; yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
           self.run_cmd(cmd)
 
 
