@@ -50,12 +50,4 @@ echo "[BOOTSTRAP]2.6 clean the old ambari-agent process"
 ambari-agent stop
 ps aux | grep ambari_agent | grep -v grep | awk '{print "kill -9 "$2}' | sh
 yum remove -y ambari-agent
-rm -rf /var/lib/ambari*
-rm -rf /usr/lib/ambari*
-rm -rf /var/log/ambari*
-rm -rf /var/run/ambari*
-rm -rf /usr/bin/ambari*
-rm -rf /usr/sbin/ambari*
-rm -rf /usr/lib/python2.6/site-packages/ambari*
-rm -rf /usr/lib/python2.6/site-packages/resource_management
-rm -rf /etc/ambari*
+yum clean all
