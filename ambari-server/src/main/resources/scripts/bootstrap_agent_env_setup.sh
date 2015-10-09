@@ -26,7 +26,7 @@ if [ $? -ne 0 ];then
   echo "[===== BOOTSTRAP-ERROR =====]copy the bootstrap_agent_setup.tar.gz to ${hostIP} failed"
   exit -1
 fi
-remoteCmd="cd /tmp;sudo tar -xzvf bootstrap_agent_setup.tar.gz >/dev/null;sudo rm -f bootstrap_agent_setup.tar.gz;sudo chmod 777 bootstrap_agent_env_script.sh;sudo ./bootstrap_agent_env_script.sh;"
+remoteCmd="cd /tmp;sudo tar -xzvf bootstrap_agent_setup.tar.gz >/dev/null;sudo rm -f bootstrap_agent_setup.tar.gz;sudo chmod 777 bootstrap_agent_env_script.sh;sudo ./bootstrap_agent_env_script.sh"
 ${currentPath}/execRemoteCmd.exp ${hostIP} ${sshUser} ${sshPass} 150 "${remoteCmd}"
 if [ $? -ne 0 ];then
   echo "[===== BOOTSTRAP-ERROR =====]execute cmd (${remoteCmd}) failed"

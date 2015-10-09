@@ -28,22 +28,22 @@ App.MainServiceMenuView = Em.CollectionView.extend({
     }, this);
 	
 	var category = {
-  "接入":[
+  "鎺ュ叆":[
      "DSE",
      "FLUME"
   ],
-  "计算":[
+  "璁＄畻":[
      "HIVE",
      "JSTORM",
      "TEZ",
      "THIVE",
      "MAPREDUCE2"
   ],
-  "调度":[
+  "璋冨害":[
      "LHOTSE",
      "YARN"
   ],
-  "存储":[
+  "瀛樺偍":[
      "HBASE",
      "HDFS",
      "PGXZ",
@@ -74,7 +74,7 @@ App.MainServiceMenuView = Em.CollectionView.extend({
 			var service_name = Em.get(items[i], 'serviceName').toUpperCase();
 			if (str_service.indexOf(service_name) == -1) {
 				if (!flag) {
-					Em.set(items[i], 'menuTitle', '其他');
+					Em.set(items[i], 'menuTitle', '鍏朵粬');
 					flag = true;
 				}
 				new_items.push(items[i]);
@@ -192,22 +192,22 @@ App.TopNavServiceMenuView = Em.CollectionView.extend({
       return !this.get('disabledServices').contains(item.get('id'));
     }, this);
 	var category = {
-  "接入":[
+  "鎺ュ叆":[
      "DSE",
      "FLUME"
   ],
-  "计算":[
+  "璁＄畻":[
      "HIVE",
      "JSTORM",
      "TEZ",
      "THIVE",
      "MAPREDUCE2"
   ],
-  "调度":[
+  "璋冨害":[
      "LHOTSE",
      "YARN"
   ],
-  "存储":[
+  "瀛樺偍":[
      "HBASE",
      "HDFS",
      "PGXZ",
@@ -238,7 +238,7 @@ App.TopNavServiceMenuView = Em.CollectionView.extend({
 			var service_name = Em.get(items[i], 'serviceName').toUpperCase();
 			if (str_service.indexOf(service_name) == -1) {
 				if (!flag) {
-					Em.set(items[i], 'menuTitle', '其他');
+					Em.set(items[i], 'menuTitle', '鍏朵粬');
 					flag = true;
 				}
 				new_items.push(items[i]);

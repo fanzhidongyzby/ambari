@@ -41,7 +41,10 @@ chown ${name}:${name} ${sshPath}
 
 echo "[BOOTSTRAP]2.5 set the user ${name} as superuser"
 chmod 440 /etc/sudoers
-echo "${name} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+grep -q "${name} ALL=(ALL) NOPASSWD:ALL" /etc/sudoers;
+if [[ $? -ne 0 ]]; then
+    echo "${name} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+fi
 
 echo "[BOOTSTRAP]2.6 clean the old ambari-agent process"
 ambari-agent stop

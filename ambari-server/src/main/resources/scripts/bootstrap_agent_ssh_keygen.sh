@@ -16,6 +16,10 @@ fi
 
 # generate sshkey file
 sudo yum -y install expect
+if [ $? -ne 0 ];then
+  echo "[===== BOOTSTRAP-ERROR =====]install expect failed"
+  exit -1
+fi
 if [ "${executor}" == "${sshUser}" ]
   then
     ${currentPath}/bootstrap_agent_ssh_keygen.exp ${homePath}

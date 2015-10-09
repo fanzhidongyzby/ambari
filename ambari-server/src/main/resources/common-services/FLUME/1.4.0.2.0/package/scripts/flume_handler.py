@@ -41,7 +41,9 @@ class FlumeHandler(Script):
     import params
     self.install_packages(env)
     env.set_params(params)
-
+    
+    Directory(params.flume_state_path)
+    
     Links(params.new_flume_install_path, params.flume_install_path)
 
   @OsFamilyFuncImpl(os_family=OsFamilyImpl.DEFAULT)

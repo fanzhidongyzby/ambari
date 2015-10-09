@@ -28,7 +28,7 @@ var App = require('app');
  */
 App.ChartHostTcpClosewait = App.ChartLinearTimeView.extend({
   id: "host-network-closewait",
-  title: 'CLOSEWAITÁ¬½Ó',
+  title: 'CLOSEWAITè¿žæŽ¥',
   renderer: 'line',
   ajaxIndex: 'host.network.closewait',
 
@@ -40,7 +40,7 @@ App.ChartHostTcpClosewait = App.ChartLinearTimeView.extend({
         var seriesData = jsonData.metrics.network[name];
         switch (name) {
           case "tcp_closewait":
-            displayName = 'CLOSEWAITÁ¬½ÓÊý';
+            displayName = 'CLOSEWAITè¿žæŽ¥æ•°';
             break;
           default:
             break;

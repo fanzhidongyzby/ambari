@@ -132,10 +132,7 @@ import org.apache.ambari.server.state.StackInfo;
 import org.apache.ambari.server.state.State;
 import org.apache.ambari.server.state.configgroup.ConfigGroupFactory;
 import org.apache.ambari.server.state.scheduler.RequestExecutionFactory;
-import org.apache.ambari.server.state.svccomphost.ServiceComponentHostInstallEvent;
-import org.apache.ambari.server.state.svccomphost.ServiceComponentHostStartEvent;
-import org.apache.ambari.server.state.svccomphost.ServiceComponentHostStopEvent;
-import org.apache.ambari.server.state.svccomphost.ServiceComponentHostUpgradeEvent;
+import org.apache.ambari.server.state.svccomphost.*;
 import org.apache.ambari.server.utils.StageUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.IOUtils;
@@ -2047,7 +2044,7 @@ public class AmbariManagementControllerImpl implements AmbariManagementControlle
                 if (oldSchState == State.INSTALLED
                     || oldSchState == State.UNINSTALLING) {
                   roleCommand = RoleCommand.UNINSTALL;
-                  event = new ServiceComponentHostStartEvent(
+                  event = new ServiceComponentHostUninstallEvent(
                       scHost.getServiceComponentName(), scHost.getHostName(),
                       nowTimestamp);
                 } else {

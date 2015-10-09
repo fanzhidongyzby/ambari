@@ -28,7 +28,7 @@ var App = require('app');
  */
 App.ChartHostHttpProcess = App.ChartLinearTimeView.extend({
   id: "host-network-process",
-  title: 'HTTP½ø³Ì',
+  title: 'HTTPè¿›ç¨‹',
   renderer: 'line',
 
   ajaxIndex: 'host.network.process',
@@ -41,7 +41,7 @@ App.ChartHostHttpProcess = App.ChartLinearTimeView.extend({
         var seriesData = jsonData.metrics.network[name];
         switch (name) {
           case "http_process":
-            displayName = 'HTTP½ø³ÌÊý';
+            displayName = 'HTTPè¿›ç¨‹æ•°';
             break;
           default:
             break;

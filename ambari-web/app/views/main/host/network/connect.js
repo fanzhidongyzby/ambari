@@ -28,7 +28,7 @@ var App = require('app');
  */
 App.ChartHostTcpConnect = App.ChartLinearTimeView.extend({
   id: "host-network-connect",
-  title: 'TCPÁ¬½Ó',
+  title: 'TCPè¿žæŽ¥',
   renderer: 'line',
 
   ajaxIndex: 'host.network.connect',
@@ -41,7 +41,7 @@ App.ChartHostTcpConnect = App.ChartLinearTimeView.extend({
         var seriesData = jsonData.metrics.network[name];
         switch (name) {
           case "tcp_connect":
-            displayName = 'TCPÁ¬½ÓÊý';
+            displayName = 'TCPè¿žæŽ¥æ•°';
             break;
           default:
             break;
