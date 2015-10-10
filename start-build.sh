@@ -20,5 +20,5 @@ docker run -it --rm -v $BUILD_DIR:/ambari \
     -v $AMBARI_BUILD_HOME/ambari-admin/node:/ambari/ambari-admin/src/main/resources/ui/admin-web/node \
     -w /ambari \
     --entrypoint /bin/bash \
-    docker.oa.com:8080/ambari/build:1.7.0
+    docker.oa.com:8080/ambari/build:1.7.1
 
