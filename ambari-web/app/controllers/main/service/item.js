@@ -470,7 +470,7 @@ App.MainServiceItemController = Em.Controller.extend({
   // 先update
   uninstallUpdate : function (query) {
 	var data = {
-	  'context': '卸载'+this.get('content.serviceName'),
+	  'context': '卸载 '+this.get('content.displayName'),
 	  'serviceName': this.get('content.serviceName').toUpperCase(),
 	  'ServiceInfo': {
 		 'state': 'UNINSTALLED'
@@ -491,6 +491,7 @@ App.MainServiceItemController = Em.Controller.extend({
   uninstallUpdateCallback : function (data, ajaxOptions, params) {
 	return App.ajax.send({
 	  'name': 'common.service.delete',
+	  'serviceName': this.get('content.serviceName').toUpperCase(),
 	  'sender': this,
 	  'success': 'uninstallDeleteCallback',
 	  'error': 'uninstallFail'
