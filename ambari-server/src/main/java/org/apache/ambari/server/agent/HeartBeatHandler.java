@@ -523,6 +523,27 @@ public class HeartBeatHandler {
         ambariEventPublisher.publish(event);
       }
 
+
+        //added by junz for deleting service upon the completion of all uninstall role commands
+        if(RoleCommand.valueOf(report.getRoleCommand()) == RoleCommand.UNINSTALL &&
+                HostRoleStatus.valueOf(report.getStatus()) == HostRoleStatus.COMPLETED){
+            List<Stage> stages = actionManager.getRequestStatus(hostRoleCommand.getRequestId());
+            boolean isAllRoleCommandCompleted = true;
+            for(Stage stage : stages){
+                for(HostRoleCommand command : stage.getOrderedHostRoleCommands()){
+                    if(!command.equals(hostRoleCommand) && command.getStatus() != HostRoleStatus.COMPLETED){
+                        isAllRoleCommandCompleted = false;
+                        break;
+                    }
+                }
+            }
+
+            if(isAllRoleCommandCompleted){
+                Service service = clusterFsm.getCluster(report.getClusterName()).getService(report.getServiceName());
+                service.delete();
+            }
+        }
+
       // Skip sending events for command reports for ABORTed commands
       if (hostRoleCommand.getStatus() == HostRoleStatus.ABORTED) {
         continue;

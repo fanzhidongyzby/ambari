@@ -458,9 +458,14 @@ App.MainServiceItemController = Em.Controller.extend({
   
   // 卸载
   uninstallComponents : function(serviceName) {
-	if (this.get('content.healthStatus') != 'red') {
-		return App.showAlertPopup(Em.I18n.t('common.error'), '请先停止该服务');
+	if (this.get('content.healthStatus') == 'yellow') {
+		this.uninstallUpdateCallback();
+		return;
 	}
+	else if (this.get('content.healthStatus') != 'red') {
+		return App.showAlertPopup(Em.I18n.t('common.error'), '请先停止该服务');
+	} 
+	 
 	var _self = this;
     return App.showConfirmationFeedBackPopup(function(query) {
 		_self.uninstallUpdate(query);
@@ -470,7 +475,7 @@ App.MainServiceItemController = Em.Controller.extend({
   // 先update
   uninstallUpdate : function (query) {
 	var data = {
-	  'context': '卸载 '+this.get('content.displayName'),
+	  'context': '卸载'+this.get('content.serviceName'),
 	  'serviceName': this.get('content.serviceName').toUpperCase(),
 	  'ServiceInfo': {
 		 'state': 'UNINSTALLED'
@@ -481,7 +486,7 @@ App.MainServiceItemController = Em.Controller.extend({
 	return App.ajax.send({
 	  'name': 'common.service.update',
 	  'sender': this,
-	  'success': 'uninstallUpdateCallback',
+	  'success': 'uninstallDeleteCallback',
 	  'error': 'uninstallFail',
 	  'data': data
 	});
@@ -494,7 +499,10 @@ App.MainServiceItemController = Em.Controller.extend({
 	  'serviceName': this.get('content.serviceName').toUpperCase(),
 	  'sender': this,
 	  'success': 'uninstallDeleteCallback',
-	  'error': 'uninstallFail'
+	  'error': 'uninstallFail',
+	  'data' : {
+		'serviceName': this.get('content.serviceName').toUpperCase()
+	  }
 	});	
   },
   
@@ -509,7 +517,7 @@ App.MainServiceItemController = Em.Controller.extend({
   
   // 失败
   uninstallFail : function(request, ajaxOptions, error, opt, params) {
-	debugger;
+	//debugger;
 	return App.showAlertPopup(Em.I18n.t('common.error'), '操作失败');
   },
 
