@@ -30,6 +30,10 @@
   <artifactId>ambari-metrics-host-monitoring</artifactId>
   <name>Ambari Metrics Monitor</name>
   <properties>
+    <monitor.dir>${project.basedir}/../ambari-metrics-host-monitoring</monitor.dir>
+    <python.ver>python &gt;= 2.6</python.ver>
+    <python.devel>python-devel</python.devel>
+    
     <resmonitor.install.dir>
       /usr/lib/python2.6/site-packages/resource_monitoring
     </resmonitor.install.dir>
@@ -127,6 +131,123 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>2.0.1</version>
+        <configuration>
+          <group>Development</group>
+          <needarch>x86_64</needarch>
+          <copyright>2012, Apache Software Foundation</copyright>
+          <version>${package-version}</version>
+          <release>${package-release}</release>
+
+          <defaultFilemode>644</defaultFilemode>
+          <defaultDirmode>755</defaultDirmode>
+          <defaultUsername>root</defaultUsername>
+          <defaultGroupname>root</defaultGroupname>
+        </configuration>
+        <executions>
+          <!--ambari-metrics-monitor-->
+          <execution>
+            <id>ambari-metrics-monitor</id>
+            <!-- unbinds rpm creation from maven lifecycle -->
+            <phase>package</phase>
+            <goals>
+              <goal>rpm</goal>
+            </goals>
+            <configuration>
+              <name>ambari-metrics-monitor</name>
+              <group>Development</group>
+              <needarch>x86_64</needarch>
+              <autoRequires>false</autoRequires>
+              <requires>
+                <require>${python.ver}</require>
+                <require>gcc</require>
+                <require>${python.devel}</require>
+              </requires>
+              <preremoveScriptlet>
+                <scriptFile>src/main/package/rpm/preremove.sh</scriptFile>
+                <fileEncoding>utf-8</fileEncoding>
+              </preremoveScriptlet>
+              <mappings>
+                <mapping>
+                  <directory>${resmonitor.install.dir}</directory>
+                  <username>root</username>
+                  <groupname>root</groupname>
+                  <sources>
+                    <source>
+                      <location>
+                        ${monitor.dir}/src/main/python/__init__.py
+                      </location>
+                    </source>
+                    <source>
+                      <location>
+                        ${monitor.dir}/src/main/python/main.py
+                      </location>
+                    </source>
+                  </sources>
+                </mapping>
+                <mapping>
+                  <directory>${resmonitor.install.dir}/core</directory>
+                  <sources>
+                    <source>
+                      <location>
+                        ${monitor.dir}/src/main/python/core
+                      </location>
+                    </source>
+                  </sources>
+                </mapping>
+                <mapping>
+                  <directory>${resmonitor.install.dir}/psutil</directory>
+                  <sources>
+                    <source>
+                      <location>
+                        ${monitor.dir}/src/main/python/psutil
+                      </location>
+                      <excludes>
+                        <exclude>build/**</exclude>
+                        <exclude>build/*</exclude>
+                      </excludes>
+                    </source>
+                  </sources>
+                </mapping>
+                <mapping>
+                  <directory>${resmonitor.install.dir}/ambari_commons</directory>
+                  <sources>
+                    <source>
+                      <location>
+                        ${project.basedir}/../../ambari-common/src/main/python/ambari_commons
+                      </location>
+                    </source>
+                  </sources>
+                </mapping>
+                <mapping>
+                  <directory>/etc/ambari-metrics-monitor/conf</directory>
+                  <configuration>true</configuration>
+                </mapping>
+                <mapping>
+                  <directory>/usr/sbin</directory>
+                  <filemode>755</filemode>
+                  <username>root</username>
+                  <groupname>root</groupname>
+                  <directoryIncluded>false</directoryIncluded>
+                  <sources>
+                    <source>
+                      <location>
+                        ${monitor.dir}/conf/unix/ambari-metrics-monitor
+                      </location>
+                      <filter>true</filter>
+                    </source>
+                  </sources>
+                </mapping>
+              </mappings>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
   <profiles>
