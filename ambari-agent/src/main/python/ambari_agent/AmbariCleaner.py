@@ -113,6 +113,8 @@ class AmbariCleaner:
     # remove user defined dirs
     self.remove_dir()
 
+    self.log("Agent clean success !")
+
 if __name__ == '__main__':
   obj = AmbariCleaner()
   obj.main()

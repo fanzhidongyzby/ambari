@@ -55,14 +55,14 @@ class YumProvider(PackageProvider):
       Logger.info("Installing package %s ('%s')" % (name, string_cmd_from_args_list(cmd)))
       shell.checked_call(cmd, sudo=True, logoutput=self.get_logoutput())
     else:
-      # Logger.info("Skipping installing existent package %s" % (name))
-      cmd = REINSTALL_CMD[self.get_logoutput()]
-      if use_repos:
-        enable_repo_option = '--enablerepo=' + ",".join(use_repos)
-        cmd = cmd + ['--disablerepo=*', enable_repo_option]
-      cmd = cmd + [name]
-      Logger.info("Reinstalling package %s ('%s')" % (name, string_cmd_from_args_list(cmd)))
-      shell.checked_call(cmd, sudo=True, logoutput=self.get_logoutput())
+      Logger.info("Skipping installing existent package %s" % (name))
+      # cmd = REINSTALL_CMD[self.get_logoutput()]
+      # if use_repos:
+      #   enable_repo_option = '--enablerepo=' + ",".join(use_repos)
+      #   cmd = cmd + ['--disablerepo=*', enable_repo_option]
+      # cmd = cmd + [name]
+      # Logger.info("Reinstalling package %s ('%s')" % (name, string_cmd_from_args_list(cmd)))
+      # shell.checked_call(cmd, sudo=True, logoutput=self.get_logoutput())
 
   def upgrade_package(self, name, use_repos=[]):
     return self.install_package(name, use_repos)
