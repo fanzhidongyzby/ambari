@@ -1255,6 +1255,21 @@ App.WizardStep8Controller = Em.Controller.extend(App.AddSecurityConfigs, App.wiz
     }, this);
   },
 
+  // map clients to all the role
+  getClientsToAllMap: function () {
+    var clientNames = App.StackServiceComponent.find().filterProperty('isClient').mapProperty('componentName'),
+      clientsMap = {},
+      dependedComponents = App.StackServiceComponent.find().filterProperty('');
+    clientNames.forEach(function (clientName) {
+      clientsMap[clientName] = Em.A([]);
+      dependedComponents.forEach(function (component) {
+        if (component.get('dependencies').mapProperty('componentName').contains(clientName)) clientsMap[clientName].push(component.get('componentName'));
+      });
+      if (!clientsMap[clientName].length) delete clientsMap[clientName];
+    });
+    return clientsMap;
+  },
+
   getClientsToMasterMap: function () {
     var clientNames = App.StackServiceComponent.find().filterProperty('isClient').mapProperty('componentName'),
       clientsMap = {},
@@ -1324,25 +1339,33 @@ App.WizardStep8Controller = Em.Controller.extend(App.AddSecurityConfigs, App.wiz
    */
   createAdditionalClientComponents: function () {
     var masterHosts = this.get('content.masterComponentHosts');
-    var clientsToMasterMap = this.getClientsToMasterMap();
+    var slaveHosts = this.get('content.slaveComponentHosts');
+    var clientsToAllMap = this.getClientsToAllMap();
     var installedClients = [];
 
     // Get all the installed Client components
     this.get('content.services').filterProperty('isInstalled').forEach(function (_service) {
       var serviceClients = App.StackServiceComponent.find().filterProperty('serviceName', _service.get('serviceName')).filterProperty('isClient');
       serviceClients.forEach(function (client) {
+        // FLORIAN: record client info if needed
         installedClients.push(client.get('componentName'));
       }, this);
     }, this);
 
     // Check if there is a dependency for being co-hosted between existing client and selected new master
     installedClients.forEach(function (_clientName) {
-      if (clientsToMasterMap[_clientName]) {
+      if (clientsToAllMap[_clientName]) {
         var hostNames = [];
-        clientsToMasterMap[_clientName].forEach(function (componentName) {
+        clientsToAllMap[_clientName].forEach(function (componentName) {
           masterHosts.filterProperty('component', componentName).filterProperty('isInstalled', false).forEach(function (_masterHost) {
             hostNames.pushObject(_masterHost.hostName);
           }, this);
+
+          if(slaveHosts.filterProperty('componentName', componentName).length > 0) {
+            slaveHosts.filterProperty('componentName', componentName)[0].hosts.filterProperty('isInstalled', false).forEach(function (_slaveHost) {
+              hostNames.pushObject(_slaveHost.hostName);
+            }, this);
+          }
         }, this);
         hostNames = hostNames.uniq();
         if (hostNames.length > 0) {
