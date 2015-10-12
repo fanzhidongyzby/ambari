@@ -72,7 +72,7 @@ echo "begin to clean agents ..."
 count=10
 for host in `cat hosts`
 do
-  ./service_cleaner.exp ${host} ${loginUser} ${loginPass} 1>>/tmp/clean/${host}.log 2>&1 &
+  ../execRemoteCmd.exp ${host} ${loginUser} ${loginPass} 150 "sudo python /usr/lib/python2.6/site-packages/ambari_agent/AmbariCleaner.py" 1>>/tmp/clean/${host}.log 2>&1 &
   p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
   echo "${host} is cleaning..."
 
