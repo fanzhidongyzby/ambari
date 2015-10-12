@@ -139,7 +139,7 @@ class HostInfo():
     #udp_send = _getProxyVal("OutDatagrams", lines)
     
     http_process = int(os.popen("ps aux|grep httpd|wc -l").read()) - 2
-    tcp_connect = int(os.popen("netstat -an | grep tcp | grep ESTABLISHED | wc -l").read())
+    tcp_connect = int(os.popen("netstat -an | grep tcp | wc -l").read())
     tcp_closewait = int(os.popen("netstat -an | grep tcp | grep CLOSE_WAIT | wc -l").read())
     
     return {

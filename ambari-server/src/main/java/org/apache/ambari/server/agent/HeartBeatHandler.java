@@ -246,6 +246,9 @@ public class HeartBeatHandler {
     // Example heartbeat for alerts from the host or its components
     processAlerts(heartbeat, hostname);
 
+    // Added by junz: workaround to delete uninstalled service
+    processUninstalledService(heartbeat, hostname, clusterFsm, now);
+
     // Send commands if node is active
     if (hostObject.getState().equals(HostState.HEALTHY)) {
       sendCommands(hostname, response);
@@ -487,6 +490,45 @@ public class HeartBeatHandler {
     }
   }
 
+    protected void processUninstalledService(
+            HeartBeat heartbeat, String hostname, Clusters clusterFsm, long now)
+            throws AmbariException {
+        List<CommandReport> reports = heartbeat.getReports();
+
+        // Cache HostRoleCommand entities because we will need them few times
+        List<Long> taskIds = new ArrayList<Long>();
+        for (CommandReport report : reports) {
+            taskIds.add(report.getTaskId());
+        }
+        Collection<HostRoleCommand> commands = actionManager.getTasks(taskIds);
+
+        Iterator<HostRoleCommand> hostRoleCommandIterator = commands.iterator();
+        for (CommandReport report : reports) {
+            // Fetch HostRoleCommand that corresponds to a given task ID
+            HostRoleCommand hostRoleCommand = hostRoleCommandIterator.next();
+
+            //added by junz for deleting service upon the completion of all uninstall role commands
+            if (RoleCommand.valueOf(report.getRoleCommand()) == RoleCommand.UNINSTALL &&
+                    HostRoleStatus.valueOf(report.getStatus()) == HostRoleStatus.COMPLETED) {
+                List<Stage> stages = actionManager.getRequestStatus(hostRoleCommand.getRequestId());
+                boolean isAllRoleCommandCompleted = true;
+                for (Stage stage : stages) {
+                    for (HostRoleCommand command : stage.getOrderedHostRoleCommands()) {
+                        if (!command.equals(hostRoleCommand) && command.getStatus() != HostRoleStatus.COMPLETED) {
+                            isAllRoleCommandCompleted = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (isAllRoleCommandCompleted) {
+                    Service service = clusterFsm.getCluster(report.getClusterName()).getService(report.getServiceName());
+                    service.getCluster().deleteService(service.getName());
+                }
+            }
+        }
+    }
+
   protected void processCommandReports(
       HeartBeat heartbeat, String hostname, Clusters clusterFsm, long now)
       throws AmbariException {
@@ -522,27 +564,6 @@ public class HeartBeatHandler {
                 clusterId, hostname, report, report.getRole());
         ambariEventPublisher.publish(event);
       }
-
-
-        //added by junz for deleting service upon the completion of all uninstall role commands
-        if(RoleCommand.valueOf(report.getRoleCommand()) == RoleCommand.UNINSTALL &&
-                HostRoleStatus.valueOf(report.getStatus()) == HostRoleStatus.COMPLETED){
-            List<Stage> stages = actionManager.getRequestStatus(hostRoleCommand.getRequestId());
-            boolean isAllRoleCommandCompleted = true;
-            for(Stage stage : stages){
-                for(HostRoleCommand command : stage.getOrderedHostRoleCommands()){
-                    if(!command.equals(hostRoleCommand) && command.getStatus() != HostRoleStatus.COMPLETED){
-                        isAllRoleCommandCompleted = false;
-                        break;
-                    }
-                }
-            }
-
-            if(isAllRoleCommandCompleted){
-                Service service = clusterFsm.getCluster(report.getClusterName()).getService(report.getServiceName());
-                service.delete();
-            }
-        }
 
       // Skip sending events for command reports for ABORTed commands
       if (hostRoleCommand.getStatus() == HostRoleStatus.ABORTED) {

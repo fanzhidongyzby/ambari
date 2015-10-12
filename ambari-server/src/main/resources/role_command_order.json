@@ -3,6 +3,7 @@
   "_comment" : "blockedRole-blockedCommand: [blockerRole1-blockerCommand1, blockerRole2-blockerCommand2, ...]",
   "general_deps" : {
     "_comment" : "dependencies for all cases",
+    "JSTORM_NIMBUS-START": ["ZOOKEEPER_SERVER-START"],
     "HBASE_MASTER-START": ["ZOOKEEPER_SERVER-START"],
     "HBASE_REGIONSERVER-START": ["HBASE_MASTER-START"],
     "OOZIE_SERVER-START": ["JOBTRACKER-START", "TASKTRACKER-START"],

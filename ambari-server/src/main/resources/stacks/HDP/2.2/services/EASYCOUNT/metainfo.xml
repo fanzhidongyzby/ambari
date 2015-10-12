@@ -28,7 +28,7 @@
                 <component>
                     <name>EASYCOUNT_CLIENT</name>
                     <displayName>EasyCount Client</displayName>
-                    <cardinality>1</cardinality>
+                    <cardinality>1+</cardinality>
                     <versionAdvertised>true</versionAdvertised>
                     <category>CLIENT</category>
                     <commandScript>
