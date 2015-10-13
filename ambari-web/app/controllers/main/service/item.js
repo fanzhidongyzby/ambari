@@ -465,11 +465,15 @@ App.MainServiceItemController = Em.Controller.extend({
 	else if (this.get('content.healthStatus') != 'red') {
 		return App.showAlertPopup(Em.I18n.t('common.error'), '请先停止该服务');
 	} 
-	 
+	var serviceDisplayName = this.get('content.displayName');
+	var bodyMessage = Em.Object.create({
+      confirmMsg: serviceDisplayName + '服务的数据和日志将会在卸载时清除，是否确认卸载？',
+      confirmButton: '确定'
+    });	
 	var _self = this;
     return App.showConfirmationFeedBackPopup(function(query) {
 		_self.uninstallUpdate(query);
-    });
+    }, bodyMessage);
   },
   
   // 先update
