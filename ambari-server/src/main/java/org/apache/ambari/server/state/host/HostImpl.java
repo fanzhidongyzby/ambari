@@ -1085,10 +1085,13 @@ public class HostImpl implements Host {
                 }
 
                 Iterator<DiskInfo> itr = r.getDisksInfo().iterator();
+                List<DiskInfo> disks = new ArrayList<DiskInfo>();
                 while (itr.hasNext()) {
                     DiskInfo disk = itr.next();
-                    if (!maxDiskInfo.getMountPoint().equals(disk.getMountPoint())) {
-                        itr.remove();
+                    if (maxDiskInfo.getMountPoint().equals(disk.getMountPoint())) {
+                        disks.add(disk);
+                        r.setDisksInfo(disks);
+                        break;
                     }
                 }
             }
