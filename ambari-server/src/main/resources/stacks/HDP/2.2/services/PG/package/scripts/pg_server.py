@@ -69,11 +69,6 @@ class PgMaster(Script):
   def uninstall(self, env):
       Toolkit.uninstall_service("postgresql")
 
-  def restart(self, env):
-    Logger.info("pg restart ")
-    self.stop(env)
-    self.start(env)
-
   def createdbsuperuser(self, env):
     Logger.info("create super user for postgresql --")
     Logger.info("load exe scripts")
