@@ -455,6 +455,19 @@ App.MainServiceItemController = Em.Controller.extend({
       batchUtils.restartAllServiceHostComponents(serviceName, false, query, runMmOperation);
     }, bodyMessage);
   },
+
+  // get services depend on service
+  getDependedServices : function (serviceName) {
+    var dependedServices = [];
+
+    App.Service.find().forEach(function(service){
+      if(App.StackService.find(service.get('serviceName')).get('requiredServices').contains(serviceName)) {
+        dependedServices.push(service);
+      }
+    });
+
+    return dependedServices;
+  },
   
   // 卸载
   uninstallComponents : function(serviceName) {
@@ -463,9 +476,19 @@ App.MainServiceItemController = Em.Controller.extend({
 		return;
 	}
 	else if (this.get('content.healthStatus') != 'red') {
-		return App.showAlertPopup(Em.I18n.t('common.error'), '请先停止该服务');
-	} 
-	var serviceDisplayName = this.get('content.displayName');
+		return App.showAlertPopup(Em.I18n.t('common.error'), '请先停止该服务！');
+	}
+
+  var serviceDisplayName = this.get('content.displayName');
+
+  var dependedServices = this.getDependedServices(serviceName).mapProperty('displayName');
+  if(dependedServices.length != 0) {
+    var serviceNames = dependedServices.reduce(function (previous, current) {
+      return previous + ", " + current;
+    });
+    return App.showAlertPopup(Em.I18n.t('common.error'), serviceDisplayName + '因为被服务' + serviceNames + '依赖而不能卸载！', null);
+  }
+
 	var bodyMessage = Em.Object.create({
       confirmMsg: serviceDisplayName + '服务的数据和日志将会在卸载时清除，是否确认卸载？',
       confirmButton: '确定'
