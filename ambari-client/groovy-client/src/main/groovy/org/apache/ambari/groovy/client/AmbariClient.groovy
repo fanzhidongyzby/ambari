@@ -382,29 +382,26 @@ class AmbariClient {
     def hostNames = getHostNames().keySet() as List
     def groups = getBlueprint(blueprint)?.host_groups?.collect { ["name": it.name, "cardinality": it.cardinality] }
     if (hostNames && groups) {
-      def groupSize = groups.size()
       def hostSize = hostNames.size()
-      if (hostSize == 1 && groupSize == 1) {
-        result = [(groups[0].name): [hostNames[0]]]
-      } else if (hostSize >= groupSize) {
-        int i = 0
-        groups.findAll { !it.name.toLowerCase().startsWith(SLAVE) }.each {
+
+      int sum = 0
+      groups.each {
+        int count  = it.cardinality.toInteger()
+        sum += count
+      }
+
+      if (hostSize < sum) {
+        throw new InvalidHostGroupHostAssociation("Host count is not enough !")
+      }
+
+      int i = 0
+      groups.each {
+        int count  = it.cardinality.toInteger()
+        for (int j = 0; j < count; j++) {
+          result[it.name] = result[it.name] ?: []
+          result[it.name] << hostNames[j]
           result << [(it.name): [hostNames[i++]]]
         }
-        def slaves = groups.findAll { it.name.toLowerCase().startsWith(SLAVE) }
-        if (slaves) {
-          int k = 0
-          for (int j = i; j < hostSize; j++) {
-            result[slaves[k].name] = result[slaves[k].name] ?: []
-            result[slaves[k].name] << hostNames[j]
-            result << [(slaves[k].name): result[slaves[k++].name]]
-            k = k == slaves.size ? 0 : k
-          }
-        } else {
-          throw new InvalidHostGroupHostAssociation("At least one '$SLAVE' is required", groupSize)
-        }
-      } else {
-        throw new InvalidHostGroupHostAssociation("At least $groupSize host is required", groupSize)
       }
     }
     return result
