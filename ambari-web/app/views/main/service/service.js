@@ -29,7 +29,11 @@ App.MainDashboardServiceHealthView = Em.View.extend({
   'data-original-title': '',
 
   updateToolTip: function () {
-    this.set('data-original-title', this.get('service.toolTipContent'));
+    if (this.get('service.healthStatus') !== 'yellow') {
+		this.set('data-original-title', this.get('service.toolTipContent'));
+	} else {
+		this.set('data-original-title', '可能已卸载，请F5刷新页面查看');
+	}
   }.observes('service.toolTipContent'),
 
   startBlink: function () {

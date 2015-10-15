@@ -734,101 +734,121 @@ module.exports = Em.Route.extend(App.RouterRedirections, {
                 str += '</div>';
                 $('#hostListDiv').html(str);
                 //$('#hostListDiv').find('.caret').parent().parent().click(function(){
-                $('#hostListDiv').find('.caret').click(function(){
-                    var $this = $(this).parent().parent();
-                    var target = $this.next();
-                    if (!target.hasClass('open')) {
-                        $this.addClass('open');
-                        target.addClass('open');
-                    } else {
-                        target.removeClass('open');
-                        $this.removeClass('open');
-                    }
-                });
-                $('.sum_select_all').bind('click', function(){
-                    var $this = $(this);
-                    if($this.is(':checked') === true) {
-                        $this.parent().parent().next().find('.input_restart').attr("checked", true);
-                    } else {
-                        $this.parent().parent().next().find('.input_restart').attr("checked", false);
-                    }
-                });
-                $('#btn_restart').bind('click', function(){
-                    var host = "";
-                    var restartComponents = [];
-                    $('.input_restart:checked').each(function(){
-                        host += $(this).next().next().text() + "<br/>";
-                        var host_name = $(this).parent().parent().parent().parent().parent().parent().parent().prev().find('.host_name').text();
-                        restartComponents.push({
-                            restartComponents : host_name,
-                            hostName : $(this).parent().parent().next().find('.host-ip').text(),
-                            serviceName : $('#btn_restart').next().text()
-                        });
-
+                    $('#hostListDiv').find('.caret').click(function(){
+                        var $this = $(this).parent().parent();
+                        var target = $this.next();
+                        if (!target.hasClass('open')) {
+                            $this.addClass('open');
+                            target.addClass('open');
+                        } else {
+                            target.removeClass('open');
+                            $this.removeClass('open');
+                        }
                     });
-                    if(host === '') {
-                        return false;
-                    }
-                    var defaultSuccessCallback = function(data, ajaxOptions, params) {
-                        App.router.get('applicationController').dataLoading().done(function(initValue) {
-                            params.query && params.query.set('status', 'SUCCESS');
-                            if (initValue) {
-                                App.router.get('backgroundOperationsController').showPopup();
-                            }
+                    $('.sum_select_all').bind('click', function(){
+                        var $this = $(this);
+                        if($this.is(':checked') === true) {
+                            $this.parent().parent().next().find('.input_restart').attr("checked", true);
+                        } else {
+                            $this.parent().parent().next().find('.input_restart').attr("checked", false);
+                        }
+                    });
+                    $('#btn_restart').bind('click', function(){
+                        var host = "";
+                        var restartComponents = [];
+                        $('.input_restart:checked').each(function(){
+                            var name = $(this).parent().parent().parent().parent().parent().parent().parent().prev().find('span[class="host_name"]').text();
+                            host += name + ' ：'  + $(this).next().next().text() + "<br/>";
+                            var host_name = $(this).parent().parent().parent().parent().parent().parent().parent().prev().find('.host_name').text();
+                            restartComponents.push({
+                                restartComponents : host_name,
+                                hostName : $(this).parent().parent().next().find('.host-ip').text(),
+                                serviceName : $('#btn_restart').next().text()
+                            });
+
                         });
-                    };
-                    var defaultErrorCallback = function(xhr, textStatus, error, opt, params) {
-                        params.query && params.query.set('status', 'FAIL');
-                        App.ajax.defaultErrorHandler(xhr, opt.url, 'POST', xhr.status);
-                    };
-                    var batches =[];
-                    if(restartComponents.length > 0) {
-                        for(count=0; count<restartComponents.length; count++) {
-                            batches.push({
-                                "order_id" : count + 1,
-                                "type" : "POST",
-                                "uri" : App.apiPrefix + "/clusters/" + App.get('clusterName') + "/requests",
-                                "RequestBodyInfo" : {
-                                    "RequestInfo" : {
-                                        "context" : "_PARSE_.ROLLING-RESTART." + restartComponents[count].restartComponents + "." + (count + 1) + "." + restartComponents.length,
-                                        "command" : "RESTART"
-                                    },
-                                    "Requests/resource_filters": [{
-                                        "service_name" : restartComponents[count].serviceName,
-                                        "component_name" : restartComponents[count].restartComponents,
-                                        "hosts" : restartComponents[count].hostName
-                                    }]
+                        if(host === '') {
+                            App.showAlertPopup(Em.I18n.t('common.error'), '请选择待重启的组件');
+                            return false;
+                        }
+                        var defaultSuccessCallback = function(data, ajaxOptions, params) {
+                            App.router.get('applicationController').dataLoading().done(function(initValue) {
+                                params.query && params.query.set('status', 'SUCCESS');
+                                if (initValue) {
+                                    App.router.get('backgroundOperationsController').showPopup();
                                 }
                             });
+                        };
+                        var defaultErrorCallback = function(xhr, textStatus, error, opt, params) {
+                            params.query && params.query.set('status', 'FAIL');
+                            App.ajax.defaultErrorHandler(xhr, opt.url, 'POST', xhr.status);
+                        };
+                        var batches =[];
+                        if(restartComponents.length > 0) {
+                            for(count=0; count<restartComponents.length; count++) {
+                                batches.push({
+                                    "order_id" : count + 1,
+                                    "type" : "POST",
+                                    "uri" : App.apiPrefix + "/clusters/" + App.get('clusterName') + "/requests",
+                                    "RequestBodyInfo" : {
+                                        "RequestInfo" : {
+                                            "context" : "_PARSE_.ROLLING-RESTART." + restartComponents[count].restartComponents + "." + (count + 1) + "." + restartComponents.length,
+                                            "command" : "RESTART"
+                                        },
+                                        "Requests/resource_filters": [{
+                                            "service_name" : restartComponents[count].serviceName,
+                                            "component_name" : restartComponents[count].restartComponents,
+                                            "hosts" : restartComponents[count].hostName
+                                        }]
+                                    }
+                                });
+                            }
                         }
-                    }
-                    App.ModalPopup.show({
-                        header : "灰度重启以下主机：",
-                        bodyClass : Em.View.extend({
-                            template : Em.Handlebars.compile('<div class="alert alert-warning">' + host + '</div>')
-                        }),
-                        classNames : [ 'rolling-restart-popup' ],
-                        primary : Em.I18n.t('rollingrestart.dialog.primary'),
-                        onPrimary : function() {
-                            var dialog = this;
-                            App.ajax.send({
-                                name: 'rolling_restart.post',
-                                sender: {
-                                    successCallback: defaultSuccessCallback,
-                                    errorCallback: defaultErrorCallback
-                                },
-                                data: {
-                                    intervalTimeSeconds: 120,
-                                    tolerateSize: 1,
-                                    batches: batches
-                                },
-                                success: 'successCallback',
-                                error: 'errorCallback'
-                            });
-                            dialog.hide();
-                        }
+                        var div_str = '<table><tbody>' +
+                            '<tr><td><span>重启</span></td><td><input class="ember-view ember-text-field span1" type="text" value="1"></td><td>个Runner每次</td></tr>' +
+                            '<tr><td><span>等候 </span></td><td><input id="service_intervalTimeSeconds" class="ember-view ember-text-field span1" type="text" value="120"></td><td><span>秒每批次之间</span></td></tr>' +
+                            '<tr><td><span>容忍</span></td><td><input id="service_tolerateSize" class="ember-view ember-text-field span1" type="text" value="1"></td><td><span>次重启失败</span></td></tr>' +
+                            '</tbody></table>';
+
+                        App.ModalPopup.show({
+                            header : "灰度重启以下主机：",
+                            bodyClass : Em.View.extend({
+                                template : Em.Handlebars.compile('<div class="alert alert-warning">' + host + '</div>' + div_str)
+                            }),
+                            classNames : [ 'rolling-restart-popup' ],
+                            primary : Em.I18n.t('rollingrestart.dialog.primary'),
+                            onPrimary : function() {
+                                var dialog = this;
+                                var intervalTimeSeconds = $.trim($("#service_intervalTimeSeconds").val());
+                                if(intervalTimeSeconds === "") {
+                                    intervalTimeSeconds = 120;
+                                } else {
+                                    intervalTimeSeconds = parseInt(intervalTimeSeconds);
+                                }
+                                var tolerateSize = $.trim($("#service_tolerateSize").val());
+                                if(tolerateSize === "") {
+                                    tolerateSize = 1;
+                                } else {
+                                    tolerateSize = parseInt(tolerateSize);
+                                }
+                                App.ajax.send({
+                                    name: 'rolling_restart.post',
+                                    sender: {
+                                        successCallback: defaultSuccessCallback,
+                                        errorCallback: defaultErrorCallback
+                                    },
+                                    data: {
+                                        intervalTimeSeconds: intervalTimeSeconds,
+                                        tolerateSize: tolerateSize,
+                                        batches: batches
+                                    },
+                                    success: 'successCallback',
+                                    error: 'errorCallback'
+                                });
+                                dialog.hide();
+                            }
+                        });
                     });
-                });
             });
         },
       showInfo: function (router, event) {

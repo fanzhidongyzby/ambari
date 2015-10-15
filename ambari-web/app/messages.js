@@ -2235,7 +2235,7 @@ Em.I18n.translations = {
   'mirroring.required.invalidNumberError' : '请输入合法数字',
 
   'rollingrestart.dialog.title': '灰度重启{0}',
-  'rollingrestart.dialog.primary': '触发灰度重启',
+  'rollingrestart.dialog.primary': '灰度重启',
   'rollingrestart.notsupported.hostComponent': '{0}组件不支持灰度重启',
   'rollingrestart.dialog.msg.restart': '这个操作将一次重启指定数目的{0}',
   'rollingrestart.dialog.msg.noRestartHosts': '没有{0}做灰度重启',

@@ -443,6 +443,9 @@ App.MainServiceItemController = Em.Controller.extend({
   },
 
   restartAllHostComponents : function(serviceName) {
+	if (this.get('content.healthStatus') == 'yellow') {
+		return App.showAlertPopup(Em.I18n.t('common.error'), '该server不可重启');
+	}
     var serviceDisplayName = this.get('content.displayName');
     var bodyMessage = Em.Object.create({
       putInMaintenance: this.get('content.passiveState') === 'OFF',
@@ -472,7 +475,7 @@ App.MainServiceItemController = Em.Controller.extend({
   // 卸载
   uninstallComponents : function(serviceName) {
 	if (this.get('content.healthStatus') == 'yellow') {
-		this.uninstallUpdateCallback();
+		return App.showAlertPopup(Em.I18n.t('common.error'), '正在卸载中...');
 		return;
 	}
 	else if (this.get('content.healthStatus') != 'red') {
@@ -502,7 +505,7 @@ App.MainServiceItemController = Em.Controller.extend({
   // 先update
   uninstallUpdate : function (query) {
 	var data = {
-	  'context': '卸载'+this.get('content.serviceName'),
+	  'context': '卸载 '+this.get('content.displayName'),
 	  'serviceName': this.get('content.serviceName').toUpperCase(),
 	  'ServiceInfo': {
 		 'state': 'UNINSTALLED'
@@ -539,6 +542,7 @@ App.MainServiceItemController = Em.Controller.extend({
         if (initValue) {
           App.router.get('backgroundOperationsController').showPopup();
         }
+		//location.reload();
 	});
   },
   
