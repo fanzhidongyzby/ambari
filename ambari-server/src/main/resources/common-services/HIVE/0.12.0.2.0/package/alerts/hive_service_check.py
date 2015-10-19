@@ -59,8 +59,7 @@ def execute(parameters=None, host_name=None):
   if HIVE_PASSWORD in parameters:
     connect_pwd = parameters[HIVE_PASSWORD]
     
-  unique = str(uuid.uuid1()).replace("-","")
-  tmp_table = "tmp_table_"+unique;
+  tmp_table = "service_check_table";
   ddl_create_table_cmd = "create table if not exists {0}(id int); ".format(tmp_table)
   ddl_drop_table_cmd = "drop table if exists {0};".format(tmp_table)
   #ddl_cmd = "show tables;"

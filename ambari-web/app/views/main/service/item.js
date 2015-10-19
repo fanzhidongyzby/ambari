@@ -201,6 +201,7 @@ App.MainServiceItemView = Em.View.extend({
 
   maintenance: [],
   maintenance2: [],
+  maintenance3: [],
 
   observeMaintenance: function() {
     Em.run.once(this, 'observeMaintenanceOnce');
@@ -210,6 +211,7 @@ App.MainServiceItemView = Em.View.extend({
     var self = this;
     var options = [];
 	var options2 = [];
+	var options3 = [];
     var service = this.get('controller.content');
     var allMasters = service.get('hostComponents').filterProperty('isMaster').mapProperty('componentName').uniq();
     var allSlaves = service.get('slaveComponents').rejectProperty('totalCount', 0).mapProperty('componentName');
@@ -233,7 +235,7 @@ App.MainServiceItemView = Em.View.extend({
         options.push(actionMap.REFRESH_YARN_QUEUE);
       }
       options2.push(actionMap.RESTART_ALL);
-	  options2.push(actionMap.UNINSTALL);
+	  options3.push(actionMap.UNINSTALL);
       allSlaves.filter(function (slave) {
         return App.get('components.rollinRestartAllowed').contains(slave);
       }).forEach(function(slave) {
@@ -321,6 +323,10 @@ App.MainServiceItemView = Em.View.extend({
 	
 	if (!this.get('maintenance2').length) {
       this.set('maintenance2', options2);
+    }
+	
+	if (!this.get('maintenance3').length) {
+      this.set('maintenance3', options3);
     }
 	
     if (!this.get('maintenance').length) {

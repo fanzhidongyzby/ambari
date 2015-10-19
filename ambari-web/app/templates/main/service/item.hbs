@@ -59,6 +59,16 @@
         </a>
         {{/each}}
 	{{/if}}
+	
+	{{#each option in view.maintenance3}}
+	<a href="javascript:void(null)" {{bindAttr class=":btn :btn-restart option.disabled option.isHidden:hidden"}}>
+	  <span {{action "doAction" option target="controller" href=true}} {{bindAttr data-title="option.tooltip"}} rel="HealthTooltip">
+		  <i {{bindAttr class="option.cssClass"}}></i>
+		  {{option.label}}
+	  </span>
+	</a>
+	{{/each}}
+	
   {{#if view.isMaintenanceActive}}
     <div class="btn-group display-inline-block">
       <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">

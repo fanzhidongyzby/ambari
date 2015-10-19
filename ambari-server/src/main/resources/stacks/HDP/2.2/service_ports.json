@@ -64,6 +64,9 @@
       "9999"
     ],
     "MYSQL_SERVER":[
+    ],
+    "HWI":[
+      "hive-site/hive.hwi.listen.port"
     ]
   },
   "HBASE":{
