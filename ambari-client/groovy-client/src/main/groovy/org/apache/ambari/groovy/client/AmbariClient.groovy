@@ -399,8 +399,8 @@ class AmbariClient {
         int count  = it.cardinality.toInteger()
         for (int j = 0; j < count; j++) {
           result[it.name] = result[it.name] ?: []
-          result[it.name] << hostNames[j]
-          result << [(it.name): [hostNames[i++]]]
+          result[it.name] << hostNames[i++]
+          result << [(it.name): result[it.name]]
         }
       }
     }

@@ -149,8 +149,7 @@ case "$1" in
           echo "You need to be root privilege"
           exit 1
         fi
-        echo "Clean the whole cluster, are you sure? (yes/no):"
-        read choose
+        echo -n "Clean the whole cluster, are you sure? (yes/no): "; read choose
         if [[ "$choose" == "yes" ]]; then
           /var/lib/tbds-server/resources/scripts/clean/agent_cleaner.sh 2>&1 | tee -a /tmp/clean_server.log
           /var/lib/tbds-server/resources/scripts/clean/server_cleaner.sh 2>&1 | tee -a /tmp/clean_server.log

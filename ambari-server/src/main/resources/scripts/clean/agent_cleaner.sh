@@ -59,33 +59,22 @@ done
 echo "agents on following hosts will be cleaned:"
 cat /var/lib/tbds-server/resources/scripts/clean/hosts
 
-BINDIR=`dirname "$0"`
-cd $BINDIR
-currentPath=`pwd`
-
-loginUser="tencent"
-loginPass="tencent"
-
-sudo mkdir -p /tmp/clean
-
 echo "begin to clean agents ..."
 count=10
 for host in `cat hosts`
 do
-  ../execRemoteCmd.exp ${host} ${loginUser} ${loginPass} 150 "sudo python /usr/lib/python2.6/site-packages/ambari_agent/AmbariCleaner.py" 1>>/tmp/clean/${host}.log 2>&1 &
+  ./service_cleaner ${host} &>/dev/null &
   p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
   echo "${host} is cleaning..."
 
   while [ $p_num -ge $count ]
   do
-      echo "$count"
       p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
       sleep 5
-      echo "waiting $p_num agents clean over ..."
   done
 done
 
-echo "waiting agents cleaning ..."
+echo "waiting agents cleaning over ..."
 
 wait
 echo "agents clean OK !"
