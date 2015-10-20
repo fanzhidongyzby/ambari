@@ -318,7 +318,7 @@ public class HostComponentResourceProvider extends AbstractControllerResourcePro
 
     installProperties.put(HOST_COMPONENT_STATE_PROPERTY_ID, "INSTALLED");
     Map<String, String> requestInfo = new HashMap<String, String>();
-    requestInfo.put("context", "Install and start components on added hosts");
+    requestInfo.put("context", "安装与启动主机上的所有组件");
     Request installRequest = PropertyHelper.getUpdateRequest(installProperties, requestInfo);
 
     Collection<EqualsPredicate> hostPredicates = new ArrayList<EqualsPredicate>();

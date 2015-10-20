@@ -2470,8 +2470,7 @@ public class AmbariManagementControllerImpl implements AmbariManagementControlle
           //Clear exclud file or draining list except HBASE
           if (!serviceName.equals(Service.Type.HBASE.toString())) {
             HashMap<String, String> requestProperties = new HashMap<String, String>();
-            requestProperties.put("context", "Remove host " +
-                    included_hostname + " from exclude file");
+            requestProperties.put("context", "删除主机" + included_hostname);
             requestProperties.put("exclusive", "true");
             HashMap<String, String> params = new HashMap<String, String>();
             params.put("included_hosts", included_hostname);
