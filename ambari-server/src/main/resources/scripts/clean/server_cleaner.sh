@@ -20,8 +20,6 @@ if [[ $RPMS_RM_OK -ne 0 ]]; then
   for x in $RPMS; do echo "removing $x ..."; yum remove -y $x 2>&1 >/dev/null | grep -i error; done
 fi
 
-yum remove -y postgresql*
-
 yum clean all
 
 echo "remove postgresql data files ..."
