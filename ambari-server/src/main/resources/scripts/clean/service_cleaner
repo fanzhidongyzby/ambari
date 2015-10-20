@@ -6,4 +6,4 @@ localUser="tencent"
 loginUser="tencent"
 loginPass="tencent"
 
-sudo su ${localUser} -c "echo ../execRemoteCmd.exp ${host} ${loginUser} ${loginPass} 150 \"${cmd}\""
+sudo su ${localUser} -c "../execRemoteCmd.exp ${host} ${loginUser} ${loginPass} 150 \"${cmd}\""

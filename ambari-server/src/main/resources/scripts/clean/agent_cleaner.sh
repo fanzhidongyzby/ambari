@@ -45,13 +45,8 @@ fi
 echo "services stopped OK !"
 
 echo "----------   CLEAN AGENTS ON ALL THE HOSTS  ----------"
-
-echo "scanning all the hosts in the cluster ..."
 > /var/lib/tbds-server/resources/scripts/clean/hosts
-
-clustername=`curl --user admin:admin "http://0.0.0.0:8080/api/v1/clusters?minimal_response=true" 2> /dev/null | grep cluster_name | awk -F':' '{print $2}' | sed  "s/[ \"]//g"`
-
-for host in `curl --user admin:admin "http://0.0.0.0:8080/api/v1/clusters/$clustername/hosts?minimal_response=true" 2> /dev/null | grep host_name | awk -F':' '{print $2}' | sed "s/[ \"]//g"`
+for host in `curl --user admin:admin "http://0.0.0.0:8080/api/v1/hosts?minimal_response=true" 2> /dev/null | grep host_name | awk -F':' '{print $2}' | sed "s/[ \"]//g"`
 do
   echo ${host} >> /var/lib/tbds-server/resources/scripts/clean/hosts
 done
