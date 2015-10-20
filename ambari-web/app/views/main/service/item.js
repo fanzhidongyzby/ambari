@@ -235,7 +235,6 @@ App.MainServiceItemView = Em.View.extend({
         options.push(actionMap.REFRESH_YARN_QUEUE);
       }
       options2.push(actionMap.RESTART_ALL);
-	  options3.push(actionMap.UNINSTALL);
       allSlaves.filter(function (slave) {
         return App.get('components.rollinRestartAllowed').contains(slave);
       }).forEach(function(slave) {
@@ -316,6 +315,7 @@ App.MainServiceItemView = Em.View.extend({
         });
       });
     }
+	options3.push(actionMap.UNINSTALL);
 
     if (hasConfigTab) {
       options.push(actionMap.DOWNLOAD_CLIENT_CONFIGS);

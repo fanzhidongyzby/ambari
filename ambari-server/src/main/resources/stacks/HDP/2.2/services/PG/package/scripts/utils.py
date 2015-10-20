@@ -30,7 +30,7 @@ class utils:
     if (status != 0):
       Logger.error("command exec error, return code = {0}".format(status))
       Logger.error(output)
-      raise Fail()
+     # raise Fail()
 
     Logger.info(output)
     return output

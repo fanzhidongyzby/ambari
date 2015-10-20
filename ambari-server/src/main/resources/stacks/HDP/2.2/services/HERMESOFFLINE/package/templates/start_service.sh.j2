@@ -1,0 +1,11 @@
+#!/bin/bash
+# export jdk path
+JAVA_HOME={{java_home}}
+export JAVA_HOME
+PATH=$JAVA_HOME/bin:$PATH
+# Switch to hermes path
+new_hermes_install_path={{new_hermes_install_path}}
+cd $new_hermes_install_path
+service_cmd=$@
+echo "service start command is :${service_cmd}"
+bash +x $service_cmd

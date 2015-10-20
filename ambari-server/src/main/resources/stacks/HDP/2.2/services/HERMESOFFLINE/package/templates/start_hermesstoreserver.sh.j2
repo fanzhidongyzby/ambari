@@ -1,0 +1,3 @@
+#!/bin/bash
+
+nohup java -Dhermes.debug.jmx.port={{debug_jms_port}} -Dlog4j.properties.path=conf/log4j.properties -Xms{{hermes_xms}} -Xmx{{hermes_xmx}} -Dfile.encoding=UTF-8 -classpath `find lib/*| grep -v source | tr '\n' ':'`:conf com.tencent.hermes.userpackage.server.HermesStoreServer > logs/storeserver.log 2>&1 &

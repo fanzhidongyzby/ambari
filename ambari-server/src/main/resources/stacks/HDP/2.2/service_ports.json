@@ -216,5 +216,25 @@
     "DSE_DATABASE":[
       "3306"
     ]
+  },
+  "HERMESOFFLINE":{
+    "HERMESOFFLINE_SERVER":[
+      "hermes-properties/hermes.server.port",
+      "hermes-properties/debug.jms.port"
+    ],
+    "HERMESOFFLINE_WORKER":[
+      "hermes-properties/hermes.worker.port",
+      "hermes-properties/debug.jms.port"
+    ]
+  },
+  "HERMESONLINE":{
+    "HERMESONLINE_SERVER":[
+      "hermes-properties/hermes.server.port",
+      "hermes-properties/debug.jms.port"
+    ],
+    "HERMESONLINE_WORKER":[
+      "hermes-properties/hermes.worker.port",
+      "hermes-properties/debug.jms.port"
+    ]
   }
 }

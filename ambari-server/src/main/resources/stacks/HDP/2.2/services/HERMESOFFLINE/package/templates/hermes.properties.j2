@@ -1,0 +1,52 @@
+## use domain
+hermes.zkConnectionString={{hermes_zkConnectionString}}
+hermes.topic={{hermes_topic}}
+# userpackage conf
+higo.userpackage.docIdsLocalBaseDir={{higo_userpackage_docIdsLocalBaseDir}}
+higo.userpackage.pkgBaseLocalDir={{higo_userpackage_pkgBaseLocalDir}}
+higo.userpackage.bitsLocalBaseDir={{higo_userpackage_bitsLocalBaseDir}}
+#store conf
+hermes.store.local.dir={{hermes_store_local_dir}}
+hermes.store.download.port={{hermes_store_download_port}}
+hermes.store.upload.port={{hermes_store_upload_port}}
+
+#core conf
+hermes.local.conf.dir={{hermes_local_conf_dir}}
+hermes.conf.dir={{hermes_conf_dir}}
+hermes.hadoop.conf.dir={{hermes_hadoop_conf_dir}}
+hermes.hadoop.home={{hermes_hadoop_home}}
+#core yaml conf
+hermes.mode={{hermes_mode}}
+hermes.schema.mode={{hermes_schema_mode}}
+hermes.worker.tasklist.assign.type={{hermes_worker_tasklist_assign_type}}
+hermes.index.path={{hermes_index_path}}
+hermes.schema.path={{hermes_schema_path}}
+
+#threads
+hermes.uniqconf.threads.invert=256
+
+hermes.uniqconf.realtime.buffer.flush.secs=8
+hermes.uniqconf.realtime.doclist.flush.secs=2
+hermes.uniqconf.realtime.doclist.buffsize=3840
+hermes.uniqconf.realtime.buffer.ram.percent=2
+hermes.uniqconf.realtime.ram.ram.percent=10
+hermes.uniqconf.realtime.buffer.maxcount=64
+hermes.uniqconf.realtime.buffer.merger.factor=16
+hermes.uniqconf.realtime.index.maxcount=21
+hermes.uniqconf.realtime.index.merger.ram.factor=12
+hermes.uniqconf.realtime.index.merger.one.factor=5
+hermes.uniqconf.realtime.index.merger.factor=5
+hermes.uniqconf.realtime.index.merger.finalcount=5
+hermes.binlog.lzo=false 
+hermes.uniqconf.realtime.binlog.sync.intervel=256
+hermes.uniqconf.realtime.binlog.usebinlog=1
+hermes.uniqconf.realtime.binlog.roll.intervel=1024
+hermes.uniqconf.realtime.binlog.roll.timelen=120000
+hermes.uniqconf.buffersize.div=1
+hermes.uniqconf.searchhandle.thread=128
+hermes.uniqconf.realtime.index.merger.threads.pool=8
+hermes.uniqconf.realtime.index.merger.threads=6
+hermes.uniqconf.hermes.raw.data.pral=0
+hermes.uniqconf.hermes.raw.data.maxopen=64
+hermes.uniqconf.realtime.index.flushDocList.process.threads=4
+hermes.uniqconf.reader.maxopen=512

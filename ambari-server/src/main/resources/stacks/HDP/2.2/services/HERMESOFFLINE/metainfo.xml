@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<metainfo>
+    <schemaVersion>2.0</schemaVersion>
+    <services>
+        <service>
+            <name>HERMESOFFLINE</name>
+            <displayName>Hermes(离线)</displayName>
+            <comment>Hermes是腾讯针对交互式海量数据分析需求而自主研发的秒级分析平台,分为实时和离线</comment>
+            <deleted>true</deleted>
+            <version>2.0.1</version>
+
+            <components>
+                <component>
+                    <name>HERMESOFFLINE_SERVER</name>
+                    <displayName>Hermes Server(offline)</displayName>
+                    <cardinality>1-2</cardinality>
+                    <versionAdvertised>true</versionAdvertised>
+                    <category>MASTER</category>
+                    <commandScript>
+                        <script>scripts/hermes_server.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>1200</timeout>
+                    </commandScript>
+                    <dependencies>
+                        <dependency>
+                            <name>HDFS/HDFS_CLIENT</name>
+                            <scope>host</scope>
+                            <auto-deploy>
+                                <enabled>true</enabled>
+                            </auto-deploy>
+                        </dependency>
+                    </dependencies>
+                </component>
+
+                <component>
+                    <name>HERMESOFFLINE_MANAGER</name>
+                    <displayName>Hermes Manager(offline)</displayName>
+                    <cardinality>1-2</cardinality>
+                    <versionAdvertised>true</versionAdvertised>
+                    <category>MASTER</category>
+                    <commandScript>
+                        <script>scripts/hermes_manager.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>1200</timeout>
+                    </commandScript>
+                </component>
+
+                <component>
+                    <name>HERMESOFFLINE_WORKER</name>
+                    <displayName>Hermes Worker(offline)</displayName>
+                    <cardinality>1+</cardinality>
+                    <versionAdvertised>true</versionAdvertised>
+                    <category>SLAVE</category>
+                    <commandScript>
+                        <script>scripts/hermes_worker.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>1200</timeout>
+                    </commandScript>
+                </component>
+
+                <component>
+                    <name>HERMES_USER_PACKAGE_SERVER</name>
+                    <displayName>Hermes User Package Server</displayName>
+                    <cardinality>1-2</cardinality>
+                    <versionAdvertised>true</versionAdvertised>
+                    <category>MASTER</category>
+                    <commandScript>
+                        <script>scripts/hermes_package_server.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>1200</timeout>
+                    </commandScript>
+                    <dependencies>
+                        <dependency>
+                            <name>HDFS/HDFS_CLIENT</name>
+                            <scope>host</scope>
+                            <auto-deploy>
+                                <enabled>true</enabled>
+                            </auto-deploy>
+                        </dependency>
+                    </dependencies>
+                </component>
+
+                <component>
+                    <name>HERMES_STORE_SERVER</name>
+                    <displayName>Hermes Store Server</displayName>
+                    <cardinality>1-2</cardinality>
+                    <versionAdvertised>true</versionAdvertised>
+                    <category>MASTER</category>
+                    <commandScript>
+                        <script>scripts/hermes_store_server.py</script>
+                        <scriptType>PYTHON</scriptType>
+                        <timeout>1200</timeout>
+                    </commandScript>
+                    <dependencies>
+                        <dependency>
+                            <name>HDFS/HDFS_CLIENT</name>
+                            <scope>host</scope>
+                            <auto-deploy>
+                                <enabled>true</enabled>
+                            </auto-deploy>
+                        </dependency>
+                    </dependencies>
+                </component>
+
+            </components>
+
+            <osSpecifics>
+                <osSpecific>
+                    <osFamily>redhat5,redhat6,suse11</osFamily>
+                    <packages>
+                        <package>
+                            <name>hermes</name>
+                        </package>
+                    </packages>
+                </osSpecific>
+            </osSpecifics>
+
+            <requiredServices>
+                <service>ZOOKEEPER</service>
+                <service>HDFS</service>
+            </requiredServices>
+
+            <configuration-dependencies>
+                <config-type>hermes-adapter-properties</config-type>
+                <config-type>hermes-properties</config-type>
+                <config-type>log4j-properties</config-type>
+            </configuration-dependencies>
+
+        </service>+
+    </services>
+</metainfo>

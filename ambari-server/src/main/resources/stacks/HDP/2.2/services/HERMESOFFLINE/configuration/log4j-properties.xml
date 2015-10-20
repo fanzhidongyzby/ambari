@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<configuration>
+    <property>
+        <name>content</name>
+        <value># Default log4j configuration file for Lily
+#
+# This file needs to be specified using the --log-configuration argument
+# when launching Lily/Kauri. This is done by default when using the provided
+# startup script or the provided service wrapper configuration.
+#
+# This file assumes a Java system property named lily.logdir is defined,
+# specifying the directory where the logs should be created.
+#
+
+#log4j.rootLogger=INFO, stdout, FILE, client, data, index, request, response, search, timer
+log4j.rootLogger=INFO, stdout, FILE
+#
+#
+# APPENDERS
+#
+#
+
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.stdout.layout.ConversionPattern=%d{ISO8601} (%p %c %L): %m%n
+
+# General appender
+log4j.appender.FILE.File=logs/hermes.log
+log4j.appender.FILE.MaxBackupIndex=10
+log4j.appender.FILE.Append=true
+log4j.appender.FILE.layout=org.apache.log4j.PatternLayout
+log4j.appender.FILE=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.FILE.DatePattern='-'yyyyMMdd'.log'
+log4j.appender.FILE.layout.ConversionPattern=%d{ISO8601} (%p %c %L): %m%n
+
+# logger.com.tencent.hermes.recommender.client appender
+#log4j.logger.com.tencent.hermes.recommender.client=ERROR,client
+#log4j.appender.client=org.apache.log4j.FileAppender
+#log4j.appender.client.File=logs/client.log
+#log4j.appender.client.layout=org.apache.log4j.PatternLayout
+#log4j.appender.client.layout.ConversionPattern=%d %p [%c] - %m%n
+
+# logger.com.tencent.hermes.recommender.data appender
+#log4j.logger.com.tencent.hermes.recommender.data=ERROR,data
+#log4j.appender.data=org.apache.log4j.FileAppender
+#log4j.appender.data.File=logs/data.log
+#log4j.appender.data.layout=org.apache.log4j.PatternLayout
+#log4j.appender.data.layout.ConversionPattern=%d %p [%c] - %m%n
+
+# Some interesting categories to see ERROR logging for
+log4j.logger.com.tencent.hermes=INFO</value>
+        <description>系统配置文件内容</description>
+    </property>
+</configuration>

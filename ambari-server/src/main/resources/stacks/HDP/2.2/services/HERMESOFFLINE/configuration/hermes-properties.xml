@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<configuration>
+    <property>
+        <name>hermes.user</name>
+        <value>hermes</value>
+        <property-type>USER</property-type>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.group</name>
+        <value>hermes</value>
+        <property-type>GROUP</property-type>
+        <final>true</final>
+        <description></description>
+    </property>
+
+    <property>
+        <name>zk.root</name>
+        <value>hermes_offline</value>
+        <description>Zookeeper上到信息根目录</description>
+    </property>
+
+    <property>
+        <name>hermes.topic</name>
+        <value>topic-test</value>
+        <description>消费tdbank数据的消费组名称</description>
+    </property>
+
+    <property>
+        <name>hermes.server.port</name>
+        <value>8080</value>
+        <description>hermes server端口</description>
+    </property>
+
+    <property>
+        <name>debug.jms.port</name>
+        <value>8081</value>
+        <description>jmx服务端口</description>
+    </property>
+
+    <property>
+        <name>hermes.worker.port</name>
+        <value>8084</value>
+        <description>hermes worker端口</description>
+    </property>
+
+    <property>
+        <name>hermes.xms</name>
+        <value>8g</value>
+        <description>JVM最小可用内存</description>
+    </property>
+
+    <property>
+        <name>hermes.xmx</name>
+        <value>8g</value>
+        <description>JVM最大可用内存</description>
+    </property>
+
+    <property>
+        <name>hermes.xmn</name>
+        <value>2g</value>
+        <description>JVN年轻代内存大小</description>
+    </property>
+
+    <property>
+        <name>higo.userpackage.docIdsLocalBaseDir</name>
+        <value>/data/tbds/hermes/userpackage/docIds</value>
+        <description>该属性HermesUserpackageServer进程使用, 表示docids的存放路径</description>
+    </property>
+
+    <property>
+        <name>higo.userpackage.pkgBaseLocalDir</name>
+        <value>/data/tbds/hermes/userpackage/pkg</value>
+        <description>该属性HermesUserpackageServer进程使用, 表示用户包的存放路径</description>
+    </property>
+
+    <property>
+        <name>higo.userpackage.bitsLocalBaseDir</name>
+        <value>/data/tbds/hermes/userpackage/bits</value>
+        <description>该属性HermesUserpackageServer进程使用, 表示位图文件本地生成路径</description>
+    </property>
+
+    <property>
+        <name>hermes.store.local.dir</name>
+        <value>/data/tbds/hermes/storeServer</value>
+        <description>该属性HermesStoreServer进程使用，存储服务的基本路径, 该路径下是可供下载的文件以及目录</description>
+    </property>
+
+    <property>
+        <name>hermes.store.download.port</name>
+        <value>8083</value>
+        <description>该属性HermesStoreServer进程使用，表示下载服务的端口号</description>
+    </property>
+
+    <property>
+        <name>hermes.store.upload.port</name>
+        <value>8082</value>
+        <description>该属性HermesStoreServer进程使用，表示上传服务的端口号</description>
+    </property>
+
+    <property>
+        <name>hermes.local.conf.dir</name>
+        <value>/data/tbds/hermes/yaml</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.conf.dir</name>
+        <value>/user/multianalysis/hermes2_0/topic_fortest/yaml</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.hadoop.conf.dir</name>
+        <value>/data/tbds/hadoop-datasharing/etc/hadoop</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.hadoop.home</name>
+        <value>/data/tbds/hadoop-datasharing</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.mode</name>
+        <value>local</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.schema.mode</name>
+        <value>hdfs</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.worker.tasklist.assign.type</name>
+        <value>offline</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.index.path</name>
+        <value>/data/tbds/index</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.schema.path</name>
+        <value>/user/multianalysis/hermes2_0/topic_fortest</value>
+        <description></description>
+    </property>
+
+</configuration>

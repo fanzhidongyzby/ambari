@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<configuration>
+    <property>
+        <name>hermes.adapter.impl.class.pull</name>
+        <value>com.tencent.hermes.adapter.data.DemoPullAdapter</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.tid</name>
+        <value>hermes_ads</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.push.tdManagerIp</name>
+        <value>tl-tdbank-tdmanger.tencent-distribute.com</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.push.cluster_id</name>
+        <value>10</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.push.net_tag</name>
+        <value>all</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.push.business_id</name>
+        <value>b_teg_hermes_transfer</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.push.dt</name>
+        <value>0</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.push.timeout</name>
+        <value>20</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.pull.setMaxoffset</name>
+        <value>false</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.pull.queueMaxsize</name>
+        <value>100000</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.pull.speed</name>
+        <value>1000</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.pull.masterHost</name>
+        <value>tl-vip-tube-master-1:8609,tl-vip-tube-master-2:8609</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.pull.topic</name>
+        <value>teg_hermes_transfer</value>
+        <description></description>
+    </property>
+
+    <property>
+        <name>hermes.adapter.pull.group</name>
+        <value>hermes_ads</value>
+        <description></description>
+    </property>
+</configuration>
