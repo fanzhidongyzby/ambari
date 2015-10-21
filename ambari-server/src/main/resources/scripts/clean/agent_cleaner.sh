@@ -68,7 +68,7 @@ echo "agents on following hosts will be cleaned:"
 for host in $hosts; do echo $host; done
 
 echo "begin to clean agents ..."
-count=10
+count=100
 for host in $hosts
 do
   ./service_cleaner ${host} &>/dev/null &

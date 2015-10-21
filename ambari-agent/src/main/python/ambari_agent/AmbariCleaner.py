@@ -42,7 +42,6 @@ class AmbariCleaner:
     findkey = False
 
     for line in fileinput.input("/usr/lib/python2.6/site-packages/ambari_agent/service_remove.txt"):
-      print(line)
       line = line.strip()
       if (line == ""):
         continue
@@ -97,15 +96,20 @@ class AmbariCleaner:
 
   def release_resources(self):
     self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
-    if not self.onServer:
-      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/ambari*")
-      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/resource_management")
 
   def remove_dir(self):
     self.release_resources()
+
+    if not self.onServer:
+      self.run_cmd("rm -rf /usr/bin/ambari-python-wrap")
+      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/ambari_commons")
+      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/ambari_jinja2")
+      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/resource_management")
+
     for dir in self.dirs:
       cmd = "rm -rf {0}".format(dir)
       self.run_cmd(cmd)
+
     self.run_cmd("DIR=/opt/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
     self.run_cmd("DIR=/etc/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
     self.run_cmd("DIR=/var/log/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")

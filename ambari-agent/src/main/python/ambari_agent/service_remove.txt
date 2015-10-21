@@ -3,12 +3,12 @@ TDP-2.2
 HDP-2.2
 
 [directory]
-/var/lib/ambari*
-/usr/lib/ambari*
-/var/log/ambari*
-/var/run/ambari*
-/usr/bin/ambari*
-/usr/sbin/ambari*
-/etc/ambari*
+/var/lib/ambari-agent
+/usr/lib/ambari-agent
+/var/log/ambari-agent
+/var/run/ambari-agent
+/usr/sbin/ambari-agent
+/etc/ambari-agent
+/usr/lib/python2.6/site-packages/ambari_agent
 /gaia/*
 /usr/hdp
