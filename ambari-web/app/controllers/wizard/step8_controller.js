@@ -1094,7 +1094,7 @@ App.WizardStep8Controller = Em.Controller.extend(App.AddSecurityConfigs, App.wiz
     this.createConfigurationGroups();
     this.createMasterHostComponents();
     this.createSlaveAndClientsHostComponents();
-    if (this.get('content.controllerName') === 'addServiceController') {
+    if (this.get('content.controllerName') === 'installerController' || this.get('content.controllerName') === 'addServiceController') {
       this.createAdditionalClientComponents();
     }
     this.createAdditionalHostComponents();
@@ -1344,7 +1344,7 @@ App.WizardStep8Controller = Em.Controller.extend(App.AddSecurityConfigs, App.wiz
     var installedClients = [];
 
     // Get all the installed Client components
-    this.get('content.services').filterProperty('isInstalled').forEach(function (_service) {
+    this.get('content.services').forEach(function (_service) {
       var serviceClients = App.StackServiceComponent.find().filterProperty('serviceName', _service.get('serviceName')).filterProperty('isClient');
       serviceClients.forEach(function (client) {
         // FLORIAN: record client info if needed
@@ -1369,6 +1369,9 @@ App.WizardStep8Controller = Em.Controller.extend(App.AddSecurityConfigs, App.wiz
         }, this);
         hostNames = hostNames.uniq();
         if (hostNames.length > 0) {
+          if(this.get('content.additionalClients') == undefined) {
+            this.set('content.additionalClients', []);
+          }
           this.get('content.additionalClients').pushObject({hostNames: hostNames, componentName: _clientName});
           // If a dependency for being co-hosted is derived between existing client and selected new master but that
           // dependency is already satisfied in the cluster then disregard the derived dependency

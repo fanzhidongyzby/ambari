@@ -151,6 +151,10 @@
 
       </osSpecifics>
 
+      <requiredServices>
+        <service>HIVE</service>
+      </requiredServices>
+
       <configuration-dependencies>
         <config-type>lhotse-base-env</config-type>
         <config-type>lhotse-database</config-type>
