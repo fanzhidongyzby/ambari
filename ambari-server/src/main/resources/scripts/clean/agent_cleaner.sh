@@ -71,7 +71,7 @@ echo "begin to clean agents ..."
 count=100
 for host in $hosts
 do
-  ./service_cleaner ${host} &>/dev/null &
+  /var/lib/tbds-server/resources/scripts/clean/service_cleaner ${host} &
   p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
   echo "${host} is cleaning..."
 
