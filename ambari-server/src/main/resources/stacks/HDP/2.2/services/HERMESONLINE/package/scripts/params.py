@@ -43,7 +43,7 @@ hermes_xms = config['configurations']['hermes-properties']['hermes.xms']
 hermes_xmx = config['configurations']['hermes-properties']['hermes.xmx']
 hermes_xmn = config['configurations']['hermes-properties']['hermes.xmn']
 
-# hermes-properties.xml
+# master-ini.xml
 hermes_user = config['configurations']['hermes-properties']['hermes.user']
 hermes_group = config['configurations']['hermes-properties']['hermes.group']
 hermes_topic = config['configurations']['hermes-properties']['hermes.topic']
@@ -66,7 +66,7 @@ hermes_schema_path = config['configurations']['hermes-properties']['hermes.schem
 # zk.root
 zk_root = config['configurations']['hermes-properties']['zk.root']
 
-# log4j-properties.xml
+# tube-log4j-properties.xml
 log4j_properties = config['configurations']['log4j-properties']['content']
 
 # refractor service path

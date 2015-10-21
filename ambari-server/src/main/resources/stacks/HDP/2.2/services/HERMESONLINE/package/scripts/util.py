@@ -34,10 +34,7 @@ def init_config(env):
 
 
 def is_service_run(service_name):
-    if get_service_pid(service_name):
-        return True
-    else:
-        return False
+    True if get_service_pid(service_name) else False
 
 
 def get_service_pid(service_name):

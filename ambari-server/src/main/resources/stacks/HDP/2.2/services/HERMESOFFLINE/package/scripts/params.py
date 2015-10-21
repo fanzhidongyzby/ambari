@@ -43,7 +43,7 @@ hermes_xms = config['configurations']['hermes-properties']['hermes.xms']
 hermes_xmx = config['configurations']['hermes-properties']['hermes.xmx']
 hermes_xmn = config['configurations']['hermes-properties']['hermes.xmn']
 
-# hermes-properties.xml
+# master-ini.xml
 hermes_user = config['configurations']['hermes-properties']['hermes.user']
 hermes_group = config['configurations']['hermes-properties']['hermes.group']
 hermes_topic = config['configurations']['hermes-properties']['hermes.topic']
@@ -81,9 +81,6 @@ hermes_adapter_pull_speed = config['configurations']['hermes-adapter-properties'
 hermes_adapter_pull_masterHost = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.masterHost']
 hermes_adapter_pull_topic = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.topic']
 hermes_adapter_pull_group = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.group']
-
-# log4j-properties.xml
-log4j_properties = config['configurations']['log4j-properties']['content']
 
 # refractor service path
 hermes_install_path = "/usr/hdp/2.2.0.0-2041/hermes"

@@ -21,55 +21,42 @@ Ambari Agent
 
 from resource_management import *
 import util
-import os
-import commands
-import sys
 
-SERVICE_NAME = "HermesManager"
+SERVICE_NAME = "master"
+SERVICE_PROCESS = "TMaster"
 
 
-class HermesManager(Script):
+class TubeMaster(Script):
 
     def install(self, env):
         self.install_packages(env)
         self.configure(env)
 
         import params
-        Links(params.new_hermes_install_path, params.hermes_install_path)
+        Links(params.new_tube_install_path, params.tube_install_path)
 
     def uninstall(self, env):
-        Toolkit.uninstall_service("hermes")
+        Toolkit.uninstall_service("tube")
 
     def configure(self, env):
         util.init_config(env)
-        util.load_command_script(env, 'start_manager.sh', 'start_manager.sh.j2')
 
     def start(self, env):
         import params
         env.set_params(params)
-        start_manager_cmd = format("sudo bash -x {start_service_script} {start_manager_script}")
-        is_success = util.command_exe(start_manager_cmd, SERVICE_NAME)
-        if not is_success:
-            Logger.error("Cannot allocate memory")
-            sys.exit(1)
+        util.service_action(SERVICE_NAME, "start")
 
     def status(self, env):
         import status_params
         env.set_params(status_params)
-        if not util.is_service_run(SERVICE_NAME):
+        if not util.is_service_run(SERVICE_PROCESS):
             Logger.warning("{0} did not started!".format(SERVICE_NAME))
             raise ComponentIsNotRunning()
 
     def stop(self, env):
         import params
         env.set_params(params)
-        service_pid = util.get_service_pid(SERVICE_NAME)
-        if service_pid:
-            stop_command = "sudo kill -9 {0}".format(service_pid)
-            util.command_exe(stop_command, SERVICE_NAME)
-        else:
-            Logger.warning("{0} did not started!".format(SERVICE_NAME))
-
+        util.service_action(SERVICE_NAME, "stop")
 
 if __name__ == "__main__":
-    HermesManager().execute()
+    TubeMaster().execute()

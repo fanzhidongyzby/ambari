@@ -22,7 +22,6 @@
             <name>HERMESONLINE</name>
             <displayName>Hermes(实时)</displayName>
             <comment>Hermes是腾讯针对交互式海量数据分析需求而自主研发的秒级分析平台,分为实时和离线</comment>
-            <deleted>true</deleted>
             <version>2.0.1</version>
 
             <components>

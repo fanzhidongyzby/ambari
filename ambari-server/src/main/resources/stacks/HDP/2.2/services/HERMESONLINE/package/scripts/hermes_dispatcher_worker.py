@@ -50,8 +50,8 @@ class HermesDispatcherWorker(Script):
         util.command_exe(start_dispatcher_cmd, SERVICE_NAME)
 
     def status(self, env):
-        import params
-        env.set_params(params)
+        import status_params
+        env.set_params(status_params)
         if not util.is_service_run(SERVICE_NAME):
             Logger.warning("{0} did not started!".format(SERVICE_NAME))
             raise ComponentIsNotRunning()

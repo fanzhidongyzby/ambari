@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+-->
+
+<configuration>
+    <property>
+        <name>tube.user</name>
+        <value>tube</value>
+        <property-type>USER</property-type>
+        <description></description>
+    </property>
+
+    <property>
+        <name>tube.group</name>
+        <value>tube</value>
+        <property-type>GROUP</property-type>
+        <final>true</final>
+        <description></description>
+    </property>
+
+    <property>
+        <name>zk.root</name>
+        <value>tube</value>
+        <description>Zookeeper上信息根目录</description>
+    </property>
+
+    <property>
+        <name>master.listen.port</name>
+        <value>9000</value>
+        <description>master监听端口</description>
+    </property>
+
+    <property>
+        <name>master.web.port</name>
+        <value>9001</value>
+        <description>master web控制台的访问端口</description>
+    </property>
+
+
+    <property>
+        <name>consumer.balance.period</name>
+        <value>10000</value>
+        <description>reblance周期，默认10s</description>
+    </property>
+
+    <property>
+        <name>first.balance.delay.after.start</name>
+        <value>60000</value>
+        <description>master启动后首次进行rebalance的时间，当集群规模较大时，请调大该值，默认60s</description>
+    </property>
+
+    <property>
+        <name>consumer.heartbeat.timeout</name>
+        <value>10000</value>
+        <description>consumer心跳超时时间，默认10s</description>
+    </property>
+
+    <property>
+        <name>producer.heartbeat.timeout</name>
+        <value>10000</value>
+        <description>producer跳超时时间，默认10s</description>
+    </property>
+
+       <property>
+        <name>broker.heartbeat.timeout</name>
+        <value>5000</value>
+        <description>broker心跳超时时间，默认5s</description>
+    </property>
+
+</configuration>

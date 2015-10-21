@@ -57,8 +57,8 @@ class HermesWorker(Script):
             Logger.error("Cannot allocate memory")
 
     def status(self, env):
-        import params
-        env.set_params(params)
+        import status_params
+        env.set_params(status_params)
         if not util.is_service_run(SERVICE_NAME):
             Logger.warning("{0} did not started!".format(SERVICE_NAME))
             raise ComponentIsNotRunning()
