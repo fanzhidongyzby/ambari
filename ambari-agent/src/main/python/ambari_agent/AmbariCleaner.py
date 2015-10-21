@@ -74,14 +74,21 @@ class AmbariCleaner:
   def remove_services_installed_rpm(self):
     if not self.onServer:
       for repo in self.repos:
-        if self.onServer and ("tbds-server" in repo) :
-          continue
         cmd = "yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}' | xargs yum remove -y"
         (ok, output) = self.run_cmd(cmd)
 
         if not ok:
           cmd = "for x in `yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}'`; do echo \"removing $x ...\"; yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
           self.run_cmd(cmd)
+    else:
+      for repo in self.repos:
+        cmd = "yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}' | grep -v tbds-server | grep -v postgresql | xargs yum remove -y"
+        (ok, output) = self.run_cmd(cmd)
+
+        if not ok:
+          cmd = "for x in `yum list installed 2>/dev/null | grep " + repo + " | awk '{print $1}' | grep -v tbds-server | grep -v postgresql`; do echo \"removing $x ...\"; yum remove -y $x 2>&1 >/dev/null | grep -i error; done"
+          self.run_cmd(cmd)
+
 
 
   def yum_clean(self):
@@ -93,14 +100,13 @@ class AmbariCleaner:
 
   def remove_dir(self):
     self.release_resources()
-    if not self.onServer:
-      for dir in self.dirs:
-        cmd = "rm -rf {0}".format(dir)
-        self.run_cmd(cmd)
-      self.run_cmd("DIR=/opt/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
-      self.run_cmd("DIR=/etc/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
-      self.run_cmd("DIR=/var/log/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
-      self.run_cmd("DIR=/data/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+    for dir in self.dirs:
+      cmd = "rm -rf {0}".format(dir)
+      self.run_cmd(cmd)
+    self.run_cmd("DIR=/opt/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+    self.run_cmd("DIR=/etc/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+    self.run_cmd("DIR=/var/log/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
+    self.run_cmd("DIR=/data/tbds; for x in $(find $DIR -type l); do rm -rf $(readlink -f $x); done; rm -rf $DIR")
 
   def main(self):
     # stop agent first

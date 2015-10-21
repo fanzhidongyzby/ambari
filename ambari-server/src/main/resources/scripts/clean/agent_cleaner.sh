@@ -1,62 +1,75 @@
 #!/bin/bash
 status=$(tbds-server status | grep "not running" | wc -l)
 if [[ "$status" == "1" ]]; then
-  echo "server is stoped ..."
-  exit -1
+  echo "server is stoped, restart it to continue ..."
+  exit 1
+fi
+
+# get server ip
+server='0.0.0.0'
+user=$1
+password=$2
+
+if [[ -z "$user" || -z "$password" ]]; then
+  echo "no user and password input"
+  exit 1
+fi
+
+login=$(curl --user $user:$password $server:8080/api/v1 2>/dev/null | grep "Bad credentials" | wc -l)
+if [[ "$login" == "1" ]]; then
+  echo "bad password of admin"
+  exit 1
 fi
 
 echo "----------   STOP ALL THE SERVICES   ----------"
-# get server ip
-server='127.0.0.1'
-
 # get cluster name
-cluster=`curl --user admin:admin http://$server:8080/api/v1/clusters 2> /dev/null | grep cluster_name | awk -F '"' '{print $4}'`
-echo "get cluster name = "$cluster
+cluster=`curl --user $user:$password http://$server:8080/api/v1/clusters 2> /dev/null | grep cluster_name | awk -F '"' '{print $4}'`
+if [[ "$cluster" == "" ]]; then
+  echo "no cluster exists, needn't to stop services."
+else
+  echo "get cluster name = "$cluster
 
-# stop all the services
-echo "send request to stop all the service"
-request=`curl -H "ContentType:application/json" -H "X-requested-By: florianfan" -X PUT -d '{"ServiceInfo":{"state":"INSTALLED"}}' --user admin:admin http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
+  # stop all the services
+  echo "send request to stop all the service"
+  request=`curl -H "ContentType:application/json" -H "X-requested-By: florianfan" -X PUT -d '{"ServiceInfo":{"state":"INSTALLED"}}' --user $user:$password http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
 
-# wait services stopped
-echo "request sent ok, waiting services to be stopped ..."
-if [[ "$request" != "" ]]; then
-	# wait services stopped
-	times=1
-	while true; do
-		status=`curl --user admin:admin $request 2> /dev/null | grep request_status | awk -F '"' '{print $4}'`
-		if [[ "$status" == "IN_PROGRESS" || "$status" == "PENDING" ]]; then
-			echo -n \>
-			sleep 5
-			times=$((times+1))
-			if [[ $times -eq 60 ]]; then
-			  echo -e "\nservices stopped timeout! please stop all the services manually."
-			  exit 1
-			fi
-		elif [[ "$status" == "COMPLETED" ]]; then
-			echo -e "\nservices stopped success !!!"
-			break
-		else
-			echo -e "\nservices stopped failed, status = $status"
-			exit 1
-			break
-		fi
-	done
+  # wait services stopped
+  echo "request sent ok, waiting services to be stopped ..."
+  if [[ "$request" != "" ]]; then
+    # wait services stopped
+    times=1
+    while true; do
+      status=`curl --user $user:$password $request 2> /dev/null | grep request_status | awk -F '"' '{print $4}'`
+      if [[ "$status" == "IN_PROGRESS" || "$status" == "PENDING" ]]; then
+        echo -n \>
+        sleep 5
+        times=$((times+1))
+        if [[ $times -eq 60 ]]; then
+          echo -e "\nservices stopped timeout! please stop all the services manually."
+          exit 1
+        fi
+      elif [[ "$status" == "COMPLETED" ]]; then
+        echo -e "\nservices stopped success !!!"
+        break
+      else
+        echo -e "\nservices stopped failed, status = $status, please stop all the services manually."
+        exit 1
+        break
+      fi
+    done
+  fi
+  echo "services stopped OK !"
 fi
-echo "services stopped OK !"
 
 echo "----------   CLEAN AGENTS ON ALL THE HOSTS  ----------"
-> /var/lib/tbds-server/resources/scripts/clean/hosts
-for host in `curl --user admin:admin "http://0.0.0.0:8080/api/v1/hosts?minimal_response=true" 2> /dev/null | grep host_name | awk -F':' '{print $2}' | sed "s/[ \"]//g"`
-do
-  echo ${host} >> /var/lib/tbds-server/resources/scripts/clean/hosts
-done
+hosts=$(curl --user $user:$password "http://$server:8080/api/v1/hosts?minimal_response=true" 2> /dev/null | grep host_name | awk -F':' '{print $2}' | sed "s/[ \"]//g")
 
 echo "agents on following hosts will be cleaned:"
-cat /var/lib/tbds-server/resources/scripts/clean/hosts
+for host in $hosts; do echo $host; done
 
 echo "begin to clean agents ..."
 count=10
-for host in `cat hosts`
+for host in $hosts
 do
   ./service_cleaner ${host} &>/dev/null &
   p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
