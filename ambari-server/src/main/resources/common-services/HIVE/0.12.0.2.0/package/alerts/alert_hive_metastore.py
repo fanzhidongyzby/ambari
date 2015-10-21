@@ -20,7 +20,7 @@ limitations under the License.
 
 import socket
 import time
-
+from resource_management import *
 from resource_management.libraries.functions import format
 from resource_management.libraries.functions import get_kinit_path
 from resource_management.core.resources import Execute
@@ -106,9 +106,11 @@ def execute(parameters=None, host_name=None):
     start_time = time.time()
 
     try:
-      Execute(cmd, user=smokeuser,
-        path=["/bin/", "/usr/bin/", "/usr/lib/hive/bin/", "/usr/sbin/"],
-        timeout=30 )
+    
+      Toolkit.execute_shell(cmd,timeout=30)
+      #Execute(cmd, user=smokeuser,
+      #  path=["/bin/", "/usr/bin/", "/usr/lib/hive/bin/", "/usr/sbin/"],
+      #  timeout=30 )
 
       total_time = time.time() - start_time
 
