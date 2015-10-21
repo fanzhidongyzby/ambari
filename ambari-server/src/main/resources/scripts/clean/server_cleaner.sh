@@ -45,6 +45,8 @@ rm -rf /usr/lib/python2.6/site-packages/tbds*
 rm -rf /usr/lib/python2.6/site-packages/resource_management
 rm -rf /etc/tbds*
 
+rm -rf /usr/lib/python2.6/site-packages/ambari*
+
 # rm -rf /var/lib/ambari*
 # rm -rf /usr/lib/ambari*
 # rm -rf /var/log/ambari*

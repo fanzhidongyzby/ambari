@@ -97,6 +97,9 @@ class AmbariCleaner:
 
   def release_resources(self):
     self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
+    if not self.onServer:
+      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/ambari*")
+      self.run_cmd("rm -rf /usr/lib/python2.6/site-packages/resource_management")
 
   def remove_dir(self):
     self.release_resources()

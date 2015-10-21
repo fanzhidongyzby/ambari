@@ -151,11 +151,11 @@ case "$1" in
         fi
 
         user="admin"
-        while [[ -z "$password"]]; do
+        while [[ -z "$password" ]]; do
           echo -n "Clean the whole cluster, input admin's password: "; read password
         done
 
-        if [[ -n "$password"]]; then
+        if [[ -n "$password" ]]; then
           /var/lib/tbds-server/resources/scripts/clean/agent_cleaner.sh $user $password 2>&1 | tee -a /tmp/clean_server.log; ret=${PIPESTATUS[0]}
           if [[ $ret -eq 0 ]]; then
             /var/lib/tbds-server/resources/scripts/clean/server_cleaner.sh 2>&1 | tee -a /tmp/clean_server.log
