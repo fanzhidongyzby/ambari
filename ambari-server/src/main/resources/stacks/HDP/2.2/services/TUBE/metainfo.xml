@@ -1,78 +1,74 @@
 <?xml version="1.0"?>
-<!--
-   Licensed to the Apache Software Foundation (ASF) under one or more
-   contributor license agreements.  See the NOTICE file distributed with
-   this work for additional information regarding copyright ownership.
-   The ASF licenses this file to You under the Apache License, Version 2.0
-   (the "License"); you may not use this file except in compliance with
-   the License.  You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
--->
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
 <metainfo>
-    <schemaVersion>2.0</schemaVersion>
-    <services>
-        <service>
-            <name>TUBE</name>
-            <displayName>Tube</displayName>
-            <comment>Tube是数据平台部自行研发的一个分布式消息中间件系统</comment>
-            <version>1.5.10</version>
+	<schemaVersion>2.0</schemaVersion>
+	<services>
+		<service>
+			<name>TUBE</name>
+			<displayName>Tube</displayName>
+			<comment>Tube是数据平台部自行研发的一个分布式消息中间件系统</comment>
+			<deleted>true</deleted>
+			<version>1.5.10</version>
 
-            <components>
-                <component>
-                    <name>TUBE_MASTER</name>
-                    <displayName>Tube Master</displayName>
-                    <cardinality>1-2</cardinality>
-                    <versionAdvertised>true</versionAdvertised>
-                    <category>MASTER</category>
-                    <commandScript>
-                        <script>scripts/tube_master.py</script>
-                        <scriptType>PYTHON</scriptType>
-                        <timeout>1200</timeout>
-                    </commandScript>
-                </component>
+			<components>
+				<component>
+					<name>TUBE_MASTER</name>
+					<displayName>Tube Master</displayName>
+					<cardinality>1-2</cardinality>
+					<versionAdvertised>true</versionAdvertised>
+					<category>MASTER</category>
+					<commandScript>
+						<script>scripts/tube_master.py</script>
+						<scriptType>PYTHON</scriptType>
+						<timeout>1200</timeout>
+					</commandScript>
+				</component>
 
-                <component>
-                    <name>TUBE_BROKER</name>
-                    <displayName>Tube Broker</displayName>
-                    <cardinality>1+</cardinality>
-                    <versionAdvertised>true</versionAdvertised>
-                    <category>SLAVE</category>
-                    <commandScript>
-                        <script>scripts/tube_broker.py</script>
-                        <scriptType>PYTHON</scriptType>
-                        <timeout>1200</timeout>
-                    </commandScript>
-                </component>
+				<component>
+					<name>TUBE_BROKER</name>
+					<displayName>Tube Broker</displayName>
+					<cardinality>1+</cardinality>
+					<versionAdvertised>true</versionAdvertised>
+					<category>SLAVE</category>
+					<commandScript>
+						<script>scripts/tube_broker.py</script>
+						<scriptType>PYTHON</scriptType>
+						<timeout>1200</timeout>
+					</commandScript>
+				</component>
 
-            </components>
+			</components>
 
-            <osSpecifics>
-                <osSpecific>
-                    <osFamily>redhat5,redhat6,suse11</osFamily>
-                    <packages>
-                        <package>
-                            <name>tube</name>
-                        </package>
-                    </packages>
-                </osSpecific>
-            </osSpecifics>
+			<osSpecifics>
+				<osSpecific>
+					<osFamily>redhat5,redhat6,suse11</osFamily>
+					<packages>
+						<package>
+							<name>tube</name>
+						</package>
+					</packages>
+				</osSpecific>
+			</osSpecifics>
 
-            <requiredServices>
-                <service>ZOOKEEPER</service>
-            </requiredServices>
+			<requiredServices>
+				<service>ZOOKEEPER</service>
+			</requiredServices>
 
-            <configuration-dependencies>
-                <config-type>master-ini</config-type>
-                <config-type>broker-ini</config-type>
-            </configuration-dependencies>
+			<configuration-dependencies>
+				<config-type>master-ini</config-type>
+				<config-type>broker-ini</config-type>
+			</configuration-dependencies>
 
-        </service>+
-    </services>
+		</service>
+		+
+	</services>
 </metainfo>
