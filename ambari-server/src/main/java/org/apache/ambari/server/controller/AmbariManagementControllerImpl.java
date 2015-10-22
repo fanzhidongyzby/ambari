@@ -388,6 +388,8 @@ public class AmbariManagementControllerImpl implements AmbariManagementControlle
     Map<String, Map<String, Map<String, Set<String>>>> hostComponentNames =
         new HashMap<String, Map<String, Map<String, Set<String>>>>();
     Set<String> duplicates = new HashSet<String>();
+    // store request removed duplicated, by florian
+    Set<ServiceComponentHostRequest> filtedRequests = new HashSet<ServiceComponentHostRequest>(requests.size());
     for (ServiceComponentHostRequest request : requests) {
       validateServiceComponentHostRequest(request);
 
@@ -503,10 +505,13 @@ public class AmbariManagementControllerImpl implements AmbariManagementControlle
         if (sch != null) {
           duplicates.add("[clusterName=" + request.getClusterName() + ", hostName=" + request.getHostname() +
               ", componentName=" +request.getComponentName() +']');
+          continue;
         }
       } catch (AmbariException e) {
         // Expected
       }
+
+      filtedRequests.add(request);
     }
 
     // ensure only a single cluster update
@@ -515,24 +520,26 @@ public class AmbariManagementControllerImpl implements AmbariManagementControlle
           + " on only one cluster at a time");
     }
 
-    if (!duplicates.isEmpty()) {
-      StringBuilder names = new StringBuilder();
-      boolean first = true;
-      for (String hName : duplicates) {
-        if (!first) {
-          names.append(",");
-        }
-        first = false;
-        names.append(hName);
-      }
-      String msg;
-      if (duplicates.size() == 1) {
-        msg = "Attempted to create a host_component which already exists: ";
-      } else {
-        msg = "Attempted to create host_component's which already exist: ";
-      }
-      throw new DuplicateResourceException(msg + names.toString());
-    }
+    requests = filtedRequests;
+
+//    if (!duplicates.isEmpty()) {
+//      StringBuilder names = new StringBuilder();
+//      boolean first = true;
+//      for (String hName : duplicates) {
+//        if (!first) {
+//          names.append(",");
+//        }
+//        first = false;
+//        names.append(hName);
+//      }
+//      String msg;
+//      if (duplicates.size() == 1) {
+//        msg = "Attempted to create a host_component which already exists: ";
+//      } else {
+//        msg = "Attempted to create host_component's which already exist: ";
+//      }
+//      throw new DuplicateResourceException(msg + names.toString());
+//    }
 
     // set restartRequired flag for  monitoring services
     setMonitoringServicesRestartRequired(requests);
