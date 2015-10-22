@@ -110,6 +110,7 @@
       </osSpecifics>
 
       <requiredServices>
+        <service>TEZ</service>
         <service>PIG</service>
       </requiredServices>
 
