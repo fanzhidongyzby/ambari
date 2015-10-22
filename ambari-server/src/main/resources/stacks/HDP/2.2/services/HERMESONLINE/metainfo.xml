@@ -104,8 +104,8 @@
             </requiredServices>
 
             <configuration-dependencies>
-                <config-type>hermes-properties</config-type>
-                <config-type>log4j-properties</config-type>
+                <config-type>online-hermes-properties</config-type>
+                <config-type>online-log4j-properties</config-type>
             </configuration-dependencies>
 
         </service>+

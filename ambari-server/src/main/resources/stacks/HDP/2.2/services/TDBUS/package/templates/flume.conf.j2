@@ -1,0 +1,130 @@
+#6-segment protocol TCP source
+agent1.sources.tcp-source.channels = ch-msg1 ch-msg2 ch-msg3 ch-msg4 ch-msg5
+agent1.sources.tcp-source.type = org.apache.flume.source.SimpleTcpSource
+agent1.sources.tcp-source.msg-factory-name = org.apache.flume.source.ServerMessageFactory
+agent1.sources.tcp-source.host = 0.0.0.0
+agent1.sources.tcp-source.port = 46801
+agent1.sources.tcp-source.max-msg-length = 524288
+agent1.sources.tcp-source.topic = test1
+agent1.sources.tcp-source.attr = m=9
+agent1.sources.tcp-source.connections = 5000
+agent1.sources.tcp-source.max-threads = 32
+agent1.sources.tcp-source.receiveBufferSize = 1048576
+agent1.sources.tcp-source.sendBufferSize = 1048576
+agent1.sources.tcp-source.max-threads=32
+agent1.sources.tcp-source.custom-cp = true
+agent1.sources.tcp-source.selector.type = org.apache.flume.channel.FailoverChannelSelector
+agent1.sources.tcp-source.selector.master = ch-msg1 ch-msg2 ch-msg3 ch-msg4
+
+#6-segment protocol UDP source
+agent1.sources.udp-source.channels = ch-msg1 ch-msg2 ch-msg3 ch-msg4 ch-msg5
+agent1.sources.udp-source.type = org.apache.flume.source.SimpleUdpSource
+agent1.sources.udp-source.msg-factory-name = org.apache.flume.source.ServerMessageFactory
+agent1.sources.udp-source.host = 0.0.0.0
+agent1.sources.udp-source.port = 46801
+agent1.sources.udp-source.max-msg-length = 524288
+agent1.sources.udp-source.topic = test2
+agent1.sources.udp-source.attr = m=9
+agent1.sources.udp-source.max-threads = 16
+agent1.sources.udp-source.custom-cp = true
+agent1.sources.udp-source.selector.type = org.apache.flume.channel.FailoverChannelSelector
+agent1.sources.udp-source.selector.master = ch-msg1 ch-msg2 ch-msg3 ch-msg4
+
+#Http Source
+agent1.sources.http-source.channels = ch-msg1 ch-msg2 ch-msg3 ch-msg4
+agent1.sources.http-source.type = org.apache.flume.source.http.SimpleHttpSource
+agent1.sources.http-source.message-handler-name = org.apache.flume.source.http.SimpleMessageHandler
+agent1.sources.http-source.host = 0.0.0.0
+agent1.sources.http-source.port = 8000
+agent1.sources.http-source.max-msg-length = 524288
+agent1.sources.http-source.topic = test1
+agent1.sources.http-source.attr = m=9
+agent1.sources.http-source.selector.type = org.apache.flume.channel.RandomChannelSelector
+
+agent1.channels.ch-msg1.type = memory
+agent1.channels.ch-msg1.capacity = 10000
+agent1.channels.ch-msg1.keep-alive = 0
+agent1.channels.ch-msg1.transactionCapacity = 200
+
+agent1.channels.ch-msg2.type = memory
+agent1.channels.ch-msg2.capacity = 10000
+agent1.channels.ch-msg2.keep-alive = 0
+agent1.channels.ch-msg2.transactionCapacity = 200
+
+agent1.channels.ch-msg3.type = memory
+agent1.channels.ch-msg3.capacity = 10000
+agent1.channels.ch-msg3.keep-alive = 0
+agent1.channels.ch-msg3.transactionCapacity = 200
+
+agent1.channels.ch-msg4.type = memory
+agent1.channels.ch-msg4.capacity = 10000
+agent1.channels.ch-msg4.keep-alive = 0
+agent1.channels.ch-msg4.transactionCapacity = 200
+
+agent1.channels.ch-msg5.type = file
+agent1.channels.ch-msg5.capacity = 100000000
+agent1.channels.ch-msg5.maxFileSize = 1073741824
+agent1.channels.ch-msg5.minimumRequiredSpace = 1073741824
+agent1.channels.ch-msg5.checkpointDir = {{new_tdbus_install_path}}/file/ch-msg5/check
+agent1.channels.ch-msg5.dataDirs = {{new_tdbus_install_path}}/file/ch-msg5/data
+agent1.channels.ch-msg5.fsyncPerTransaction = false
+agent1.channels.ch-msg5.fsyncInterval = 10
+
+agent1.sinks.meta-sink-msg1.channel = ch-msg1
+agent1.sinks.meta-sink-msg1.type = org.apache.flume.sink.MetaSink
+agent1.sinks.meta-sink-msg1.master-host-port-list = {{tube_master_address_list}}
+agent1.sinks.meta-sink-msg1.send_timeout = 30000
+agent1.sinks.meta-sink-msg1.stat-interval-sec = 60
+agent1.sinks.meta-sink-msg1.thread-num = 4
+agent1.sinks.meta-sink-msg1.client-id-cache = true
+agent1.sinks.meta-sink-msg1.max-survived-time = 300000
+agent1.sinks.meta-sink-msg1.max-survived-size = 3000000
+agent1.sinks.meta-sink-msg1.new-check-pattern = true
+
+agent1.sinks.meta-sink-msg2.channel = ch-msg2
+agent1.sinks.meta-sink-msg2.type = org.apache.flume.sink.MetaSink
+agent1.sinks.meta-sink-msg2.master-host-port-list = {{tube_master_address_list}}
+agent1.sinks.meta-sink-msg2.send_timeout = 30000
+agent1.sinks.meta-sink-msg2.stat-interval-sec = 60
+agent1.sinks.meta-sink-msg2.thread-num = 4
+agent1.sinks.meta-sink-msg2.client-id-cache = true
+agent1.sinks.meta-sink-msg2.max-survived-time = 300000
+agent1.sinks.meta-sink-msg2.max-survived-size = 3000000
+agent1.sinks.meta-sink-msg2.new-check-pattern = true
+
+agent1.sinks.meta-sink-msg3.channel = ch-msg3
+agent1.sinks.meta-sink-msg3.type = org.apache.flume.sink.MetaSink
+agent1.sinks.meta-sink-msg3.master-host-port-list = {{tube_master_address_list}}
+agent1.sinks.meta-sink-msg3.send_timeout = 30000
+agent1.sinks.meta-sink-msg3.stat-interval-sec = 60
+agent1.sinks.meta-sink-msg3.thread-num = 4
+agent1.sinks.meta-sink-msg3.client-id-cache = true
+agent1.sinks.meta-sink-msg3.max-survived-time = 300000
+agent1.sinks.meta-sink-msg3.max-survived-size = 3000000
+agent1.sinks.meta-sink-msg3.new-check-pattern = true
+
+agent1.sinks.meta-sink-msg4.channel = ch-msg4
+agent1.sinks.meta-sink-msg4.type = org.apache.flume.sink.MetaSink
+agent1.sinks.meta-sink-msg4.master-host-port-list = {{tube_master_address_list}}
+agent1.sinks.meta-sink-msg4.send_timeout = 30000
+agent1.sinks.meta-sink-msg4.stat-interval-sec = 60
+agent1.sinks.meta-sink-msg4.thread-num = 4
+agent1.sinks.meta-sink-msg4.client-id-cache = true
+agent1.sinks.meta-sink-msg4.max-survived-time = 300000
+agent1.sinks.meta-sink-msg4.max-survived-size = 3000000
+agent1.sinks.meta-sink-msg4.new-check-pattern = true
+
+agent1.sinks.meta-sink-msg5.channel = ch-msg5
+agent1.sinks.meta-sink-msg5.type = org.apache.flume.sink.MetaSink
+agent1.sinks.meta-sink-msg5.master-host-port-list = {{tube_master_address_list}}
+agent1.sinks.meta-sink-msg5.send_timeout = 30000
+agent1.sinks.meta-sink-msg5.stat-interval-sec = 60
+agent1.sinks.meta-sink-msg5.thread-num = 8
+agent1.sinks.meta-sink-msg5.client-id-cache = true
+agent1.sinks.meta-sink-msg5.max-survived-time = 300000
+agent1.sinks.meta-sink-msg5.max-survived-size = 3000000
+agent1.sinks.meta-sink-msg5.new-check-pattern = true
+
+agent1.sources = tcp-source udp-source http-source
+agent1.channels = ch-msg1 ch-msg2 ch-msg3 ch-msg4 ch-msg5
+agent1.sinks = meta-sink-msg1 meta-sink-msg2 meta-sink-msg3 meta-sink-msg4 meta-sink-msg5

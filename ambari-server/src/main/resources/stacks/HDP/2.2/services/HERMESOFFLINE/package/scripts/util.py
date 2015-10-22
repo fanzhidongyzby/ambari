@@ -40,7 +40,7 @@ def init_config(env):
 
 
 def is_service_run(service_name):
-    True if get_service_pid(service_name) else False
+    return True if get_service_pid(service_name) else False
 
 
 def get_service_pid(service_name):
@@ -52,11 +52,12 @@ def get_service_pid(service_name):
     return output
 
 
-def zk_connection_string(zk_hosts):
+def zk_connection_string(zk_hosts, port):
     """get zookeeper cluster hosts with port"""
     zk_hosts_port = []
+    port = ":" + str(port)
     for host in zk_hosts:
-        host += ':2181'
+        host += port
         zk_hosts_port.append(host)
     return ','.join(zk_hosts_port)
 

@@ -1,0 +1,11 @@
+#!/bin/sh
+# export jdk path
+JAVA_HOME={{java_home}}
+PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME PATH
+# Switch to tdbus path
+new_tdbus_install_path={{new_tdbus_install_path}}
+cd new_tdbus_install_path
+
+sudo java -Xmx512m -Djava.net.preferIPv4Stack=true -cp lib/*: org.apache.flume.console.FlumeOperationClient stop
+sudo $JAVA_HOME/bin/jps | grep "Application" | awk '{print $1}' | xargs kill

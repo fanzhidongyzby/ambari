@@ -24,50 +24,51 @@ import util
 # server configurations
 config = Script.get_config()
 
-# zk hosts
-zk_hosts = default("/clusterHostInfo/zookeeper_hosts", [])
 # hermes worker hosts
 hostname = default("hostname", [])
 worker_hosts = default("/clusterHostInfo/hermesonline_worker_hosts", [])
 
-# zk hosts to string
-hermes_zkConnectionString = util.zk_connection_string(zk_hosts)
+
+# zk hosts
+zk_hosts = default("/clusterHostInfo/zookeeper_hosts", [])
+hermes_zkConnectionString = util.zk_connection_string(zk_hosts, 2181)
+
 # JAVA HOME
 java_home = default("/hostLevelParams/java_home", "/usr/jdk64/jdk1.7.0_67")
 # hermes port used
-hermes_server_port = config['configurations']['hermes-properties']['hermes.server.port']
-hermes_worker_port = config['configurations']['hermes-properties']['hermes.worker.port']
-debug_jms_port = config['configurations']['hermes-properties']['debug.jms.port']
+hermes_server_port = config['configurations']['online-hermes-properties']['hermes.server.port']
+hermes_worker_port = config['configurations']['online-hermes-properties']['hermes.worker.port']
+debug_jms_port = config['configurations']['online-hermes-properties']['debug.jms.port']
 # hermes JVN setting
-hermes_xms = config['configurations']['hermes-properties']['hermes.xms']
-hermes_xmx = config['configurations']['hermes-properties']['hermes.xmx']
-hermes_xmn = config['configurations']['hermes-properties']['hermes.xmn']
+hermes_xms = config['configurations']['online-hermes-properties']['hermes.xms']
+hermes_xmx = config['configurations']['online-hermes-properties']['hermes.xmx']
+hermes_xmn = config['configurations']['online-hermes-properties']['hermes.xmn']
 
 # master-ini.xml
-hermes_user = config['configurations']['hermes-properties']['hermes.user']
-hermes_group = config['configurations']['hermes-properties']['hermes.group']
-hermes_topic = config['configurations']['hermes-properties']['hermes.topic']
-higo_userpackage_docIdsLocalBaseDir = config['configurations']['hermes-properties']['higo.userpackage.docIdsLocalBaseDir']
-higo_userpackage_pkgBaseLocalDir = config['configurations']['hermes-properties']['higo.userpackage.pkgBaseLocalDir']
-higo_userpackage_bitsLocalBaseDir = config['configurations']['hermes-properties']['higo.userpackage.bitsLocalBaseDir']
-hermes_store_local_dir = config['configurations']['hermes-properties']['hermes.store.local.dir']
-hermes_store_download_port = config['configurations']['hermes-properties']['hermes.store.download.port']
-hermes_store_upload_port = config['configurations']['hermes-properties']['hermes.store.upload.port']
-hermes_local_conf_dir = config['configurations']['hermes-properties']['hermes.local.conf.dir']
-hermes_conf_dir = config['configurations']['hermes-properties']['hermes.conf.dir']
-hermes_hadoop_conf_dir = config['configurations']['hermes-properties']['hermes.hadoop.conf.dir']
-hermes_hadoop_home = config['configurations']['hermes-properties']['hermes.hadoop.home']
-hermes_mode = config['configurations']['hermes-properties']['hermes.mode']
-hermes_schema_mode = config['configurations']['hermes-properties']['hermes.schema.mode']
-hermes_worker_tasklist_assign_type = config['configurations']['hermes-properties']['hermes.worker.tasklist.assign.type']
-hermes_index_path = config['configurations']['hermes-properties']['hermes.index.path']
-hermes_schema_path = config['configurations']['hermes-properties']['hermes.schema.path']
+hermes_user = config['configurations']['online-hermes-properties']['hermes.user']
+hermes_group = config['configurations']['online-hermes-properties']['hermes.group']
+hermes_topic = config['configurations']['online-hermes-properties']['hermes.topic']
+higo_userpackage_docIdsLocalBaseDir = config['configurations']['online-hermes-properties']['higo.userpackage.docIdsLocalBaseDir']
+higo_userpackage_pkgBaseLocalDir = config['configurations']['online-hermes-properties']['higo.userpackage.pkgBaseLocalDir']
+higo_userpackage_bitsLocalBaseDir = config['configurations']['online-hermes-properties']['higo.userpackage.bitsLocalBaseDir']
+hermes_store_local_dir = config['configurations']['online-hermes-properties']['hermes.store.local.dir']
+hermes_store_download_port = config['configurations']['online-hermes-properties']['hermes.store.download.port']
+hermes_store_upload_port = config['configurations']['online-hermes-properties']['hermes.store.upload.port']
+hermes_local_conf_dir = config['configurations']['online-hermes-properties']['hermes.local.conf.dir']
+hermes_conf_dir = config['configurations']['online-hermes-properties']['hermes.conf.dir']
+hermes_hadoop_conf_dir = config['configurations']['online-hermes-properties']['hermes.hadoop.conf.dir']
+hermes_hadoop_home = config['configurations']['online-hermes-properties']['hermes.hadoop.home']
+hermes_mode = config['configurations']['online-hermes-properties']['hermes.mode']
+hermes_schema_mode = config['configurations']['online-hermes-properties']['hermes.schema.mode']
+hermes_worker_tasklist_assign_type = config['configurations']['online-hermes-properties']['hermes.worker.tasklist.assign.type']
+hermes_index_path = config['configurations']['online-hermes-properties']['hermes.index.path']
+hermes_schema_path = config['configurations']['online-hermes-properties']['hermes.schema.path']
 
 # zk.root
-zk_root = config['configurations']['hermes-properties']['zk.root']
+zk_root = config['configurations']['online-hermes-properties']['zk.root']
 
-# tube-log4j-properties.xml
-log4j_properties = config['configurations']['log4j-properties']['content']
+# online-log4j-properties.xml
+log4j_properties = config['configurations']['online-log4j-properties']['content']
 
 # refractor service path
 hermes_install_path = "/usr/hdp/2.2.0.0-2041/hermes"

@@ -24,14 +24,19 @@ import util
 # server configurations
 config = Script.get_config()
 
-# zk hosts
-zk_hosts = default("/clusterHostInfo/zookeeper_hosts", [])
 # hermes worker hosts
 hostname = default("hostname", [])
 worker_hosts = default("/clusterHostInfo/hermesoffline_worker_hosts", [])
 
-# zk hosts to string
-hermes_zkConnectionString = util.zk_connection_string(zk_hosts)
+# tube master hosts
+master_listen_port = config['configurations']['master-ini']['master.listen.port']
+master_hosts = default("/clusterHostInfo/tube_master_hosts", [])
+hermes_adapter_pull_masterHost = util.zk_connection_string(master_hosts, master_listen_port)
+
+# zk hosts
+zk_hosts = default("/clusterHostInfo/zookeeper_hosts", [])
+hermes_zkConnectionString = util.zk_connection_string(zk_hosts, 2181)
+
 # JAVA HOME
 java_home = default("/hostLevelParams/java_home", "/usr/jdk64/jdk1.7.0_67")
 # hermes port used
@@ -65,6 +70,7 @@ hermes_schema_path = config['configurations']['hermes-properties']['hermes.schem
 
 # zk.root
 zk_root = config['configurations']['hermes-properties']['zk.root']
+log4j_properties = config['configurations']['offline-log4j-properties']['content']
 
 # hermes-adapter-properties.xml
 hermes_adapter_impl_class_pull = config['configurations']['hermes-adapter-properties']['hermes.adapter.impl.class.pull']
@@ -78,7 +84,6 @@ hermes_adapter_push_timeout = config['configurations']['hermes-adapter-propertie
 hermes_adapter_pull_setMaxoffset = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.setMaxoffset']
 hermes_adapter_pull_queueMaxsize = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.queueMaxsize']
 hermes_adapter_pull_speed = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.speed']
-hermes_adapter_pull_masterHost = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.masterHost']
 hermes_adapter_pull_topic = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.topic']
 hermes_adapter_pull_group = config['configurations']['hermes-adapter-properties']['hermes.adapter.pull.group']
 

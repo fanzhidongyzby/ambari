@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 # export jdk path
 JAVA_HOME={{java_home}}
-export JAVA_HOME
 PATH=$JAVA_HOME/bin:$PATH
+export JAVA_HOME PATH
 # Switch to hermes path
 new_hermes_install_path={{new_hermes_install_path}}
 cd $new_hermes_install_path

@@ -88,12 +88,6 @@
     </property>
 
     <property>
-        <name>hermes.adapter.pull.masterHost</name>
-        <value>tl-vip-tube-master-1:8609,tl-vip-tube-master-2:8609</value>
-        <description></description>
-    </property>
-
-    <property>
         <name>hermes.adapter.pull.topic</name>
         <value>teg_hermes_transfer</value>
         <description></description>

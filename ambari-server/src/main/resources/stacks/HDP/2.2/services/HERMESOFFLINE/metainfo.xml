@@ -133,12 +133,13 @@
             <requiredServices>
                 <service>ZOOKEEPER</service>
                 <service>HDFS</service>
+                <service>TUBE</service>
             </requiredServices>
 
             <configuration-dependencies>
                 <config-type>hermes-adapter-properties</config-type>
                 <config-type>hermes-properties</config-type>
-                <config-type>log4j-properties</config-type>
+                <config-type>offline-log4j-properties</config-type>
             </configuration-dependencies>
 
         </service>+

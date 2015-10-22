@@ -7,27 +7,32 @@ def init_config(env):
     import params
     env.set_params(params)
 
-    # tube conf directory
-    tube_conf_path = os.path.join(params.tube_install_path, 'conf')
+    # tdbus conf directory
+    tdbus_conf_path = os.path.join(params.tdbus_install_path, 'conf')
 
-    # tube master ini file
-    master_ini = os.path.join(tube_conf_path, 'master.ini')
-    File(master_ini,
-         content=Template('master.ini.j2'),
+    # flume.conf file
+    flume_conf = os.path.join(tdbus_conf_path, 'flume.conf')
+    File(flume_conf,
+         content=Template('flume.conf.j2'),
          mode=0644)
 
-    # tube broker ini file
-    broker_ini = os.path.join(tube_conf_path, 'server.ini')
-    File(broker_ini,
-         content=Template('broker.ini.j2'),
-         mode=0644)
+    # flume-env.sh file
+    flume_env = os.path.join(tdbus_conf_path, 'flume-env.sh')
+    File(flume_env,
+         content=Template('flume-env.sh.j2'),
+         mode=0755)
 
-    # tube bin directory
-    tube_bin_path = os.path.join(params.tube_install_path, 'bin')
-    # env file, for java environment
-    tube_command_file = os.path.join(tube_bin_path, "env.sh")
-    File(tube_command_file,
-         content=Template("env.sh.j2"),
+    # tdbus conf directory
+    tdbus_bin_path = os.path.join(params.tdbus_install_path, 'bin')
+
+    start_tdbus = os.path.join(tdbus_bin_path, 'start_tdbus.sh')
+    File(start_tdbus,
+         content=Template('start_tdbus.sh.j2'),
+         mode=0755)
+
+    stop = os.path.join(tdbus_bin_path, 'stop.sh')
+    File(stop,
+         content=Template('stop.sh.j2'),
          mode=0755)
 
 
@@ -57,11 +62,11 @@ def zk_connection_string(zk_hosts, port):
 
 def service_action(service_name, action):
     """execute different action for service"""
-    if service_name is "master":
-        command_script = format("{master_script}")
-    elif service_name is "broker":
-        command_script = format("{broker_script}")
-    action_command = "sudo bash -x {0}  {1}".format(command_script, action)
+    if action is "start":
+        command_script = format("{start_script}")
+    elif action is "stop":
+        command_script = format("{stop_script}")
+    action_command = "sudo bash -x {0}".format(command_script)
     (ret, output) = commands.getstatusoutput(action_command)
     if ret != 0:
         Logger.info("execute {0}  failed ,for {1}".format(action_command, service_name))
