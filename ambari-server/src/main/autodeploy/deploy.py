@@ -182,6 +182,10 @@ if __name__ == '__main__':
   ######################################################################################################
 
   logger.info("Running blueprint to install tbds case {0}".format(cmd.case))
+
+  # download if tbds-shell not exists
+  exe("TOOL=\"tbds-shell.jar\"; if [ ! -f \"$TOOL\" ]; then wget http://{0}/ambari/ambari-server/$TOOL; fi".format(cmd.repo))
+
   # cluster prepare ok, use blueprint to install
   exe("./blueprint.sh cases/{0} {1} {2} {3}".format(cmd.case, cmd.port, cmd.user, cmd.password))
 

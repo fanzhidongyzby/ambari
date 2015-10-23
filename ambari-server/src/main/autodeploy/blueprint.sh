@@ -18,5 +18,5 @@ cluster autoAssign
 cluster create
 EOM
 
-/usr/jdk64/jdk*/bin/java  -jar tbds-shell-0.1.DEV.jar --ambari.host=$HOST --ambari.port=$PORT --ambari.user=$USER --ambari.password=$PSW --cmdfile=$FILE
+/usr/jdk64/jdk*/bin/java  -jar tbds-shell.jar --ambari.host=$HOST --ambari.port=$PORT --ambari.user=$USER --ambari.password=$PSW --cmdfile=$FILE
 

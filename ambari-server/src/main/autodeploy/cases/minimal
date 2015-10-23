@@ -39,7 +39,7 @@
           "name" : "METRICS_MONITOR"
         }  
       ],
-      "cardinality": "${slavesCount}"
+      "cardinality": "1"
     }
   ],
   "Blueprints": {
