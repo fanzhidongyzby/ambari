@@ -56,7 +56,8 @@ class KafkaBroker(Script):
     if pid_file and os.path.isfile(pid_file):
         return
 
-    daemon_cmd = "nohup {0}/bin/kafka-manager -Dconfig.file={0}/conf/application.conf -Dhttp.port={1} &".format(params.kafka_manager_dir, str(params.kafka_manager_http_port))
+    daemon_cmd = "export PATH={0}/bin:$PATH;".format(params.java64_home)
+    daemon_cmd += "nohup {0}/bin/kafka-manager -Dconfig.file={0}/conf/application.conf -Dhttp.port={1} &".format(params.kafka_manager_dir, str(params.kafka_manager_http_port))
     Execute(daemon_cmd,
             user=params.kafka_user,
     )
