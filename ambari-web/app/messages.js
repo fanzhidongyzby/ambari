@@ -2371,7 +2371,7 @@ Em.I18n.translations = {
     'common.groups':'群组',
     'common.downgrade':'降级',
     'common.oss':'OSs',
-    'common.started':'已开始',
+    'common.started':'已启动',
     'common.kerberos':'Kerberos',
     'common.stack.versions':'套件版本',
     'common.versions':'版本',
