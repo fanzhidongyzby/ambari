@@ -45,9 +45,15 @@ consumer_heartbeat_timeout = config['configurations']['master-ini']['consumer.he
 producer_heartbeat_timeout = config['configurations']['master-ini']['producer.heartbeat.timeout']
 broker_heartbeat_timeout = config['configurations']['master-ini']['broker.heartbeat.timeout']
 
+# topic tool
+topic_port = config['configurations']['master-ini']['topic.tool.port']
+topic_client_timeval = config['configurations']['master-ini']['topic.tool.timeval']
+
 # master hosts
 master_hosts = default("/clusterHostInfo/tube_master_hosts", [])
 master_address_list = util.zk_connection_string(master_hosts, master_listen_port)
+
+topic_tool_server_hosts = default("/clusterHostInfo/topic_tool_server_hosts", [])[0]
 
 # broker-ini.xml
 broker_listen_port = config['configurations']['broker-ini']['broker.listen.port']
@@ -63,11 +69,14 @@ load_message_stores_in_parallel = "true" if config['configurations']['broker-ini
 
 # refractor service path
 tube_install_path = "/usr/hdp/2.2.0.0-2041/tube"
-new_tube_install_path = "/data/tbds/tube"
+new_tube_install_path = "/opt/tbds/tube"
 
 # scripts
 master_script = new_tube_install_path + "/bin/master.sh"
 broker_script = new_tube_install_path + "/bin/broker.sh"
+topic_tool_server = new_tube_install_path + "/bin/topic_tool.py"
+topic_tool_client = new_tube_install_path + "/bin/start_tool_client.py"
+start_tool_server = new_tube_install_path + "/bin/start_tool_server.sh"
 
 
 

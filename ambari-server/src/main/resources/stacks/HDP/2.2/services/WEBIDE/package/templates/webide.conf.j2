@@ -1,0 +1,8 @@
+listen {{webide_web_listen_port}}
+Alias /webide "{{new_webide_install_path}}/tod_ide"
+<Directory "{{new_webide_install_path}}/tod_ide">
+   Options FollowSymLinks
+   AllowOverride None
+   Order allow,deny
+   Allow from all
+</Directory>

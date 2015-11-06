@@ -31,99 +31,87 @@ from utils import utils
 
 
 class PgMaster(Script):
-  def install(self, env):
+    def install(self, env):
 
-    Logger.info("install Pg")
-    excludePackage = ['pgxzm-center']
-    self.install_packages(env,excludePackage)
+        Logger.info("install Pg")
+        excludePackage = ['pgxzm-center']
+        self.install_packages(env,excludePackage)
 
-    # create dba user for pg
-    #	configinit().create_pg_dba(env)
+        import params
+        Logger.info("create  user and passwd")
 
-    # get a best avilable dir for pg data
-    #	configinit().get_avilable_dir(env)
+        Logger.info("create  install dir")
 
+        Logger.info(params.pgxx_install_path)
+        utils().exe(params.create_install_dir)
+        utils().exe(params.chown_install_dir)
+        Logger.info("create log dir")
+        Logger.info(params.pgxx_log_path)
+        utils().exe(params.create_log_dir)
+        utils().exe(params.chown_log_dir)
+        Logger.info("process initdb")
+        utils().exe(params.pg_init_db)
+        Logger.info("update configure parameters")
+        self.configure(env)
+        self.start(env)
+        self.createdbsuperuser()
 
-    import params
-    Logger.info("create  user and passwd")
-    Logger.info(params.pgxx_passwd)
+        change_passwd_cmd = format("psql -h {pg_host_name} -p {pgxx_postgre_port} -U postgres -c \"ALTER USER postgres WITH PASSWORD '{pgxx_db_passwd}';\"")
+        print 'alter postgres password:{0}'.format(change_passwd_cmd)
+        utils().exe(change_passwd_cmd)
 
-    Logger.info("create  install dir")
+        create_demo_table_cmd = format("psql -h {pg_host_name} -p {pgxx_postgre_port} -U postgres -d postgres -c \"create table demo (time varchar(255),pv integer);\"")
+        print 'create demo table:{0}'.format(create_demo_table_cmd)
+        utils().exe(create_demo_table_cmd)
 
-    Logger.info(params.pgxx_install_path)
-    utils().exe(params.create_install_dir)
-    utils().exe(params.chown_install_dir)
-    Logger.info("create log dir")
-    Logger.info(params.pgxx_log_path)
-    utils().exe(params.create_log_dir)
-    utils().exe(params.chown_log_dir)
-    Logger.info("process initdb")
-    utils().exe(params.pg_init_db)
-    Logger.info("update configure parameters")
-    self.configure(env)
-    self.start(env)
-    self.createdbsuperuser(env)
+        Links(params.new_postgresql_install_path, params.postgresql_install_path)
 
-    Links(params.new_postgresql_install_path, params.postgresql_install_path)
+    def uninstall(self, env):
+        Toolkit.uninstall_service("postgresql")
 
-  def uninstall(self, env):
-      Toolkit.uninstall_service("postgresql")
+    def createdbsuperuser(self):
+        Logger.info("create super user for postgresql --")
+        create_superuser_command = format("{create_superuser_command}")
+        utils().exe(create_superuser_command)
 
-  def createdbsuperuser(self, env):
-    Logger.info("create super user for postgresql --")
-    Logger.info("load exe scripts")
-    import params
-    File(params.config_runner_script_for_db,
-       mode=0755,
-       content=StaticFile('createdbsuperuser.sh')
-       )
-    Logger.info("exe scripts create user")
-    if os.path.exists(params.config_runner_script_for_db):
-      Logger.info(params.create_superuser_sh)
-      val = os.system(params.create_superuser_sh)
-      # createdbsuperuser.sh pgxx_postgre_port pgxx_user   'CREATE ROLE  pgxx_db_user SUPERUSER;'
-      #		val= os.system("su hdfs -c '/usr/local/lhotse_runners/initLogScript.sh /usr/local/lhotse_runners'")
-      Logger.info("exe createdbsuperusersh result = " + str(val) )
-    else:
-      Logger.info('createdbsuperuser.sh is not exist')
+        Logger.info("change password for superuser")
+        change_passwd_command = format("psql -h {pg_host_name} -p {pgxx_postgre_port} -U {pgxx_db_user}  "
+                                       "-c \"ALTER USER postgres WITH PASSWORD '{pgxx_db_passwd}';\"")
+        utils().exe(change_passwd_command)
 
-  def start(self, env):
-    Logger.info("start the pg")
-    import params
-    env.set_params(params)
+    def start(self, env):
+        Logger.info("start the pg")
+        import params
+        env.set_params(params)
 
-    self.configure(env)
-    utils().exe(params.pg_start)
-    #		utils.exe(params.pg_cofig_check)
+        self.configure(env)
+        utils().exe(params.pg_start)
 
-    Links(params.new_postgresql_data_path, params.postgresql_data_path)
-    Links(params.new_postgresql_log_path, params.postgresql_log_path)
+        Links(params.new_postgresql_data_path, params.postgresql_data_path)
+        Links(params.new_postgresql_log_path, params.postgresql_log_path)
 
+    def stop(self, env):
+        Logger.info("Stop the pg")
+        import params
+        env.set_params(params)
+        utils().exe(params.pg_stop)
 
-  def stop(self, env):
-      Logger.info("Stop the pg")
-      import params
-      env.set_params(params)
-      utils().exe(params.pg_stop)
+    def configure(self, env):
+        import params
+        env.set_params(params)
+        Logger.info("update pg configs")
+        configinit().update_pg(env)
 
-  def configure(self, env):
-    import params
-    env.set_params(params)
-    Logger.info("update pg configs")
-    configinit().update_pg(env)
-
-
-
-  def status(self, env):
-    Logger.info("check pg server running status---")
-    #	import params
-    #	utils().exe_status(params.pg_status)
-    import params
-    #Toolkit1.check_service(params.pg_status)
-    Toolkit.check_command(params.pg_status,keyword = "is running")
-    #	import params
-    #	utils.check_postgre_running(params.pg_status)
+    def status(self, env):
+        Logger.info("check pg server running status---")
+        import status_params
+        cmd = "{0} | grep -E '{1}'".format(status_params.pg_status, "PID")
+        Logger.info("check command: {0}".format(status_params.pg_status))
+        output = Toolkit.exe(cmd)
+        if output == "":
+            Logger.error("command {0} not running".format(status_params.pg_status))
+            raise ComponentIsNotRunning()
 
 if __name__ == "__main__":
-  PgMaster().execute()
+    PgMaster().execute()
 

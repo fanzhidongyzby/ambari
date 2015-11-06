@@ -22,6 +22,11 @@ def init_config(env):
          content=Template('broker.ini.j2'),
          mode=0644)
 
+    broker_ini_source = os.path.join(tube_conf_path, 'server.ini.source')
+    File(broker_ini_source,
+         content=Template('broker.ini.j2'),
+         mode=0644)
+
     # tube bin directory
     tube_bin_path = os.path.join(params.tube_install_path, 'bin')
     # env file, for java environment
@@ -29,6 +34,17 @@ def init_config(env):
     File(tube_command_file,
          content=Template("env.sh.j2"),
          mode=0755)
+
+    start_tool_server = os.path.join(tube_bin_path, "start_tool_server.sh")
+    File(start_tool_server,
+         content=Template("start_tool_server.sh.j2"),
+         mode=0755)
+
+    # topic_tool_client file
+    topic_tool_client = os.path.join(tube_bin_path, 'start_tool_client.py')
+    File(topic_tool_client,
+         content=Template('start_tool_client.py.j2'),
+         mode=0744)
 
 
 def is_service_run(service_name):
@@ -61,7 +77,7 @@ def service_action(service_name, action):
         command_script = format("{master_script}")
     elif service_name is "broker":
         command_script = format("{broker_script}")
-    action_command = "sudo bash -x {0}  {1}".format(command_script, action)
+    action_command = "(sudo bash -x {0}  {1}&)  &> /dev/null".format(command_script, action)
     (ret, output) = commands.getstatusoutput(action_command)
     if ret != 0:
         Logger.info("execute {0}  failed ,for {1}".format(action_command, service_name))
@@ -69,6 +85,11 @@ def service_action(service_name, action):
     else:
         Logger.info("execute {0}  success ,for {1}".format(action_command, service_name))
         # Logger.info(output)
+
+
+def exe_command(command):
+    (ret, output) = commands.getstatusoutput(command)
+    return output
 
 
 if __name__ == '__main__':

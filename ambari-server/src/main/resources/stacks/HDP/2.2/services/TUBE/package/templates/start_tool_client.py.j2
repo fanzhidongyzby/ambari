@@ -1,0 +1,50 @@
+#!/usr/bin/env python
+import commands
+import time
+
+SERVER_INI_PATH = "{{new_tube_install_path}}/conf/server.ini"
+SOURCE_INI_PATH = "{{new_tube_install_path}}/conf/server.ini.source"
+
+HOST_IP = "{{topic_tool_server_hosts}}"
+PORT = {{topic_port}}
+TIME_VAL = {{topic_client_timeval}}
+BROKER_SCRIPT="{{broker_script}}"
+
+
+def recreate_server_ini():
+    last_topic_list = []
+    while True:
+        # get topic list
+        command = "curl -s http://{0}:{1}".format(HOST_IP, PORT)
+        out = exe_command(command)
+        try:
+            topic_list = eval(out)
+        except TypeError:
+            topic_list = []
+        # if topic list changed, recreate server.ini.source
+        if topic_list != last_topic_list:
+            print "in while ", topic_list
+            # init server.ini by server.ini.source
+            command = "cp -f {0}  {1}".format(SOURCE_INI_PATH, SERVER_INI_PATH)
+            exe_command(command)
+            # add new topic list
+            server_ini = open(SERVER_INI_PATH, 'a')
+            server_ini.write("\n")
+            for topic in topic_list:
+                str_topic = "[topic=tube_" + topic + "]\n\n"
+                server_ini.write(str_topic)
+            server_ini.close()
+            action_command = "(sudo bash -x {0}  {1}&)  &> /dev/null".format(BROKER_SCRIPT, "reload")
+            exe_command(action_command)
+
+            last_topic_list = topic_list
+        time.sleep(TIME_VAL)
+        print "out while ", topic_list
+
+
+def exe_command(command):
+    (ret, output) = commands.getstatusoutput(command)
+    return output if ret == 0 else None
+
+if __name__ == '__main__':
+    recreate_server_ini()

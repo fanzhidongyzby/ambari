@@ -236,5 +236,10 @@
       "hermes-properties/hermes.worker.port",
       "hermes-properties/debug.jms.port"
     ]
+  },
+  "NIFI":{
+    "NIFI_SERVER":[
+      "nifi-site/nifi.http.port"
+    ]
   }
 }

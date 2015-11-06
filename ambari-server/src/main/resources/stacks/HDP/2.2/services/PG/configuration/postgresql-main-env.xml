@@ -4,27 +4,20 @@
 
     <property>
         <name>postgresql.user</name>
-        <value>postgresxx</value>
+        <value>postgres</value>
 		<property-type>USER</property-type>
         <description>This is user to exe init db role</description>
 		<final>true</final>
     </property>
     <property>
-        <name>postgresql.passwd</name>
+        <name>postgresql.superuser</name>
         <value>postgres</value>
-		<property-type>PASSWORD</property-type>
-        <description>postgresxx's  password</description>
-		<final>true</final>
-    </property>
-    <property>
-        <name>postgresql.db.superuser</name>
-        <value>postgresqluser</value>
         <description>create a db user (spuer) for postgresql</description>
     </property>
-    <property  require-input = "true">
-        <name>postgresql.db.passwd</name>
-        <value></value>
-        <description>setting passwd for new db user(super)</description>
+    <property>
+        <name>superuser.passwd</name>
+        <value>postgres</value>
+        <description>setting passwd for db user(super)</description>
     </property>
 
     <property>

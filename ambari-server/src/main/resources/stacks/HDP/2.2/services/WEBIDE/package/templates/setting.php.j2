@@ -1,0 +1,168 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+/**=======================================
+ * 业务系统需要自定义的配置文件项目
+ * =======================================
+*/
+
+//网站虚拟目录
+
+//$config["domain_path"]="http://d.tod.qq.com/tod_ide"; //dev
+$config["domain_path"]="{{webide_web_url}}"; //dev
+$config["data_domain_path"]="http://d.tod.qq.com/tod_ide";
+//$config["domain_path"]="http://tod.qcloud.com";  //runtime
+
+//$config["domain_path"]="http://t.tod.qcloud.com";  //test
+
+//$config["domain_path"]="http://tod.qq.com";  //runtime
+//$config["domain_path"]="http://t.tod.qq.com";  //test
+
+/**
+ * 系统key和名称，使用GRI框架的内部系统推荐配置，方便记录流水日志
+ * 
+ */
+$config['system_key'] = 162;
+$config['system_name'] = 'tod';
+
+/**
+ * 如果使用消息发送，在增加如下配置
+ */
+$config['sms_config'] = array(
+	'enable' => true, // 发送邮件 true打开，false关闭
+	'validate' => false, //收件人合法性校验
+);
+
+//$config['rest_uri'] = 'http://10.136.135.48:8099'; //dev
+//$config['rest_uri'] = 'http://10.136.136.113:8081'; //dev
+//$config['rest_uri'] = 'http://tdsi.tencent-distribute.com'; //runtime
+//$config['rest_uri'] = 'http://172.27.194.58:8080'; //runtime
+$config['rest_uri'] = '{{rest_uri}}'; //runtime
+//$config['rest_uri'] = 'http://10.136.4.90:8080'; //runtime
+
+//加密密钥
+$config['secret'] = 'e40b12cf2c8740bdb8dcae51ef42f3b1kwmwknRy';
+
+$config['app_key'] = 'D53072425F9811DD31069EADEF72BB84';
+
+$config['api_timeout'] = 5;
+
+$config['api_dict'] = array(
+    'instance.get' => array("cmd" => '0x200', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'instance.rerun' => array("cmd" => '0x202', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'instance.add' => array("cmd" => '0x204', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'instance.kill' => array("cmd" => '0x206', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'instance.table.state' => array("cmd" => '0x208', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'instance.succeed' => array("cmd" => '0x20A', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'instance.count' => array("cmd" => '0x20C', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'log.system' => array("cmd" => '0x20E', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.list' => array("cmd" => '0x210', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.instance' => array("cmd" => '0x212', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.get' => array("cmd" => '0x214', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.add' => array("cmd" => '0x216', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.update' => array("cmd" => '0x218', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.delete' => array("cmd" => '0x21A', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.all.instance' => array("cmd" => '0x23A ', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'get.servers' => array("cmd" => '0x21C', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.onetime.add' => array("cmd" => '0x21E', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.add' => array("cmd" => '0x220', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.copy' => array("cmd" => '0x222', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.defreeze' => array("cmd" => '0x224', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.delete' => array("cmd" => '0x226', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.freeze' => array("cmd" => '0x228', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'task.get' => array("cmd" => '0x22A', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'type.ext' => array("cmd" => '0x22C', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'demo.create' => array("cmd" => '0x22E', 'service' => 'lhotseapiservers', 'authType' => 0),
+
+    'apply.tod.priority' => array("cmd" => '0x230', 'service' => 'lhotseapiservers', 'authType' => 0),
+    'add.members' => array("cmd" => '0x232', 'service' => 'lhotseapiservers', 'authType' => 0),
+
+    'relation.remove' => array("cmd" => '0x234', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'relation.add' => array("cmd" => '0x236', 'service' => 'lhotseapiservers', 'authType' => 4),
+    'project.save' => array("cmd" => '0x23C', 'service' => 'lhotseapiservers', 'authType' => 4),
+
+    'get.gid' => array("cmd" => '0x1A0', 'service' => 'tod', 'authType' => 0),
+    'has.cos' => array("cmd" => '0x1C0', 'service' => 'tod', 'authType' => 5),
+
+    'cost.hdfs.get' => array("cmd" => '0x400', 'service' => 'tdwapi', 'authType' => 4),
+    'tdw.hive.role.get' => array("cmd" => '0x402', 'service' => 'tdwapi', 'authType' => 4),
+    'tdw.hive.user.exits' => array("cmd" => '0x404', 'service' => 'tdwapi', 'authType' => 4),
+    'cost.map.get' => array("cmd" => '0x406', 'service' => 'tdwapi', 'authType' => 4),
+    'cost.reduce.get' => array("cmd" => '0x408', 'service' => 'tdwapi', 'authType' => 4),
+    'pig.run' => array("cmd" => '0x40A', 'service' => 'tdwapi', 'authType' => 4),
+    'pig.info.get' => array("cmd" => '0x40C', 'service' => 'tdwapi', 'authType' => 4),
+    'pig.result.get' => array("cmd" => '0x40E', 'service' => 'tdwapi', 'authType' => 4),
+    'pig.kill' => array("cmd" => '0x410', 'service' => 'tdwapi', 'authType' => 4),
+    'quote.cost.hdfs.get' => array("cmd" => '0x412', 'service' => 'tdwapi', 'authType' => 4),
+    'sql.run' => array("cmd" => '0x300', 'service' => 'tdwapi', 'authType' => 4),
+    'defaultdb.get' => array("cmd" => '0x340', 'service' => 'webide', 'authType' => 4),
+    'sql.run.sync' => array("cmd" => '0x342', 'service' => 'webide', 'authType' => 4),
+    'sql.info.get' => array("cmd" => '0x302', 'service' => 'tdwapi', 'authType' => 4),
+    'sql.result.get' => array("cmd" => '0x304', 'service' => 'tdwapi', 'authType' => 4),
+    'sql.stop' => array("cmd" => '0x306', 'service' => 'tdwapi', 'authType' => 4),
+    'sql.history.get' => array("cmd" => '0x308', 'service' => 'tdwapi', 'authType' => 4),
+    'dbs.get' => array("cmd" => '0x30A', 'service' => 'tdwapi', 'authType' => 4),
+    'tables.get' => array("cmd" => '0x30C', 'service' => 'tdwapi', 'authType' => 4),
+    'table.get' => array("cmd" => '0x30E', 'service' => 'tdwapi', 'authType' => 4),
+    'table.get.ddl' => array("cmd" => '0x310', 'service' => 'tdwapi', 'authType' => 4),
+    'table.delete' => array("cmd" => '0x312', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.add' => array("cmd" => '0x314', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.update' => array("cmd" => '0x316', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscripts.get' => array("cmd" => '0x318', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.get' => array("cmd" => '0x31A', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.deploy' => array("cmd" => '0x31C', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.delete' => array("cmd" => '0x31E', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.freeze' => array("cmd" => '0x320', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscript.defreeze' => array("cmd" => '0x322', 'service' => 'tdwapi', 'authType' => 4),
+    'sqlscripts.get.keyword' => array("cmd" => '0x324', 'service' => 'tdwapi', 'authType' => 4),
+    'tables.get.all' => array("cmd" => '0x326', 'service' => 'tdwapi', 'authType' => 4),
+    'file.add' => array("cmd" => '0x328', 'service' => 'tdwapi', 'authType' => 4),
+    'file.update' => array("cmd" => '0x32A', 'service' => 'tdwapi', 'authType' => 4),
+    'files.get' => array("cmd" => '0x32C', 'service' => 'tdwapi', 'authType' => 4),
+    'file.get' => array("cmd" => '0x32E', 'service' => 'tdwapi', 'authType' => 4),
+    'file.deploy' => array("cmd" => '0x330', 'service' => 'tdwapi', 'authType' => 4),
+    'file.delete' => array("cmd" => '0x332', 'service' => 'tdwapi', 'authType' => 4),
+    'file.freeze' => array("cmd" => '0x334', 'service' => 'tdwapi', 'authType' => 4),
+    'file.defreeze' => array("cmd" => '0x336', 'service' => 'tdwapi', 'authType' => 4),
+    'files.get.keyword' => array("cmd" => '0x338', 'service' => 'tdwapi', 'authType' => 4),
+    'file.upload' => array("cmd" => '0x33A', 'service' => 'tdwapi', 'authType' => 4),
+    'file.check.exist' => array("cmd" => '0x33C', 'service' => 'tdwapi', 'authType' => 4),
+    'templates.get' => array("cmd" => '0x33E', 'service' => 'tdwapi', 'authType' => 4),
+
+);
+
+//实例状态翻译
+$config['instance_dict'] = array(
+    "0" =>array('name' => "就绪",'pic' => 'icon16_1'),
+    "1" => array('name' => "运行中", 'pic' => 'icon16_2'),
+    "2" => array('name' => "成功", 'pic' => 'icon16_4'),
+    "3" =>array('name' =>  "失败",'pic' => 'icon16_3'),
+    "4" =>array('name' =>  "等待终止", 'pic' => 'icon16_5'),
+    "5" => array('name' => "正在终止",'pic' => 'icon16_6'),
+    "6" => array('name' => "终止成功",'pic' => 'icon16_7'),
+    "7" => array('name' => "终止失败",'pic' => 'icon16_8'),
+    "8" =>array('name' =>  "永久终止",'pic' => 'icon16_10'),
+    "9" =>array('name' =>  "就绪",'pic' => 'icon16_1')
+);
+//任务类型翻译
+$config['task_type_dict'] = array(
+    "90" => array('name' => "SQL脚本计算", 'pic' => 'icon-file-s-4'),
+    "91" => array('name' => "MR脚本计算", 'pic' => 'icon-file-s-3'),
+//    "100" => array('name' => "云存储入库", 'pic' => 'icon-file-1'),
+//    "101" => array('name' => "数据表导出", 'pic' => 'icon-file-1'),
+    "102" => array('name' => "PIG脚本计算", 'pic' => 'icon-file-s-5'),
+    "103" => array('name' => "导入云存储", 'pic' => 'icon-file-s-2'),
+    "110" => array('name' => "导入数据表", 'pic' => 'icon-file-s-1'),
+    "111" => array('name' => "数据表导出", 'pic' => 'icon-file-s-6')
+);
+
+$config['users'] = array(
+  "1143652967",
+  "2966818872",
+  "2839327309",
+  "2967613436"
+);
+$config["serviceCenterData"]=array(
+    'business' => 'dasai',
+    'service' => 'QueryHDFSInfoService'
+);
+$config["f_sign"]="dasai@2014#;-08";

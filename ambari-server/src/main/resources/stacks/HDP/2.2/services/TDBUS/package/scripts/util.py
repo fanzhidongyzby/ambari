@@ -35,6 +35,11 @@ def init_config(env):
          content=Template('stop.sh.j2'),
          mode=0755)
 
+    topic_tool_client = os.path.join(tdbus_bin_path, 'tube_topic_tool_client.py')
+    File(topic_tool_client,
+         content=Template('tube_topic_tool_client.py.j2'),
+         mode=0744)
+
 
 def is_service_run(service_name):
     return True if get_service_pid(service_name) else False
@@ -74,6 +79,11 @@ def service_action(service_name, action):
     else:
         Logger.info("execute {0}  success ,for {1}".format(action_command, service_name))
         # Logger.info(output)
+
+
+def exe_command(command):
+    (ret, output) = commands.getstatusoutput(command)
+    return output
 
 
 if __name__ == '__main__':

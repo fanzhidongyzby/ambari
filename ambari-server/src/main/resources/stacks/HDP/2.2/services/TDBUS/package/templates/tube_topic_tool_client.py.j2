@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+import commands
+import time
+
+TOPIC_PROPERTIES = "{{new_tdbus_install_path}}/conf/topics.properties"
+
+HOST_IP = "{{topic_tool_server_hosts}}"
+PORT = 9002
+TIME_VAL = 5
+
+
+def recreate_topic_properties():
+    last_topic_list = []
+    while True:
+        # get topic list
+        command = "curl -s http://{0}:{1}".format(HOST_IP, PORT)
+        out = exe_command(command)
+        try:
+            topic_list = eval(out)
+        except TypeError:
+            topic_list = []
+        # if topic list changed, recreate topic.properties
+        if topic_list != last_topic_list:
+            print "in while ", topic_list
+            # add new topic list
+            topic_properties = open(TOPIC_PROPERTIES, 'w')
+            for topic in topic_list:
+                str_topic = "tdbus_" + topic + " = tube_" + topic + "\n"
+                topic_properties.write(str_topic)
+            topic_properties.close()
+
+            last_topic_list = topic_list
+        time.sleep(TIME_VAL)
+        print "out while ", topic_list
+
+
+def exe_command(command):
+    (ret, output) = commands.getstatusoutput(command)
+    return output if ret == 0 else None
+
+if __name__ == '__main__':
+    recreate_topic_properties()

@@ -54,6 +54,17 @@
         <description>master web控制台的访问端口</description>
     </property>
 
+    <property>
+        <name>topic.tool.port</name>
+        <value>9002</value>
+        <description>topic tool server启动端口</description>
+    </property>
+
+    <property>
+        <name>topic.tool.timeval</name>
+        <value>5</value>
+        <description>topic tool client同步数据时间间隔</description>
+    </property>
 
     <property>
         <name>consumer.balance.period</name>
@@ -79,7 +90,7 @@
         <description>producer跳超时时间，默认10s</description>
     </property>
 
-       <property>
+    <property>
         <name>broker.heartbeat.timeout</name>
         <value>5000</value>
         <description>broker心跳超时时间，默认5s</description>

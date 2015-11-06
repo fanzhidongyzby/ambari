@@ -1,0 +1,15 @@
+#!/bin/bash
+
+WEBIDE_LISTEN_PORT={{webide_web_listen_port}}
+WEBIDE_CONF_PATH={{webide_conf_path}}
+WEBIDE_INSTALL_PATH={{webide_install_path}}
+DEFAULT_GLOBAL_HTTPD=/etc/httpd
+
+
+PORT_EXIST=`cat ${DEFAULT_GLOBAL_HTTPD}/conf/httpd.conf | grep -iE "^Listen ${WEBIDE_LISTEN_PORT}\$" | wc -l`
+# Check whether listen port already exists
+if [ $PORT_EXIST -ge 1 ]; then
+        sed -i 1d ${WEBIDE_CONF_PATH}
+fi
+cp ${WEBIDE_CONF_PATH}  ${DEFAULT_GLOBAL_HTTPD}/conf.d/
+service httpd restart

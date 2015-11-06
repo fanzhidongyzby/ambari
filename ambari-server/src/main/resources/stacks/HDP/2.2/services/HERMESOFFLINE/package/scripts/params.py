@@ -89,10 +89,10 @@ hermes_adapter_pull_group = config['configurations']['hermes-adapter-properties'
 
 # refractor service path
 hermes_install_path = "/usr/hdp/2.2.0.0-2041/hermes"
-new_hermes_install_path = "/data/tbds/hermes"
+new_hermes_install_path = "/opt/tbds/hermes"
 
 # scripts
-start_service_script = "/data/tbds/hermes/start_service.sh"
+start_service_script = "/opt/tbds/hermes/start_service.sh"
 start_manager_script = "bin/start_manager.sh"
 start_hermes_server_script = "bin/start_hermesserver.sh"
 start_package_server_script = "bin/start_hermesuserpackageserver.sh"

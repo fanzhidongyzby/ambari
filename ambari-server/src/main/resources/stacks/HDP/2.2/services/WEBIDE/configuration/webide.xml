@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <name>webide.user</name>
+        <value>webide</value>
+        <property-type>USER</property-type>
+        <description></description>
+    </property>
+
+    <property>
+        <name>webide.group</name>
+        <value>webide</value>
+        <property-type>GROUP</property-type>
+        <final>true</final>
+        <description></description>
+    </property>
+
+    <property>
+        <name>web.listen.port</name>
+        <value>80</value>
+        <description>Web IDE web服务端口</description>
+    </property>
+
+    <property>
+        <name>app.listen.port</name>
+        <value>9090</value>
+        <description>Web IDE app server服务端口</description>
+    </property>
+
+</configuration>

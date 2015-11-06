@@ -41,14 +41,21 @@ master_listen_port = config['configurations']['master-ini']['master.listen.port'
 master_hosts = default("/clusterHostInfo/tube_master_hosts", [])
 tube_master_address_list = util.zk_connection_string(master_hosts, master_listen_port)
 
+topic_tool_server_hosts = default("/clusterHostInfo/topic_tool_server_hosts", [])[0]
+
 
 # refractor service path
 tdbus_install_path = "/usr/hdp/2.2.0.0-2041/tdbus"
-new_tdbus_install_path = "/data/tbds/tdbus"
+new_tdbus_install_path = "/opt/tbds/tdbus"
 
 # scripts
 start_script = new_tdbus_install_path + "/bin/start_tdbus.sh"
 stop_script = new_tdbus_install_path + "/bin/stop.sh"
+
+# topic client
+tube_topic_tool_client = new_tdbus_install_path + "/bin/tube_topic_tool_client.py"
+tube_topic_client_timeval = config['configurations']['master-ini']['topic.tool.timeval']
+tube_topic_port = config['configurations']['master-ini']['topic.tool.port']
 
 
 

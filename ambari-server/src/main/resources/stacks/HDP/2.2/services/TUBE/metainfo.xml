@@ -17,7 +17,7 @@
 			<displayName>Tube</displayName>
 			<comment>Tube是数据平台部自行研发的一个分布式消息中间件系统</comment>
 			<deleted>true</deleted>
-			<version>1.5.10</version>
+			<version>1.6</version>
 
 			<components>
 				<component>
@@ -46,6 +46,32 @@
 					</commandScript>
 				</component>
 
+				<component>
+					<name>TOPIC_TOOL_SERVER</name>
+					<displayName>Topic Tool Server</displayName>
+					<cardinality>1-2</cardinality>
+					<versionAdvertised>true</versionAdvertised>
+					<category>MASTER</category>
+					<commandScript>
+						<script>scripts/topic_tool_server.py</script>
+						<scriptType>PYTHON</scriptType>
+						<timeout>1200</timeout>
+					</commandScript>
+				</component>
+
+				<component>
+					<name>TOPIC_TOOL_CLIENT</name>
+					<displayName>Topic Tool Client</displayName>
+					<cardinality>1+</cardinality>
+					<versionAdvertised>true</versionAdvertised>
+					<category>SLAVE</category>
+					<commandScript>
+						<script>scripts/topic_tool_client.py</script>
+						<scriptType>PYTHON</scriptType>
+						<timeout>1200</timeout>
+					</commandScript>
+				</component>
+
 			</components>
 
 			<osSpecifics>
@@ -69,6 +95,5 @@
 			</configuration-dependencies>
 
 		</service>
-		+
 	</services>
 </metainfo>

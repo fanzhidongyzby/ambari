@@ -781,6 +781,7 @@ App.MainServiceItemController = Em.Controller.extend({
   }.property('content.healthStatus','isPending'),
 
   isStopDisabled: function () {
+    return false;
     if(this.get('isPending')) return true;
     if (App.get('isHaEnabled') && this.get('content.serviceName') == 'HDFS' && this.get('content.hostComponents').filterProperty('componentName', 'NAMENODE').someProperty('workStatus', App.HostComponentStatus.started)) {
       return false;

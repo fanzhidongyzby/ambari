@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
-	license agreements. See the NOTICE file distributed with this work for additional 
-	information regarding copyright ownership. The ASF licenses this file to 
+	license agreements. See the NOTICE files distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this files to 
 	You under the Apache License, Version 2.0 (the "License"); you may not use 
-	this file except in compliance with the License. You may obtain a copy of 
+	this files except in compliance with the License. You may obtain a copy of 
 	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
 	by applicable law or agreed to in writing, software distributed under the 
 	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
@@ -13,36 +13,34 @@
 	<schemaVersion>2.0</schemaVersion>
 	<services>
 		<service>
-			<name>TDBUS</name>
-			<displayName>TDBus</displayName>
-			<comment>TDBus可对数据进行中转,使用SSL协议以保证数据传输的安全性</comment>
+			<name>WEBIDE</name>
+			<displayName>Web IDE</displayName>
+			<comment>web版集成开发环境</comment>
 			<deleted>true</deleted>
-			<version>1.6</version>
+			<version>1.0.0</version>
 
 			<components>
 				<component>
-					<name>TDBUS-AGENT</name>
-					<displayName>TDBus</displayName>
-					<cardinality>1+</cardinality>
-					<versionAdvertised>true</versionAdvertised>
-					<category>SLAVE</category>
+					<name>WEB_IDE_WEB</name>
+					<displayName>Web IDE WEB</displayName>
+					<category>MASTER</category>
+					<cardinality>1-2</cardinality>
 					<commandScript>
-						<script>scripts/tdbus.py</script>
+						<script>scripts/web.py</script>
 						<scriptType>PYTHON</scriptType>
-						<timeout>1200</timeout>
+						<timeout>600</timeout>
 					</commandScript>
 				</component>
 
 				<component>
-					<name>TDBUS_TOPIC_TOOL_CLIENT</name>
-					<displayName>Tdbus Topic Tool Client</displayName>
-					<cardinality>1+</cardinality>
-					<versionAdvertised>true</versionAdvertised>
-					<category>SLAVE</category>
+					<name>WEB_IDE_APP</name>
+					<displayName>Web IDE APP</displayName>
+					<category>MASTER</category>
+					<cardinality>1-2</cardinality>
 					<commandScript>
-						<script>scripts/tdbus_topic_tool_client.py</script>
+						<script>scripts/app.py</script>
 						<scriptType>PYTHON</scriptType>
-						<timeout>1200</timeout>
+						<timeout>600</timeout>
 					</commandScript>
 				</component>
 
@@ -53,21 +51,24 @@
 					<osFamily>redhat5,redhat6,suse11</osFamily>
 					<packages>
 						<package>
-							<name>tdbus</name>
+							<name>webide</name>
+						</package>
+						<package>
+							<name>php</name>
 						</package>
 					</packages>
 				</osSpecific>
 			</osSpecifics>
 
 			<requiredServices>
-				<service>TUBE</service>
+				<!--<service>THIVE</service> -->
+				<service>POSTGRESQL</service>
 			</requiredServices>
 
 			<configuration-dependencies>
-				<config-type>tdbus-properties</config-type>
+				<config-type>webide</config-type>
 			</configuration-dependencies>
 
 		</service>
-		+
 	</services>
 </metainfo>

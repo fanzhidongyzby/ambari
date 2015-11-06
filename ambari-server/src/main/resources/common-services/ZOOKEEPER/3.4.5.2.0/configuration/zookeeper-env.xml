@@ -48,7 +48,7 @@ export JAVA_HOME={{java64_home}}
 export ZOOKEEPER_HOME={{zk_home}}
 export ZOO_LOG_DIR={{zk_log_dir}}
 export ZOOPIDFILE={{zk_pid_file}}
-export SERVER_JVMFLAGS={{zk_server_heapsize}}
+export SERVER_JVMFLAGS="{{zk_server_heapsize}} -Djute.maxbuffer=20971520"
 export JAVA=$JAVA_HOME/bin/java
 export CLASSPATH=$CLASSPATH:/usr/share/zookeeper/*
 
