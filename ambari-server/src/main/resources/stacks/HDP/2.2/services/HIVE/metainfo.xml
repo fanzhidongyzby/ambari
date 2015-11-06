@@ -112,6 +112,7 @@
       <requiredServices>
         <service>TEZ</service>
         <service>PIG</service>
+        <service>MAPREDUCE2</service>
       </requiredServices>
 
     </service>
