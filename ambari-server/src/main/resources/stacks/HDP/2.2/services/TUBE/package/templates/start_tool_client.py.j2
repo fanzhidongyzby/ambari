@@ -31,7 +31,7 @@ def recreate_server_ini():
             server_ini = open(SERVER_INI_PATH, 'a')
             server_ini.write("\n")
             for topic in topic_list:
-                str_topic = "[topic=tube_" + topic + "]\n\n"
+                str_topic = "[topic=" + topic + "]\n\n"
                 server_ini.write(str_topic)
             server_ini.close()
             action_command = "(sudo bash -x {0}  {1}&)  &> /dev/null".format(BROKER_SCRIPT, "reload")

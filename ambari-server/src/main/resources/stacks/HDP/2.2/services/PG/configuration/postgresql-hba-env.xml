@@ -4,7 +4,7 @@
 
     <property>
         <name>postgresql.hba.local</name>
-        <value>local	all	        all		                          trust</value>
+        <value>local    all        all                           trust</value>
         <description>This is trust conncet info for local</description>
     </property>
     <property>
