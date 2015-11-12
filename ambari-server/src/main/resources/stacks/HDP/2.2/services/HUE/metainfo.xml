@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <!--
    Licensed to the Apache Software Foundation (ASF) under one or more
    contributor license agreements.  See the NOTICE file distributed with
@@ -16,22 +15,13 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<configuration supports_final="true">
-  <property>
-    <name>pgxz.username</name>
-    <value>pgxz</value>
-    <property-type>USER</property-type>
-    <description>PGXZ 数据库用户名</description>
-    <final>true</final>
-  </property>
-
-  <property require-input = "true">
-    <name>pgxz.password</name>
-    <value>pgxz</value>
-    <property-type>PASSWORD</property-type>
-    <description>PGXZ 数据库用户密码</description>
-  </property>
-
-</configuration>
-
-
+<metainfo>
+    <schemaVersion>2.0</schemaVersion>
+    <services>
+        <service>
+            <name>HUE</name>
+            <comment>Hadoop UI</comment>
+            <extends>common-services/HUE/3.9.0</extends>
+        </service>
+    </services>
+</metainfo>
