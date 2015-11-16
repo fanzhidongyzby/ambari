@@ -28,19 +28,17 @@ class TubeMaster(Script):
 
     def install(self, env):
         self.install_packages(env)
-        self.configure(env)
-
         import params
         Links(params.new_tube_install_path, params.tube_install_path)
+
+        self.configure(env)
+
 
     def uninstall(self, env):
         Toolkit.uninstall_service("tube")
 
     def configure(self, env):
         import params
-        Directory(params.topic_tool_server,
-                  owner=params.tube_user,
-                  recursive=True)
         File(params.topic_tool_server, mode=0755, content=StaticFile('topic_tool.py'))
         util.init_config(env)
 
