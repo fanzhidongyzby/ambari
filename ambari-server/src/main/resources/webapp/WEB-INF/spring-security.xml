@@ -27,6 +27,7 @@
     <http-basic entry-point-ref="ambariEntryPoint"/>
     <intercept-url pattern="/**" access="permitAll"/>
     <!--<custom-filter ref="ambariAuthorizationFilter" after="BASIC_AUTH_FILTER"/>-->
+  </http>
 
   <!--<ldap-server id="ldapServer" root="dc=ambari,dc=apache,dc=org"/>-->
 
