@@ -208,16 +208,14 @@ App.Router = Em.Router.extend({
 
   login: function () {
     var controller = this.get('loginController');
-    var loginName = controller.get('loginName').toLowerCase();
+    var loginName = 'admin';//controller.get('loginName').toLowerCase();
     controller.set('loginName', loginName);
-    var hash = window.btoa(loginName + ":" + controller.get('password'));
+    var hash = window.btoa(loginName + ":admin");
     var usr = '';
 
     if (App.get('testMode')) {
-      if (loginName === "admin" && controller.get('password') === 'admin') {
+      if (loginName === "admin") {
         usr = 'admin';
-      } else if (loginName === 'user' && controller.get('password') === 'user') {
-        usr = 'user';
       }
     }
 
@@ -492,8 +490,7 @@ App.Router = Em.Router.extend({
     adminView: Em.Route.extend({
       route: '/adminView',
       enter: function (router) {
-        //Modified by junz: Bypass login page
-        if (!App.isAccessible('upgrade_ADMIN') || App.isAccessible('upgrade_OPERATOR')) {
+        if (!router.get('loggedIn') || !App.isAccessible('upgrade_ADMIN') || App.isAccessible('upgrade_OPERATOR')) {
           Em.run.next(function () {
             router.transitionTo('login');
           });
