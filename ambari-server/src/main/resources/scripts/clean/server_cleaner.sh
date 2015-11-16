@@ -18,6 +18,7 @@ echo "remove postgresql data files ..."
 rm -rf /var/lib/pgsql/
 rm -rf /var/run/post*
 rm -rf /var/lock/subsys/postgresql*
+rm -f /tmp/.s.PGSQL.*
 
 echo "remove residual files on server ..."
 rm -rf /var/lib/tbds-server
