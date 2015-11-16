@@ -29,8 +29,6 @@ module.exports = Em.Route.extend(App.RouterRedirections, {
     App.clusterStatus.set('wizardControllerName', App.router.get('installerController.name'));
 
     router.getAuthenticated().done(function (loggedIn) {
-      //Modified by junz: Bypass login page
-      loggedIn = true;
       if (loggedIn) {
         var applicationController = router.get('applicationController');
         applicationController.startKeepAlivePoller();

@@ -20,15 +20,20 @@
 var App = require('app');
 
 App.LoginView = Em.View.extend({
-
-  templateName: require('templates/login'),
+    didInsertElement: function(){
+      this.get("controller").submit();
+	  //this._super();
+      //this.$().focus();
+    },
+  /*templateName: require('templates/login'),
   loginTextField: Em.TextField.extend({
     didInsertElement: function(){
-      this._super();
-      this.$().focus();
+      this.get("controller").submit();
+	  //this._super();
+      //this.$().focus();
     },
     classNames: ['login-user-name']
-  }),
+  }),*/
   passTextField : Em.TextField.extend({
     insertNewline: function(){
       this.get("controller").submit();
