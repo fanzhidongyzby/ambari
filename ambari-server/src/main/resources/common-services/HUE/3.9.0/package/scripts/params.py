@@ -55,7 +55,11 @@ http_port = config['configurations']['hue-site']['http.port']
 namenode_http_address = config['configurations']['hdfs-site']['dfs.namenode.http-address']
 fs_defaultFS = config['configurations']['core-site']['fs.defaultFS']
 hive_host = config['clusterHostInfo']['hive_server_host'][0]
-hive_port = config['configurations']['hive-site']['hive.server2.thrift.port']
+hive_port = default('/configurations/hive-site/hive.server2.thrift.port',"10000")
+yarn_rm_url = default('/configurations/yarn-site/yarn.resourcemanager.webapp.address', "http://localhost:8088")
+
+zookeeper_host = default('/clusterHostInfo/zookeeper_hosts', ['localhost'])
+zk_address = zookeeper_host[0] + ":" + default('/configurations/zoo-cfg/clientPort', "2181")
 
 # Security-related params
 security_enabled = config['configurations']['cluster-env']['security_enabled']

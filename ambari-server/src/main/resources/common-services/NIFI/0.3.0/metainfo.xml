@@ -75,7 +75,6 @@
       <requiredServices>
         <service>HDFS</service>
         <service>YARN</service>
-        <service>POSTGRESQL</service>
       </requiredServices>
 
     </service>

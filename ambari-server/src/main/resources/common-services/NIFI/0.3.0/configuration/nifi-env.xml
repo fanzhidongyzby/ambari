@@ -23,7 +23,7 @@
 <configuration>
     <property>
         <name>nifi_user</name>
-        <value>nifi</value>
+        <value>hdfs</value>
         <property-type>USER</property-type>
         <description>User to run NiFi as</description>
     </property>

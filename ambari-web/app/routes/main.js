@@ -26,6 +26,8 @@ module.exports = Em.Route.extend(App.RouterRedirections, {
     console.log('in /main:enter');
     var self = this;
     router.getAuthenticated().done(function (loggedIn) {
+      //Modified by junz: Bypass login page
+      loggedIn = true;
       if (loggedIn) {
         var applicationController = App.router.get('applicationController');
         applicationController.startKeepAlivePoller();

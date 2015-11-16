@@ -16,7 +16,7 @@
 			<name>WEBIDE</name>
 			<displayName>Web IDE</displayName>
 			<comment>web版集成开发环境</comment>
-			<deleted>true</deleted>
+			<!--deleted>true</deleted-->
 			<version>1.0.0</version>
 
 			<components>
