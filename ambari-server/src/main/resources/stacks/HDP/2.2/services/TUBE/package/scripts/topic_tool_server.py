@@ -38,6 +38,9 @@ class TubeMaster(Script):
 
     def configure(self, env):
         import params
+        Directory(params.topic_tool_server,
+                  owner=params.tube_user,
+                  recursive=True)
         File(params.topic_tool_server, mode=0755, content=StaticFile('topic_tool.py'))
         util.init_config(env)
 
