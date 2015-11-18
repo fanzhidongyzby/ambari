@@ -96,6 +96,7 @@ class AmbariCleaner:
 
   def release_resources(self):
     self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
+    self.run_cmd("/usr/sbin/userdel -r tencent")
 
   def remove_dir(self):
     self.release_resources()
