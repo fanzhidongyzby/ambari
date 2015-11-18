@@ -16,7 +16,6 @@
 			<name>TUBE</name>
 			<displayName>Tube</displayName>
 			<comment>Tube是数据平台部自行研发的一个分布式消息中间件系统</comment>
-			<deleted>true</deleted>
 			<version>1.6</version>
 
 			<components>
