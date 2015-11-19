@@ -74,7 +74,8 @@ class NiFi(Script):
     import params
     env.set_params(params)
     self.configure(env)
-    daemon_cmd = "{0} stop".format(params.nifi_bin)
+    daemon_cmd = "export PATH={0}/bin:$PATH;export JAVA_HOME={0};".format(params.java64_home)
+    daemon_cmd += "{0} stop".format(params.nifi_bin)
     Execute(daemon_cmd,
             user=params.nifi_user,
             )
