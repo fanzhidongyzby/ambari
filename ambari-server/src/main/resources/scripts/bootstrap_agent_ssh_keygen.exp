@@ -3,7 +3,7 @@
 spawn ssh-keygen -t rsa
 
 expect {
-    "*y/n)?" {send "\n"; exp_continue}
+    "*y/n)?" {send "y\n"; exp_continue}
     "*:" {send "\n"; exp_continue }
     eof { exit 0 }
 }
