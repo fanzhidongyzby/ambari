@@ -1,0 +1,20 @@
+# Default system properties included when running spark-submit.
+# This is useful for setting default environmental settings.
+
+# Example:
+# spark.master                     spark://master:7077
+# spark.eventLog.enabled           true
+# spark.eventLog.dir               hdfs://namenode:8021/directory
+# spark.serializer                 org.apache.spark.serializer.KryoSerializer
+# spark.driver.memory              5g
+# spark.executor.extraJavaOptions  -XX:+PrintGCDetails -Dkey=value -Dnumbers="one two three"
+
+# spark history
+spark.history.ui.port             {{spark_history_ui_port}}
+spark.history.kerberos.enabled    false
+spark.history.kerberos.principal  none
+spark.history.kerberos.keytab     none
+spark.history.ui.acls.enable      false
+spark.eventLog.enabled            true
+spark.eventLog.dir                {{spark_eventLog_dir}}
+spark.history.fs.logDirectory     {{spark_history_fs_logDirectory}}

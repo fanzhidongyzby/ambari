@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -18,13 +18,13 @@
  * limitations under the License.
  */
 -->
-<metainfo>
-    <schemaVersion>2.0</schemaVersion>
-    <services>
-        <service>
-            <name>SPARK</name>
-            <extends>common-services/SPARK/1.5.2</extends>
-            <!--deleted>false</deleted-->
-        </service>
-    </services>
-</metainfo>
+
+<configuration supports_final="true">
+  <property>
+    <name>spark.history.ui.port</name>
+    <value>18080</value>
+    <description>
+      The port to which the web interface of the History Server binds.
+    </description>
+  </property>
+</configuration>

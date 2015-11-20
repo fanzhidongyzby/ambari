@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -18,13 +18,15 @@
  * limitations under the License.
  */
 -->
-<metainfo>
-    <schemaVersion>2.0</schemaVersion>
-    <services>
-        <service>
-            <name>SPARK</name>
-            <extends>common-services/SPARK/1.5.2</extends>
-            <!--deleted>false</deleted-->
-        </service>
-    </services>
-</metainfo>
+
+<configuration supports_final="true">
+
+  <property>
+    <name>livy.server.port</name>
+    <value>8998</value>
+    <description>
+      The livy server port.
+    </description>
+  </property>
+
+</configuration>
