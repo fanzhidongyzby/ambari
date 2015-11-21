@@ -104,7 +104,9 @@
       "3306"
     ],
     "LHOTSE_SERVICE":[
-      "lhotse-service/listen.port"
+      "lhotse-service/listen.port",
+      "8005",
+      "8009"
     ],
     "LHOTSE_FTP":[
       "lhotse-ftp/lhotse.ftp.port"
@@ -239,7 +241,9 @@
       "webide/web.listen.port"
     ],
     "WEB_IDE_APP":[
-      "webide/app.listen.port"
+      "webide/app.listen.port",
+      "8005",
+      "8009"
     ]
   },
   "HERMESOFFLINE":{
