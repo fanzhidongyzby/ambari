@@ -67,7 +67,7 @@ class WebIDE(Script):
         Logger.info(stop_command)
         self.command_exe(stop_command)
         # kill zombie process
-        kill_zobie_process = "ps -ef | grep 'catalina.startup.Bootstrap' | grep -v 'grep'| awk '{print $2}' | xargs kill -9"
+        kill_zobie_process = "ps -ef | grep 'webide-app' | grep -v 'grep'| awk '{print $2}' | xargs kill -9"
         Logger.info(kill_zobie_process)
         self.command_exe(kill_zobie_process)
 
@@ -75,7 +75,7 @@ class WebIDE(Script):
         import status_params
         env.set_params(status_params)
         # warring defalut port is 9090
-        process_check_command = "sudo ps aux | grep 'catalina.startup.Bootstrap'  | grep -v 'grep' "
+        process_check_command = "sudo ps aux | grep 'webide-app'  | grep -v 'grep' "
         output = self.command_exe(process_check_command)
         if not output:
             Logger.warning("{0} did not started!".format("webide APP server"))
