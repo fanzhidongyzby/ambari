@@ -54,12 +54,12 @@ http_port = config['configurations']['hue-site']['http.port']
 #hadoop services' addresses
 namenode_http_address = config['configurations']['hdfs-site']['dfs.namenode.http-address']
 fs_defaultFS = config['configurations']['core-site']['fs.defaultFS']
-hive_host = config['clusterHostInfo']['hive_server_host'][0]
+hive_host = default('/clusterHostInfo/hive_server_host',['localhost'])[0]
 hive_port = default('/configurations/hive-site/hive.server2.thrift.port',"10000")
 yarn_rm_url = default('/configurations/yarn-site/yarn.resourcemanager.webapp.address', "http://localhost:8088")
-livy_server_host = config['clusterHostInfo']['spark_livy_server_hosts'][0]
+livy_server_host = default('/clusterHostInfo/spark_livy_server_hosts', ['localhost'])[0]
 livy_server_port = default('/configurations/livy-defaults/livy.server.port',"8998")
-spark_jdbc_server_host = config['clusterHostInfo']['spark_jdbc_server_hosts'][0]
+spark_jdbc_server_host = default('/clusterHostInfo/spark_jdbc_server_hosts',['localhost'])[0]
 spark_jdbc_server_port = default('/configurations/spark-defaults/spark.hive.server2.thrift.port',"10002")
 
 zookeeper_host = default('/clusterHostInfo/zookeeper_hosts', ['localhost'])
