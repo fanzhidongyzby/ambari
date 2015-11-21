@@ -218,6 +218,31 @@
       "3306"
     ]
   },
+  "POSTGRESQL":{
+    "POSTGRESQL_SERVER":[
+      "postgresql-postgre-env/postgresql.postgre.port"
+    ]
+  },
+  "TUBE":{
+    "TUBE_MASTER":[
+      "master-ini/master.listen.port",
+      "master-ini/master.web.port"
+    ],
+    "TUBE_BROKER":[
+      "broker-ini/broker.listen.port"
+    ],
+    "TOPIC_TOOL_SERVER":[
+      "master-ini/topic.tool.port"
+    ]
+  },
+  "WEBIDE":{
+    "WEB_IDE_WEB":[
+      "webide/web.listen.port"
+    ],
+    "WEB_IDE_APP":[
+      "webide/app.listen.port"
+    ]
+  },
   "HERMESOFFLINE":{
     "HERMESOFFLINE_SERVER":[
       "hermes-properties/hermes.server.port",
