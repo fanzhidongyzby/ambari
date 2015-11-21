@@ -56,8 +56,7 @@
     ],
     "HIVE_SERVER":[
       "hive-site/hive.server2.thrift.port",
-      "hive-site/hive.server2.thrift.http.port",
-      "3306"
+      "hive-site/hive.server2.thrift.http.port"
     ],
     "WEBHCAT_SERVER":[
       "webhcat-site/templeton.port",
