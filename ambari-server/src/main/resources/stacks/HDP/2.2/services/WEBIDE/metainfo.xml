@@ -67,6 +67,8 @@
 
 			<configuration-dependencies>
 				<config-type>webide</config-type>
+				<config-type>postgresql-postgre-env</config-type>
+				<config-type>thive-config-env</config-type>
 			</configuration-dependencies>
 
 		</service>

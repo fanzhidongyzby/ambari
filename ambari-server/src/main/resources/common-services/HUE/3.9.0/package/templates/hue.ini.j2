@@ -830,10 +830,10 @@
 
   # Host where HiveServer2 is running.
   # If Kerberos security is enabled, use fully-qualified domain name (FQDN).
-  hive_server_host={{ hive_host }}
+  hive_server_host={{spark_jdbc_server_host}}
 
   # Port where HiveServer2 Thrift server runs on.
-  hive_server_port={{ hive_port }}
+  hive_server_port={{spark_jdbc_server_port}}
 
   # Hive configuration directory, where hive-site.xml is located
   ## hive_conf_dir=/etc/hive/conf
@@ -843,7 +843,7 @@
 
   # Choose whether to use the old GetLog() thrift call from before Hive 0.14 to retrieve the logs.
   # If false, use the FetchResults() thrift call from Hive 1.0 or more instead.
-  ## use_get_log_api=false
+  use_get_log_api=true
 
   # Set a LIMIT clause when browsing a partitioned table.
   # A positive value will be set as the LIMIT. If 0 or negative, do not set any limit.

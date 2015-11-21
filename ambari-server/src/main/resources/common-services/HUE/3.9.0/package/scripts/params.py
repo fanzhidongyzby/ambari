@@ -59,6 +59,8 @@ hive_port = default('/configurations/hive-site/hive.server2.thrift.port',"10000"
 yarn_rm_url = default('/configurations/yarn-site/yarn.resourcemanager.webapp.address', "http://localhost:8088")
 livy_server_host = config['clusterHostInfo']['spark_livy_server_hosts'][0]
 livy_server_port = default('/configurations/livy-defaults/livy.server.port',"8998")
+spark_jdbc_server_host = config['clusterHostInfo']['spark_jdbc_server_hosts'][0]
+spark_jdbc_server_port = default('/configurations/spark-defaults/spark.hive.server2.thrift.port',"10002")
 
 zookeeper_host = default('/clusterHostInfo/zookeeper_hosts', ['localhost'])
 zk_address = zookeeper_host[0] + ":" + default('/configurations/zoo-cfg/clientPort', "2181")

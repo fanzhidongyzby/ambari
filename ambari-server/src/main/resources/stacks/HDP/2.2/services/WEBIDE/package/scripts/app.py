@@ -19,6 +19,7 @@ limitations under the License.
 """
 import commands
 from resource_management import *
+from resource_management.core.resources import Execute
 from resource_management.core.logger import Logger
 
 
@@ -53,7 +54,10 @@ class WebIDE(Script):
 
         start_command = format("bash +x {webide_app_start_script}")
         Logger.info(start_command)
-        self.command_exe(start_command)
+        Execute(start_command,
+            user='root',
+            environment={'JAVA_HOME': params.java_home}
+        )
 
     def stop(self, env):
         import params

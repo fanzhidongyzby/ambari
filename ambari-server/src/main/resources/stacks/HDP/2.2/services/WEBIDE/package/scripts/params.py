@@ -22,6 +22,8 @@ import os
 
 config = Script.get_config()
 
+java_home = config['hostLevelParams']['java_home']
+
 webide_user = config['configurations']['webide']['webide.user']
 webide_group = config['configurations']['webide']['webide.group']
 

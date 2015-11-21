@@ -48,6 +48,7 @@ class SparkJDBCServer(Script):
         import params
         env.set_params(params)
         
+        """
         XmlConfig("spark-defaults.xml",
               conf_dir=params.spark_conf_dir,
               configurations=params.config['configurations']['spark-defaults'],
@@ -55,6 +56,7 @@ class SparkJDBCServer(Script):
               owner=params.spark_user,
               group=params.user_group
         )
+        """
         
         # add template files
         File(params.spark_defaults_conf_file, mode=0644, content=Template("spark-defaults.conf.j2"))
