@@ -28,7 +28,7 @@ class SparkLivyServer(Script):
         import params
         env.set_params(params)
         
-        excludePackage = ['spark']
+        excludePackage = ['spark*']
         self.install_packages(env, excludePackage)
         
         self.configure(env)

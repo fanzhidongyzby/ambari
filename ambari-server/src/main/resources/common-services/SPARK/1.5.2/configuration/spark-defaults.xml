@@ -27,4 +27,12 @@
       The port to which the web interface of the History Server binds.
     </description>
   </property>
+  
+  <property>
+    <name>spark.hive.server2.thrift.port</name>
+    <value>10002</value>
+    <description>
+      Spark thrift JDBC Serve Port.
+    </description>
+  </property>
 </configuration>

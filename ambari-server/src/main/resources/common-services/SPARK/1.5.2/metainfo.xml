@@ -59,8 +59,15 @@
               <scope>host</scope>
               <auto-deploy>
                 <enabled>true</enabled>
-             </auto-deploy>
-           </dependency>
+              </auto-deploy>
+            </dependency>
+            <dependency>
+              <name>HIVE/HIVE_CLIENT</name>
+              <scope>host</scope>
+              <auto-deploy>
+                <enabled>true</enabled>
+              </auto-deploy>
+            </dependency>
           </dependencies>
           <commandScript>
             <script>scripts/spark_jdbc_server.py</script>
@@ -142,13 +149,16 @@
       <configuration-dependencies>
         <config-type>spark-defaults</config-type>
         <config-type>livy-defaults</config-type>
+        <config-type>core-site</config-type>
+        <config-type>hdfs-site</config-type>
+        <config-type>yarn-site</config-type>
         <!--  config-type>spark-env</config-type>
         <config-type>spark-log4j-properties</config-type>
         <config-type>spark-metrics-properties</config-type>
         <config-type>spark-javaopts-properties</config-type-->
       </configuration-dependencies>
 
-      < commandScript>
+      <commandScript>
         <script>scripts/service_check.py</script>
         <scriptType>PYTHON</scriptType>
         <timeout>300</timeout>

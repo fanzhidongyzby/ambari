@@ -27,7 +27,7 @@ fs_default_fs = config['configurations']['core-site']['fs.defaultFS']
 hadoop_conf_dir = "/etc/hadoop/conf"
 
 # spark common
-hdfs_user = config['configurations']['hadoop-env']['hdfs_user']
+hdfs_user = "hdfs"
 user_group = "hadoop"
 spark_user = hdfs_user
 spark_home = "/usr/hdp/2.2.0.0-2041/spark"
@@ -46,8 +46,10 @@ history_start_script = spark_home + "/sbin/start-history-server.sh"
 history_stop_script = spark_home + "/sbin/stop-history-server.sh"
 
 # spark jdbc server
+spark_jdbc_server_host = default("/clusterHostInfo/spark_jdbc_server_hosts", ["localhost"])[0]
+spark_jdbc_server_port = config['configurations']['spark-defaults']['spark.hive.server2.thrift.port']
 spark_jdbc_server_home = "/opt/tbds/spark-jdbc-server"
-jdbc_start_script = spark_home + "/sbin/start-thriftserver.sh"
+jdbc_start_script = spark_home + "/sbin/start-thriftserver.sh " + " --hiveconf hive.server2.thrift.bind.host=" + spark_jdbc_server_host + " --hiveconf hive.server2.thrift.port=" + str(spark_jdbc_server_port)
 jdbc_stop_script = spark_home + "/sbin/stop-thriftserver.sh"
 
 # spark client

@@ -242,5 +242,24 @@
     "NIFI_SERVER":[
       "nifi-site/nifi.http.port"
     ]
-  }
+  },
+  "WEBIDE":{
+    "WEB_IDE_APP":[
+      "webide/app.listen.port"
+    ],
+    "WEB_IDE_WEB":[
+      "webide/web.listen.port"
+    ]
+  },
+  "SPARK":{
+    "SPARK_HISTORY_SERVER":[
+      "spark-defaults/spark.history.ui.port"
+    ],
+    "SPARK_JDBC_SERVER":[
+      "spark-defaults/spark.hive.server2.thrift.port"
+    ],
+    "SPARK_LIVY_SERVER":[
+      "livy-defaults/livy.server.port"
+    ]
+  }  
 }
