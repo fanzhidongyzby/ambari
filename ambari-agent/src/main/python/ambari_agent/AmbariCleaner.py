@@ -94,7 +94,7 @@ class AmbariCleaner:
 
     if not self.onServer:
       self.run_cmd("service postgresql stop")
-      self.run_cmd("ps aux | grep '/usr/pgsql-9.3/bin/postmaster' | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
+      self.run_cmd("ps aux | grep '/usr/pgsql-9.3/bin' | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
       self.run_cmd("ipcs -m | grep postgres | awk '{print \"ipcrm -m \"$2}' | sh")
       self.run_cmd("ipcs -s | grep postgres | awk '{print \"ipcrm -s \"$2}' | sh")
       self.run_cmd("ipcs -q | grep postgres | awk '{print \"ipcrm -q \"$2}' | sh")
