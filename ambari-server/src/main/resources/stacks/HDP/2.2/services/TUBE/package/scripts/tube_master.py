@@ -44,6 +44,7 @@ class TubeMaster(Script):
     def start(self, env):
         import params
         env.set_params(params)
+        self.configure(env)
         util.service_action(SERVICE_NAME, "start")
 
     def status(self, env):

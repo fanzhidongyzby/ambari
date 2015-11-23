@@ -166,6 +166,7 @@
 
       <requiredServices>
         <service>YARN</service>
+        <service>HIVE</service>
         <!-- service>TEZ</service-->
       </requiredServices>
     </service>
