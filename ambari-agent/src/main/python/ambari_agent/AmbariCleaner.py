@@ -69,6 +69,12 @@ class AmbariCleaner:
     cmd = "ambari-agent stop"
     self.run_cmd(cmd)
 
+    cmd = "service httpd stop"
+    self.run_cmd(cmd)
+
+    cmd = "ps aux | grep httpd | grep -v grep | awk '{print \"kill -9 \"$2}' | sh"
+    self.run_cmd(cmd)
+
 
   def remove_services_installed_rpm(self):
     if not self.onServer:
