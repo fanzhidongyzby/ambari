@@ -64,6 +64,10 @@ class PgMaster(Script):
         print 'create demo table:{0}'.format(create_demo_table_cmd)
         utils().exe(create_demo_table_cmd)
 
+        create_demo_table_cmd = format("psql -h {pg_host_name} -p {pgxx_postgre_port} -U postgres -d postgres -c \"create table demo1 (method varchar(255),count integer);\"")
+        print 'create demo table:{0}'.format(create_demo_table_cmd)
+        utils().exe(create_demo_table_cmd)
+
         Links(params.new_postgresql_install_path, params.postgresql_install_path)
 
     def uninstall(self, env):
