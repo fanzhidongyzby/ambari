@@ -87,11 +87,17 @@ class AmbariCleaner:
     self.run_cmd("yum clean all")
 
   def release_resources(self):
+    # kill httpd
     self.run_cmd("service httpd stop")
     self.run_cmd("ps aux | grep httpd | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
+    self.run_cmd("ipcs -m | grep apache | awk '{print \"ipcrm -m \"$2}' | sh")
+    self.run_cmd("ipcs -s | grep apache | awk '{print \"ipcrm -s \"$2}' | sh")
+    self.run_cmd("ipcs -q | grep apache | awk '{print \"ipcrm -q \"$2}' | sh")
 
+    # gaia docker
     self.run_cmd("umount /gaia/docker/var/lib/docker/devicemapper")
 
+    # kill pg
     if not self.onServer:
       self.run_cmd("service postgresql stop")
       self.run_cmd("ps aux | grep '/usr/pgsql-9.3/bin' | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
