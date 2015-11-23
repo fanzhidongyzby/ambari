@@ -6,9 +6,10 @@ ps aux | grep AmbariServer | grep -v grep | awk '{print "kill -9 "$2}' | sh
 
 echo "stop postgresql ..."
 service postgresql stop
-for x in `ps aux | grep "/usr/pgsql-9.3/bin/postmaster" | grep -v grep | awk '{print $2}'`; do kill -9 $x; done
-for x in `ipcs -m | grep postgres | awk '{print $2}'`; do ipcrm -m $x; done
-for x in `ipcs -s | grep postgres | awk '{print $2}'`; do ipcrm -s $x; done
+ps aux | grep "/usr/pgsql-9.3/bin/postmaster" | grep -v grep | awk '{print "kill -9 "$2}' | sh
+ipcs -m | grep postgres | awk '{print "ipcrm -m "$2}' | sh
+ipcs -s | grep postgres | awk '{print "ipcrm -s "$2}' | sh
+ipcs -q | grep postgres | awk '{print "ipcrm -q "$2}' | sh
 
 echo "uninstall tbds-server ..."
 yum remove -y postgresql*
