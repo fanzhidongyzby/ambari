@@ -39,18 +39,6 @@ class SparkLivyServer(Script):
         
         Links(params.livy_server_link_home, params.livy_server_home)
         
-        mkdir_command = format("fs -mkdir -p {params.livy_jar_path}")
-        ExecuteHadoop(mkdir_command,
-                      user=params.hdfs_user,
-                      conf_dir=params.hadoop_conf_dir
-        )
-        
-        copy_command = format("fs -put -f {livy_local_jar_file} {livy_jar_path}")
-        ExecuteHadoop(copy_command,
-                      user=params.hdfs_user,
-                      conf_dir=params.hadoop_conf_dir
-        )
-
     def uninstall(self, env):
         import params
         env.set_params(params)
@@ -70,7 +58,19 @@ class SparkLivyServer(Script):
         import params
         env.set_params(params)
         self.configure(env)
-
+        
+        mkdir_command = format("fs -mkdir -p {params.livy_jar_path}")
+        ExecuteHadoop(mkdir_command,
+                      user=params.hdfs_user,
+                      conf_dir=params.hadoop_conf_dir
+        )
+        
+        copy_command = format("fs -put -f {livy_local_jar_file} {livy_jar_path}")
+        ExecuteHadoop(copy_command,
+                      user=params.hdfs_user,
+                      conf_dir=params.hadoop_conf_dir
+        )
+        
         start_command = format("export HADOOP_CONF_DIR=/etc/hadoop/conf; bash +x {livy_server_start_script} &")
         Logger.info(start_command)
         Execute(start_command,

@@ -167,6 +167,7 @@
       <requiredServices>
         <service>YARN</service>
         <service>HIVE</service>
+	<service>HDFS</service>
         <!-- service>TEZ</service-->
       </requiredServices>
     </service>

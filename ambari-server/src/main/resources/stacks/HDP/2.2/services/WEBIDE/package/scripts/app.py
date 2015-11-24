@@ -32,8 +32,7 @@ class WebIDE(Script):
         Links(params.new_webide_install_path, params.webide_install_path)
         Links(params.new_webide_log_path, params.webide_log_path)
         self.configure(env)
-        # init database
-        self.init_app_sql_data()
+        
 
     def uninstall(self, env):
         Toolkit.uninstall_service("webide")
@@ -46,12 +45,17 @@ class WebIDE(Script):
         File(params.webide_app_server_path, mode=0644, content=Template("server.xml.j2"))
         File(params.webide_app_properties_path, mode=0644, content=Template("webide.properties.j2"))
         File(params.webide_app_sql_path, mode=0655, content=StaticFile('app.sql'))
-
+        
     def start(self, env):
         import params
         env.set_params(params)
         self.configure(env)
-
+        
+        # init database
+        (ret, output) = commands.getstatusoutput(params.webide_db_exist_cmd)
+        if ret != 0:
+            self.init_app_sql_data()
+        
         start_command = format("bash +x {webide_app_start_script}")
         Logger.info(start_command)
         Execute(start_command,
@@ -67,7 +71,7 @@ class WebIDE(Script):
         Logger.info(stop_command)
         self.command_exe(stop_command)
         # kill zombie process
-        kill_zobie_process = "ps -ef | grep 'webide-app' | grep -v 'grep'| awk '{print $2}' | xargs kill -9"
+        kill_zobie_process = "ps -ef | grep '/usr/hdp/2.2.0.0-2041/webide/webide-app' | grep -v 'grep'| awk '{print $2}' | xargs kill -9"
         Logger.info(kill_zobie_process)
         self.command_exe(kill_zobie_process)
 
@@ -75,7 +79,7 @@ class WebIDE(Script):
         import status_params
         env.set_params(status_params)
         # warring defalut port is 9090
-        process_check_command = "sudo ps aux | grep 'webide-app'  | grep -v 'grep' "
+        process_check_command = "sudo ps aux | grep '/usr/hdp/2.2.0.0-2041/webide/webide-app'  | grep -v 'grep' "
         output = self.command_exe(process_check_command)
         if not output:
             Logger.warning("{0} did not started!".format("webide APP server"))

@@ -28,6 +28,12 @@
     </property>
 
     <property>
+        <name>broker.web.port</name>
+        <value>8090</value>
+        <description>broker web控制台的访问端口</description>
+    </property>
+
+    <property>
         <name>num.partitions</name>
         <value>1</value>
         <description>默认每个topic的分区数目，默认为1</description>

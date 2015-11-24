@@ -27,7 +27,7 @@ def recreate_server_ini():
             # init server.ini by server.ini.source
             command = "cp -f {0}  {1}".format(SOURCE_INI_PATH, SERVER_INI_PATH)
             exe_command(command)
-            # add new topic list
+            # add new topic listb
             server_ini = open(SERVER_INI_PATH, 'a')
             server_ini.write("\n")
             for topic in topic_list:

@@ -53,8 +53,6 @@ pg_port = default("/configurations/postgresql-postgre-env/postgresql.postgre.por
 
 thive_host = default("/clusterHostInfo/thive_server_hosts", ["localhost"])[0]
 thive_port = default("/configurations/thive-config-env/thive.server.port", 10002)
-# thive_port = 8081
-# thive_host = "10.151.139.105"
 
 rest_uri = "http://" + webide_app_host + ":" + str(webide_app_listen_port)
 
@@ -68,3 +66,4 @@ webide_app_stop_script = webide_app_path + "/bin/shutdown.sh"
 http_conf_path = "/etc/httpd/conf/httpd.conf"
 webide_app_sql_path = webide_app_path + "/app.sql"
 postgresql_install_path = "/opt/tbds/postgresql"
+webide_db_exist_cmd = format("{postgresql_install_path}/bin/psql -U postgres -h {pg_host} -p {pg_port}") + " -c '\l' | awk '{print $1}' | grep webide"

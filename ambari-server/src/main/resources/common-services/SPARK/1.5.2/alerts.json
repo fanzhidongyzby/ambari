@@ -40,7 +40,7 @@
         "source": {
           "type": "PORT",
           "uri": "{{spark-defaults/spark.hive.server2.thrift.port}}",
-          "default_port": 10002,
+          "default_port": 10003,
           "reporting": {
             "ok": {
               "text": "TCP OK - {0:.3f}s response on port {1}"

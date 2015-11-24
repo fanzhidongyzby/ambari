@@ -66,6 +66,7 @@ delete_policy = config['configurations']['broker-ini']['delete.policy']
 delete_when = config['configurations']['broker-ini']['delete.when']
 data_path = config['configurations']['broker-ini']['data.path']
 load_message_stores_in_parallel = "true" if config['configurations']['broker-ini']['load.message.stores.in.parallel'] else "false"
+broker_web_port = config['configurations']['broker-ini']['broker.web.port']
 
 # refractor service path
 tube_install_path = "/usr/hdp/2.2.0.0-2041/tube"
