@@ -56,6 +56,9 @@
 						<package>
 							<name>php</name>
 						</package>
+            <package>
+              <name>postgresql93*</name>
+            </package>
 					</packages>
 				</osSpecific>
 			</osSpecifics>

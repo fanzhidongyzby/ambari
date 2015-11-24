@@ -27,7 +27,7 @@ class WebIDE(Script):
 
     def install(self, env):
         import params
-        self.install_packages(env)
+        self.install_packages(env, ["postgresql93*"])
         Links(params.new_webide_install_path, params.webide_install_path)
         Links(params.new_webide_log_path, params.webide_log_path)
 
