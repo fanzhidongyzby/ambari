@@ -64,7 +64,7 @@
 			</osSpecifics>
 
 			<requiredServices>
-				<!--<service>THIVE</service> -->
+				<service>THIVE</service> 
 				<service>POSTGRESQL</service>
 			</requiredServices>
 

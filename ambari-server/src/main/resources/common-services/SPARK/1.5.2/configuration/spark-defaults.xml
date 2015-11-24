@@ -30,7 +30,7 @@
   
   <property>
     <name>spark.hive.server2.thrift.port</name>
-    <value>10002</value>
+    <value>10003</value>
     <description>
       Spark thrift JDBC Serve Port.
     </description>

@@ -67,7 +67,7 @@ class SparkJDBCServer(Script):
         
         self.configure(env)
   
-        daemon_cmd = format("export HADOOP_CONF_DIR=/etc/hadoop/conf; bash +x {jdbc_start_script}")
+        daemon_cmd = format("bash +x {jdbc_start_script}")
         Logger.info(daemon_cmd)
         Execute(daemon_cmd,
             user=params.spark_user,
@@ -78,7 +78,7 @@ class SparkJDBCServer(Script):
         import params
         env.set_params(params)
         
-        stop_command = format("export HADOOP_CONF_DIR=/etc/hadoop/conf; bash +x {jdbc_stop_script}")
+        stop_command = format("bash +x {jdbc_stop_script}")
         Logger.info(stop_command)
         Execute(stop_command,
             user=params.spark_user,

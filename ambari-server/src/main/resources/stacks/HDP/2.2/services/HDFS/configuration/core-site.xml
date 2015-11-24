@@ -28,7 +28,7 @@
     <description></description>
   </property>
 
-  <!--property>
+  <property>
     <name>io.compression.codec.lzo.class</name>
     <value>com.hadoop.compression.lzo.LzoCodec</value>
   </property>
@@ -37,12 +37,12 @@
      <name>io.compression.codecs</name>
      <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.SnappyCodec,com.hadoop.compression.lzo.LzoCodec,com.hadoop.compression.lzo.LzopCodec</value>
      <description>A list of the compression codec classes that can be used for compression/decompression.</description>
-   </property-->
+   </property>
    
-   <property>
+   <!--property>
      <name>io.compression.codecs</name>
      <value>org.apache.hadoop.io.compress.GzipCodec,org.apache.hadoop.io.compress.DefaultCodec,org.apache.hadoop.io.compress.SnappyCodec</value>
      <description>A list of the compression codec classes that can be used for compression/decompression.</description>
-   </property>
+   </property-->
 
 </configuration>
