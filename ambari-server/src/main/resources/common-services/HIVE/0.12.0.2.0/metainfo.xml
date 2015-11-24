@@ -226,7 +226,7 @@
             </configFile>
           </configFiles>
         </component>
-        
+        <!--
         <component>
 			<name>HWI</name>
 			<displayName>Hive Web Interface</displayName>
@@ -240,6 +240,7 @@
 				<config-type>hive-site</config-type>
 			</configuration-dependencies>
 		</component>
+		-->
         
         <configuration-dependencies>
           <config-type>hive-site</config-type>
