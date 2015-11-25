@@ -65,5 +65,5 @@ webide_app_stop_script = webide_app_path + "/bin/shutdown.sh"
 
 http_conf_path = "/etc/httpd/conf/httpd.conf"
 webide_app_sql_path = webide_app_path + "/app.sql"
-postgresql_install_path = "/opt/tbds/postgresql"
+postgresql_install_path = "/usr/pgsql-9.3"
 webide_db_exist_cmd = format("{postgresql_install_path}/bin/psql -U postgres -h {pg_host} -p {pg_port}") + " -c '\l' | awk '{print $1}' | grep webide"

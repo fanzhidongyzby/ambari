@@ -389,23 +389,23 @@
 		</description>
 	</property>
 
-	<property>
-		<name>hive.hwi.war.file</name>
-		<value>lib/hive-hwi-0.12.0.war</value>
-		<description>This sets the path to the HWI war file, relative to </description>
-	</property>
+	<!--<property>-->
+		<!--<name>hive.hwi.war.file</name>-->
+		<!--<value>lib/hive-hwi-0.12.0.war</value>-->
+		<!--<description>This sets the path to the HWI war file, relative to </description>-->
+	<!--</property>-->
 
-	<property>
-		<name>hive.hwi.listen.host</name>
-		<value>0.0.0.0</value>
-		<description>This is the host address the Hive Web Interface will listen on</description>
-	</property>
+	<!--<property>-->
+		<!--<name>hive.hwi.listen.host</name>-->
+		<!--<value>0.0.0.0</value>-->
+		<!--<description>This is the host address the Hive Web Interface will listen on</description>-->
+	<!--</property>-->
 
-	<property>
-		<name>hive.hwi.listen.port</name>
-		<value>8081</value>
-		<description>This is the port the Hive Web Interface will listen on
-		</description>
-	</property>
+	<!--<property>-->
+		<!--<name>hive.hwi.listen.port</name>-->
+		<!--<value>8081</value>-->
+		<!--<description>This is the port the Hive Web Interface will listen on-->
+		<!--</description>-->
+	<!--</property>-->
 
 </configuration>

@@ -324,6 +324,8 @@ class HDP206StackAdvisor(DefaultStackAdvisor):
                   usedPort = propertyValue[i+1:]
                 else:
                   usedPort = propertyValue
+              else:
+                usedPort = propertyValue
           else:
               configType = "NA"
               propertyKey = "NA"

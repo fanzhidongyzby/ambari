@@ -409,12 +409,12 @@ ranger_driver_curl_target = format("{java_share_dir}/{ranger_jdbc_jar_name}")
 if security_enabled:
   hive_principal = hive_server_principal.replace('_HOST',hostname.lower())
 
-
-
-hwi_cmd = "({0}&) &> /dev/null"
-
-hwi_start_command=hwi_cmd.format("su hive -c '/usr/hdp/2.2.0.0-2041/hive/bin/hive --service hwi'")
-hwi_exclude_packages = ['mysql-connector-java', 'mysql', 'mysql-server','']
+#
+#
+# hwi_cmd = "({0}&) &> /dev/null"
+#
+# hwi_start_command=hwi_cmd.format("su hive -c '/usr/hdp/2.2.0.0-2041/hive/bin/hive --service hwi'")
+# hwi_exclude_packages = ['mysql-connector-java', 'mysql', 'mysql-server','']
 
 # refractor service path
 
