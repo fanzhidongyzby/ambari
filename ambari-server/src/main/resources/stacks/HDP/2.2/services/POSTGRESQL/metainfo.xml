@@ -27,7 +27,7 @@
                 <component>
                     <name>POSTGRESQL_SERVER</name>
                     <displayName>Postgresql Server</displayName>
-                    <category>SLAVE</category>
+                    <category>MASTER</category>
                     <cardinality>1+</cardinality>
                     <commandScript>
                         <script>scripts/pg_server.py</script>
