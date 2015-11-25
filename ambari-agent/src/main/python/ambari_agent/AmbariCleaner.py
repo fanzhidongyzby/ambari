@@ -142,6 +142,7 @@ class AmbariCleaner:
     self.remove_dir()
 
     self.log("Agent clean success !")
+    self.log("================================================================================")
 
 if __name__ == '__main__':
   obj = AmbariCleaner()

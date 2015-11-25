@@ -37,3 +37,4 @@ rm -rf /usr/lib/python2.6/site-packages/ambari_jinja2
 rm -rf /usr/lib/python2.6/site-packages/resource_management
 
 echo "server cleaned success !!!"
+echo "================================================================================"
