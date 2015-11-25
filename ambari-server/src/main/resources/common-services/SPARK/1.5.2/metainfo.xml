@@ -62,6 +62,13 @@
               </auto-deploy>
             </dependency>
             <dependency>
+              <name>TEZ/TEZ_CLIENT</name>
+              <scope>host</scope>
+              <auto-deploy>
+                <enabled>true</enabled>
+              </auto-deploy>
+            </dependency>
+            <dependency>
               <name>HIVE/HIVE_CLIENT</name>
               <scope>host</scope>
               <auto-deploy>
@@ -88,8 +95,8 @@
               <scope>host</scope>
               <auto-deploy>
                 <enabled>true</enabled>
-             </auto-deploy>
-           </dependency>
+              </auto-deploy>
+            </dependency>
           </dependencies>
           <commandScript>
             <script>scripts/spark_livy_server.py</script>
@@ -131,6 +138,15 @@
             <package>
               <name>spark</name>
             </package>
+            <package>
+              <name>lzo</name>
+            </package>
+            <package>
+              <name>hadoop-lzo-native</name>
+            </package>
+            <package>
+              <name>hadoop-lzo</name>
+            </package>
           </packages>
         </osSpecific>
         <osSpecific>
@@ -141,6 +157,15 @@
             </package>
             <package>
               <name>spark</name>
+            </package>
+            <package>
+              <name>lzo</name>
+            </package>
+            <package>
+              <name>hadoop-lzo-native</name>
+            </package>
+            <package>
+              <name>hadoop-lzo</name>
             </package>
           </packages>
         </osSpecific>
