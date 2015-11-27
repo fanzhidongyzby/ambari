@@ -262,6 +262,7 @@
           <requires>
             <require>postgresql-server &gt;= 8.1</require>
             <require>openssl</require>
+            <require>expect</require>
             <require>${python.ver}</require>
             <require>${python.xml.package}</require>
           </requires>
