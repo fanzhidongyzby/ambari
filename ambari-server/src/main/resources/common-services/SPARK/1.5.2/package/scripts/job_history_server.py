@@ -44,6 +44,9 @@ class SparkHistoryServer(Script):
         self.configure(env)
 
     def uninstall(self, env):
+        import params
+        env.set_params(params)
+        
         uninstall_cmd = format("rm -rf  {spark_history_server_home}")
         Logger.info(uninstall_cmd)
         self.command_exe(uninstall_cmd)

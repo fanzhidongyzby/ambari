@@ -18,3 +18,5 @@ spark.history.ui.acls.enable      false
 spark.eventLog.enabled            true
 spark.eventLog.dir                {{spark_eventLog_dir}}
 spark.history.fs.logDirectory     {{spark_history_fs_logDirectory}}
+spark.driver.extraJavaOptions     -Dhdp.version=2.2.0.0-2041
+spark.yarn.am.extraJavaOptions    -Dhdp.version=2.2.0.0-2041

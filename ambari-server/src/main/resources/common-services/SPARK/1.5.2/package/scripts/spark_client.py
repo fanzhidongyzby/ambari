@@ -50,6 +50,7 @@ class SparkClient(Script):
     import params
     env.set_params(params)
   
+    """
     XmlConfig("spark-defaults.xml",
       conf_dir=params.spark_conf_dir,
       configurations=params.config['configurations']['spark-defaults'],
@@ -57,6 +58,18 @@ class SparkClient(Script):
       owner=params.spark_user,
       group=params.user_group
     )
+    """
+    
+    # add template files
+    File(params.spark_defaults_conf_file, mode=0644, content=Template("spark-defaults.conf.j2"))
+    
+    copy_cmd = format("cp -arpf {hive_site_file} {spark_conf_dir}")
+    Logger.info(copy_cmd)
+    self.command_exe(copy_cmd)
+        
+    copy_cmd = format("cp -arpf {tez_site_file} {spark_conf_dir}")
+    Logger.info(copy_cmd)
+    self.command_exe(copy_cmd)
     
   def command_exe(self, command):
         (ret, output) = commands.getstatusoutput(command)

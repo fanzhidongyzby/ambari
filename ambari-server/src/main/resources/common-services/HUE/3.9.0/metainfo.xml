@@ -52,6 +52,19 @@
           </packages>
         </osSpecific>
       </osSpecifics>
+      
+      <configuration-dependencies>
+        <config-type>hue-env</config-type>
+        <config-type>hue-site</config-type>
+        <config-type>hdfs-site</config-type>
+        <config-type>core-site</config-type>
+        <config-type>hive-site</config-type>
+        <config-type>yarn-site</config-type>
+        <config-type>livy-defaults</config-type>
+        <config-type>spark-defaults</config-type>
+        <config-type>zoo-cfg</config-type>
+        <config-type>cluster-env</config-type>
+      </configuration-dependencies>
 
       <commandScript>
         <script>scripts/service_check.py</script>

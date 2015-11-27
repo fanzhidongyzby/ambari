@@ -98,6 +98,7 @@
       <configuration-dependencies>
         <config-type>pg-config-env</config-type>
         <config-type>thive-config-env</config-type>
+        <config-type>pg-hba-env</config-type>
       </configuration-dependencies>
 
     </service>

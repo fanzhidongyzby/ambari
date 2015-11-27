@@ -117,7 +117,21 @@
               <scope>host</scope>
               <auto-deploy>
                 <enabled>true</enabled>
-             </auto-deploy>
+              </auto-deploy>
+            </dependency>
+            <dependency>
+              <name>TEZ/TEZ_CLIENT</name>
+              <scope>host</scope>
+              <auto-deploy>
+                <enabled>true</enabled>
+              </auto-deploy>
+            </dependency>
+            <dependency>
+              <name>HIVE/HIVE_CLIENT</name>
+              <scope>host</scope>
+              <auto-deploy>
+                <enabled>true</enabled>
+              </auto-deploy>
             </dependency>
           </dependencies>
           <commandScript>
@@ -138,7 +152,7 @@
             <package>
               <name>spark</name>
             </package>
-            <package>
+            <!--package>
               <name>lzo</name>
             </package>
             <package>
@@ -146,7 +160,7 @@
             </package>
             <package>
               <name>hadoop-lzo</name>
-            </package>
+            </package-->
           </packages>
         </osSpecific>
         <osSpecific>
@@ -158,7 +172,7 @@
             <package>
               <name>spark</name>
             </package>
-            <package>
+            <!--package>
               <name>lzo</name>
             </package>
             <package>
@@ -166,7 +180,7 @@
             </package>
             <package>
               <name>hadoop-lzo</name>
-            </package>
+            </package-->
           </packages>
         </osSpecific>
       </osSpecifics>

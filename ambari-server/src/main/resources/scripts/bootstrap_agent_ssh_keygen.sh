@@ -3,8 +3,8 @@ executor=`whoami`
 BINDIR=`dirname "$0"`
 cd $BINDIR
 currentPath=`pwd`
-echo "[----- BOOTSTRAP -----]1. start to generate certificate of user:${sshUser}"
 sshUser=$1
+echo "[----- BOOTSTRAP -----]1. start to generate certificate of user:${sshUser}"
 homePath=`cat /etc/passwd | grep ${sshUser}: | awk -F':' '{print $6}'`
 if [ "${homePath}" == "" ]
   then 
