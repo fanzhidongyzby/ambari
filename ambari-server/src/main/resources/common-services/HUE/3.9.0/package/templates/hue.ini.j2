@@ -118,7 +118,7 @@
 
   # Comma separated list of apps to not load at server startup.
   # e.g.: pig,zookeeper
-  ## app_blacklist=
+  app_blacklist=pig,zookeeper,hbase,impala,search,sqoop,jobsub,rdbms
 
   # The directory where to store the auditing logs. Auditing is disable if the value is empty.
   # e.g. /var/log/hue/audit.log
@@ -830,10 +830,10 @@
 
   # Host where HiveServer2 is running.
   # If Kerberos security is enabled, use fully-qualified domain name (FQDN).
-  hive_server_host={{spark_jdbc_server_host}}
+  hive_server_host={{ hive_host }}
 
   # Port where HiveServer2 Thrift server runs on.
-  hive_server_port={{spark_jdbc_server_port}}
+  hive_server_port={{ hive_port }}
 
   # Hive configuration directory, where hive-site.xml is located
   ## hive_conf_dir=/etc/hive/conf

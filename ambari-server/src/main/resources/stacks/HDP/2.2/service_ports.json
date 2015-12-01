@@ -218,7 +218,7 @@
   },
   "POSTGRESQL":{
     "POSTGRESQL_SERVER":[
-      "postgresql-postgre-env/postgresql.postgre.port"
+      "5432"
     ]
   },
   "TUBE":{

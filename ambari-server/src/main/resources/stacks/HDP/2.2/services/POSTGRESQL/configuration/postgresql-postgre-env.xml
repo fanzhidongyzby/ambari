@@ -2,11 +2,13 @@
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration supports_final="true">
 
+    <!--
     <property>
         <name>postgresql.postgre.port</name>
         <value>5432</value>
         <description>setting postgresql default port</description>
     </property>
+    -->
     <property>
         <name>postgresql.postgre.max_connections</name>
         <value>100</value>
