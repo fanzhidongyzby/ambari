@@ -77,7 +77,7 @@ def service_action(service_name, action):
         command_script = format("{master_script}")
     elif service_name is "broker":
         command_script = format("{broker_script}")
-    action_command = "(sudo bash -x {0}  {1}&)  &> /dev/null".format(command_script, action)
+    action_command = "(sudo bash -x {0}  {1})  &> /dev/null".format(command_script, action)
     (ret, output) = commands.getstatusoutput(action_command)
     if ret != 0:
         Logger.info("execute {0}  failed ,for {1}".format(action_command, service_name))
