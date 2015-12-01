@@ -36,5 +36,8 @@ rm -rf /usr/lib/python2.6/site-packages/ambari_commons
 rm -rf /usr/lib/python2.6/site-packages/ambari_jinja2
 rm -rf /usr/lib/python2.6/site-packages/resource_management
 
+echo "remove ssh files on server ..."
+rm -f /home/tencent/.ssh/*
+
 echo "server cleaned success !!!"
 echo "================================================================================"

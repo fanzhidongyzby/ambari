@@ -117,6 +117,9 @@ class AmbariCleaner:
       self.run_cmd("rm -rf /var/lock/subsys/postgresql*")
       self.run_cmd("rm -f /tmp/.s.PGSQL.*")
 
+      self.log("remove ssh files on agent")
+      self.run_cmd("rm -f /home/tencent/.ssh/*")
+
     dirNames = ""
     for dir in self.dirs:
       dirNames += dir + " "
