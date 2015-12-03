@@ -992,7 +992,11 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
     processBlueprintClusterConfigAttributes(blueprintAttributes);
 
     BlueprintConfigurationProcessor configurationProcessor = new BlueprintConfigurationProcessor(mapClusterConfigurations);
-    configurationProcessor.doUpdateForClusterCreate(blueprintHostGroups, stack);
+    /**
+     * removed by florian
+     * 该函数会根据已有规则刷新配置的value，而规划部署已经将配置的value计算完毕，不需要重新刷新。
+      configurationProcessor.doUpdateForClusterCreate(blueprintHostGroups, stack);
+    **/
     setMissingConfigurations(blueprintHostGroups);
   }
 
