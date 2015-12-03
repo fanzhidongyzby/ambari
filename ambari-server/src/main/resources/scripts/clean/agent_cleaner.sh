@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "[$(date "+%F %T")]"
+
 status=$(tbds-server status | grep "not running" | wc -l)
 if [[ "$status" == "1" ]]; then
   echo "server is stoped, restart it to continue ..."
@@ -67,10 +69,11 @@ echo "agents on following hosts will be cleaned:"
 for host in $hosts; do echo $host; done
 
 echo "begin to clean agents ..."
+mkdir -p /tmp/clean
 count=100
 for host in $hosts
 do
-  /var/lib/tbds-server/resources/scripts/clean/service_cleaner ${host} &>/dev/null &
+  /var/lib/tbds-server/resources/scripts/clean/service_cleaner ${host} &>/tmp/clean/${host}.log &
   p_num=`ps -wef | grep service_cleaner | grep -v grep -c`
   echo "${host} is cleaning..."
 
@@ -84,4 +87,6 @@ done
 echo "waiting agents cleaning over ..."
 
 wait
+
+echo "[$(date "+%F %T")]"
 echo "agents clean OK !"

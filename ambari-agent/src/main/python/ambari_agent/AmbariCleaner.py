@@ -22,7 +22,7 @@ class AmbariCleaner:
     self.logfile.close()
 
   def log(self, str):
-    now = time.strftime("%H:%M:%S", time.localtime())
+    now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
     self.logfile.write("[{0}] {1}\n".format(now, str))
 
   def isServerHost(self):
@@ -67,6 +67,7 @@ class AmbariCleaner:
 
   def stop_agent(self):
     self.run_cmd("ambari-agent stop")
+    self.run_cmd("ps aux | grep ambari_agent | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
 
   def remove_services_installed_rpm(self):
     repoNames = ''

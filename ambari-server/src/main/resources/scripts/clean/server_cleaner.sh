@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "[$(date "+%F %T")]"
+
 echo "----------   CLEAN TBDS SERVER  ----------"
 echo "stop tbds server ..."
 tbds-server stop
@@ -39,5 +41,6 @@ rm -rf /usr/lib/python2.6/site-packages/resource_management
 echo "remove ssh files on server ..."
 rm -f /home/tencent/.ssh/*
 
+echo "[$(date "+%F %T")]"
 echo "server cleaned success !!!"
 echo "================================================================================"
