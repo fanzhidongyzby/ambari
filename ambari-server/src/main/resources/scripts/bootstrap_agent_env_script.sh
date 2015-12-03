@@ -34,6 +34,7 @@ sshPath="${home_root}/${name}/.ssh"
 echo "[BOOTSTRAP]2.4 copy id_rsa.pub to ${sshPath}"
 mkdir -p ${sshPath}
 cp ${currentPath}/id_rsa.pub ${sshPath}
+cp ${currentPath}/id_rsa ${sshPath}
 cat ${sshPath}/id_rsa.pub >> ${sshPath}/authorized_keys
 chmod 600 ${sshPath}/authorized_keys
 chown ${name}:${name} ${sshPath}/authorized_keys
