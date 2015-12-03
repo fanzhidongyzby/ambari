@@ -67,7 +67,7 @@ class AmbariCleaner:
 
   def stop_agent(self):
     self.run_cmd("ambari-agent stop")
-    self.run_cmd("ps aux | grep ambari_agent | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
+    self.run_cmd("ps aux | grep -E \"(AmbariAgent\.py|main\.py) start\"  | grep -v grep | awk '{print \"kill -9 \"$2}' | sh")
 
   def remove_services_installed_rpm(self):
     repoNames = ''

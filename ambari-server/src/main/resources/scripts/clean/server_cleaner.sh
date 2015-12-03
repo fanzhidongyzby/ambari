@@ -4,7 +4,7 @@ echo "[$(date "+%F %T")]"
 echo "----------   CLEAN TBDS SERVER  ----------"
 echo "stop tbds server ..."
 tbds-server stop
-ps aux | grep AmbariServer | grep -v grep | awk '{print "kill -9 "$2}' | sh
+ps aux | grep -E "org\.apache\.ambari\.server\.controller\.AmbariServer" | grep -v grep | awk '{print "kill -9 "$2}' | sh
 
 echo "stop postgresql ..."
 service postgresql stop
