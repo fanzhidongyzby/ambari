@@ -11,6 +11,7 @@ home_root="/home"
 
 echo "[BOOTSTRAP]2.1 go to host: `hostname`"
 echo "[BOOTSTRAP]2.2 copy ambari.repo to path /etc/yum.repos.d"
+#rm -f /etc/yum.repos.d/*.repo
 cp ./ambari.repo /etc/yum.repos.d/
 
 if cat /etc/passwd | awk -F : '{print $1}' | grep "^${name}$" >/dev/null 2>&1

@@ -6,8 +6,7 @@ sshUser=$1
 homePath=`cat /etc/passwd | grep ${sshUser}: | awk -F':' '{print $6}'`
 if [ "${homePath}" == "" ]
   then 
-    # ambari user has not exists
-    echo "#{sshUser} user has not exists"
+    echo "[===== BOOTSTRAP-ERROR =====]${sshUser} user has not exists"
     exit -1
 fi
 

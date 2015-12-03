@@ -53,6 +53,7 @@ class SparkLivyServer(Script):
 
         # add template files
         File(params.livy_conf_path, mode=0644, content=Template("livy-defaults.conf.j2"))
+        File(params.livy_env_path, mode=0755, content=Template("livy-server-env.j2"))
 
     def start(self, env):
         import params
@@ -71,7 +72,7 @@ class SparkLivyServer(Script):
                       conf_dir=params.hadoop_conf_dir
         )
         
-        start_command = format("export HADOOP_CONF_DIR=/etc/hadoop/conf; bash +x {livy_server_start_script} &")
+        start_command = format("source {livy_env_path}; bash +x {livy_server_start_script} >> /usr/hdp/2.2.0.0-2041/livy/livy.log 2>&1 &")
         Logger.info(start_command)
         Execute(start_command,
             user=params.spark_user,

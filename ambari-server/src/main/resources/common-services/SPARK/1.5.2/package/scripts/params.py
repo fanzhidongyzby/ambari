@@ -63,6 +63,7 @@ livy_server_port = config['configurations']['livy-defaults']['livy.server.port']
 livy_server_home = "/usr/hdp/2.2.0.0-2041/livy"
 livy_server_link_home = "/opt/tbds/spark-livy"
 livy_conf_path = livy_server_home + "/conf/livy-defaults.conf"
+livy_env_path = livy_server_home + "/bin/livy-server-env.sh"
 livy_server_start_script = livy_server_home + "/bin/livy-server"
 livy_jar_path = fs_default_fs + "/user/spark/share/lib"
 livy_jar_file = livy_jar_path + "/livy-assembly-3.9.0-SNAPSHOT.jar"

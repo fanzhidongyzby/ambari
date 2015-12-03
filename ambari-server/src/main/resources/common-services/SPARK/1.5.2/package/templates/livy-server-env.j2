@@ -1,0 +1,13 @@
+#/bin/bash
+export SPARK_HOME=/usr/hdp/2.2.0.0-2041/spark/
+export SPARK_CONF=${SPARK_HOME}/conf
+export SPARK_CONF_DIR=${SPARK_HOME}/conf
+export SPARK_LOG_DIR=/data/log/tbds/spark
+export HADOOP_HOME=/usr/hdp/2.2.0.0-2041/hadoop
+export HADOOP_CONF_DIR=/etc/hadoop/conf
+export LIVY_HOME=/usr/hdp/2.2.0.0-2041/livy/
+export LIVY_CONF_DIR=/opt/tbds/spark-livy/conf
+export JAVA_HOME=/usr/jdk64/jdk1.7.0_67/
+export LIVY_SERVER_JAVA_OPTS="-Dlivy.server.session.factory=yarn"
+export CLASSPATH=`hadoop classpath`
+export TEZ_CONF_DIR=/etc/tez/conf
