@@ -880,6 +880,12 @@ public class BlueprintConfigurationProcessor {
       Collection<String> hostStrings = getHostStrings(hostGroups, origValue);
       if (hostStrings.isEmpty()) {
         //default non-exported original value
+
+        //todo : temp fix zk address
+        if (!origValue.contains("localhost:") && "ZOOKEEPER_SERVER".equals(component)) {
+          return origValue;
+        }
+
         String port = null;
         if (origValue.contains(":")) {
           //todo: currently assuming all hosts are using same port
