@@ -30,7 +30,7 @@ class GPSlave(Script):
           )
     daemon_cmd = "ln -s {0} {1}".format(params.gp_install_dir, params.gp_install_symlink)
     Execute(daemon_cmd,
-            user=params.gp_user,
+            user="root",
             )
 
     dataDirs = params.gp_segment_data_dir

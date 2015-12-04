@@ -24,6 +24,8 @@ class GPMaster(Script):
   def install(self, env):
     self.install_packages(env)
     import params
+    env.set_params(params)
+
     daemon_cmd = "cd {0};unzip {1}".format(params.gp_install_dir, params.gp_install_zip)
     Execute(daemon_cmd,
           user=params.gp_user,
@@ -52,13 +54,26 @@ class GPMaster(Script):
     hosts = params.gp_master_host + "\n"
     for host in params.gp_segment_hosts:
         hosts += host + "\n"
-
     File(os.path.join(params.gp_conf_dir, 'hostfile_gpinitsystem'),
          owner=params.gp_user,
          group=params.user_group,
          mode=0644,
          content=hosts
          )
+
+    File(params.expect_script,
+         owner=params.gp_user,
+         group=params.user_group,
+         mode=0755,
+         content=StaticFile("execExpect.sh")
+         )
+    gpInitCmd = "source {3}/greenplum_path.sh;MASTER_DATA_DIRECTORY={2} {0}/gpinitsystem -c {1}/gpinitsystem_config -h {1}/hostfile_gpinitsystem"\
+        .format(params.gp_install_bin, params.gp_conf_dir, params.gp_master_data_dir+"/gpseg-1", params.gp_install_dir)
+    daemon_cmd = '{0} 3600 "{1}"'.format(params.expect_script, gpInitCmd)
+    print "Init gp: {0}".format(daemon_cmd)
+    Execute(daemon_cmd,
+            user=params.gp_user,
+            )
 
     self.configure(env)
 

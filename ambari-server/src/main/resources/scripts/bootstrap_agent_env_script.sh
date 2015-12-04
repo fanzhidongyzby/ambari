@@ -39,7 +39,7 @@ cat ${sshPath}/id_rsa.pub >> ${sshPath}/authorized_keys
 chmod 600 ${sshPath}/authorized_keys
 chown ${name}:${name} ${sshPath}/authorized_keys
 chmod 700 ${sshPath}
-chown ${name}:${name} ${sshPath}
+chown -R ${name}:${name} ${sshPath}
 
 echo "[BOOTSTRAP]2.5 set the user ${name} as superuser"
 chmod 440 /etc/sudoers

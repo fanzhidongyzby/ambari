@@ -36,4 +36,8 @@ if [ "${executor}" == "${sshUser}" ]
       exit -1
     fi
 fi
+# set the tbds server ssh login
+cat ${homePath}/.ssh/id_rsa.pub >> ${homePath}/.ssh/authorized_keys
+chmod 600 ${homePath}/.ssh/authorized_keys
+chown ${sshUser}:${sshUser} ${homePath}/.ssh/authorized_keys
 echo "[----- BOOTSTRAP -----]1. end generate certificate"

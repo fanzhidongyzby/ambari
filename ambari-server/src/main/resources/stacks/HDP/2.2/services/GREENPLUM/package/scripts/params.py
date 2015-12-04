@@ -26,6 +26,7 @@ import status_params
 
 # server configurations
 config = Script.get_config()
+tmp_dir = Script.get_tmp_dir()
 
 stack_name = default("/hostLevelParams/stack_name", None)
 
@@ -35,6 +36,7 @@ stack_version_unformatted = str(config['hostLevelParams']['stack_version'])
 hdp_stack_version = format_hdp_stack_version(stack_version_unformatted)
 
 gp_install_dir = '/opt/tbds/greenplum-db-4.3.6.2'
+gp_install_bin = gp_install_dir + "/bin"
 gp_install_zip = 'greenplum-db-4.3.6.2.zip'
 gp_install_symlink = '/opt/tbds/greenplum-db'
 gp_conf_dir = "/etc/tbds/greenplum"
@@ -50,3 +52,5 @@ gp_master_port = config['configurations']['gp-site']['master.port']
 gp_master_data_dir = config['configurations']['gp-site']['master.data.dir']
 gp_segment_data_dir = config['configurations']['gp-site']['segment.data.dir']
 gp_segment_base_port = config['configurations']['gp-site']['segment.base.port']
+
+expect_script = gp_install_dir + '/execExpect.sh'
