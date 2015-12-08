@@ -62,7 +62,7 @@ public class LogAuditor extends Auditor {
    */
   @Override
   public void record(Request request, Response response) {
-    if (request.getRequestType() == Request.Type.GET) {
+    if (request == null || request.getRequestType() == Request.Type.GET) {
       // ignore get request
       return;
     }
