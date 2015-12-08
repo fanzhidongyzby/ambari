@@ -39,7 +39,10 @@ gp_install_dir = '/opt/tbds/greenplum-db-4.3.6.2'
 gp_install_bin = gp_install_dir + "/bin"
 gp_install_zip = 'greenplum-db-4.3.6.2.zip'
 gp_install_symlink = '/opt/tbds/greenplum-db'
+gp_install_flag = gp_install_dir + "/initialized"
 gp_conf_dir = "/etc/tbds/greenplum"
+gp_log_dir = "/var/log/tbds/greenplum"
+gp_log_file = gp_log_dir + "/gp.log"
 
 gp_user = config['configurations']['gp-env']['gp_user']
 hostname = config['hostname']

@@ -13,7 +13,7 @@
 set cmdTimeout [lindex $argv 0]
 set runCommand [lindex $argv 1]
 
-spawn /bin/sh -c "${runCommand} && echo \\#SUCCESS\\# || echo \\#fail\\#"
+spawn /bin/sh -c "${runCommand}; echo \\#SUCCESS\\#"
 
 set timeout ${cmdTimeout}
 expect {

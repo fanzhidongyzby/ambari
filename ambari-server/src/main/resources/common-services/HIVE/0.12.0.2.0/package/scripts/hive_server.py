@@ -78,7 +78,7 @@ class HiveServer(Script):
     hive_port = params.hive_server_port
     ddl_create_database_cmd = "create database if not exists tdw_inter_db"
     cmd = "/usr/hdp/2.2.0.0-2041/hive/bin/beeline -n hive -p hive -u jdbc:hive2://{0}:{1} -e \"{2}\" ".format(host_name, hive_port, ddl_create_database_cmd)
-    Toolkit.execute_shell(cmd,3,30)
+    Toolkit.execute_shell(cmd,5,60)
 
   def stop(self, env, rolling_restart=False):
     import params

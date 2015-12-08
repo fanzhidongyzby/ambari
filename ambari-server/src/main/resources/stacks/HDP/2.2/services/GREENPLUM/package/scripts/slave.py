@@ -19,6 +19,7 @@ limitations under the License.
 
 from resource_management import *
 import os
+import subprocess
 
 class GPSlave(Script):
   def install(self, env):
@@ -62,6 +63,13 @@ class GPSlave(Script):
   def status(self, env):
     import status_params
     env.set_params(status_params)
+
+    psCmd = "ps -ef|grep greenplum|grep -v grep|awk '{print $2}'"
+    psProcess = subprocess.Popen(psCmd, shell=True, stdout=subprocess.PIPE)
+    stdout = psProcess.communicate()[0]
+
+    if not stdout:
+        raise ComponentIsNotRunning()
 
 if __name__ == "__main__":
     GPSlave().execute()

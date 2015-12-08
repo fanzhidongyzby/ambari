@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+      http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!-- marked as lazy so that security beans are not created when applications runs in non-secure mode -->
+<beans default-lazy-init="true"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+    http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <!-- self define  for nifi run dependency            -->
+    <!--<sec:http>-->
+    <!--<sec:intercept-url pattern="/**" access="ROLE_USER" />-->
+    <!--<sec:http-basic />-->
+    <!--<sec:custom-filter ref="nodeAuthorizedUserFilter" before="PRE_AUTH_FILTER"/>-->
+    <!--<sec:custom-filter ref="x509Filter" position="PRE_AUTH_FILTER"/>-->
+    <!--&lt;!&ndash;<sec:anonymous enabled="false"/>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<sec:custom-filter ref="tbdsAuthorizedUserFilter" before="PRE_AUTH_FILTER"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<sec:custom-filter ref="anonymousFilter" position="ANONYMOUS_FILTER"/>&ndash;&gt;-->
+    <!--</sec:http>-->
+
+    <!--<sec:authentication-manager>-->
+    <!--<sec:authentication-provider>-->
+    <!--<sec:user-service>-->
+    <!--<sec:user name="jessica" password="123" authorities="ROLE_USER, ROLE_ADMIN" />-->
+    <!--<sec:user name="jcl" password="123" authorities="ROLE_USER" />-->
+    <!--</sec:user-service>-->
+    <!--</sec:authentication-provider>-->
+    <!--</sec:authentication-manager>-->
+
+
+
+
+
+    <!-- self define  for nifi run in tbds -->
+
+    <sec:http auto-config="false" entry-point-ref="casEntryPoint">
+        <sec:intercept-url pattern="/**" access="ROLE_DFM" />
+        <sec:custom-filter ref="requestSingleLogoutFilter" before="LOGOUT_FILTER"/>
+        <sec:custom-filter ref="tbdsAuthorizedUserFilter" position="PRE_AUTH_FILTER"/>
+        <sec:custom-filter ref="singleLogoutFilter" before="CAS_FILTER"/>
+        <sec:custom-filter ref="casFilter" position="CAS_FILTER"/>
+    </sec:http>
+
+
+
+    <bean id="serviceProperties"
+          class="org.springframework.security.cas.ServiceProperties">
+        <property name="service" value="http://{{nifi_server_ip}}:{{web_http_port}}/nifi-api/loginnifi"/>
+        <property name="sendRenew" value="false"/>
+    </bean>
+
+
+    <bean id="casFilter"
+          class="org.springframework.security.cas.web.CasAuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="filterProcessesUrl" value="/loginnifi"/>
+    </bean>
+
+    <bean id="casEntryPoint"
+         class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
+          <!--class="org.apache.nifi.web.security.authorization.TbdsCasAuthenticationEntryPoint">-->
+
+        <property name="loginUrl" value="https://sso.tencent.com:80/cas/login"/>
+        <property name="serviceProperties" ref="serviceProperties"/>
+    </bean>
+
+
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider ref="casAuthenticationProvider" />
+    </sec:authentication-manager>
+
+    <bean id="casAuthenticationProvider"
+          class="org.apache.nifi.web.security.authorization.TbdsCasAuthenticationProvider">
+          <!--class="org.apache.nifi.web.security.authorization.TbdsCasAuthenticationProvider">-->
+        <property name="authenticationUserDetailsService">
+            <bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+                <constructor-arg ref="userCasAuthorizationService" />
+            </bean>
+        </property>
+        <property name="serviceProperties" ref="serviceProperties" />
+        <property name="ticketValidator">
+            <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
+                <constructor-arg index="0" value="https://sso.tencent.com:80/cas" />
+            </bean>
+        </property>
+        <property name="key" value="cas"/>
+    </bean>
+
+    <!-- This filter handles a Single Logout Request from the CAS Server -->
+    <bean id="singleLogoutFilter" class="org.jasig.cas.client.session.SingleSignOutFilter"/>
+    <!-- This filter redirects to the CAS Server to signal Single Logout should be performed -->
+    <bean id="requestSingleLogoutFilter"
+          class="org.springframework.security.web.authentication.logout.LogoutFilter">
+        <constructor-arg value="https://sso.tencent.com:80/cas/logout"/>
+        <constructor-arg>
+            <bean
+                    class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+        </constructor-arg>
+        <property name="filterProcessesUrl" value="/logoutnifi"/>
+    </bean>
+
+    <!-- enable method level security -->
+    <sec:global-method-security pre-post-annotations="enabled"/>
+
+    <!-- entry point reference -->
+    <bean  id="entryPoint" class="org.apache.nifi.web.security.authentication.NiFiAuthenticationEntryPoint"/>
+
+
+    <!-- pre-authentication provider -->
+    <bean id="preauthAuthProvider" class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+        <property name="preAuthenticatedUserDetailsService">
+            <bean class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+                <property name="userDetailsService" ref="userAuthorizationService"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- user details service -->
+    <bean id="userAuthorizationService" class="org.apache.nifi.web.security.authorization.NiFiAuthorizationService">
+        <property name="userService" ref="userService"/>
+        <property name="properties" ref="nifiProperties"/>
+    </bean>
+
+    <!-- performs ocsp certificate validation -->
+    <bean id="ocspCertificateValidator" class="org.apache.nifi.web.security.x509.ocsp.OcspCertificateValidator">
+        <constructor-arg ref="nifiProperties"/>
+    </bean>
+
+    <!-- custom x509 filter for checking for proxied users -->
+    <bean id="x509Filter" class="org.apache.nifi.web.security.x509.X509AuthenticationFilter">
+        <property name="authenticationManager" ref="authenticationManager"/>
+        <property name="properties" ref="nifiProperties"/>
+        <property name="userService" ref="userService"/>
+        <property name="certificateValidator" ref="ocspCertificateValidator"/>
+        <property name="continueFilterChainOnUnsuccessfulAuthentication" value="false"/>
+    </bean>
+
+    <!-- custom filter for checking for proxied users that are already authenticated -->
+    <bean id="nodeAuthorizedUserFilter" class="org.apache.nifi.web.security.authorization.NodeAuthorizedUserFilter">
+        <property name="properties" ref="nifiProperties"/>
+    </bean>
+
+    <!-- custom filter for authenticating sso users  in tbds -->
+    <bean id="tbdsAuthorizedUserFilter" class="org.apache.nifi.web.security.authorization.TbdsAuthorizedUserFilter">
+        <property name="properties" ref="nifiProperties"/>
+    </bean>
+
+    <bean id="tbdsAuthorizedUserFilterTest" class="org.apache.nifi.web.security.authorization.TbdsAuthorizedUserFilterTest">
+        <property name="properties" ref="nifiProperties"/>
+    </bean>
+
+    <bean id="userCasAuthorizationService" class="org.apache.nifi.web.security.authorization.CasNiFiAuthorizationService">
+        <property name="userService" ref="userService"/>
+        <property name="properties" ref="nifiProperties"/>
+    </bean>
+
+    <!-- custom anonymous filter to assign default roles based on current operating mode -->
+    <bean id="anonymousFilter" class="org.apache.nifi.web.security.anonymous.NiFiAnonymousUserFilter">
+        <property name="userService" ref="userService"/>
+        <property name="properties" ref="nifiProperties"/>
+    </bean>
+
+</beans>

@@ -27,7 +27,7 @@
             <components>
                 <component>
                     <name>GP_MASTER</name>
-                    <displayName>PG Master</displayName>
+                    <displayName>GP Master</displayName>
                     <category>MASTER</category>
                     <cardinality>1</cardinality>
                     <versionAdvertised>true</versionAdvertised>
@@ -39,7 +39,7 @@
                 </component>
                 <component>
                     <name>GP_SEGMENT</name>
-                    <displayName>PG Segment</displayName>
+                    <displayName>GP Segment</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
                     <versionAdvertised>true</versionAdvertised>

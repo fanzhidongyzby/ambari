@@ -46,6 +46,7 @@ new_nifi_config_path = "/etc/tbds/nifi"
 new_nifi_data_path = "/data/tbds/nifi"
 new_nifi_log_path = "/var/log/tbds/nifi"
 
+nifi_server_ip = default("/clusterHostInfo/nifi_server_hosts", ["localhost"])[0]
 nifi_user = config['configurations']['nifi-env']['nifi_user']
 hostname = config['hostname']
 user_group = config['configurations']['cluster-env']['user_group']
