@@ -519,7 +519,9 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
     RequestStatusResponse request = ((ServiceResourceProvider) getResourceProvider(Resource.Type.Service)).
         installAndStart(clusterName);
 
-    request.setMessage(message);
+    if (request != null) {
+      request.setMessage(message);
+    }
 
     return request;
   }

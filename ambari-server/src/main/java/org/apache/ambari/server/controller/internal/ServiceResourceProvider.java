@@ -306,6 +306,10 @@ public class ServiceResourceProvider extends AbstractControllerResourceProvider 
     try {
       LOG.info("Installing all services");
       requestStages = doUpdateResources(null, installRequest, installPredicate);
+      if (requestStages == null) {
+        return null;
+      }
+
       notifyUpdate(Resource.Type.Service, installRequest, installPredicate);
 
       Map<String, Object> startProperties = new HashMap<String, Object>();
