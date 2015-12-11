@@ -26,13 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.ambari.server.AmbariException;
-import org.apache.ambari.server.ClusterNotFoundException;
-import org.apache.ambari.server.DuplicateResourceException;
-import org.apache.ambari.server.ObjectNotFoundException;
-import org.apache.ambari.server.ParentObjectNotFoundException;
-import org.apache.ambari.server.ServiceNotFoundException;
-import org.apache.ambari.server.StackAccessException;
+import org.apache.ambari.server.*;
 import org.apache.ambari.server.api.services.AmbariMetaInfo;
 import org.apache.ambari.server.controller.AmbariManagementController;
 import org.apache.ambari.server.controller.MaintenanceStateHelper;
@@ -401,27 +395,37 @@ public class ComponentResourceProvider extends AbstractControllerResourceProvide
       } else {
         msg = "Attempted to create components which already exist: ";
       }
-      throw new DuplicateResourceException(msg + names.toString());
+      LOG.info(msg);
+//      throw new DuplicateResourceException(msg + names.toString());
     }
 
     // now doing actual work
     for (ServiceComponentRequest request : requests) {
       Cluster cluster = clusters.getCluster(request.getClusterName());
       Service s = cluster.getService(request.getServiceName());
-      ServiceComponent sc = serviceComponentFactory.createNew(s,
+
+      // do not create duplicated components
+      try {
+        s.getServiceComponent(request.getComponentName());
+        System.out.println("FLORIAN: try to get service component: " + request.getComponentName());
+        LOG.info("FLORIAN: try to get service component: " + request.getComponentName());
+      } catch (ServiceComponentNotFoundException e) {
+
+        ServiceComponent sc = serviceComponentFactory.createNew(s,
           request.getComponentName());
-      sc.setDesiredStackVersion(s.getDesiredStackVersion());
+        sc.setDesiredStackVersion(s.getDesiredStackVersion());
 
-      if (request.getDesiredState() != null
+        if (request.getDesiredState() != null
           && !request.getDesiredState().isEmpty()) {
-        State state = State.valueOf(request.getDesiredState());
-        sc.setDesiredState(state);
-      } else {
-        sc.setDesiredState(s.getDesiredState());
-      }
+          State state = State.valueOf(request.getDesiredState());
+          sc.setDesiredState(state);
+        } else {
+          sc.setDesiredState(s.getDesiredState());
+        }
 
-      s.addServiceComponent(sc);
-      sc.persist();
+        s.addServiceComponent(sc);
+        sc.persist();
+      }
     }
   }
 
