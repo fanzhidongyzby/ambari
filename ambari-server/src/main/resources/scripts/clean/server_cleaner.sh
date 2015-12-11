@@ -14,7 +14,7 @@ ipcs -s | grep postgres | awk '{print "ipcrm -s "$2}' | sh
 ipcs -q | grep postgres | awk '{print "ipcrm -q "$2}' | sh
 
 echo "uninstall tbds-server ..."
-yum remove -y postgresql*
+yum remove -y -v postgresql*
 yum clean all
 
 echo "remove postgresql data files ..."
