@@ -504,7 +504,7 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
       newCluster = true;
     }
 
-    setConfigurationsOnCluster(clusterName, stack, blueprintHostGroups);
+    setConfigurationsOnCluster(clusterName, stack, blueprintHostGroups, newCluster);
 
     Set<String> services = getServicesToDeploy(stack, blueprintHostGroups);
 
@@ -718,7 +718,7 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
    *
    * @throws SystemException an unexpected exception occurred
    */
-  void setConfigurationsOnCluster(String clusterName, Stack stack, Map<String, HostGroupImpl> blueprintHostGroups) throws SystemException {
+  void setConfigurationsOnCluster(String clusterName, Stack stack, Map<String, HostGroupImpl> blueprintHostGroups, boolean newCluster) throws SystemException {
     List<BlueprintServiceConfigRequest> listofConfigRequests =
       new LinkedList<BlueprintServiceConfigRequest>();
 
@@ -753,15 +753,17 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
       listofConfigRequests.add(blueprintConfigRequest);
     }
 
-    // since the stack returns "cluster-env" with each service's config
-    // this code needs to ensure that only one ClusterRequest occurs for
-    // the global cluster-env configuration
-    BlueprintServiceConfigRequest globalConfigRequest =
-      new BlueprintServiceConfigRequest("GLOBAL-CONFIG");
-    globalConfigRequest.addConfigElement("cluster-env",
-      mapClusterConfigurations.get("cluster-env"),
-      mapClusterAttributes.get("cluster-env"));
-    listofConfigRequests.add(globalConfigRequest);
+    if (newCluster) {
+      // since the stack returns "cluster-env" with each service's config
+      // this code needs to ensure that only one ClusterRequest occurs for
+      // the global cluster-env configuration
+      BlueprintServiceConfigRequest globalConfigRequest =
+        new BlueprintServiceConfigRequest("GLOBAL-CONFIG");
+      globalConfigRequest.addConfigElement("cluster-env",
+        mapClusterConfigurations.get("cluster-env"),
+        mapClusterAttributes.get("cluster-env"));
+      listofConfigRequests.add(globalConfigRequest);
+    }
 
     try {
       //todo: properly handle non system exceptions

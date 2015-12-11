@@ -3473,7 +3473,7 @@ public class ClusterResourceProviderTest {
     clusterConfig.put("cluster-env", Collections.<String, String>emptyMap());
 
     // call the method being tested
-    clusterResourceProvider.setConfigurationsOnCluster("clusterone", mockStack, testMapOfHostGroups);
+    clusterResourceProvider.setConfigurationsOnCluster("clusterone", mockStack, testMapOfHostGroups, true);
 
     // verify that the ClusterRequest's passed to the controller include the expected information
     for (Capture<Set<ClusterRequest>> requestCapture : listOfRequestCaptures) {
@@ -3569,7 +3569,7 @@ public class ClusterResourceProviderTest {
     clusterConfig.put("cluster-env", Collections.<String, String>emptyMap());
 
     // call the method being tested
-    clusterResourceProvider.setConfigurationsOnCluster("clusterone", mockStack, testMapOfHostGroups);
+    clusterResourceProvider.setConfigurationsOnCluster("clusterone", mockStack, testMapOfHostGroups, true);
 
     // verify that the ClusterRequest's passed to the controller include the expected information
     for (Capture<Set<ClusterRequest>> requestCapture : listOfRequestCaptures) {
