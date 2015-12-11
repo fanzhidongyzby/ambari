@@ -551,10 +551,17 @@ public class BlueprintResourceProvider extends BaseBlueprintProcessor {
       public Void invoke() throws AmbariException {
         BlueprintEntity blueprint = toBlueprintEntity(properties);
 
-        if (blueprintDAO.findByName(blueprint.getBlueprintName()) != null) {
-          throw new DuplicateResourceException(
-              "Attempted to create a Blueprint which already exists, blueprint_name=" +
-              blueprint.getBlueprintName());
+        String blueprintName = blueprint.getBlueprintName();
+        if (blueprintDAO.findByName(blueprintName) != null) {
+
+          // add by florian: to support blueprint refresh
+          LOG.info("Attempted to create a blueprint which already exists, remove existing blueprint first: " + blueprintName);
+          // remove existing blueprint
+          blueprintDAO.removeByName(blueprintName);
+
+//          throw new DuplicateResourceException(
+//              "Attempted to create a Blueprint which already exists, blueprint_name=" +
+//              blueprint.getBlueprintName());
         }
         Map<String, Map<String, Collection<String>>> missingProperties = blueprint.validateConfigurations(
             stackInfo, false);

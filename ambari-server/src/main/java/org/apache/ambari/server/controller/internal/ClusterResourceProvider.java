@@ -47,11 +47,7 @@ import org.apache.ambari.server.orm.dao.BlueprintDAO;
 import org.apache.ambari.server.orm.entities.BlueprintConfigEntity;
 import org.apache.ambari.server.orm.entities.BlueprintEntity;
 import org.apache.ambari.server.orm.entities.HostGroupEntity;
-import org.apache.ambari.server.state.Config;
-import org.apache.ambari.server.state.ConfigHelper;
-import org.apache.ambari.server.state.ConfigImpl;
-import org.apache.ambari.server.state.SecurityType;
-import org.apache.ambari.server.state.StackId;
+import org.apache.ambari.server.state.*;
 
 /**
  * Resource provider for cluster resources.
@@ -498,7 +494,16 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
     validatePasswordProperties(blueprint, blueprintHostGroups, (String) properties.get("default_password"));
 
     String clusterName = (String) properties.get(CLUSTER_NAME_PROPERTY_ID);
-    createClusterResource(buildClusterResourceProperties(stack, clusterName));
+
+    boolean newCluster = false;
+    try {
+      getManagementController().getClusters().getCluster(clusterName);
+    } catch (AmbariException e) {
+      LOG.info("cluster " + clusterName + " not exists, create new cluster");
+      createClusterResource(buildClusterResourceProperties(stack, clusterName));
+      newCluster = true;
+    }
+
     setConfigurationsOnCluster(clusterName, stack, blueprintHostGroups);
 
     Set<String> services = getServicesToDeploy(stack, blueprintHostGroups);
@@ -506,9 +511,10 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
     createServiceAndComponentResources(blueprintHostGroups, clusterName, services);
     createHostAndComponentResources(blueprintHostGroups, clusterName);
 
-    registerConfigGroups(clusterName, blueprintHostGroups, stack);
-
-    persistInstallStateForUI(clusterName);
+    if (newCluster) {
+      registerConfigGroups(clusterName, blueprintHostGroups, stack);
+      persistInstallStateForUI(clusterName);
+    }
 
     RequestStatusResponse request = ((ServiceResourceProvider) getResourceProvider(Resource.Type.Service)).
         installAndStart(clusterName);
