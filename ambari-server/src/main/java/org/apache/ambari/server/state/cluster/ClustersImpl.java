@@ -501,8 +501,11 @@ public class ClustersImpl implements Clusters {
       // check to ensure there are no duplicates
       for (Cluster c : hostClusterMap.get(hostname)) {
         if (c.getClusterName().equals(clusterName)) {
-          throw new DuplicateResourceException("Attempted to create a host which already exists: clusterName=" +
-              clusterName + ", hostName=" + hostname);
+          LOG.info("Attempted to create a host which already exists: clusterName=" +
+            clusterName + ", hostName=" + hostname);
+          return;
+//          throw new DuplicateResourceException("Attempted to create a host which already exists: clusterName=" +
+//              clusterName + ", hostName=" + hostname);
         }
       }
     } finally {
