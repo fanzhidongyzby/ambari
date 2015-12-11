@@ -557,10 +557,9 @@ public class AmbariManagementControllerImpl implements AmbariManagementControlle
       ServiceComponent sc = s.getServiceComponent(
           request.getComponentName());
 
+      // do not create duplicated component host
       try {
         sc.getServiceComponentHost(request.getHostname());
-        System.out.println("FLORIAN: try to get service component host: " + request.getHostname() + " : " + request.getComponentName());
-        LOG.info("FLORIAN: try to get service component host: " + request.getHostname() + " : " + request.getComponentName());
       } catch (ServiceComponentHostNotFoundException e) {
 
         ServiceComponentHost sch =

@@ -407,8 +407,6 @@ public class ComponentResourceProvider extends AbstractControllerResourceProvide
       // do not create duplicated components
       try {
         s.getServiceComponent(request.getComponentName());
-        System.out.println("FLORIAN: try to get service component: " + request.getComponentName());
-        LOG.info("FLORIAN: try to get service component: " + request.getComponentName());
       } catch (ServiceComponentNotFoundException e) {
 
         ServiceComponent sc = serviceComponentFactory.createNew(s,
