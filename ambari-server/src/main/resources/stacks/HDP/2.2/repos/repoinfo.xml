@@ -23,11 +23,11 @@
             <reponame>TDP</reponame>
         </repo>
     </os>
-    <!--os family="redhat7">
+    <os family="redhat7">
         <repo>
             <baseurl>${repo_url}</baseurl>
             <repoid>TDP-2.2</repoid>
             <reponame>TDP</reponame>
         </repo>
-    </os -->
+    </os>
 </reposinfo>

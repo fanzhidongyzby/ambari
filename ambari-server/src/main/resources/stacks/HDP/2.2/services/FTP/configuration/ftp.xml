@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>ftp.port</name>
+    <value>2121</value>
+    <description>ftp port(仅首次安装时,修改生效)</description>
+  </property>
+
+  <property>
+    <name>ftp.user</name>
+    <value>ftpadmin</value>
+    <description>ftp user(仅首次安装时,修改生效)</description>
+  </property>
+
+  <property>
+    <name>ftp.password</name>
+    <value>123456</value>
+    <description>ftp password(仅首次安装时,修改生效)</description>
+  </property>
+ 
+  <property>
+    <name>root.path</name>
+    <value>/ftp_data</value>
+    <description>ftp root path(仅首次安装时,修改生效)</description>
+  </property>
+
+</configuration>
