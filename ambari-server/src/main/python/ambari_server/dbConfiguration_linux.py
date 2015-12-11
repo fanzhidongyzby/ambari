@@ -527,7 +527,7 @@ class PGConfig(LinuxDBMSConfig):
   def _get_postgre_status():
     retcode, out, err = run_os_command(PGConfig.PG_ST_CMD)
     try:
-      pg_status = re.search('(stopped|running|active)', out, re.IGNORECASE).group(0).lower()
+      pg_status = re.search('(unused|stopped|not running|inactive|running|active)', out, re.IGNORECASE).group(0).lower()
     except AttributeError:
       pg_status = None
     return pg_status, retcode, out, err
@@ -668,7 +668,7 @@ class PGConfig(LinuxDBMSConfig):
       process.kill()
       pg_status, retcode, out, err = PGConfig._get_postgre_status()
       # SUSE linux set status of stopped postgresql proc to unused
-      if pg_status == "unused" or pg_status == "stopped":
+      if pg_status == "unused" or pg_status == "stopped" or pg_status == "not running" or pg_status == "inactive":
         print_info_msg("PostgreSQL is stopped. Restarting ...")
         retcode, out, err = run_os_command(PGConfig.PG_START_CMD)
         return retcode, out, err
