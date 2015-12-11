@@ -55,5 +55,6 @@ gp_master_port = config['configurations']['gp-site']['master.port']
 gp_master_data_dir = config['configurations']['gp-site']['master.data.dir']
 gp_segment_data_dir = config['configurations']['gp-site']['segment.data.dir']
 gp_segment_base_port = config['configurations']['gp-site']['segment.base.port']
+gp_checkpoint_segments = config['configurations']['gp-site']['checkpoint.segments']
 
 expect_script = gp_install_dir + '/execExpect.sh'

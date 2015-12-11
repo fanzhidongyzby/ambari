@@ -29,16 +29,21 @@
     <property>
         <name>segment.base.port</name>
         <value>40004</value>
-        <description>Port the master runs on</description>
+        <description>Base port the segments runs on</description>
     </property>
     <property>
         <name>master.data.dir</name>
         <value>/data/master</value>
-        <description>Port the master runs on</description>
+        <description>Data directory of the master</description>
     </property>
     <property>
         <name>segment.data.dir</name>
         <value>/data/primary</value>
-        <description>Port the master runs on</description>
+        <description>Data directories of the segments</description>
+    </property>
+    <property>
+        <name>checkpoint.segments</name>
+        <value>128</value>
+        <description>Maximum log file segments between automatic WAL checkpoints</description>
     </property>
 </configuration>

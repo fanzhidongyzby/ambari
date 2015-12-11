@@ -38,7 +38,7 @@ MASTER_PORT={{ gp_master_port }}
 TRUSTED_SHELL=ssh
 
 #### Maximum log file segments between automatic WAL checkpoints.
-CHECK_POINT_SEGMENTS=8
+CHECK_POINT_SEGMENTS={{ gp_checkpoint_segments }}
 
 #### Default server-side character set encoding.
 ENCODING=UNICODE

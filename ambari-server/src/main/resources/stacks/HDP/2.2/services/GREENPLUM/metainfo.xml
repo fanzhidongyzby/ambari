@@ -20,14 +20,14 @@
     <services>
         <service>
             <name>GREENPLUM</name>
-            <displayName>Greenplum</displayName>
-            <comment>分布式MPP数据仓库</comment>
+            <displayName>PGXZ</displayName>
+            <comment>分布式MPP数据仓库：适合结构化大数据的快速分析</comment>
             <version>4.3.6</version>
 
             <components>
                 <component>
                     <name>GP_MASTER</name>
-                    <displayName>GP Master</displayName>
+                    <displayName>PG Master</displayName>
                     <category>MASTER</category>
                     <cardinality>1</cardinality>
                     <versionAdvertised>true</versionAdvertised>
@@ -39,7 +39,7 @@
                 </component>
                 <component>
                     <name>GP_SEGMENT</name>
-                    <displayName>GP Segment</displayName>
+                    <displayName>PG Segment</displayName>
                     <category>SLAVE</category>
                     <cardinality>1+</cardinality>
                     <versionAdvertised>true</versionAdvertised>
