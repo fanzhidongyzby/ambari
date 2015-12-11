@@ -32,7 +32,7 @@ else
 
   # stop all the services
   echo "send request to stop all the service"
-  request=`curl -H "ContentType:application/json" -H "X-requested-By: florianfan" -X PUT -d '{"ServiceInfo":{"state":"INSTALLED"}}' --user $user:$password http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
+  request=`curl -H "ContentType:application/json" -H "X-requested-By:admin" -X PUT -d '{"RequestInfo":{"context":"停止所有服务","operation_level":{"level":"CLUSTER","cluster_name":"tdw"}},"Body":{"ServiceInfo":{"state":"INSTALLED"}}}' --user $user:$password http://$server:8080/api/v1/clusters/$cluster/services?ServiceInfo/state=STARTED 2> /dev/null | grep href | awk -F '"' '{print $4}' `
 
   # wait services stopped
   echo "request sent ok, waiting services to be stopped ..."
