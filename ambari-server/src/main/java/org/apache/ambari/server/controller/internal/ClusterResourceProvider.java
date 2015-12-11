@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.ambari.server.AmbariException;
+import org.apache.ambari.server.ServiceNotFoundException;
 import org.apache.ambari.server.api.services.AmbariMetaInfo;
 import org.apache.ambari.server.controller.*;
 import org.apache.ambari.server.controller.spi.NoSuchParentResourceException;
@@ -752,7 +753,12 @@ public class ClusterResourceProvider extends BaseBlueprintProcessor {
         }
       }
 
-      listofConfigRequests.add(blueprintConfigRequest);
+      // remove duplicated service config
+      try {
+        getManagementController().getClusters().getCluster(clusterName).getService(service);
+      } catch (AmbariException e) {
+        listofConfigRequests.add(blueprintConfigRequest);
+      }
     }
 
     if (newCluster) {
