@@ -54,4 +54,5 @@ java64_home = config['hostLevelParams']['java_home']
 web_http_port = config['configurations']['nifi-site']['nifi.http.port']
 
 # Security-related params
+sso_url =  default("/configurations/cluster-env/sso_url", "http://localhost:80/")
 security_enabled = config['configurations']['cluster-env']['security_enabled']

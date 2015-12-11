@@ -75,6 +75,7 @@ class SparkHistoryServer(Script):
         
         # add template files
         File(params.spark_defaults_conf_file, mode=0644, content=Template("spark-defaults.conf.j2"))
+        File(params.spark_env_file, mode=0644, content=Template("spark-env.j2"))
 
     def start(self, env):
         import params

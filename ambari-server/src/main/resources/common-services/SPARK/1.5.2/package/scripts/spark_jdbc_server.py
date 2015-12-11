@@ -63,6 +63,7 @@ class SparkJDBCServer(Script):
         
         # add template files
         File(params.spark_defaults_conf_file, mode=0644, content=Template("spark-defaults.conf.j2"))
+        File(params.spark_env_file, mode=0644, content=Template("spark-env.j2"))
         
         copy_cmd = format("cp -arpf {hive_site_file} {spark_conf_dir}")
         Logger.info(copy_cmd)

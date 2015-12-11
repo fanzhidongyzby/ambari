@@ -75,7 +75,7 @@
          class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
           <!--class="org.apache.nifi.web.security.authorization.TbdsCasAuthenticationEntryPoint">-->
 
-        <property name="loginUrl" value="https://sso.tencent.com:80/cas/login"/>
+        <property name="loginUrl" value="{{sso_url}}/cas/login"/>
         <property name="serviceProperties" ref="serviceProperties"/>
     </bean>
 
@@ -95,7 +95,7 @@
         <property name="serviceProperties" ref="serviceProperties" />
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
-                <constructor-arg index="0" value="https://sso.tencent.com:80/cas" />
+                <constructor-arg index="0" value="{{sso_url}}/cas" />
             </bean>
         </property>
         <property name="key" value="cas"/>
@@ -106,7 +106,7 @@
     <!-- This filter redirects to the CAS Server to signal Single Logout should be performed -->
     <bean id="requestSingleLogoutFilter"
           class="org.springframework.security.web.authentication.logout.LogoutFilter">
-        <constructor-arg value="https://sso.tencent.com:80/cas/logout"/>
+        <constructor-arg value="{{sso_url}}/cas/logout"/>
         <constructor-arg>
             <bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

@@ -114,7 +114,8 @@
   # Comma-separated list of regular expressions, which match the redirect URL.
   # For example, to restrict to your local domain and FQDN, the following value can be used:
   # ^\/.*$,^http:\/\/www.mydomain.com\/.*$
-  ## redirect_whitelist=^\/.*$
+  # Added by junz for cas-based sso
+  redirect_whitelist=.*
 
   # Comma separated list of apps to not load at server startup.
   # e.g.: pig,zookeeper
@@ -211,7 +212,8 @@
     # - libopenid.backend.OpenIDBackend
     # - liboauth.backend.OAuthBackend
     #     (New oauth, support Twitter, Facebook, Google+ and Linkedin
-    ## backend=desktop.auth.backend.AllowFirstUserDjangoBackend
+    # Added by junz for cas-based sso
+    backend=django_cas.backends.CASBackend
 
     # The service to use when querying PAM.
     ## pam_service=login
@@ -1064,13 +1066,13 @@
   livy_server_port={{livy_server_port}}
 
   # Configure livy to start with 'process', 'thread', or 'yarn' workers.
-  ## livy_server_session_kind=process
+  livy_server_session_kind=yarn
 
   # If livy should use proxy users when submitting a job.
   ## livy_impersonation_enabled=true
 
   # List of available types of snippets
-  ## languages='[{"name": "Scala Shell", "type": "scala"},{"name": "PySpark Shell", "type": "python"},{"name": "R Shell", "type": "r"},{"name": "Jar", "type": "Jar"},{"name": "Python", "type": "py"},{"name": "Impala SQL", "type": "impala"},{"name": "Hive SQL", "type": "hive"},{"name": "Text", "type": "text"}]'
+  languages='[{"name": "Scala Shell", "type": "scala"},{"name": "PySpark Shell", "type": "python"},{"name": "R Shell", "type": "r"},{"name": "Hive SQL", "type": "hive"}]'
 
 
 ###########################################################################

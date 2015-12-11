@@ -24,10 +24,20 @@ class Hue(Script):
   def install(self, env):
     self.install_packages(env)
     import params
-    daemon_cmd = "cd {0};tar xvf {1}".format(params.hue_install_dir, params.hue_install_tar)
+    # configure django settings to replace cas server url
+    daemon_cmd = 'sed -i \'s/{{CAS_SERVER_URL}}/"{0}"/g\' {1}'.format(
+        params.sso_cas_url.replace('/', '\/'), params.hue_django_settings)
     Execute(daemon_cmd,
-          user=params.hue_user,
-          )
+            user=params.hue_user,
+            )
+    # create default admin user
+    if "admin" != params.hue_admin_user:
+        daemon_cmd = '{0} createsuperuser --username {1} --email {1}@tencent.com --noinput'.format(
+            params.hue_admin_bin, params.hue_admin_user)
+        print daemon_cmd
+        Execute(daemon_cmd,
+            user=params.hue_user,
+            )
     self.configure(env)
 
   def uninstall(self, env):
@@ -43,11 +53,6 @@ class Hue(Script):
          mode=0644,
          content=Template("hue.ini.j2")
          )
-
-  #def pre_rolling_restart(self, env):
-    #import params
-    #env.set_params(params)
-    #upgrade.prestart(env, "kafka-broker")
 
   def start(self, env, rolling_restart=False):
     import params

@@ -26,7 +26,8 @@ java_home = config['hostLevelParams']['java_home']
 fs_default_fs = config['configurations']['core-site']['fs.defaultFS']
 hadoop_conf_dir = "/etc/hadoop/conf"
 hive_site_file = "/etc/hive/conf/hive-site.xml"
-tez_site_file = "/etc/tez/conf/tez-site.xml"
+tez_conf_dir = "/etc/tez/conf"
+tez_site_file = tez_conf_dir + "/tez-site.xml"
 
 # spark common
 hdfs_user = "hdfs"
@@ -37,6 +38,7 @@ spark_submit_cmd = spark_home + "/bin/spark-submit"
 spark_conf_dir = spark_home + "/conf"
 spark_defaults_conf_file = spark_home + "/conf/spark-defaults.conf"
 spark_log_home = "/data/log/tbds/spark"
+spark_env_file = spark_conf_dir + "/spark-env.sh"
 
 # spark history server
 spark_history_ui_port = config['configurations']['spark-defaults']['spark.history.ui.port']

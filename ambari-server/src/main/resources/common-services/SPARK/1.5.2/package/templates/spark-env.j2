@@ -1,0 +1,16 @@
+export SPARK_LOG_DIR=/data/log/tbds/spark
+export HADOOP_HOME=/usr/hdp/current/hadoop-client
+export HADOOP_CONF_DIR=/etc/hadoop/conf
+export HIVE_CONF_DIR=/etc/hive/conf
+export SPARK_CLASSPATH=$SPARK_CLASSPATH:/usr/hdp/current/hive-client/lib/mysql-connector-java.jar:/usr/hdp/current/share/lzo/0.6.0/lib/hadoop-lzo-0.6.0.jar
+export SPARK_LIBRARY_PATH=$SPARK_LIBRARY_PATH:/usr/hdp/current/share/lzo/0.6.0/lib/native/Linux-amd64-64
+
+jars=$(find /usr/hdp/2.2.0.0-2041/tez -name "*.jar")
+for jar in ${jars[@]}; do
+  SPARK_CLASSPATH=$SPARK_CLASSPATH:$jar
+done
+
+export SPARK_YARN_USER_ENV="SPARK_HOME=/usr/hdp/2.2.0.0-2041/spark"
+
+
+export SPARK_HISTORY_OPTS="-Dspark.history.ui.port={{spark_history_ui_port}} -Dspark.history.retainedApplications=3 -Dspark.history.fs.logDirectory={{fs_default_fs}}/data/log/tbds/spark"

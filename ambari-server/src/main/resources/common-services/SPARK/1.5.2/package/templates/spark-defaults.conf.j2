@@ -19,6 +19,10 @@ spark.history.ui.acls.enable      false
 spark.eventLog.enabled            false
 spark.eventLog.dir                {{spark_eventLog_dir}}
 spark.history.fs.logDirectory     {{spark_history_fs_logDirectory}}
-spark.driver.extraJavaOptions     -Dhdp.version=2.2.0.0-2041
-spark.yarn.am.extraJavaOptions    -Dhdp.version=2.2.0.0-2041
-spark.driver.memory               2g
+spark.driver.extraJavaOptions     "-Dhdp.version=2.2.0.0-2041  -XX:MaxPermSize=512m"
+spark.yarn.am.extraJavaOptions    "-Dhdp.version=2.2.0.0-2041  -XX:MaxPermSize=512m"
+spark.driver.memory    4g
+#spark.driver.cores  2
+spark.yarn.executor.memoryOverhead 1024
+spark.yarn.driver.memoryOverhead  1024
+spark.yarn.queue                  default

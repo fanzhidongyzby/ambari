@@ -35,11 +35,12 @@ stack_version_unformatted = str(config['hostLevelParams']['stack_version'])
 hdp_stack_version = format_hdp_stack_version(stack_version_unformatted)
 
 hue_install_dir = '/opt/tbds/hue'
-hue_install_tar = 'hue-3.9.0-bin.tgz'
-hue_bin = '/opt/tbds/hue/build/env/bin/supervisor'
+hue_bin = hue_install_dir + '/build/env/bin/supervisor'
+hue_admin_bin = hue_install_dir + '/build/env/bin/hue'
 hue_conf_dir = "/opt/tbds/hue/desktop/conf"
 hue_log_dir = "/opt/tbds/hue/logs"
 hue_pid_file = "/opt/tbds/hue/hue.pid"
+hue_django_settings = hue_install_dir + "/desktop/core/src/desktop/settings.py"
 
 new_hue_config_path = "/etc/tbds/hue"
 new_hue_data_path = "/data/tbds/hue"
@@ -61,6 +62,9 @@ livy_server_host = default('/clusterHostInfo/spark_livy_server_hosts', ['localho
 livy_server_port = default('/configurations/livy-defaults/livy.server.port',"8998")
 spark_jdbc_server_host = default('/clusterHostInfo/spark_jdbc_server_hosts',['localhost'])[0]
 spark_jdbc_server_port = default('/configurations/spark-defaults/spark.hive.server2.thrift.port',"10002")
+
+sso_cas_url = default('/configurations/cluster-env/sso_url',"https://127.0.0.1:8080/cas") + "/"
+hue_admin_user = default('/configurations/cluster-env/cluster_manager',"admin")
 
 zookeeper_host = default('/clusterHostInfo/zookeeper_hosts', ['localhost'])
 zk_address = zookeeper_host[0] + ":" + default('/configurations/zoo-cfg/clientPort', "2181")
