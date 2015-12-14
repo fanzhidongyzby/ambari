@@ -17,6 +17,11 @@ class configinit:
       mode=0755,
       content=Template("goldeneye.web.httpd.conf.j2")
     )
+    
+    File(os.path.join(params.web_http_path,'setting.php'),
+      mode=0755,
+      content=Template("setting.php.j2")
+    )
 	
   def init_mysql_scripts(self):
     import params

@@ -1,0 +1,40 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * @author hillliu
+ */
+$config[]='';
+
+$config['sso_url'] = '{{sso_server_hostname}}';
+$config['sso_port'] = {{sso_server_port}};
+$config['sso_application'] = '{{sso_server_application}}';
+
+//版本号
+$config['version'] = '2.10.23';
+
+//网站虚拟目录
+$config["domain_path"] = rtrim(BASE_URL,'/'); 
+$config["upload_path"] = dirname(dirname(__file__)) . "/resource/logo/";
+
+//默认取维度值个数
+$config['dimension_num'] = 2000;
+
+//默认取数据值行数
+$config['max_data_num'] = 5000;
+
+//禁止使用的门户名
+$config['forbidden_portal_name'] = array();
+
+//DEMO门户名
+$config['demo_portal_name'] = array('demo_basic', 'demo_pro');
+
+//超级管理员
+$config['administrator'] = array(
+    'admin'
+);
+
+$config['sms_config'] = array(
+    'enable'   => true, // 发送邮件
+    'validate' => true, // 收件人合法性校验
+);
+
+?>

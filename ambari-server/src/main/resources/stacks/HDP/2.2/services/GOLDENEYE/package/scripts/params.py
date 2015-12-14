@@ -76,3 +76,7 @@ new_goldeneye_log_path_web = "/var/log/tbds/goldeneye/web"
 new_goldeneye_log_path_metadb = "/var/log/tbds/goldeneye/metadb/mysqld.log"
 
 new_goldeneye_data_path_metadb = "/data/tbds/goldeneye/metadb"
+
+sso_server_hostname = default('/configurations/cluster-env/sso_server_hostname',"127.0.0.1")
+sso_server_port = default('/configurations/cluster-env/sso_server_port',"8081")
+sso_server_application = default('/configurations/cluster-env/sso_server_application',"cas")

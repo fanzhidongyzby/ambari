@@ -1,0 +1,21 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+/*
+ * 配置文件
+ */
+ 
+$config['sso_url'] = '{{sso_server_hostname}}';
+$config['sso_port'] = {{sso_server_port}};
+$config['sso_application'] = '{{sso_server_application}}';
+
+// 后台接口地址
+// 10.149.27.91:8086
+$config["api_server"] = "http://10.151.139.114:9010/LService/";
+//$config["api_server"] = "http://10.136.4.90:8083/LService/";
+$config['log_server'] = "http://10.149.27.91:8080/cgi-bin/";
+
+// 脚本FTP地址
+$config['ftp_server'] = '10.151.135.211';
+$config['ftp_port']   = '21';
+$config['ftp_user']   = 'ftpadmin';
+$config['ftp_pwd']    = 'ftpadmin';

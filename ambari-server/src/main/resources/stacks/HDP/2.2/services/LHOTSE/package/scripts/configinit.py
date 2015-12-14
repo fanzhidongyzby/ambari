@@ -31,6 +31,13 @@ class configinit:
       mode=0644,
       content=Template("base.hadoop-metrics2.properties.j2")
     )
+    
+    File(os.path.join(params.base_config_path,'setting.php'),
+      owner='lhotse',
+      group='lhotse',
+      mode=0644,
+      content=Template("setting.php.j2")
+    )
 
   def update_runner_config(self,env):
     import params
