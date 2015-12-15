@@ -18,7 +18,7 @@ class configinit:
       content=Template("goldeneye.web.httpd.conf.j2")
     )
     
-    File(os.path.join(params.web_http_path,'setting.php'),
+    File(os.path.join(params.web_config_path,'setting.php'),
       mode=0755,
       content=Template("setting.php.j2")
     )

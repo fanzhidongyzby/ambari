@@ -1,5 +1,9 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+$config['sso_url'] = '{{sso_server_hostname}}';
+$config['sso_port'] = {{sso_server_port}};
+$config['sso_application'] = '{{sso_server_application}}';
+
 $config["api_server"]="http://{{lhotse_service_hosts}}:{{service_listen_port}}/LService/";
 
 $config['ftp_server'] ='{{ftp_server_host}}';
