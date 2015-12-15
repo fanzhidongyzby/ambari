@@ -177,3 +177,6 @@ new_lhotse_data_path_ftp = "/data/tbds/lhotse/lhoste_ftp"
 sso_server_hostname = default('/configurations/cluster-env/sso_server_hostname',"127.0.0.1")
 sso_server_port = default('/configurations/cluster-env/sso_server_port',"8081")
 sso_server_application = default('/configurations/cluster-env/sso_server_application',"cas")
+
+portal_server_hostname = default('/configurations/cluster-env/portal_server_hostname',"127.0.0.1")
+portal_server_port = default('/configurations/cluster-env/portal_server_port',"80")
