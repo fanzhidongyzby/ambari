@@ -35,6 +35,5 @@ ftp_server_host = default("/clusterHostInfo/lhotse_ftp_hosts", ["127.0.0.1"])[0]
 ftp_server_port = default("/configurations/ftp/ftp.port", 2121)
 ftp_server_user = default("/configurations/ftp/ftp.user", 'ftpadmin')
 ftp_server_pwd = default("/configurations/ftp/ftp.password", '123456')
-ftp_server_root_path = default("/configurations/ftp/root.path", '/ftp_data')
+ftp_server_root_path = default("/configurations/ftp/root.path", '/data/ftp_data')
 
-ftp_data_path = default("/configurations/lhotse-ftp/data.dir", "/data/ftp_data")

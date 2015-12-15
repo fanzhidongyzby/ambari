@@ -295,5 +295,10 @@
     "GP_SEGMENT": [
       "gp-site/segment.base.port"
     ]
+  },
+  "FTP": {
+    "FTP_SERVER": [
+      "ftp/ftp.port"
+    ]
   }
 }

@@ -56,17 +56,17 @@
           </commandScript>
         </component>
 
-        <component>
-          <name>LHOTSE_FTP</name>
-          <displayName>Lhotse FTP</displayName>
-          <category>MASTER</category>
-          <cardinality>1</cardinality>
-          <commandScript>
-            <script>scripts/ftp.py</script>
-            <scriptType>PYTHON</scriptType>
-            <timeout>1200</timeout>
-          </commandScript>
-        </component>
+        <!--<component>-->
+          <!--<name>LHOTSE_FTP</name>-->
+          <!--<displayName>Lhotse FTP</displayName>-->
+          <!--<category>MASTER</category>-->
+          <!--<cardinality>1</cardinality>-->
+          <!--<commandScript>-->
+            <!--<script>scripts/ftp.py</script>-->
+            <!--<scriptType>PYTHON</scriptType>-->
+            <!--<timeout>1200</timeout>-->
+          <!--</commandScript>-->
+        <!--</component>-->
 
         <component>
           <name>LHOTSE_RUNNER</name>
@@ -143,9 +143,9 @@
             <package>
               <name>lhotse-web*</name>
             </package>
-            <package>
-              <name>vsftpd*</name>
-            </package>
+            <!--<package>-->
+              <!--<name>vsftpd*</name>-->
+            <!--</package>-->
           </packages>
         </osSpecific>
 
@@ -153,6 +153,7 @@
 
       <requiredServices>
         <service>HIVE</service>
+        <service>FTP</service>
       </requiredServices>
 
       <configuration-dependencies>
