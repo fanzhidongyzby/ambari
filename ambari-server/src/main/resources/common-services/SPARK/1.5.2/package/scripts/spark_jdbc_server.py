@@ -37,6 +37,10 @@ class SparkJDBCServer(Script):
         
         Links(params.spark_jdbc_server_home, params.spark_home)
         
+        create_log_path = format("mkdir -p {spark_log_home}; chown {spark_user}:{user_group} {spark_log_home} -R")
+        Logger.info(create_log_path)
+        self.command_exe(create_log_path)
+        
         self.configure(env)
 
     def uninstall(self, env):

@@ -25,7 +25,9 @@ config = Script.get_config()
 java_home = config['hostLevelParams']['java_home']
 fs_default_fs = config['configurations']['core-site']['fs.defaultFS']
 hadoop_conf_dir = "/etc/hadoop/conf"
-hive_site_file = "/etc/hive/conf/hive-site.xml"
+hadoop_home = "/usr/hdp/current/hadoop-client"
+hive_conf_dir = "/etc/hive/conf"
+hive_site_file = hive_conf_dir + "/hive-site.xml"
 tez_conf_dir = "/etc/tez/conf"
 tez_site_file = tez_conf_dir + "/tez-site.xml"
 

@@ -39,6 +39,10 @@ class SparkLivyServer(Script):
         
         Links(params.livy_server_link_home, params.livy_server_home)
         
+        create_log_path = format("mkdir -p {spark_log_home}; chown {spark_user}:{user_group} {spark_log_home} -R")
+        Logger.info(create_log_path)
+        self.command_exe(create_log_path)
+        
     def uninstall(self, env):
         import params
         env.set_params(params)
@@ -72,7 +76,7 @@ class SparkLivyServer(Script):
                       conf_dir=params.hadoop_conf_dir
         )
         
-        start_command = format("source {livy_env_path}; bash +x {livy_server_start_script} >> /usr/hdp/2.2.0.0-2041/livy/livy.log 2>&1 &")
+        start_command = format("source {livy_env_path}; bash +x {livy_server_start_script} >> {spark_log_home}/livy.log 2>&1 &")
         Logger.info(start_command)
         Execute(start_command,
             user=params.spark_user,

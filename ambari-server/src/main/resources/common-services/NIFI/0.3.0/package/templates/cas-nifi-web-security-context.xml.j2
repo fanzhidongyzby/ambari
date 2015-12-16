@@ -75,7 +75,7 @@
          class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
           <!--class="org.apache.nifi.web.security.authorization.TbdsCasAuthenticationEntryPoint">-->
 
-        <property name="loginUrl" value="{{sso_url}}/cas/login"/>
+        <property name="loginUrl" value="{{sso_url}}/login"/>
         <property name="serviceProperties" ref="serviceProperties"/>
     </bean>
 
@@ -95,7 +95,7 @@
         <property name="serviceProperties" ref="serviceProperties" />
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas10TicketValidator">
-                <constructor-arg index="0" value="{{sso_url}}/cas" />
+                <constructor-arg index="0" value="{{sso_url}}" />
             </bean>
         </property>
         <property name="key" value="cas"/>
