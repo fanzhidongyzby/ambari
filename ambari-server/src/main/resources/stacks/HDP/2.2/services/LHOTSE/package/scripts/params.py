@@ -68,7 +68,7 @@ hadoop_env_sh_template = config['configurations']['lhotse-hadoop-env']['content'
 #ftp config
 config_ftp_script = format("{tmp_dir}/configFtp.sh")
 ftp_service_daemon = "vsftpd"
-ftp_server_host = default("/clusterHostInfo/ftp_ftp_server_hosts", ["127.0.0.1"])[0]
+ftp_server_host = default("/clusterHostInfo/ftp_server_hosts", ["127.0.0.1"])[0]
 ftp_server_port = default("/configurations/ftp/ftp.port", 2121)
 ftp_server_user = default("/configurations/ftp/ftp.user", 'ftpadmin')
 ftp_server_pwd = default("/configurations/ftp/ftp.password", '123456')
