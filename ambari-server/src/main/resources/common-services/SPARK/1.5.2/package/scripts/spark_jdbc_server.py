@@ -28,7 +28,7 @@ class SparkJDBCServer(Script):
         import params
         env.set_params(params)
     
-        excludePackage = ['livy-server*']
+        excludePackage = ['livy-server']
         self.install_packages(env, excludePackage)
         
         rm_command = format("rm -rf {spark_jdbc_server_home}")

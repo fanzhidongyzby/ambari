@@ -27,8 +27,8 @@ class SparkHistoryServer(Script):
     def install(self, env):
         import params
         env.set_params(params)
-    
-        excludePackage = ['livy-server*']
+        
+        excludePackage = ['livy-server']
         self.install_packages(env, excludePackage)
         
         rm_command = format("rm -rf {spark_history_server_home}")

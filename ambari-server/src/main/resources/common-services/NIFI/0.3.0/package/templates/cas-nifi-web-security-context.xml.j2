@@ -106,7 +106,7 @@
     <!-- This filter redirects to the CAS Server to signal Single Logout should be performed -->
     <bean id="requestSingleLogoutFilter"
           class="org.springframework.security.web.authentication.logout.LogoutFilter">
-        <constructor-arg value="{{sso_url}}/cas/logout"/>
+        <constructor-arg value="{{sso_url}}/logout"/>
         <constructor-arg>
             <bean
                     class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>

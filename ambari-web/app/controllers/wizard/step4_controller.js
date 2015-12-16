@@ -113,14 +113,14 @@ App.WizardStep4Controller = Em.ArrayController.extend({
    */
   sparkValidation: function () {
     var sparkService = this.findProperty('serviceName', 'SPARK');
-    if (sparkService && sparkService.get('isSelected') && !sparkService.get('isInstalled') &&
+    /**if (sparkService && sparkService.get('isSelected') && !sparkService.get('isInstalled') &&
       App.get('currentStackName') == 'HDP' && App.get('currentStackVersionNumber') == '2.2') {
       this.addValidationError({
         id: 'sparkWarning',
         type: 'WARNING',
         callback: this.sparkWarningPopup
       });
-    }
+    }*/
   },
 
   /**
